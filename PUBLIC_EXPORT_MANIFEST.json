@@ -16,8 +16,8 @@
   },
   {
     "path": "REPLICATION.md",
-    "sha256": "5917041ac7d23970c2c2c1ab13563b48ee94d0af849e30d30510dbee512eac78",
-    "bytes": 3960
+    "sha256": "ccb255b09d0a104728ff989209d6248322ce853c494ad12f59c8dc537ab11de5",
+    "bytes": 4270
   },
   {
     "path": "configs/runtime.yaml",
@@ -36,8 +36,8 @@
   },
   {
     "path": "docs/figure_script_toc.md",
-    "sha256": "2e00a9ff50da167ca76d845aaeb43e049c78395c575c343ae6a92b8bcd06b69c",
-    "bytes": 15075
+    "sha256": "a211d0dd9286290171a740c688a494c5f105b201b6c927ce21d6c956173145e8",
+    "bytes": 15038
   },
   {
     "path": "overleaf/Manuscript.tex",
@@ -46,13 +46,13 @@
   },
   {
     "path": "overleaf/main/Abstract.tex",
-    "sha256": "f396cf324508e9c874636502b309b67646fe803577e08a9cce957dc8cfa492a2",
-    "bytes": 2817
+    "sha256": "0eee33932993b1cbfa435c96a94f5847e4180f5912726834d3c0397674ddbbb0",
+    "bytes": 2911
   },
   {
     "path": "overleaf/main/Acknowledgment.tex",
-    "sha256": "3a2efa0cdcbebafa5729519ec87cd927c679fba192d99fe04a333fc3bf59c95b",
-    "bytes": 1963
+    "sha256": "9106f547ae2ee32753c7257cbc38b5585d9ccc13e8baaee43617a325917cb958",
+    "bytes": 2589
   },
   {
     "path": "overleaf/main/Author_elsevier.tex",
@@ -61,23 +61,23 @@
   },
   {
     "path": "overleaf/main/Conclusion.tex",
-    "sha256": "88be6910079ae7409c3107d4cddbb1728e34f78591b30c30d203852995c1b028",
-    "bytes": 4510
+    "sha256": "3e53ee723a972693c236162da6bc7e4aee86e17ebcb758702e364bd9b51b10b8",
+    "bytes": 4641
   },
   {
     "path": "overleaf/main/Discussion.tex",
-    "sha256": "0eccde99da4cb33cd08e55a73d4d8fecf4e7275c6113de4a3676ac052f1a7281",
-    "bytes": 38459
+    "sha256": "fe6160bd4b4dd3b007d923cda91ba1cf7c592b6174d749d0e420dd40a7cf0ebe",
+    "bytes": 38657
   },
   {
     "path": "overleaf/main/Highlights.tex",
-    "sha256": "15d0a5546bd11889f8bb7a4e0acf1531f46a7b285a2046edab9ede5a647b7c2b",
-    "bytes": 478
+    "sha256": "537068b3565aefa68d399473de3fc12394a254fee2211cdfb4bae2c590c2aa6a",
+    "bytes": 477
   },
   {
     "path": "overleaf/main/Introduction.tex",
-    "sha256": "7894f0e4ba76f46b5ba9d4755691308ad431c858011cef1d299827aaa71d066b",
-    "bytes": 10772
+    "sha256": "52c264e853154cca631e46580d695152eb48197c77e01d69904e27531b38b13c",
+    "bytes": 10909
   },
   {
     "path": "overleaf/main/Keywords_elsevier.tex",
@@ -86,8 +86,8 @@
   },
   {
     "path": "overleaf/main/Methods.tex",
-    "sha256": "c2a9c2ba8cefc5640998a526b5f30eec739a7d0e502e2559030e291c3b57bc05",
-    "bytes": 56929
+    "sha256": "d43b17caf9ff23fe314f673e9bef93e0f301fa928006067848b08c0167c5de87",
+    "bytes": 58204
   },
   {
     "path": "overleaf/main/README.md",
@@ -101,13 +101,13 @@
   },
   {
     "path": "overleaf/main/Results.tex",
-    "sha256": "8e39596e5b13c27743e9a4486b8984da9af8e04875fe8b9895648fd24afab1d3",
-    "bytes": 75535
+    "sha256": "9a75dbdbe8960b0d7aa498967a1bdaa130abb8f221919dea1ed5a31a4b85b5c7",
+    "bytes": 76661
   },
   {
     "path": "overleaf/main/Supplementary.tex",
-    "sha256": "2342e91edb13efde8ea3e750ea63c91e26155c4047b5f6182fae8569ec3806c3",
-    "bytes": 36536
+    "sha256": "261d088fac2f8fa0e86591a4b34ce49e8e11ba166f9f1f1c5b2700fd3161d305",
+    "bytes": 36456
   },
   {
     "path": "overleaf/main/statistical_comparison_table.tex",
@@ -156,13 +156,13 @@
   },
   {
     "path": "overleaf/main/supp_model_constructor_defaults.tex",
-    "sha256": "c66c9df8424090840a705b7d795d508a1d8ab3ef6d52a20479d67912f47f39ef",
-    "bytes": 7151
+    "sha256": "917bdb00f439bae85f20f5bc5490948030b3905a17fe22f4303ccc4c41a321ca",
+    "bytes": 7232
   },
   {
     "path": "overleaf/main/supp_model_inventory.tex",
-    "sha256": "187c2c448ed77c45adf0252099675fd379c56a00add9ca52d7a9acaa3e8e9b3d",
-    "bytes": 3904
+    "sha256": "663dd4412ec195f8533318decde9a2fe757e6bc47e46ccb139ff1245a8e41d30",
+    "bytes": 3988
   },
   {
     "path": "overleaf/main/supp_nested_rf_selections.tex",
@@ -325,6 +325,11 @@
     "bytes": 384
   },
   {
+    "path": "reports/evidence/tables/condition_target_summary.csv",
+    "sha256": "89b77b39f61dbc5354767bdf6378f8db75702766fb13f128aa5461e72f5dabd6",
+    "bytes": 492
+  },
+  {
     "path": "reports/evidence/tables/cv_scheme_comparison.csv",
     "sha256": "9663e4b5a29ac06ebd1a27d0f2dbe77aa1260a6a4c8db27ffb21ed5f12a83c85",
     "bytes": 315
@@ -348,6 +353,16 @@
     "path": "reports/evidence/tables/edge_latency_benchmark_per_fold.csv",
     "sha256": "ee90b944671bd89fded03fd46b50be7934da232baa2e0dd941014eef3a6b44ea",
     "bytes": 37599
+  },
+  {
+    "path": "reports/evidence/tables/final_evaluation_targets.csv",
+    "sha256": "bb38470120d61894a7f5b83a800e343eb6edbc3529a4fc88fc21b0e636a221d4",
+    "bytes": 7503
+  },
+  {
+    "path": "reports/evidence/tables/final_evaluation_targets_manifest.json",
+    "sha256": "a918131085ee4fbda88c4568ee0917709cc17b307f6026a9eebde2dfb9666a00",
+    "bytes": 371
   },
   {
     "path": "reports/evidence/tables/fixed_input_representation_comparison.csv",
@@ -1111,8 +1126,8 @@
   },
   {
     "path": "reports/publication/figure_toc.md",
-    "sha256": "c8ac04bdf53c179ea64c8242d4ecd39918ed6247c926d2b89671f531fa2778be",
-    "bytes": 18619
+    "sha256": "2af11cc329ef6b300ec85e6ee064bbecb07aaf90d4930bbbf9f676ede835c3f0",
+    "bytes": 18566
   },
   {
     "path": "scripts/ablation_no_psnorm.py",
@@ -1168,6 +1183,11 @@
     "path": "scripts/generate_cache_provenance.py",
     "sha256": "9e67b4f5f94dabeb1c994a4d732701bcffacef9961c3ad22d6629daaa00938af",
     "bytes": 4896
+  },
+  {
+    "path": "scripts/generate_evaluation_target_manifest.py",
+    "sha256": "dfbc10973a6c1b89dc8cccf9583cac369f24223563784b16f42180d0f671968c",
+    "bytes": 2413
   },
   {
     "path": "scripts/generate_fixed_input_representation_figure.py",

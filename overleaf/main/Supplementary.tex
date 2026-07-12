@@ -543,7 +543,7 @@ Condition & Mean $R_a$ (\(\upmu\)m) & Std $R_a$ (\(\upmu\)m) & AE broad RMS & Vi
 4 & 0.096 & 0.011 & 0.833 & 1.876 \\
 5 & 0.097 & 0.005 & 0.743 & 1.458 \\
 6 & 0.090 & 0.007 & 0.937 & 1.794 \\
-7 & 0.360 & 0.012 & 0.437 & 1.591 \\
+7 & 0.354 & 0.013 & 0.437 & 1.591 \\
 8 & 0.242 & 0.011 & 0.301 & 0.896 \\
 9 & 0.085 & 0.009 & 0.362 & 1.475 \\
 10 & 0.078 & 0.008 & 0.512 & 1.522 \\
@@ -645,7 +645,7 @@ Vibration $>$15 kHz & -2.33 & [-3.19, -1.48] \\
 
 \subsection*{Out-of-fold SHAP attribution for the current benchmark random forest}
 
-Figure~\ref{fig:supp-shap-rf} shows out-of-fold TreeSHAP frequency profiles
+Main Figure~\ref{fig:rf-oof-shap} shows out-of-fold TreeSHAP frequency profiles
 under three aggregation rules: sample-pooled absolute attribution,
 condition-balanced attribution after normalising each fold to 100\%, and the
 same condition-balanced calculation excluding Condition~7 as a descriptive
@@ -659,9 +659,9 @@ excluding Condition~7; both peak at 16.2~kHz. The observed upper-band pattern
 is therefore not created solely by the difficult fold, although the
 sensor-chain caveat near Nyquist remains essential.
 
-The sample-pooled out-of-fold TreeSHAP mean
-absolute importance for the reproducible current random forest trained on
-fused AE and vibration dB-z descriptors. A separate RF is fitted in each
+The sample-pooled profile reports out-of-fold TreeSHAP mean absolute
+importance for the reproducible current random forest trained on fused AE and
+vibration dB-z descriptors. A separate RF is fitted in each
 LOGO fold after excluding its test and validation conditions, and SHAP is
 computed only for that fold's held-out test condition. The 319 held-out
 profiles are then pooled by sample count. AE importance is concentrated
@@ -674,24 +674,19 @@ dB-z scaling and the random-forest split structure, and
 reinforces the need for sensor-transfer-function verification before
 treating any single bin as a validated physical signature.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=\linewidth]{rf_dbz_oof_treeshap.png}
-\caption{Out-of-fold TreeSHAP frequency profiles for the reproducible current
-RF on AE-dB-z + Vib-dB-z. Curves show sample-pooled attribution,
-equal-condition aggregation after fold-wise normalisation, and the latter
-excluding Condition~7. Each held-out pass is explained only by the RF trained
-without its condition. This analysis reproduces the current
-0.0210~\(\upmu\)m OOF MAE but does not attribute the historical canonical
-artifact.}\label{fig:supp-shap-rf}
-\end{figure}
+The main figure reports the current reproducible RF and does not attribute the
+historical canonical artifact. The global LightGBM and ResNetVibCNN
+explanations remain secondary cross-model comparisons.
 
 \subsection*{Seed-repeat results}
 
 Table~\ref{tab:supp-seed-repeat-all} reports the seed-averaged
 per-condition LOGO MAE for the equal-budget current random forest and the six
 deep-learning baselines that were repeated over five random seeds
-(42--46).  Condition~7 remains the largest outlier for every model.
+(42--46) under the current fixed-setting protocol. These neural runs do not
+exactly reproduce the historical tuned checkpoints; they quantify stochastic
+variability within the current setting rather than around the historical
+canonical models. Condition~7 remains the largest outlier for every model.
 The equal-budget random-forest seed-averaged overall MAE is
 \(0.0203 \pm 0.0360~\upmu\)m; the DL baselines range from
 \(0.0384 \pm 0.0452~\upmu\)m (ResNetVibCNN) to
@@ -796,7 +791,7 @@ should be interpreted cautiously.
 
 \subsection*{Deep Learning Baselines Architecture Details}
 
-To support replication, Table~\ref{tab:supp-dl-arch} details the architectural configurations, layer dimensions, activation functions, regularization (dropout), and parameter counts for the nine architecturally documented deep-learning baselines. The complete 27-model, 38-input canonical LOGO inventory is listed below; models not covered by Table~\ref{tab:supp-dl-arch} are retained as benchmark variants and their archived configurations are named explicitly in the inventory.
+To support replication, Table~\ref{tab:supp-dl-arch} details the architectural configurations, layer dimensions, activation functions, regularization (dropout), and parameter counts for the nine architecturally documented deep-learning baselines. The 38-input canonical LOGO inventory contains 25 exactly reconstructable model variants plus two archival variants with incomplete resolved-configuration provenance. The latter are retained only as historical inventory entries and are not central to any conclusion.
 
 \input{main/supp_dl_architectures.tex}
 

@@ -447,10 +447,15 @@ is not tested here.
   estimators, maximum depth 5, learning rate $0.05$, subsample
   $0.8$, and column sampling $0.8$.
 \item
-  \textbf{Shallow MLP:} two hidden layers of 128 and 64 units, L2
+  \textbf{Historical shallow MLP:} two hidden layers of 128 and 64 units, L2
   penalty $\alpha=10^{-4}$, Adam optimiser with learning rate
   $10^{-3}$, early stopping on 10\% validation data, maximum 500
-  iterations.
+  iterations. This archived implementation uses scikit-learn's internal
+  random 10\% validation fraction and is the MLP included in the historical
+  14-comparison family. The separate \textbf{corrected grouped-validation
+  MLP} uses the designated whole validation condition, training-only input
+  and target scaling, and a three-candidate training-only grid; it is reported
+  only as a sensitivity analysis.
 \end{itemize}
 
 \textbf{Deep-learning baselines.} These models represent recent
@@ -494,9 +499,10 @@ stopping (patience 20 epochs), and a maximum of 200 epochs. Batch sizes
 are 16 for the ResNet encoders and 32 otherwise. The historical planned
 comparison uses the canonical seed-42 results for all model--configuration
 pairs; reproducible current RF reruns are reported before those artifacts in
-the Results. To quantify training stochasticity, a secondary equal-budget
-sensitivity analysis repeats the main stochastic architectures over five
-seeds; details are provided in Section~\ref{experimental-workflow}.
+the Results. A secondary equal-budget current fixed-setting analysis repeats
+the main stochastic architectures over five seeds; it does not reproduce the
+historical tuned checkpoints. Details are provided in
+Section~\ref{experimental-workflow}.
 
 \begin{figure}[htbp]
 \centering
@@ -549,8 +555,10 @@ LOGO protocol.}
 \begin{table}[htbp]
 \centering
 \caption{Key hyperparameters of the main auditable classical and baseline models.
-Fixed hyperparameters were applied uniformly across all LOGO folds; deep-learning
-entries (Shallow MLP) used additional early-stopping on the validation fold.}
+The historical shallow MLP uses an internal random 10\% validation fraction.
+The corrected grouped-validation MLP instead uses the designated complete
+validation condition and is reported separately in Supplementary
+Table~\ref{tab:supp-grouped-mlp}.}
 \label{tbl:hyperparams}
 \setlength{\tabcolsep}{8pt}
 \renewcommand{\arraystretch}{1.25}
@@ -574,9 +582,12 @@ XGBoost              & Number of estimators               & 200 \\
                      & Learning rate                      & 0.05 \\
                      & Subsample ratio                    & 0.8 \\
 \addlinespace[4pt]
-Shallow MLP          & Hidden layers                      & (128, 64) \\
+Historical shallow MLP & Hidden layers                    & (128, 64) \\
+                     & Internal validation fraction       & 10\% \\
                      & L2 regularisation $\alpha$         & $10^{-4}$ \\
-                     & Learning rate                      & $10^{-3}$ \\
+Corrected grouped MLP & Validation                        & Whole condition \\
+                     & Candidate configurations           & 3 \\
+                     & Input and target scaling           & Training only \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -625,7 +636,7 @@ best RF as well as to the deep-learning entries. The primary purpose of
 the benchmark is comparative evidence within this dataset, not an
 unbiased population estimate.
 
-The primary planned statistical testing is performed on the canonical seed-42 results using paired Wilcoxon signed-rank tests. However, because training sets overlap substantially across folds (each pair of training sets shares 13 out of 14 conditions), the fold MAEs are not strictly independent. This violation of the independence assumption means the resulting p-values must be interpreted as exploratory indicators of relative performance rather than strict, independent probability assessments. A secondary sensitivity analysis using five random seeds (42--46) is conducted to assess training stochasticity, as described in Section~\ref{experimental-workflow}.
+The primary planned statistical testing is performed on the canonical seed-42 results using paired Wilcoxon signed-rank tests. However, because training sets overlap substantially across folds (each pair of training sets shares 13 out of 14 conditions), the fold MAEs are not strictly independent. This violation of the independence assumption means the resulting p-values must be interpreted as exploratory indicators of relative performance rather than strict, independent probability assessments. A secondary current fixed-setting repeated-baseline analysis uses five random seeds (42--46), as described in Section~\ref{experimental-workflow}. It does not reproduce the historical tuned checkpoints and therefore combines stochastic variation with protocol/configuration differences relative to that historical benchmark.
 
 \begin{figure}[htbp]
 \centering
@@ -721,7 +732,7 @@ sensor/fixture resonance can be separated from the present data
 (Figure~\ref{fig:xai-methods}b). The full ranked
 SHAP importance for the LightGBM model is shown in Figure~\ref{fig:xai},
 and the pooled out-of-fold SHAP profile for the current 14-condition RF/dB-z
-pipeline is shown in Supplementary Figure~\ref{fig:supp-shap-rf}. It shows
+pipeline is shown in Figure~\ref{fig:rf-oof-shap}. It shows
 AE importance above approximately
 300~kHz and dominant vibration importance between approximately 16 and
 24~kHz, with the largest pooled bin near 16.2~kHz. The profiles share a broad separation between
@@ -887,7 +898,7 @@ available grinding conditions, repeating the outer cross-validation would
 not create new validation evidence. The historical planned comparison uses
 the canonical seed-42 results and the pre-defined 14-comparison
 Holm-corrected testing family.  To quantify training stochasticity, a
-secondary sensitivity analysis trained the main stochastic architectures
+secondary current fixed-setting sensitivity analysis trained the main stochastic architectures
 (ResNetVibCNN, TrajectoryCNN, ResNetAECNN, ChannelAttentionCNN, ResNetFusion, BilinearFusionNetwork, and
 the recommended random forest) under the same 16 outer LOGO folds with
 five different random seeds. In every outer fold, the repeated RF excludes
@@ -900,8 +911,12 @@ Supplementary Table~\ref{tab:supp-seed-level}.  For the sensitivity
 analysis, per-condition MAEs were first averaged over seeds, preserving
 the 16 condition-level paired observations; the 16 condition-level values
 were not inflated by treating folds and seeds as independent samples.
-This seed-repeat analysis provides a robustness check for training
-stochasticity and is not treated as the primary inferential comparison.
+Architecture, preprocessing, validation assignment, and training settings are
+fixed within this repeated set while the random seed varies. These settings do
+not exactly reproduce the historical tuned checkpoints, so the analysis is a
+current-protocol stochastic sensitivity rather than variance around the
+historical seed-42 benchmark. It is not treated as the primary inferential
+comparison.
 
 The historical shallow-MLP baseline used scikit-learn's internal random
 10\% validation fraction and is therefore an implementation-specific member
@@ -921,8 +936,9 @@ with process parameters and physics-informed features, and evaluated by
 auditable classical or deep-learning models under the unified LOGO protocol. The
 two AE spectrogram planes map to the physical narrowband and broadband raw
 AE columns; their analogue filter specifications and gains were not
-archived. The full 27-model, 38-input inventory is given in the
-Supplementary Materials.}
+archived. The 38-input inventory comprises 25 exactly reconstructable variants
+and two archival variants with incomplete resolved-configuration provenance,
+as detailed in the Supplementary Materials.}
 \label{fig:workflow}
 \end{figure}
 

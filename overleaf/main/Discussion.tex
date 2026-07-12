@@ -10,15 +10,17 @@ primary single-seed planned comparison, corrected statistical comparisons
 established clear superiority only over the implementation-specific historical
 shallow MLP baseline, while
 most pairwise differences against deep-learning models were favourable by
-point estimate but not significant.  A secondary five-seed sensitivity
-analysis supports the robustness of this pattern: after averaging training
-stochasticity over five random seeds using the same canonical 14-condition
+point estimate but not significant.  A secondary current fixed-setting
+five-seed sensitivity produces the same qualitative ordering for the selected
+repeated baselines. These runs use the same canonical 14-condition
 training budget for every repeated model, the current random forest is
 significantly lower than the six repeated deep-learning baselines under
 Holm--Bonferroni-corrected Wilcoxon tests on the 16 condition-level paired
-MAEs (Supplementary Table~\ref{tab:supp-seed-repeat-all}).  This
-sensitivity analysis is reported as robustness evidence rather than as the
-primary inferential conclusion.  The observed RF advantage is most
+MAEs (Supplementary Table~\ref{tab:supp-seed-repeat-all}). They do not exactly
+reproduce the historical tuned neural checkpoints, so this sensitivity mixes
+seed variation with protocol/configuration differences relative to the
+historical artifacts. It is reported as current-protocol robustness evidence,
+not as independent confirmation or the primary inferential conclusion. The observed RF advantage is most
 plausibly related to dataset size, spectral feature structure, and the
 grouped validation protocol.
 

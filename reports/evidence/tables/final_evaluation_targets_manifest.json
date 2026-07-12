@@ -1,0 +1,11 @@
+{
+  "target_file": "reports/evidence/tables/final_evaluation_targets.csv",
+  "sha256": "bb38470120d61894a7f5b83a800e343eb6edbc3529a4fc88fc21b0e636a221d4",
+  "n_evaluation_samples": 319,
+  "excluded_sample": {
+    "condition_id": 1,
+    "sample_id": 1
+  },
+  "condition_7_mean_measured_ra_um": 0.3539699986577034,
+  "condition_7_sd_measured_ra_um": 0.013149947983136769
+}

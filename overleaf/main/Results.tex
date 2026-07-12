@@ -64,12 +64,15 @@ process-parameter combinations within the sampled factor space; the poor
 added value of PP may therefore reflect the sparse 16-condition design
 rather than true physical irrelevance.
 
-\subsubsection{Seed-repeat validation of stochastic
+\subsubsection{Current fixed-setting repeated-baseline sensitivity of stochastic
 architectures}\label{sec:seed-repeat}
 
-To quantify training stochasticity, the main stochastic architectures
+To assess stochastic variability under a common current protocol, the main stochastic architectures
 were each repeated over five random seeds under the same 16 LOGO folds
-(Supplementary Table~\ref{tab:supp-seed-level}). The repeated neural models
+(Supplementary Table~\ref{tab:supp-seed-level}). These runs do not exactly
+reproduce the historical canonical checkpoints and should therefore be
+interpreted as a current fixed-setting stochastic sensitivity, not as variance
+around the historical tuned seed-42 models. The repeated neural models
 and RF use the same canonical 14-condition training budget in each fold. For
 the current random forest on AE-dB-z + Vib-dB-z, the seed-averaged MAE is
 \(0.0203 \pm 0.0360~\upmu\)m, with per-seed overall MAEs of 0.0210,
@@ -84,9 +87,9 @@ TrajectoryCNN from 0.0439 to 0.0484~\(\upmu\)m, ResNetAECNN from 0.0353 to
 0.0478~\(\upmu\)m, and ChannelAttentionCNN from 0.0334 to 0.0503~\(\upmu\)m.
 Their seed-averaged MAEs (ResNetVibCNN 0.0384, ResNetFusion 0.0417,
 BilinearFusionNetwork 0.0447, TrajectoryCNN 0.0450, ResNetAECNN 0.0423,
-and ChannelAttentionCNN 0.0423~\(\upmu\)m) are higher than their seed-42
-point estimates because seed 42 lies near the lower-error end of the
-observed neural-network seed distribution. Supplementary
+and ChannelAttentionCNN 0.0423~\(\upmu\)m) differ from the historical
+canonical point estimates. Within the repeated set, seed 42 is not uniformly
+the lowest-error seed. Supplementary
 Table~\ref{tab:supp-seed-repeat-all} gives the per-condition
 seed-averaged errors for the equal-budget current random forest and the six
 repeated deep-learning baselines. The seed-averaged per-condition
@@ -102,8 +105,10 @@ MAEs show that the random forest is significantly lower than the six
 repeated deep-learning baselines after Holm--Bonferroni correction for the
 six comparisons (all \(p_{\text{Holm}} < 0.01\); the largest corrected
 \(p\)-value is 0.0027 versus TrajectoryCNN). This equal-budget sensitivity analysis
-provides a robustness check for training stochasticity: the RF advantage
-persists after averaging out neural-network seed variation. The inference
+provides robustness evidence within the selected current fixed-setting
+baselines. Because the historical tuned checkpoints are not reproduced, the
+differences reflect the current protocol as well as seed variation and do not
+independently confirm superiority over those historical neural models. The inference
 family here contains only the six selected repeated stochastic baselines
 and should not be combined with the 14-comparison primary family. Because
 the repeated model set was selected from the broader benchmark, this
@@ -632,7 +637,7 @@ the historically reported nominal response band, and should be treated as a mode
 attribution rather than calibrated physical AE energy. For the recommended RF/dB-z model, TreeSHAP shows AE
 importance concentrated above approximately 300~kHz and vibration
 importance primarily between approximately 16 and 24~kHz; the AE importance above 1~MHz remains
-sensor-response-limited (Supplementary Figure~\ref{fig:supp-shap-rf}).
+sensor-response-limited (Figure~\ref{fig:rf-oof-shap}).
 
 \begin{table}[htbp]
 \centering
@@ -666,6 +671,19 @@ Vibration & RF OOF TreeSHAP & 0.21\% & 0.26\% & 10.89\% & 88.63\% \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{rf_dbz_oof_treeshap.png}
+\caption{Primary interpretability analysis: out-of-fold TreeSHAP frequency
+profiles for the reproducible current RF on AE-dB-z + Vib-dB-z. Curves show
+sample-pooled attribution, equal-condition aggregation after fold-wise
+normalisation, and the latter excluding Condition~7. Each held-out pass is
+explained only by the RF trained without its condition. The analysis reproduces
+the current 0.0210~\(\upmu\)m OOF MAE. Condition-balanced vibration attribution
+above 15~kHz is 85.76\% (85.74\% without Condition~7), with a 16.2~kHz peak;
+the AE profile peaks at 334~kHz.}\label{fig:rf-oof-shap}
+\end{figure}
 
 \textit{Note:} This shared-band table is restricted to vibration. AE
 interpretation uses the modality-specific bands in Table~\ref{tab:ae-bands}.
@@ -718,10 +736,11 @@ comparison of explainers.}\label{fig:bandmass}
 The dominant bins are compatible with grinding-related spectral activity,
 but they do not identify a unique surface-generation mechanism. The
 frequency-band ablation, sensor-response limitations, and absence of
-archived no-cut spectra prevent a causal conclusion. TreeSHAP on vibration ranks bin 209 (\(20.9\) kHz)
+archived no-cut spectra prevent a causal conclusion. Global LightGBM
+TreeSHAP on vibration ranks bin 209 (\(20.9\) kHz)
 first, accounting for 69.5\% of total importance mass. Grad-CAM peaks at
 \(4.1\) kHz (bin 41), with the top ten bins spanning 3.7--12.0 kHz.
-TreeSHAP on AE peaks at \(1.22\) MHz (bin 182), which lies above the
+Global LightGBM TreeSHAP on AE peaks at \(1.22\) MHz (bin 182), which lies above the
 historically reported 100~kHz--1~MHz nominal AE response band; this bin
 should therefore be interpreted cautiously unless the sensor transfer
 function above 1~MHz is independently verified. The top three AE bins
@@ -734,7 +753,7 @@ reproducible current RF/dB-z pipeline using only each held-out condition's
 predictions. The pooled out-of-fold profile peaks at 16.2~kHz for vibration
 and 334~kHz for AE; vibration peaks remain mainly in the 16--24~kHz region,
 whereas the dominant AE bin varies more strongly among folds
-(Supplementary Figure~\ref{fig:supp-shap-rf}). The current refits reproduce
+(Figure~\ref{fig:rf-oof-shap}). The current refits reproduce
 an overall OOF MAE of 0.0210~\(\upmu\)m. The separate faster impurity-based
 diagnostic in Supplementary Figure~\ref{fig:supp-shap-stability} provides a
 qualitatively related stability check but is not SHAP. The AE attribution
@@ -900,7 +919,7 @@ distribution shift; future calibration should be condition-level, not
 sample-level. A more fundamental limitation is that Condition~7 is
 uncovered by every calibration strategy tested. Condition~7 has the
 largest negative prediction bias (mean predicted $R_a$ about 0.217~\(\upmu\)m
-versus observed about 0.360~\(\upmu\)m) and its observed $R_a$ lies above the
+versus mean measured 0.3540~\(\upmu\)m) and its observed $R_a$ lies above the
 range seen in the training conditions, so the failure combines a
 systematic directional bias with extrapolation outside the training-target
 support. Condition~8, the next hardest condition, has the widest

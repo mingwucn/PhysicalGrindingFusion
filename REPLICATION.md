@@ -1,5 +1,11 @@
 # Replication Guide - PhysicalGrindingFusion
 
+The immutable public review snapshot is the Git tag `review-v1`. The exact
+319-sample evaluation target is stored in
+`reports/evidence/tables/final_evaluation_targets.csv`; its SHA-256 digest and
+the excluded sample identifier are recorded in
+`reports/evidence/tables/final_evaluation_targets_manifest.json`.
+
 This document describes how to reproduce the grouped benchmark, XAI analysis,
 uncertainty diagnostics, robustness sensitivities, and submission figures.
 
