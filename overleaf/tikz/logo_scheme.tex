@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+    train/.style={pub/train},
+    val/.style={pub/validation},
+    test/.style={pub/test},
+    arrow/.style={pub/arrow},
+    ann/.style={pub/heading},
+]
+
+% One representative LOGO fold. The caption supplies the full figure title.
+\foreach \c in {1,...,16} {
+    \pgfmathsetmacro{\col}{mod(\c-1,8)}
+    \pgfmathsetmacro{\row}{floor((\c-1)/8)}
+    \pgfmathsetmacro{\x}{\col*1.10}
+    \pgfmathsetmacro{\y}{0.45 - \row*1.12}
+    \ifnum\c=1
+        \node[test] (C\c) at (\x,\y) {C\c\\TEST};
+    \else\ifnum\c=8
+        \node[val] (C\c) at (\x,\y) {C\c\\VAL};
+    \else
+        \node[train] (C\c) at (\x,\y) {C\c};
+    \fi\fi
+}
+
+\node[ann] (annTest) at (0.0,-2.35) {Held-out test condition};
+\draw[arrow] (annTest.north) -- (C1.south);
+\node[ann] (annVal) at (4.7,-2.35) {Validation condition};
+\draw[arrow] (annVal.north) -- (C8.south);
+
+\node[pub/base, fill=white, text width=7.5cm] at (3.85,-3.65) {
+  The remaining 14 conditions train the model. Repeat the split 16 times so each condition is tested once.
+};
+
+\node[train, minimum width=0.8cm, minimum height=0.45cm] (legT) at (0.2,-4.8) {};
+\node[right=0.08cm of legT, pub/legend] {Train (14)};
+\node[val, minimum width=0.8cm, minimum height=0.45cm] (legV) at (3.0,-4.8) {};
+\node[right=0.08cm of legV, pub/legend] {Validation (1)};
+\node[test, minimum width=0.8cm, minimum height=0.45cm] (legTe) at (6.3,-4.8) {};
+\node[right=0.08cm of legTe, pub/legend] {Test (1)};
+\end{tikzpicture}%

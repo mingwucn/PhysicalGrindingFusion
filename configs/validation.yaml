@@ -1,0 +1,22 @@
+validation:
+  strict_validation: true
+  fail_closed: true
+  levels:
+    - id: 0
+      name: "off"
+      description: "No validation performed."
+    - id: 1
+      name: "warn"
+      description: "Validation issues are logged as warnings only."
+    - id: 2
+      name: "basic"
+      description: "Basic structural validation is enforced."
+    - id: 3
+      name: "standard"
+      description: "Standard schema and type validation is enforced."
+    - id: 4
+      name: "strict"
+      description: "Strict validation with additional consistency checks."
+    - id: 5
+      name: "maximal"
+      description: "Maximal validation including all experimental checks."

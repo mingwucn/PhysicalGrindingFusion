@@ -1,0 +1,33 @@
+{
+  "protocol": "designated whole-condition validation; train-only input and target scaling; three-candidate training-only grid",
+  "config": "ae_features+vib_features+pp",
+  "mean_mae": 0.052932949794922024,
+  "fold_sd": 0.06265896181831233,
+  "median_mae": 0.027456975542008877,
+  "maximum_mae": 0.2644929587841034,
+  "grid": [
+    {
+      "hidden_layer_sizes": [
+        64
+      ],
+      "alpha": 0.001,
+      "learning_rate_init": 0.001
+    },
+    {
+      "hidden_layer_sizes": [
+        128,
+        64
+      ],
+      "alpha": 0.001,
+      "learning_rate_init": 0.001
+    },
+    {
+      "hidden_layer_sizes": [
+        128,
+        64
+      ],
+      "alpha": 0.01,
+      "learning_rate_init": 0.0005
+    }
+  ]
+}

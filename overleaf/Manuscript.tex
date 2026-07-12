@@ -1,0 +1,54 @@
+\documentclass[a4paper,fleqn]{cas-sc}
+\makeatletter
+\@namedef{ver@authblk.sty}{}
+\@namedef{ver@geometry.sty}{}
+\@namedef{opt@geometry.sty}{left=1cm,right=1cm,top=2cm,bottom=2cm,paperwidth=20cm,paperheight=30cm}
+\makeatother
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.multipart,fit,backgrounds,calc}
+\input{tikz/publication_styles}
+\input{myMacros.tex}
+% \setcitestyle{square,numbers,sort&compress}
+\graphicspath{{./images}}
+\hypersetup{hidelinks}
+\usepackage{url}
+\usepackage{upgreek}
+
+%%%Author macros
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\tsc{WGM}
+\tsc{QE}
+\tsc{EP}
+\tsc{PMS}
+\tsc{BEC}
+\tsc{DE}
+%%%
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+\shorttitle{Multimodal signal processing for grinding roughness}
+\shortauthors{M. Wu and J. Zha}
+
+\title [mode = title]{Physics-aware multimodal acoustic-emission and vibration signal processing for interpretable surface roughness prediction in grinding}
+\input{main/Author_elsevier.tex}
+\input{main/Highlights.tex}
+\input{main/Keywords_elsevier.tex}
+\input{main/Abstract.tex}
+\maketitle
+\input{main/Introduction.tex}
+\input{main/Related_work.tex}
+\input{main/Methods.tex}
+\input{main/Results.tex}
+\input{main/Discussion.tex}
+% \input{main/Case_study.tex}
+\input{main/Conclusion.tex}
+\input{main/Supplementary.tex}
+\input{main/Acknowledgment.tex}
+% \input{main/Appendix.tex}
+\clearpage
+\bibliographystyle{elsarticle-num}
+% \bibliographystyle{cas-model2-names}
+\bibliography{ref}
+\end{document}

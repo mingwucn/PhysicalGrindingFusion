@@ -1,0 +1,7 @@
+scheme,folds,mae
+LOGO (16 conditions),16,0.02022349089384079
+LOGO by workpiece speed,4,0.020970137789845467
+LOGO by wheel speed,4,0.038153067231178284
+LOGO by grinding depth,4,0.0204393919557333
+Random 5-fold CV (mean of 5 seeds),5,0.005257762051530776
+Random 80/20 split (mean of 10 seeds),10,0.005295342553527965

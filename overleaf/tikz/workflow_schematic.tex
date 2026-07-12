@@ -1,0 +1,89 @@
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+    raw/.style={pub/input, minimum width=2.6cm, minimum height=0.85cm, text width=2.5cm},
+    rep/.style={pub/representation, minimum width=2.6cm, minimum height=0.85cm, text width=2.5cm},
+    pp/.style={pub/process, minimum width=2.6cm, minimum height=0.85cm, text width=2.5cm},
+    phys/.style={pub/physics, minimum width=2.6cm, minimum height=0.85cm, text width=2.5cm},
+    config/.style={pub/explanation, minimum width=4.0cm, minimum height=1.05cm, text width=3.8cm},
+    model/.style={pub/model, minimum width=3.6cm, minimum height=1.05cm, text width=3.4cm},
+    target/.style={pub/target, minimum width=2.8cm, minimum height=1.6cm, text width=2.6cm},
+    arrow/.style={pub/arrow},
+    flowarrow/.style={pub/flow},
+    label/.style={pub/heading},
+]
+
+% ===== Left column: input modalities =====
+\node[raw]  (ae_raw)  at (0, 5.0) {AE Raw\\(4.0 MHz)};
+\node[rep]  (ae_spec) at (0, 3.5) {AE Spectrogram\\(2 channels$\times$300$\times$47)};
+\node[rep]  (ae_feat) at (0, 2.0) {AE Features\\(RMS, Kurt, Skew, Crest)};
+\draw[arrow] (ae_raw)  -- (ae_spec);
+\draw[arrow] (ae_spec) -- (ae_feat);
+
+\node[raw]  (vib_raw)  at (0, 0.0)  {Vib Raw\\(51.2 kHz)};
+\node[rep]  (vib_spec) at (0,-1.5)  {Vib Spectrogram\\(3$\times$257$\times$13)};
+\node[rep]  (vib_feat) at (0,-3.0)  {Vib Features\\(RMS, Kurt, Skew, Crest)};
+\draw[arrow] (vib_raw)  -- (vib_spec);
+\draw[arrow] (vib_spec) -- (vib_feat);
+
+\node[pp]   (pp)   at (0,-5.0) {Process Params\\($v_s,\,v_w,\,a_p$)};
+\node[phys] (phys) at (0,-6.5) {Physics Features\\(11 indic.$\times$4 agg. = 44-D)};
+
+% Column headers
+\node[label] at (0,   7.2) {Input Modalities};
+\node[label] at (5.5, 7.2) {Input Configuration\\Categories};
+\node[label] at (10.3,7.2) {Representative Model Families};
+
+% ===== Flow arrows between columns =====
+\draw[flowarrow] (1.5, 0.25) -- (3.3, 0.25) node[midway, above, pub/heading] {combine};
+\draw[flowarrow] (7.7, 0.25) -- (8.7, 0.25) node[midway, above, pub/heading] {evaluate};
+\draw[flowarrow] (12.1,0.25) -- (13.1,0.25) node[midway, above, pub/heading] {predict};
+
+% ===== Middle column: configuration categories =====
+\node[config] (c1) at (5.5, 5.6) {1.\ Process params only};
+\node[config] (c2) at (5.5, 4.2) {2.\ Single modality\\(AE or Vib spectrum/features)};
+\node[config] (c3) at (5.5, 2.8) {3.\ AE+Vib fusion\\(no physics)};
+\node[config] (c4) at (5.5, 1.4) {4.\ AE+Vib+physics\\(+ process params)};
+\node[config] (c5) at (5.5, 0.0) {5.\ Single modality\\+ physics features};
+\node[config] (c6) at (5.5,-1.4) {6.\ Process params\\+ physics features};
+\node[config] (c7) at (5.5,-2.8) {7.\ All modalities combined};
+
+% ===== Right column: model zoo =====
+\node[model] (m1) at (10.3, 5.6) {Classical ML\\Ridge / RF / XGB / LightGBM\\Shallow MLP};
+\node[model] (m2) at (10.3, 4.2) {Single-Modality CNNs\\ResNetAE / ResNetVib\\ChannelAttention};
+\node[model] (m3) at (10.3, 2.8) {Fusion CNNs\\Bilinear / ResNetFusion};
+\node[model] (m4) at (10.3, 1.4) {Graph Fusion\\GNN};
+\node[model] (m5) at (10.3, 0.0) {Tabular DL\\TabTransformer};
+\node[model] (m6) at (10.3,-1.4) {Attention Fusion\\Cross-modal attention};
+\node[model] (m7) at (10.3,-2.8) {Sequence Models\\TrajectoryCNN};
+
+% ===== Target =====
+\node[target] (target) at (14.5, 0.25) {Surface Roughness $R_a$\\(\textmu m)\\0.066--0.381};
+
+% Representative dashed connectors
+\draw[pub/dashed] (ae_spec.east)  -- ++(0.4,0) |- (c2.west);
+\draw[pub/dashed] (ae_feat.east)  -- ++(0.4,0) |- (c7.west);
+\draw[pub/dashed] (vib_spec.east) -- ++(0.4,0) |- (c3.west);
+\draw[pub/dashed] (pp.east)       -- ++(0.4,0) |- (c1.west);
+\draw[pub/dashed] (phys.east)     -- ++(0.4,0) |- (c6.west);
+
+% ===== Compact two-row legend =====
+\node[raw, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg1) at (1.0,-8.25) {};
+\node[right=0.08cm of leg1, pub/legend] {AE raw};
+
+\node[rep, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg2) at (5.0,-8.25) {};
+\node[right=0.08cm of leg2, pub/legend] {AE representation};
+
+\node[pp, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg3) at (10.0,-8.25) {};
+\node[right=0.08cm of leg3, pub/legend] {Process / physics};
+
+\node[config, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg4) at (1.0,-9.0) {};
+\node[right=0.08cm of leg4, pub/legend] {Config. category};
+
+\node[model, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg5) at (5.0,-9.0) {};
+\node[right=0.08cm of leg5, pub/legend] {Model};
+
+\node[target, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg6) at (10.0,-9.0) {};
+\node[right=0.08cm of leg6, pub/legend] {Target};
+
+\end{tikzpicture}%
+}

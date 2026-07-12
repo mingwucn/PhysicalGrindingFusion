@@ -1,0 +1,562 @@
+\section{Discussion}\label{discussion}
+
+\subsection{Why auditable tree ensembles perform
+strongly}\label{why-auditable-models-perform-strongly}
+
+The central empirical finding is that auditable tree ensembles occupy the
+leading observed point-estimate group and are competitive with deep-learning
+alternatives under strict leave-one-condition-out evaluation.  In the
+primary single-seed planned comparison, corrected statistical comparisons
+established clear superiority only over the implementation-specific historical
+shallow MLP baseline, while
+most pairwise differences against deep-learning models were favourable by
+point estimate but not significant.  A secondary five-seed sensitivity
+analysis supports the robustness of this pattern: after averaging training
+stochasticity over five random seeds using the same canonical 14-condition
+training budget for every repeated model, the current random forest is
+significantly lower than the six repeated deep-learning baselines under
+Holm--Bonferroni-corrected Wilcoxon tests on the 16 condition-level paired
+MAEs (Supplementary Table~\ref{tab:supp-seed-repeat-all}).  This
+sensitivity analysis is reported as robustness evidence rather than as the
+primary inferential conclusion.  The observed RF advantage is most
+plausibly related to dataset size, spectral feature structure, and the
+grouped validation protocol.
+
+\subsubsection{Small-data bias--variance
+behaviour}\label{small-data-bias-variance}
+
+The dataset contains only 319 samples spread across 16 grinding
+conditions. With roughly 20 samples per condition, deep networks with
+86--171k gradient-trained weights may have more capacity than the
+319-sample dataset can reliably constrain. Random forests and LightGBM, by contrast,
+partition the feature space with a large collection of shallow, axis-parallel
+rules; they do not have gradient-trained neural weights and instead store tree counts, depths, leaves, split thresholds, feature indices, and leaf predictions. The observed ranking may reflect differences in inductive bias, regularisation, optimisation stability, and effective complexity under the small condition-level sample size:
+Figure~\ref{fig:discussion-complexity} shows that tree ensembles achieve the lowest mean LOGO MAE, while the comparison uses checkpoint size as a storage-footprint proxy rather than a one-parameter stand-in for trees. ResNetVibCNN and the bilinear fusion network still require many trainable weights yet deliver higher error (0.027 and 0.032~\(\upmu\)m versus 0.020~\(\upmu\)m for the best random forest). This should be interpreted as a hypothesis
+because architecture design and regularization could change the result; it
+is consistent with broader evidence that tree-based models remain
+competitive on small tabular or pre-processed spectral datasets
+\cite{grinsztajn2022tree, shwartz2022tabular}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=140mm]{discussion_complexity_accuracy.png}
+\caption{Model size versus LOGO accuracy. Tree ensembles (Random Forest, LightGBM) are compared with deep models using checkpoint size on a log scale rather than a one-parameter stand-in; lower MAE does not imply smaller checkpoints.}\label{fig:discussion-complexity}
+\end{figure}
+
+The fold-level variance seen in Table~\ref{tbl:statistical} reinforces
+this interpretation. Even when the random forest has a lower point-estimate
+MAE, the wide per-fold confidence intervals prevent most pairwise
+differences from reaching significance. This variance likely reflects condition-to-condition heterogeneity,
+potentially mixed with run-order or wheel-state effects; the present deep
+models did not reduce this heterogeneity relative to the regularised tree
+ensembles.
+
+\subsubsection{Inductive bias of tree ensembles on spectral
+features}\label{inductive-bias}
+
+Spectrograms and scattering transforms are naturally organised as
+frequency-indexed tables. A tree ensemble can place a split directly on a
+single frequency bin, making it easy to isolate narrow bands such as the
+20.9~kHz vibration bin identified by TreeSHAP in
+Section~\ref{sec:top-features}; AE bins above 1~MHz should be treated as
+empirical model attributions rather than as independently validated
+physical features. The evaluated CNN architectures apply translation-invariant filters
+and pooling operations that may blur some fine-grained frequency-bin
+information. The sparse attribution profile suggests that narrow-bin
+information may be useful, but controlled feature and architecture
+ablations are needed to verify this.
+
+In this dataset, per-sample dB-z and log-mel preprocessing appear to produce feature spaces in which tree splits are effective. Their canonical RF MAEs differ by only 0.0001~\(\upmu\)m, while the current documented dB-z pipeline does not exactly reproduce the 0.0200~\(\upmu\)m artifact. The evidence therefore supports a top group rather than a unique representation winner. In the implemented log-mel cache, local dB maps are averaged before inverse conversion to power and mel filtering. The recovered linear quantity is consequently a geometric-mean power representation, not the arithmetic mean obtained by mel-filtering each local power map before pass averaging. This non-standard processing order may suppress transient energy and should be considered when comparing the representation with conventional log-mel pipelines. Per-sample standardisation and mel filtering may alter the relative weighting of high-energy AE components and lower-energy vibration modes; controlled preprocessing ablations would be needed to verify this mechanism.
+Wavelet scattering achieves a similar stabilisation through
+mathematically-defined translation and deformation invariants. However, because our WST features (\texttt{ae\_wst}, \texttt{vib\_wst}) are computed by applying the 2D spatial scattering transform on top of the already-computed 2D STFT spectrogram (rather than directly on the raw 1D time-domain signals), there is a significant mathematical redundancy. The STFT magnitude operation has already discarded phase information and performed local temporal averaging, meaning that the subsequent scattering transform acts as a secondary layer of modulation filtering rather than a raw signal representation. This redundancy, combined with boundary smoothing on the short vibration time series ($T=13$), may contribute to the observed WST ranking, but controlled ablations would be needed to establish the mechanism. In this dataset, simple learners on engineered spectral
+representations achieve lower point-estimate errors than the evaluated
+neural baselines---a pattern that has been observed in other small-data
+spectral tasks and is reproduced here for precision grinding.
+
+\subsubsection{LOGO as a proxy for operational generalisation and the
+risk of CV leakage}\label{logo-operational-generalisation}
+
+Many prior studies in tool-condition and surface-quality monitoring use
+ordinary K-fold cross-validation, which can place samples from the same
+grinding condition in both training and test folds. Because a condition
+shares wheel state, coolant history, dressing state, and perhaps thermal
+history, this protocol leaks condition-specific artefacts across folds and
+overestimates real-world performance.
+
+LOGO cross-validation treats each condition as a unit, so the test fold
+always contains a previously unseen grinding state. This is a stricter proxy
+for transfer to an unseen process-parameter combination within the same machine, wheel campaign, workpiece material, and sensor installation. The auditable tree ensembles achieved lower point-estimate errors under this protocol, possibly
+because they did not overfit to the idiosyncrasies of individual
+conditions. The persistent influence of
+Condition~7 (Section~\ref{sec:conditions}) is precisely the kind of
+condition-level heterogeneity that LOGO exposes and that ordinary K-fold
+would dilute.
+
+A final caveat concerns model selection. The deep-learning entries were
+optimised by random search over model and training hyperparameters on the
+same outer LOGO folds, whereas the tree-based models used fixed
+hyperparameters (Table~\ref{tbl:hyperparams}). This is not a fully nested
+algorithm comparison, and the search budget may favour the deep-learning
+estimates \cite{varma2006bias}. The same caveat applies to the claim that
+the random forest is the best model, because that model was also selected
+from the observed benchmark. The reported differences should therefore be
+read as relative rankings under a fixed evaluation budget, not as unbiased
+population estimates of generalisation error.
+
+\subsection{Model-attribution patterns and possible physical
+interpretation}\label{grinding-process-insights}
+
+Beyond predictive accuracy, the attribution analyses identify measured
+frequency regions associated with the fitted roughness predictions. They do
+not establish how surface roughness is physically generated.
+
+\subsubsection{Frequency signatures of surface
+generation}\label{frequency-signatures}
+
+The explanation analysis in Section~\ref{sec:feature-attribution} shows a
+broad separation between higher-frequency AE and structural-frequency
+vibration information, but the dominant bins differ substantially by model
+and representation. AE importance is concentrated mainly above 800~kHz, with a substantial
+fraction above the historically reported nominal 1~MHz response limit. This pattern is
+compatible with high-frequency AE activity associated with grain--workpiece
+contacts and micro-fracture events \cite{tonshoff1992acoustic}, although
+the component above 1~MHz is not calibrated by an archived sensor response.
+These frequencies may encode aspects of grain--workpiece interaction, but
+this interpretation requires sensor-response and process-force validation.
+For the reproducible current random forest, 34.21\% of out-of-fold AE attribution mass lies
+above 1~MHz, outside the historically reported nominal response band; this
+component is therefore treated as a model attribution rather than strong
+physical evidence.
+
+Vibration attribution is model-dependent: LightGBM TreeSHAP peaks near
+20.9~kHz, ResNetVibCNN Grad-CAM peaks near 4~kHz with additional 10--12~kHz
+regions, and the current RF out-of-fold TreeSHAP analysis assigns its
+strongest vibration importance mainly between approximately 16 and 24~kHz.
+Lower-frequency regions receive relatively little
+attribution in the evaluated fitted models. These associations are not a
+direct agreement between explainers or a causal frequency taxonomy. This
+range lies close to the 25.6~kHz Nyquist limit. Because the accelerometer
+response, analogue anti-alias filter, and mounting transfer function were
+not archived, the attribution and ablation sensitivity cannot distinguish
+mechanical content from upper-band acquisition-chain behaviour.
+Sensor-transfer-function and fold-stability analyses would be required to
+rule out recording-chain artefacts; because no-cut spectra were not
+archived, attribution-based physical interpretation remains plausible rather
+than experimentally verified.
+
+\subsubsection{Condition 7 as a case study in outlier-driven
+failure}\label{condition-seven-case}
+
+Condition~7 is the largest outlier across the evaluated model--configuration
+inventory: its mean MAE of 0.234~\(\upmu\)m accounts for 35.2\% of the
+summed condition-level mean MAE and is more than
+twice that of the next hardest condition (Section~\ref{sec:hard-conditions}).
+The failure is not model-specific; every architecture performs worse on
+Condition~7, which points to a robust prediction failure rather than a
+weakness of any one learner. A critical contributing factor for tree-based
+models is the \emph{extrapolation regime}: Condition~7 contains the
+highest observed pass-level $R_a$ values (up to 0.381~\(\upmu\)m), which
+are absent from the training set when this condition is held out
+(Supplementary Table~\ref{tab:supp-logo-extrapolation}). The evaluated constant-leaf random forest cannot produce predictions beyond the range represented by its terminal-leaf training responses and therefore underpredicts near the training maximum of
+0.259~\(\upmu\)m (Condition~8, the next-roughest condition), explaining the large
+held-out-condition errors. This is a limitation of the evaluated
+constant-leaf tree ensembles; it cannot be solved by spectral descriptors
+alone unless the training data or model class supports the target range.
+Because the design is fractional, this
+interpretation is partly confounded with the workpiece-speed/depth-of-cut
+pairing and cannot be cleanly isolated from interaction effects.
+
+The training-target-support distance is a post-hoc diagnostic because it
+requires the measured test \(R_a\), which is unavailable at prediction
+time. It therefore cannot serve as an online warning signal. Deployable
+out-of-distribution monitoring must instead use input-space evidence such
+as distance in process-parameter or representation space, density/leverage,
+ensemble disagreement, or sensor-feature support.
+As a descriptive check, the nearest remaining-condition centroid in the
+training-fold-standardised AE-dB-z + Vib-dB-z space has a Spearman
+association of \(\rho = 0.512\) with the canonical RF LOGO MAE across the 16
+conditions (unadjusted \(p=0.043\); leave-one-condition-out range
+0.414--0.625; Supplementary Table~\ref{tab:supp-input-ood}). The analogous
+nearest process-parameter distance has \(\rho = -0.256\). Thus, the archived
+representation contains a potentially useful novelty signal that is not
+available from the three programmed parameters alone. This 16-condition,
+post-hoc association is not a calibrated online alarm; a deployable method
+must fix a threshold without using the unknown test target and be validated
+on independent campaigns.
+
+Table~\ref{tbl:condition-seven} compares the process parameters of
+Condition~7 with the median of the remaining 15 conditions. Condition~7
+combines the highest workpiece speed (80~r/min), a below-median wheel speed
+(30~m/s), and the shallowest grinding depth (20~\(\upmu\)m). Condition~7 is
+mechanistically ambiguous. Its high workpiece speed and low wheel speed
+increase the kinematic chip-thickness proxy, while the shallow depth and
+possible wheel-state effects could still produce rubbing, ploughing, or
+thermal/wheel-loading behaviour. The current data are insufficient to
+distinguish these mechanisms. The kinematic undeformed chip thickness scales as
+\begin{equation}
+h_m \propto \left(\frac{v_w}{v_s}\right)^{1/2}\left(\frac{a_e}{D_e}\right)^{1/4},
+\label{eq:chip-thickness}
+\end{equation}
+where \(v_w\) and \(v_s\) are expressed in consistent linear surface speed units (using the workpiece outer diameter \(d_w = 214\)~mm to convert \(v_w\) from r/min to m/s), \(a_e\) is the effective depth of cut, and \(D_e\) is the
+equivalent wheel diameter \cite{malkin2008grinding, tonshoff1992acoustic}. For this descriptive calculation, \(a_e=a_p\); \(D_e\) and the r/min-to-surface-speed conversion cancel in the ratio because the same wheel and workpiece diameter apply to both cases. Substituting Condition~7 and the component-wise medians gives
+\(\sqrt{(80/30)/(40/35)}(20/40)^{1/4}=1.28\).
+This kinematic interpretation remains
+post-hoc and is not definitively settled. Because our experimental setup
+did not archive direct grinding force, spindle power, contact temperature,
+wheel loading/dressing state, coolant state, surface images, or
+high-resolution spectral difference plots for Condition~7, the exact
+material-removal mechanism remains speculative. Future work must integrate
+these physical diagnostics to validate regime transitions.
+
+\begin{table}[htbp]
+\centering
+\caption{Process parameters for Condition~7 versus the median of the
+other 15 conditions.}\label{tbl:condition-seven}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Parameter & Condition~7 & Median of others \\
+\midrule
+Wheel speed (m/s) & 30 & 35 \\
+Workpiece speed (r/min) & 80 & 40 \\
+Grinding depth (\(\upmu\)m) & 20 & 40 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Condition~10 provides a near-matched diagnostic contrast: it shares the
+same workpiece speed and depth of cut as Condition~7 but uses 35 rather
+than 30~m/s wheel speed. Its mean measured \(R_a\) is
+0.0783~\(\upmu\)m, versus 0.3540~\(\upmu\)m for Condition~7. Figure~\ref{fig:condition7-condition10}
+compares the archived mean dB spectra and shows why this target contrast
+should be treated as a priority data and machine-state audit, not as proof
+of a wheel-speed-only regime transition. Machine logs, dressing/loading
+state, coolant state, surface images, force, power, and temperature data
+are unavailable for distinguishing the alternatives.
+The quantitative cache comparison is consistent with this distinction:
+Condition~7 is 2.77~dB higher in the archived 0.1--1.0~MHz AE band and
+3.14~dB lower in the archived 2--15~kHz vibration band than Condition~10;
+the respective nonparametric pass-bootstrap 95\% intervals are
+[1.37, 4.16] and [-4.24, -2.09]~dB (Supplementary
+Table~\ref{tab:supp-condition7-condition10-bands}). These are
+cache-level contrasts after the recorded signal chain, not calibrated
+spectral measurements or evidence for a material-removal mechanism. The
+bootstrap resamples repeated passes within each single condition; its
+interval quantifies within-condition pass variability and cannot establish
+generalisability of the wheel-speed contrast across independently repeated
+conditions.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{condition7_condition10_spectra.png}
+\caption{Archived-cache spectral comparison for Conditions~7 and 10.
+The conditions share workpiece speed and depth of cut but differ in wheel
+speed and measured roughness. These descriptive spectra do not identify a
+causal mechanism.}\label{fig:condition7-condition10}
+\end{figure}
+
+Condition~7 should be treated as a critical failure case for model
+robustness and may require either explicit regime identification or
+condition-aware uncertainty estimation. In practice it warrants
+inspection of wheel wear, dressing state, coolant flow, and possible
+thermal damage. It should remain part of the main evaluation unless it is
+proven to be invalid data, because difficult or outlier conditions are
+precisely the cases that matter most in process monitoring.
+
+\subsection{Reliability and decision-making under
+uncertainty}\label{uncertainty-and-decisions}
+
+\subsubsection{Coverage failure of MC-dropout epistemic-only intervals}\label{why-mc-dropout-fails}
+
+MC-dropout produced epistemic-only bands with 50.2\% descriptive target coverage
+under full 16-fold LOGO evaluation (319 held-out samples). The intervals
+are therefore substantially under-covering. However, predicted standard
+deviation is correlated with absolute error at pass level (Pearson
+$r=0.488$, Spearman $\rho=0.594$; AUROC for detecting the top 20\%
+highest-error samples is 0.818), so MC-dropout has some discrimination
+ability but does not provide calibrated predictive intervals. This is not a
+formal calibration test of the epistemic posterior variance because the band
+omits residual and aleatoric variability. The corresponding 16-condition mean
+correlation is Pearson $r=0.492$ (Spearman $\rho=0.732$), but the
+condition-cluster bootstrap intervals are wide and the pass-level metrics
+must remain descriptive.
+Condition~7 has 0\% coverage, showing that it fails on the dominant hard
+condition. The earlier 59-sample subset (Conditions 1, 2, and 6)
+reported 100\% coverage with a wider mean width (0.073~\(\upmu\)m versus
+0.0479~\(\upmu\)m under full LOGO), demonstrating that the apparent quality of
+MC-dropout is highly sensitive to which conditions are included. Under the full LOGO evaluation most uncertainty bins are far
+below the nominal 95\% level, and the mean interval width is much smaller
+than the mean absolute error in the highest-error bins. The failure is
+therefore not merely an artefact of the earlier 59-sample subset. It represents a substantial calibration failure for the evaluated CNN, dropout configuration, and grouped-shift setting: dropout variance partially ranks error magnitude but does not
+provide calibrated prediction intervals and should not be used alone as a
+process-warning signal \cite{ovadia2019can}.
+
+Contributing reasons for the poor predictive coverage include omission of
+residual or aleatoric variability, systematic model bias under condition
+shift, model misspecification, and limited sensitivity of the evaluated
+dropout approximation to out-of-support inputs. If an outlier similar to Condition~7 were presented to the network, the
+dropout masks might still produce similar hidden representations, so the
+interval could remain narrow even though the prediction would likely be
+wrong.
+
+This distinction has direct operational consequences. A plant engineer
+relying on MC-dropout intervals would not receive a reliable warning that
+Condition~7 is about to produce a large residual. Aggregate coverage is
+therefore not sufficient for process control; the calibration of
+uncertainty at the sample level matters at least as much as the overall
+coverage rate (Figure~\ref{fig:reliability}).
+
+\subsubsection{Practical alternatives for shop-floor
+uncertainty}\label{shop-floor-uncertainty}
+
+The failure of both MC-dropout and OOB-scaled RF intervals on Condition~7
+indicates that future uncertainty methods must calibrate at condition
+level and include frontier conditions. Ensembles of
+structurally different models (tree, CNN, scattering) can provide
+uncertainty estimates that reflect genuine model disagreement rather than
+internal Monte-Carlo noise \cite{lakshminarayanan2017simple}. Conformal
+prediction is a candidate approach, but with only 16 conditions the calibration set would be small, and coverage would depend strongly on whether calibration conditions span the same process frontier as Condition~7 \cite{angelopoulos2021gentle}.
+Exchangeability can be questioned when conditions differ as strongly as
+Condition~7 does from the rest, so adaptive or condition-aware conformal
+variants should be considered in practice. For multivariate industrial
+targets, copula-based conformal methods provide a way to build joint
+prediction regions that respect output correlations
+\cite{zhang2023improved}. Evidential regression models, such as Normal-Inverse-Gamma
+formulations, or explicit aleatoric/epistemic decomposition could also
+separate process noise from model ignorance.
+Evaluating these alternatives under the same LOGO protocol is an important
+direction for future work.
+
+\subsection{Industrial deployment
+implications}\label{industrial-deployment}
+
+The present evidence is retrospective and pass-level: every cached input is
+the arithmetic aggregate of 2,910 local maps spanning its recorded pass.
+Accordingly, the reported feature-precomputed inference times do not imply
+within-pass prediction, a closed-loop update interval, or first-decision
+latency. A deployable streaming system would need to fix an aggregation
+horizon and hop, then measure raw-signal-to-decision timing and accuracy on
+partial or overlapping pass windows.
+
+\subsubsection{Matching model choice to plant
+constraints}\label{model-choice-by-constraints}
+
+The deployment trade-offs in Section~\ref{sec:latency-accuracy} and
+Section~\ref{sec:footprint-maintainability} can be summarised as a simple
+decision rule (Table~\ref{tbl:deployment-choice}). Under the present post-selection benchmark, if the overriding priority
+is point-estimate accuracy and the application can tolerate a
+pooled median of approximately 8~ms (p95 13.7~ms) for feature-precomputed
+model inference, the random
+forest on fused AE and vibration dB-z descriptors is one leading
+point-estimate candidate alongside the nearly tied log-mel RF by mean MAE.
+The current nested dB-z result has the lower maximum fold error
+(0.1402 versus 0.2061~\(\upmu\)m), so dB-z is the better observed tail-risk
+candidate in this dataset (its
+superiority is not statistically conclusive versus most deep-learning
+alternatives under the primary test family). It can be audited through the
+out-of-fold RF TreeSHAP analysis reported for the same dB-z pipeline. If the application
+requires sub-5~ms median inference on an edge device or must run at high
+cached-feature model-call rates, ResNetVibCNN provides the lowest median and
+p95 latency, while ResNetAECNN is the AE-only CNN alternative. LightGBM and
+bilinear fusion also have pooled medians near or below 5~ms but different
+accuracy and interpretability trade-offs. Both CNN choices have MAEs
+approximately 0.0068--0.0100~\(\upmu\)m above the historical best RF point
+estimate; most corresponding pairwise differences are not statistically
+conclusive after multiplicity correction. Their decisions are also less
+directly auditable under the explanation methods evaluated here.
+
+\begin{table}[htbp]
+\centering
+\caption{Recommended model--configuration pair by deployment
+priority. All latency figures are \emph{feature-precomputed model-inference
+only}; true online latency must additionally account for the full-pass temporal aggregation used by the current cache, signal acquisition, STFT/dB-z/log-mel preprocessing, feature
+scaling, and communication/edge-hardware overhead.}
+\label{tbl:deployment-choice}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Priority & Recommended model & Configuration \\
+\midrule
+Lowest observed point-estimate group & Random forest & \texttt{AE-dB-z + Vib-dB-z} or \texttt{AE-log-mel + Vib-log-mel} \\
+Better observed nested worst-fold robustness & Random forest & \texttt{AE-dB-z + Vib-dB-z} \\
+Lowest median and p95 model-only latency & ResNetVibCNN & \texttt{Vib-dB} \\
+Out-of-fold attribution for recommended model & Random forest & \texttt{AE-dB-z + Vib-dB-z} \\
+Exact local TreeSHAP where individual examples are required & LightGBM & \texttt{AE-dB + Vib-dB} \\
+Observed low-error baseline under limited data & Random forest & \texttt{AE-dB-z + Vib-dB-z} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Latency caveat.} The reported inference latencies are
+\emph{feature-precomputed model-inference times only} and do not represent
+end-to-end online latency. The complete acquisition-to-decision pipeline would
+additionally require a chosen partial-pass aggregation horizon and hop,
+signal acquisition, signal preprocessing (STFT, dB-z/log-mel computation,
+feature scaling), network communication, and edge-hardware boot-up. The
+current cached descriptor instead aggregates the full recorded pass
+(approximately 14.6~s in the raw AE record). Industrial claims
+about real-time capability must specify the full pipeline budget; the present
+latency figures serve only as a relative ranking of model-inference overhead.
+
+LightGBM offers a middle ground in accuracy and its p95 latency is
+5.0~ms in the fold-complete controlled rerun, which keeps it within the same
+order-of-magnitude latency band as the RF configurations while remaining
+less accurate than the best RF. Bilinear fusion is not competitive: it is the largest deep-learning entry without any
+point-estimate accuracy advantage over the simpler CNNs.
+
+\subsubsection{Human-in-the-loop, interpretability, and
+retraining}\label{human-in-the-loop}
+
+Auditable models may be easier to inspect because their frequency-bin attributions and split rules can be examined, but this expected advantage was not tested through a user study, retraining-time benchmark, or plant deployment. TreeSHAP attributions let engineers inspect whether a
+prediction is associated with physically plausible frequency regions
+rather than with sensor drift or anomalous wheel loading, although this
+audit is post-hoc and does not prove causal reliance. When a new wheel
+grade, workpiece material, or dressing strategy is introduced, the random
+forest is expected to require less tuning than a deep CNN, but this
+maintainability claim was not measured here. For production environments
+where models must be updated frequently, this expected advantage should be
+tested alongside point-estimate accuracy.
+
+\subsection{Limitations and future
+work}\label{limitations-and-future-work}
+
+\subsubsection{Dataset scale and
+generalisability}\label{scale-and-generalisability}
+
+The study is based on 319 samples from 16 grinding conditions. While this
+collection is large enough to expose clear performance differences and
+condition-level failure modes, it is not large enough to guarantee
+generalisation to every wheel grade, workpiece material, dressing protocol,
+or coolant formulation. Future work should expand the dataset across these
+dimensions and report external validation on independently collected data.
+
+\subsubsection{Statistical power and inference limitations}\label{power-limitations}
+
+With only 16 condition-level folds, most pairwise model comparisons are underpowered to detect subtle performance differences under Holm--Bonferroni correction. The experimental design can detect only relatively large paired condition-level effects; non-significance is not evidence of equivalence. Consequently, while the random forest's point-estimate advantage is suggestive, the lack of statistically significant differences against many deep learning baselines must be interpreted with caution.
+
+\subsubsection{Reproducibility, preprocessing, and measurement
+caveats}\label{reproducibility-caveats}
+
+Several reproducibility caveats bound the scientific claims. Only the
+final averaged $R_a$ value per pass is archived; the raw profilometer
+traces and trace-level repeatability were not retained, so gauge R\&R
+	and experimental uncertainty cannot be computed. The best reported MAE
+	(0.020~\(\upmu\)m) is only about twice the manufacturer-quoted
+	repeatability (0.01~\(\upmu\)m) and is below the expanded uncertainty
+	scale of 0.025~\(\upmu\)m. It should therefore be interpreted as error
+	against the averaged measured \(R_a\), not error against latent true
+	roughness. Because trace-level repeatability is unavailable, the latent
+	error relative to latent roughness cannot be separated from
+	measurement uncertainty. Differences among the top RF
+variants are smaller than the available measurement-resolution evidence,
+so their ranking is exploratory. No-cut background spectra were
+not archived, so frequency attributions cannot be verified against
+background-noise measurements and remain plausible rather than
+experimentally confirmed. A strict per-sample/channel normalisation ablation for the top RF
+configuration changes the overall LOGO MAE only slightly (0.0210
+versus 0.0213~\(\upmu\)m), but the worst-condition MAE increases without
+per-sample normalisation (Supplementary
+Table~\ref{tab:supp-psnorm-ablation}), so the ablation supports
+mean-level robustness but not necessarily tail robustness. The top RF
+result does not therefore appear to depend on removing absolute
+AE/vibration energy for mean MAE. Physics-informed features are computed by
+the implemented algorithms and parameters documented in Supplementary
+Table~\ref{tab:physics_features}; any cached intermediate-derived
+preprocessing must be preserved for full reproducibility. Historical campaign
+notes report a nominal 100~kHz--1~MHz AE response band, but the sensor
+specification and transfer-function record are unavailable; AE
+attributions above 1~MHz (34.21\% of the current RF's out-of-fold AE importance)
+remain sensor-response-limited and must not be treated as validated grinding physics. In this high-frequency regime, the measured content is heavily shaped by sensor-mounting, couplant resonance, and the sensor's own transfer function rather than raw workpiece interactions. Because our experimental setup did not characterize the sensor transfer function, collect no-cut spectra, or measure mount/couplant resonance, we cannot physically validate the attributions above 1~MHz. The nominal 100~kHz--1~MHz band is a cautious reporting convention, not a calibrated physical-interpretation range; high-frequency features serve solely as empirical statistical predictors.
+
+\subsubsection{Wheel-state dynamics and cyclostationary
+features}\label{wheel-state-dynamics}
+
+The current feature set captures frequency content but does not explicitly
+model wheel-pass modulation or cyclostationary dynamics. As a wheel wears
+or loads, the periodicity of grain engagements changes, and
+cyclostationary features---cyclic spectral correlation, averaged cyclic
+periodograms, or spectral kurtosis---could track this evolution more
+directly than static spectrograms \cite{antoni2007cyclic, antoni2004cyclostationary}.
+Including such features is a natural next step, particularly for
+Condition~7-style outliers where wheel state may be the dominant factor.
+
+\subsubsection{Robustness of feature and validation
+choices}\label{feature-validation-robustness}
+
+The cross-validation-scheme comparison shows that random sample-level
+splits give MAEs of roughly 0.005~\(\upmu\)m, about four times lower than
+grouped LOGO. Because this value is below the manufacturer-quoted
+profilometer repeatability and primarily reflects within-condition similarity, it
+should not be interpreted as practically meaningful performance. This
+confirms that condition-level grouping is essential and that the modest
+differences among top models are only meaningful under grouped evaluation.
+The current descriptors are temporal means over 2,910 archived local windows per pass; they do not retain early/middle/late temporal ordering. The retrospective early/middle/late-third sensitivity and ordered three-window concatenation have similar mean MAEs, but fixed-distance and streaming-dispersion features remain necessary to test whether transients add information beyond the pass-level mean. The sensor-modality ablation shows that
+vibration alone achieves 0.0207~\(\upmu\)m, nearly matching the fused
+result, while AE alone degrades to 0.0296~\(\upmu\)m. AE therefore
+provides a secondary, condition-specific benefit rather than a dominant
+signal. The frequency-band ablation shows that removing AE content above
+1~MHz or the vibration 2--15~kHz chatter band individually changes MAE by
+less than 0.0001~\(\upmu\)m; only removing both bands together raises MAE
+to 0.0208~\(\upmu\)m. This supports treating the >1~MHz AE attribution as
+a model response pattern rather than calibrated physical energy: the
+band is not required for near-optimal accuracy, even though the RF
+assigns it substantial importance. The complementary retrained analysis
+finds no interval-supported condition-level change after removing AE >1~MHz,
+vibration 2--15~kHz, or the narrower vibration 16--24~kHz region. In
+contrast, removing the complete vibration region above 15~kHz raises MAE
+from 0.0210 to 0.0285~\(\upmu\)m, with a descriptive paired 95\% interval
+that excludes zero. The fitted RF therefore uses predictive information
+distributed across the high-frequency vibration region; this result does
+not establish a causal grinding mechanism. A stricter dB-source analysis
+deletes the bands before recomputing the retained-bin z-score and again finds
+an increase for removal of >15~kHz (0.0209 to 0.0255~\(\upmu\)m). Therefore,
+the finding is not explained solely by indirect encoding through the original
+full-spectrum normalisation.
+
+\subsubsection{Broader uncertainty-quantification
+methods}\label{broader-uq}
+
+The MC-dropout analysis is limited to one CNN architecture and shows poor
+per-sample calibration. The full-LOGO MC-dropout values reported in
+Section~\ref{uncertainty-quantification} supersede the earlier 59-sample
+subset, which is retained only to show sensitivity to subset choice. We
+also tested four interval strategies for a separate 15-condition RF uncertainty variant (global OOB scaling, condition-aware k-NN calibration,
+split conformal with one held-out calibration condition, and a naive
+residual interval). None covers Condition~7, indicating that the largest
+outlier lies outside the support of in-distribution residuals. Future
+work should compare conformal prediction
+\cite{angelopoulos2021gentle, zhang2023improved}, deep ensembles
+\cite{lakshminarayanan2017simple}, and evidential or explicitly decomposed
+uncertainty estimates under the same LOGO protocol, with explicit
+calibration reserves that span the parameter-space frontier. The goal is
+an uncertainty estimate that not only covers the aggregate error but also
+flags condition-specific outliers before they enter the control loop.
+
+\subsubsection{Benchmarking and deployment caveats}
+
+The model ranking is the outcome of a non-nested/post-selection benchmark:
+the best random forest and the best deep-learning configurations were
+selected from the same observed results, and the deep-learning entries
+were further tuned by random search on the outer LOGO folds. The reported
+differences should be read as relative rankings under a fixed evaluation
+budget, not as unbiased population estimates. This caveat applies to the
+selected best RF as well as to the deep-learning entries. A current-cache,
+inner-grouped rerun gives 0.0207~\(\upmu\)m for dB-z and 0.0206~\(\upmu\)m
+for log-mel RF descriptors; an earlier nested log-mel artifact gives
+0.0455~\(\upmu\)m and is not reproduced by the current pipeline
+(Supplementary Table~\ref{tab:supp-nested-logo}). This provenance discrepancy
+reinforces that dB-z and log-mel should be treated as a leading observed group,
+not a uniquely ordered pair. Random 5-fold CV and
+random 80/20 splits give MAEs of roughly 0.0053~\(\upmu\)m, so validation
+schemes that allow condition leakage between training and test sets are
+overly optimistic for this dataset; grouped LOGO or parameter-group LOGO
+is required for an honest estimate of generalisation. Four RF interval
+calibration strategies (global OOB, condition-aware k-NN, split
+conformal, naive residual) all fail to cover Condition~7, confirming that
+the dominant outlier is not captured by in-distribution residual
+patterns. The latency analysis is limited to feature-precomputed
+model-inference timing on a single CPU core with the `powersave'
+governor; it excludes signal acquisition, the full-pass temporal aggregation used by the current cache, STFT/dB-z/log-mel computation, feature scaling, and communication
+	overhead. A full end-to-edge deployment assessment remains future work, and
+	the reported timings do not imply full edge-deployment readiness. Robust
+	latency benchmarking should repeat the measurements in multiple blocks
+	under a fixed CPU performance governor and report p90, p95, p99, and
+	maximum latency before using any model for hard real-time conclusions.

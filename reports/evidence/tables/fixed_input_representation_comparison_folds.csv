@@ -1,0 +1,385 @@
+family,config,learner,fold,mae
+dB,ae_spec+vib_spec,RandomForestModel,1,0.005174213474513206
+dB,ae_spec+vib_spec,RandomForestModel,2,0.01066947479472743
+dB,ae_spec+vib_spec,RandomForestModel,3,0.008318374242555406
+dB,ae_spec+vib_spec,RandomForestModel,4,0.010094767073731692
+dB,ae_spec+vib_spec,RandomForestModel,5,0.004688700940820505
+dB,ae_spec+vib_spec,RandomForestModel,6,0.005758793642136181
+dB,ae_spec+vib_spec,RandomForestModel,7,0.18629818767945486
+dB,ae_spec+vib_spec,RandomForestModel,8,0.026830697640941963
+dB,ae_spec+vib_spec,RandomForestModel,9,0.01162945606514553
+dB,ae_spec+vib_spec,RandomForestModel,10,0.008295492016244455
+dB,ae_spec+vib_spec,RandomForestModel,11,0.0049579140123163995
+dB,ae_spec+vib_spec,RandomForestModel,12,0.01130604180551786
+dB,ae_spec+vib_spec,RandomForestModel,13,0.006743842096030929
+dB,ae_spec+vib_spec,RandomForestModel,14,0.021111926045656926
+dB,ae_spec+vib_spec,RandomForestModel,15,0.010282540979106334
+dB,ae_spec+vib_spec,RandomForestModel,16,0.007129244403344387
+dB,ae_spec+vib_spec,RidgeRegressionModel,1,0.013092937879264355
+dB,ae_spec+vib_spec,RidgeRegressionModel,2,0.005392220802605152
+dB,ae_spec+vib_spec,RidgeRegressionModel,3,0.012350387871265411
+dB,ae_spec+vib_spec,RidgeRegressionModel,4,0.022724870592355728
+dB,ae_spec+vib_spec,RidgeRegressionModel,5,0.005770844407379627
+dB,ae_spec+vib_spec,RidgeRegressionModel,6,0.01171177253127098
+dB,ae_spec+vib_spec,RidgeRegressionModel,7,0.1297174096107483
+dB,ae_spec+vib_spec,RidgeRegressionModel,8,0.06733173877000809
+dB,ae_spec+vib_spec,RidgeRegressionModel,9,0.01360330730676651
+dB,ae_spec+vib_spec,RidgeRegressionModel,10,0.01007117796689272
+dB,ae_spec+vib_spec,RidgeRegressionModel,11,0.01641438901424408
+dB,ae_spec+vib_spec,RidgeRegressionModel,12,0.017249515280127525
+dB,ae_spec+vib_spec,RidgeRegressionModel,13,0.018864648416638374
+dB,ae_spec+vib_spec,RidgeRegressionModel,14,0.030441978946328163
+dB,ae_spec+vib_spec,RidgeRegressionModel,15,0.008593925274908543
+dB,ae_spec+vib_spec,RidgeRegressionModel,16,0.014006400480866432
+dB,ae_spec+vib_spec,LightGBMModel,1,0.0048899523975288635
+dB,ae_spec+vib_spec,LightGBMModel,2,0.0076552664091884106
+dB,ae_spec+vib_spec,LightGBMModel,3,0.009143977797107258
+dB,ae_spec+vib_spec,LightGBMModel,4,0.01014460910045728
+dB,ae_spec+vib_spec,LightGBMModel,5,0.003883047667986381
+dB,ae_spec+vib_spec,LightGBMModel,6,0.006062033276260239
+dB,ae_spec+vib_spec,LightGBMModel,7,0.2565710153014785
+dB,ae_spec+vib_spec,LightGBMModel,8,0.10291470137431744
+dB,ae_spec+vib_spec,LightGBMModel,9,0.010105119685919067
+dB,ae_spec+vib_spec,LightGBMModel,10,0.007594708313483203
+dB,ae_spec+vib_spec,LightGBMModel,11,0.004789455303564844
+dB,ae_spec+vib_spec,LightGBMModel,12,0.010440380046948495
+dB,ae_spec+vib_spec,LightGBMModel,13,0.007965911606951847
+dB,ae_spec+vib_spec,LightGBMModel,14,0.05436969200533581
+dB,ae_spec+vib_spec,LightGBMModel,15,0.010876075637430722
+dB,ae_spec+vib_spec,LightGBMModel,16,0.005522020160259255
+dB,ae_spec+vib_spec,ShallowMLPModel,1,3.3637807369232178
+dB,ae_spec+vib_spec,ShallowMLPModel,2,0.6281576156616211
+dB,ae_spec+vib_spec,ShallowMLPModel,3,0.7549410462379456
+dB,ae_spec+vib_spec,ShallowMLPModel,4,1.1825764179229736
+dB,ae_spec+vib_spec,ShallowMLPModel,5,1.213201880455017
+dB,ae_spec+vib_spec,ShallowMLPModel,6,0.2290193736553192
+dB,ae_spec+vib_spec,ShallowMLPModel,7,1.1757878065109253
+dB,ae_spec+vib_spec,ShallowMLPModel,8,0.9227048754692078
+dB,ae_spec+vib_spec,ShallowMLPModel,9,0.6069022417068481
+dB,ae_spec+vib_spec,ShallowMLPModel,10,0.8726856112480164
+dB,ae_spec+vib_spec,ShallowMLPModel,11,2.0566701889038086
+dB,ae_spec+vib_spec,ShallowMLPModel,12,0.5281926393508911
+dB,ae_spec+vib_spec,ShallowMLPModel,13,0.3288056254386902
+dB,ae_spec+vib_spec,ShallowMLPModel,14,1.777666687965393
+dB,ae_spec+vib_spec,ShallowMLPModel,15,0.815962016582489
+dB,ae_spec+vib_spec,ShallowMLPModel,16,0.7451586127281189
+dB-z,ae_logspec+vib_logspec,RandomForestModel,1,0.0054203251807792745
+dB-z,ae_logspec+vib_logspec,RandomForestModel,2,0.0030747166575197187
+dB-z,ae_logspec+vib_logspec,RandomForestModel,3,0.009652393304394762
+dB-z,ae_logspec+vib_logspec,RandomForestModel,4,0.008169607553608191
+dB-z,ae_logspec+vib_logspec,RandomForestModel,5,0.0033233874611621134
+dB-z,ae_logspec+vib_logspec,RandomForestModel,6,0.005939456088574812
+dB-z,ae_logspec+vib_logspec,RandomForestModel,7,0.147817065814029
+dB-z,ae_logspec+vib_logspec,RandomForestModel,8,0.06981357902025631
+dB-z,ae_logspec+vib_logspec,RandomForestModel,9,0.008927700101770169
+dB-z,ae_logspec+vib_logspec,RandomForestModel,10,0.011190870714761486
+dB-z,ae_logspec+vib_logspec,RandomForestModel,11,0.008219613716475496
+dB-z,ae_logspec+vib_logspec,RandomForestModel,12,0.009642958580685288
+dB-z,ae_logspec+vib_logspec,RandomForestModel,13,0.01234606525572316
+dB-z,ae_logspec+vib_logspec,RandomForestModel,14,0.016817687995131735
+dB-z,ae_logspec+vib_logspec,RandomForestModel,15,0.009781050070015326
+dB-z,ae_logspec+vib_logspec,RandomForestModel,16,0.005233609084457655
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,1,0.005479315761476755
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,2,0.007287418935447931
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,3,0.007963882759213448
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,4,0.017597796395421028
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,5,0.007813898846507072
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,6,0.010808134451508522
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,7,0.13489307463169098
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,8,0.05174555256962776
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,9,0.017136283218860626
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,10,0.017891520634293556
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,11,0.017751459032297134
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,12,0.02225356735289097
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,13,0.01568565145134926
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,14,0.025600219145417213
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,15,0.01018553413450718
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,16,0.008882074616849422
+dB-z,ae_logspec+vib_logspec,LightGBMModel,1,0.005199725393847984
+dB-z,ae_logspec+vib_logspec,LightGBMModel,2,0.004537365259743312
+dB-z,ae_logspec+vib_logspec,LightGBMModel,3,0.01056550060918884
+dB-z,ae_logspec+vib_logspec,LightGBMModel,4,0.011634739735256649
+dB-z,ae_logspec+vib_logspec,LightGBMModel,5,0.005385007649521914
+dB-z,ae_logspec+vib_logspec,LightGBMModel,6,0.005767054923775649
+dB-z,ae_logspec+vib_logspec,LightGBMModel,7,0.2640331746439526
+dB-z,ae_logspec+vib_logspec,LightGBMModel,8,0.1413683472930254
+dB-z,ae_logspec+vib_logspec,LightGBMModel,9,0.009861261549864896
+dB-z,ae_logspec+vib_logspec,LightGBMModel,10,0.007253161365510579
+dB-z,ae_logspec+vib_logspec,LightGBMModel,11,0.007008455626051874
+dB-z,ae_logspec+vib_logspec,LightGBMModel,12,0.01081129633016997
+dB-z,ae_logspec+vib_logspec,LightGBMModel,13,0.011270322563982176
+dB-z,ae_logspec+vib_logspec,LightGBMModel,14,0.011099534120063467
+dB-z,ae_logspec+vib_logspec,LightGBMModel,15,0.009696099728288197
+dB-z,ae_logspec+vib_logspec,LightGBMModel,16,0.0058911000321265495
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,1,3.602234363555908
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,2,1.5161460638046265
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,3,1.1199795007705688
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,4,1.5430848598480225
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,5,2.04547381401062
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,6,1.6765896081924438
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,7,38.68988800048828
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,8,6.4989495277404785
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,9,1.5997850894927979
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,10,10.006574630737305
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,11,1.497849464416504
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,12,3.6492080688476562
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,13,2.1209921836853027
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,14,9.759947776794434
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,15,2.692457675933838
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,16,1.773880958557129
+log-mel,ae_mel+vib_mel,RandomForestModel,1,0.005086884717320589
+log-mel,ae_mel+vib_mel,RandomForestModel,2,0.004918263602168981
+log-mel,ae_mel+vib_mel,RandomForestModel,3,0.008935170677885828
+log-mel,ae_mel+vib_mel,RandomForestModel,4,0.011351625140967074
+log-mel,ae_mel+vib_mel,RandomForestModel,5,0.004728025415660508
+log-mel,ae_mel+vib_mel,RandomForestModel,6,0.00827365565846056
+log-mel,ae_mel+vib_mel,RandomForestModel,7,0.2061158980921455
+log-mel,ae_mel+vib_mel,RandomForestModel,8,0.01177662581420251
+log-mel,ae_mel+vib_mel,RandomForestModel,9,0.01088413841732731
+log-mel,ae_mel+vib_mel,RandomForestModel,10,0.009602078782313606
+log-mel,ae_mel+vib_mel,RandomForestModel,11,0.005222832984738931
+log-mel,ae_mel+vib_mel,RandomForestModel,12,0.010486231864154589
+log-mel,ae_mel+vib_mel,RandomForestModel,13,0.006213747277006061
+log-mel,ae_mel+vib_mel,RandomForestModel,14,0.00606348785897169
+log-mel,ae_mel+vib_mel,RandomForestModel,15,0.010365527757542426
+log-mel,ae_mel+vib_mel,RandomForestModel,16,0.007316656410887519
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,1,0.02693117968738079
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,2,0.00583376782014966
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,3,0.017943862825632095
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,4,0.019197139889001846
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,5,0.005865170154720545
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,6,0.010645908303558826
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,7,0.1319531351327896
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,8,0.07756327092647552
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,9,0.009044495411217213
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,10,0.010622364468872547
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,11,0.04235279560089111
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,12,0.020659413188695908
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,13,0.02516641840338707
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,14,0.2005590945482254
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,15,0.017922446131706238
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,16,0.011453850194811821
+log-mel,ae_mel+vib_mel,LightGBMModel,1,0.0051814533870110455
+log-mel,ae_mel+vib_mel,LightGBMModel,2,0.004915536057977742
+log-mel,ae_mel+vib_mel,LightGBMModel,3,0.009660855548100124
+log-mel,ae_mel+vib_mel,LightGBMModel,4,0.007309702055055029
+log-mel,ae_mel+vib_mel,LightGBMModel,5,0.004442014352998897
+log-mel,ae_mel+vib_mel,LightGBMModel,6,0.00592737842793975
+log-mel,ae_mel+vib_mel,LightGBMModel,7,0.26075109507945343
+log-mel,ae_mel+vib_mel,LightGBMModel,8,0.0993275644516432
+log-mel,ae_mel+vib_mel,LightGBMModel,9,0.011851883398864069
+log-mel,ae_mel+vib_mel,LightGBMModel,10,0.007978170903438407
+log-mel,ae_mel+vib_mel,LightGBMModel,11,0.004758559854322521
+log-mel,ae_mel+vib_mel,LightGBMModel,12,0.010093973067347531
+log-mel,ae_mel+vib_mel,LightGBMModel,13,0.00760404499532098
+log-mel,ae_mel+vib_mel,LightGBMModel,14,0.004660669931518593
+log-mel,ae_mel+vib_mel,LightGBMModel,15,0.009079731872751023
+log-mel,ae_mel+vib_mel,LightGBMModel,16,0.006414222202340794
+log-mel,ae_mel+vib_mel,ShallowMLPModel,1,0.6936523914337158
+log-mel,ae_mel+vib_mel,ShallowMLPModel,2,0.6355818510055542
+log-mel,ae_mel+vib_mel,ShallowMLPModel,3,0.6231040954589844
+log-mel,ae_mel+vib_mel,ShallowMLPModel,4,0.531197190284729
+log-mel,ae_mel+vib_mel,ShallowMLPModel,5,0.4898935854434967
+log-mel,ae_mel+vib_mel,ShallowMLPModel,6,0.5896007418632507
+log-mel,ae_mel+vib_mel,ShallowMLPModel,7,1.043738842010498
+log-mel,ae_mel+vib_mel,ShallowMLPModel,8,0.69475257396698
+log-mel,ae_mel+vib_mel,ShallowMLPModel,9,0.7156223058700562
+log-mel,ae_mel+vib_mel,ShallowMLPModel,10,0.3206295669078827
+log-mel,ae_mel+vib_mel,ShallowMLPModel,11,0.7999900579452515
+log-mel,ae_mel+vib_mel,ShallowMLPModel,12,0.6133576035499573
+log-mel,ae_mel+vib_mel,ShallowMLPModel,13,0.36289575695991516
+log-mel,ae_mel+vib_mel,ShallowMLPModel,14,148.07620239257812
+log-mel,ae_mel+vib_mel,ShallowMLPModel,15,1.3007657527923584
+log-mel,ae_mel+vib_mel,ShallowMLPModel,16,0.5112212300300598
+WST,ae_wst+vib_wst,RandomForestModel,1,0.005702923612150487
+WST,ae_wst+vib_wst,RandomForestModel,2,0.007306864347197582
+WST,ae_wst+vib_wst,RandomForestModel,3,0.009666184839994615
+WST,ae_wst+vib_wst,RandomForestModel,4,0.011095274090218469
+WST,ae_wst+vib_wst,RandomForestModel,5,0.004912182744867313
+WST,ae_wst+vib_wst,RandomForestModel,6,0.006587423406274433
+WST,ae_wst+vib_wst,RandomForestModel,7,0.21694747391087313
+WST,ae_wst+vib_wst,RandomForestModel,8,0.0679898098714069
+WST,ae_wst+vib_wst,RandomForestModel,9,0.012781289319436848
+WST,ae_wst+vib_wst,RandomForestModel,10,0.014027703999429741
+WST,ae_wst+vib_wst,RandomForestModel,11,0.04485795451385723
+WST,ae_wst+vib_wst,RandomForestModel,12,0.007893742254045395
+WST,ae_wst+vib_wst,RandomForestModel,13,0.012182656541520412
+WST,ae_wst+vib_wst,RandomForestModel,14,0.08722167311325864
+WST,ae_wst+vib_wst,RandomForestModel,15,0.012059554001516301
+WST,ae_wst+vib_wst,RandomForestModel,16,0.008955254562137338
+WST,ae_wst+vib_wst,RidgeRegressionModel,1,0.022671416401863098
+WST,ae_wst+vib_wst,RidgeRegressionModel,2,0.011156892403960228
+WST,ae_wst+vib_wst,RidgeRegressionModel,3,0.01494145579636097
+WST,ae_wst+vib_wst,RidgeRegressionModel,4,0.028399895876646042
+WST,ae_wst+vib_wst,RidgeRegressionModel,5,0.013979680836200714
+WST,ae_wst+vib_wst,RidgeRegressionModel,6,0.012005433440208435
+WST,ae_wst+vib_wst,RidgeRegressionModel,7,0.17575792968273163
+WST,ae_wst+vib_wst,RidgeRegressionModel,8,0.020047694444656372
+WST,ae_wst+vib_wst,RidgeRegressionModel,9,0.03128784894943237
+WST,ae_wst+vib_wst,RidgeRegressionModel,10,0.028048191219568253
+WST,ae_wst+vib_wst,RidgeRegressionModel,11,0.024607300758361816
+WST,ae_wst+vib_wst,RidgeRegressionModel,12,0.013397512026131153
+WST,ae_wst+vib_wst,RidgeRegressionModel,13,0.01794184185564518
+WST,ae_wst+vib_wst,RidgeRegressionModel,14,0.0649147778749466
+WST,ae_wst+vib_wst,RidgeRegressionModel,15,0.025668447837233543
+WST,ae_wst+vib_wst,RidgeRegressionModel,16,0.021590670570731163
+WST,ae_wst+vib_wst,LightGBMModel,1,0.00481478767231543
+WST,ae_wst+vib_wst,LightGBMModel,2,0.008323426196245699
+WST,ae_wst+vib_wst,LightGBMModel,3,0.009321428401087243
+WST,ae_wst+vib_wst,LightGBMModel,4,0.007670069494581081
+WST,ae_wst+vib_wst,LightGBMModel,5,0.004799813129798017
+WST,ae_wst+vib_wst,LightGBMModel,6,0.005939540779283309
+WST,ae_wst+vib_wst,LightGBMModel,7,0.2656920861112559
+WST,ae_wst+vib_wst,LightGBMModel,8,0.08349490295168478
+WST,ae_wst+vib_wst,LightGBMModel,9,0.012845288309094354
+WST,ae_wst+vib_wst,LightGBMModel,10,0.01423688763562742
+WST,ae_wst+vib_wst,LightGBMModel,11,0.017708073231642325
+WST,ae_wst+vib_wst,LightGBMModel,12,0.007404321967023268
+WST,ae_wst+vib_wst,LightGBMModel,13,0.010143094237585831
+WST,ae_wst+vib_wst,LightGBMModel,14,0.01119042859451081
+WST,ae_wst+vib_wst,LightGBMModel,15,0.01120508401223235
+WST,ae_wst+vib_wst,LightGBMModel,16,0.008413643590489017
+WST,ae_wst+vib_wst,ShallowMLPModel,1,0.39038923382759094
+WST,ae_wst+vib_wst,ShallowMLPModel,2,0.294009268283844
+WST,ae_wst+vib_wst,ShallowMLPModel,3,0.21719947457313538
+WST,ae_wst+vib_wst,ShallowMLPModel,4,0.18091225624084473
+WST,ae_wst+vib_wst,ShallowMLPModel,5,0.35228222608566284
+WST,ae_wst+vib_wst,ShallowMLPModel,6,0.14625011384487152
+WST,ae_wst+vib_wst,ShallowMLPModel,7,0.38032475113868713
+WST,ae_wst+vib_wst,ShallowMLPModel,8,0.7276052832603455
+WST,ae_wst+vib_wst,ShallowMLPModel,9,0.26736506819725037
+WST,ae_wst+vib_wst,ShallowMLPModel,10,0.3450489640235901
+WST,ae_wst+vib_wst,ShallowMLPModel,11,0.2614602744579315
+WST,ae_wst+vib_wst,ShallowMLPModel,12,0.16344013810157776
+WST,ae_wst+vib_wst,ShallowMLPModel,13,0.2103385627269745
+WST,ae_wst+vib_wst,ShallowMLPModel,14,0.7125061750411987
+WST,ae_wst+vib_wst,ShallowMLPModel,15,0.23230507969856262
+WST,ae_wst+vib_wst,ShallowMLPModel,16,0.213130921125412
+time-domain,ae_features+vib_features,RandomForestModel,1,0.013823733531326
+time-domain,ae_features+vib_features,RandomForestModel,2,0.011840817597277531
+time-domain,ae_features+vib_features,RandomForestModel,3,0.011914699865613755
+time-domain,ae_features+vib_features,RandomForestModel,4,0.012137477867359497
+time-domain,ae_features+vib_features,RandomForestModel,5,0.006836640989216136
+time-domain,ae_features+vib_features,RandomForestModel,6,0.050772550704603826
+time-domain,ae_features+vib_features,RandomForestModel,7,0.2520338460859376
+time-domain,ae_features+vib_features,RandomForestModel,8,0.13113861730529197
+time-domain,ae_features+vib_features,RandomForestModel,9,0.012442638046988095
+time-domain,ae_features+vib_features,RandomForestModel,10,0.04887135778400472
+time-domain,ae_features+vib_features,RandomForestModel,11,0.06914149024284907
+time-domain,ae_features+vib_features,RandomForestModel,12,0.014564024651989601
+time-domain,ae_features+vib_features,RandomForestModel,13,0.011050503228454495
+time-domain,ae_features+vib_features,RandomForestModel,14,0.10141222729028598
+time-domain,ae_features+vib_features,RandomForestModel,15,0.011051754745470906
+time-domain,ae_features+vib_features,RandomForestModel,16,0.029002464045592445
+time-domain,ae_features+vib_features,RidgeRegressionModel,1,0.01825760491192341
+time-domain,ae_features+vib_features,RidgeRegressionModel,2,0.022482039406895638
+time-domain,ae_features+vib_features,RidgeRegressionModel,3,0.05797995254397392
+time-domain,ae_features+vib_features,RidgeRegressionModel,4,0.0662454217672348
+time-domain,ae_features+vib_features,RidgeRegressionModel,5,0.020500801503658295
+time-domain,ae_features+vib_features,RidgeRegressionModel,6,0.04686218500137329
+time-domain,ae_features+vib_features,RidgeRegressionModel,7,0.20232224464416504
+time-domain,ae_features+vib_features,RidgeRegressionModel,8,0.06580023467540741
+time-domain,ae_features+vib_features,RidgeRegressionModel,9,0.021523796021938324
+time-domain,ae_features+vib_features,RidgeRegressionModel,10,0.015401413664221764
+time-domain,ae_features+vib_features,RidgeRegressionModel,11,0.04008505493402481
+time-domain,ae_features+vib_features,RidgeRegressionModel,12,0.02460227534174919
+time-domain,ae_features+vib_features,RidgeRegressionModel,13,0.01995701529085636
+time-domain,ae_features+vib_features,RidgeRegressionModel,14,0.05705759674310684
+time-domain,ae_features+vib_features,RidgeRegressionModel,15,0.022050686180591583
+time-domain,ae_features+vib_features,RidgeRegressionModel,16,0.02001204900443554
+time-domain,ae_features+vib_features,LightGBMModel,1,0.016248892319341776
+time-domain,ae_features+vib_features,LightGBMModel,2,0.017769651922334588
+time-domain,ae_features+vib_features,LightGBMModel,3,0.011761301463373817
+time-domain,ae_features+vib_features,LightGBMModel,4,0.01738373338930225
+time-domain,ae_features+vib_features,LightGBMModel,5,0.01149447781643866
+time-domain,ae_features+vib_features,LightGBMModel,6,0.0339926703014531
+time-domain,ae_features+vib_features,LightGBMModel,7,0.24488102881420654
+time-domain,ae_features+vib_features,LightGBMModel,8,0.09593053596013297
+time-domain,ae_features+vib_features,LightGBMModel,9,0.01918038083815316
+time-domain,ae_features+vib_features,LightGBMModel,10,0.025921621597941414
+time-domain,ae_features+vib_features,LightGBMModel,11,0.06960961937122373
+time-domain,ae_features+vib_features,LightGBMModel,12,0.018034921012348007
+time-domain,ae_features+vib_features,LightGBMModel,13,0.009675666548880106
+time-domain,ae_features+vib_features,LightGBMModel,14,0.08490908174142989
+time-domain,ae_features+vib_features,LightGBMModel,15,0.025542703828733367
+time-domain,ae_features+vib_features,LightGBMModel,16,0.02263309850036761
+time-domain,ae_features+vib_features,ShallowMLPModel,1,0.0651765689253807
+time-domain,ae_features+vib_features,ShallowMLPModel,2,0.09105624258518219
+time-domain,ae_features+vib_features,ShallowMLPModel,3,0.04002220928668976
+time-domain,ae_features+vib_features,ShallowMLPModel,4,0.06875641644001007
+time-domain,ae_features+vib_features,ShallowMLPModel,5,0.03992597013711929
+time-domain,ae_features+vib_features,ShallowMLPModel,6,0.05971548706293106
+time-domain,ae_features+vib_features,ShallowMLPModel,7,0.3295782208442688
+time-domain,ae_features+vib_features,ShallowMLPModel,8,0.07417363673448563
+time-domain,ae_features+vib_features,ShallowMLPModel,9,0.07358108460903168
+time-domain,ae_features+vib_features,ShallowMLPModel,10,0.07657355070114136
+time-domain,ae_features+vib_features,ShallowMLPModel,11,0.15234129130840302
+time-domain,ae_features+vib_features,ShallowMLPModel,12,0.057675160467624664
+time-domain,ae_features+vib_features,ShallowMLPModel,13,0.0666138306260109
+time-domain,ae_features+vib_features,ShallowMLPModel,14,0.13399548828601837
+time-domain,ae_features+vib_features,ShallowMLPModel,15,0.05101257562637329
+time-domain,ae_features+vib_features,ShallowMLPModel,16,0.08431771397590637
+process parameters,pp,RandomForestModel,1,0.25132947187361865
+process parameters,pp,RandomForestModel,2,0.014688533382644453
+process parameters,pp,RandomForestModel,3,0.009060551958534158
+process parameters,pp,RandomForestModel,4,0.11613327789992636
+process parameters,pp,RandomForestModel,5,0.12032083160296572
+process parameters,pp,RandomForestModel,6,0.008132538559132058
+process parameters,pp,RandomForestModel,7,0.27322322831954765
+process parameters,pp,RandomForestModel,8,0.13320803079689708
+process parameters,pp,RandomForestModel,9,0.009454411296985429
+process parameters,pp,RandomForestModel,10,0.2760409469340692
+process parameters,pp,RandomForestModel,11,0.010540434305152214
+process parameters,pp,RandomForestModel,12,0.008339269025744656
+process parameters,pp,RandomForestModel,13,0.005640000477433205
+process parameters,pp,RandomForestModel,14,0.015999669699253892
+process parameters,pp,RandomForestModel,15,0.011893063177133007
+process parameters,pp,RandomForestModel,16,0.02028841631221543
+process parameters,pp,RidgeRegressionModel,1,0.04764905199408531
+process parameters,pp,RidgeRegressionModel,2,0.07224082201719284
+process parameters,pp,RidgeRegressionModel,3,0.04465707018971443
+process parameters,pp,RidgeRegressionModel,4,0.009323855862021446
+process parameters,pp,RidgeRegressionModel,5,0.01704264059662819
+process parameters,pp,RidgeRegressionModel,6,0.006439508404582739
+process parameters,pp,RidgeRegressionModel,7,0.27325671911239624
+process parameters,pp,RidgeRegressionModel,8,0.13852305710315704
+process parameters,pp,RidgeRegressionModel,9,0.009493820369243622
+process parameters,pp,RidgeRegressionModel,10,0.11170408874750137
+process parameters,pp,RidgeRegressionModel,11,0.015785451978445053
+process parameters,pp,RidgeRegressionModel,12,0.017527956515550613
+process parameters,pp,RidgeRegressionModel,13,0.05000034719705582
+process parameters,pp,RidgeRegressionModel,14,0.020893514156341553
+process parameters,pp,RidgeRegressionModel,15,0.05105139687657356
+process parameters,pp,RidgeRegressionModel,16,0.060707490891218185
+process parameters,pp,LightGBMModel,1,0.006360908809941474
+process parameters,pp,LightGBMModel,2,0.07351497135948266
+process parameters,pp,LightGBMModel,3,0.010193150518109498
+process parameters,pp,LightGBMModel,4,0.14915087870661137
+process parameters,pp,LightGBMModel,5,0.08158691091594743
+process parameters,pp,LightGBMModel,6,0.012666657004115973
+process parameters,pp,LightGBMModel,7,0.2715410148070737
+process parameters,pp,LightGBMModel,8,0.1337463248207864
+process parameters,pp,LightGBMModel,9,0.008887871086241252
+process parameters,pp,LightGBMModel,10,0.255373273699961
+process parameters,pp,LightGBMModel,11,0.10218226139602135
+process parameters,pp,LightGBMModel,12,0.009478371224096348
+process parameters,pp,LightGBMModel,13,0.005640000477433205
+process parameters,pp,LightGBMModel,14,0.009416676279316406
+process parameters,pp,LightGBMModel,15,0.00953458344426355
+process parameters,pp,LightGBMModel,16,0.033583049208186
+process parameters,pp,ShallowMLPModel,1,0.07439970970153809
+process parameters,pp,ShallowMLPModel,2,0.09374472498893738
+process parameters,pp,ShallowMLPModel,3,0.04505592957139015
+process parameters,pp,ShallowMLPModel,4,0.015214046463370323
+process parameters,pp,ShallowMLPModel,5,0.02947160229086876
+process parameters,pp,ShallowMLPModel,6,0.064203642308712
+process parameters,pp,ShallowMLPModel,7,0.3405764698982239
+process parameters,pp,ShallowMLPModel,8,0.1846204400062561
+process parameters,pp,ShallowMLPModel,9,0.03219081461429596
+process parameters,pp,ShallowMLPModel,10,0.17267948389053345
+process parameters,pp,ShallowMLPModel,11,0.12842248380184174
+process parameters,pp,ShallowMLPModel,12,0.009589962661266327
+process parameters,pp,ShallowMLPModel,13,0.12141601741313934
+process parameters,pp,ShallowMLPModel,14,0.12232077121734619
+process parameters,pp,ShallowMLPModel,15,0.005218572914600372
+process parameters,pp,ShallowMLPModel,16,0.1046345978975296

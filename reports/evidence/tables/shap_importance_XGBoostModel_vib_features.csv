@@ -1,0 +1,13 @@
+feature,mean_abs_shap
+vib_z_rms,0.018987495
+vib_y_rms,0.018531986
+vib_x_skewness,0.007380989
+vib_z_skewness,0.0067068473
+vib_y_crest_factor,0.004267413
+vib_x_rms,0.0036136168
+vib_x_kurtosis,0.0031338632
+vib_y_skewness,0.002822165
+vib_x_crest_factor,0.0021142568
+vib_y_kurtosis,0.0020858822
+vib_z_crest_factor,0.0017462327
+vib_z_kurtosis,0.0008918675

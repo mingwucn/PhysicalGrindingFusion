@@ -1,0 +1,12 @@
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Repeated baseline & Input & RF MAE & Baseline MAE & $W$ & $p$ raw & $p$ Holm \\
+\midrule
+BilinearFusion & \texttt{AE-dB + Vib-dB + phys + PP} & 0.0203 & 0.0447 & 4.0 & 2.136230e-04 & 4.272461e-04 \\
+ChannelAttentionCNN & \texttt{AE-dB} & 0.0203 & 0.0423 & 0.0 & 3.051758e-05 & 1.831055e-04 \\
+ResNetAECNN & \texttt{AE-dB} & 0.0203 & 0.0423 & 2.0 & 9.155273e-05 & 2.746582e-04 \\
+ResNetFusion & \texttt{AE-dB + Vib-dB + phys} & 0.0203 & 0.0417 & 0.0 & 3.051758e-05 & 1.831055e-04 \\
+ResNetVibCNN & \texttt{Vib-dB} & 0.0203 & 0.0384 & 1.0 & 6.103516e-05 & 2.441406e-04 \\
+TrajectoryCNN & \texttt{Vib trajectory} & 0.0203 & 0.0450 & 13.0 & 2.685547e-03 & 2.685547e-03 \\
+\bottomrule
+\end{tabular}

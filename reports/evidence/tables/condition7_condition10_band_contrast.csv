@@ -1,0 +1,6 @@
+band,condition7_mean_db,condition10_mean_db,condition7_minus_condition10_db,bootstrap_ci95_low_db,bootstrap_ci95_high_db,n_condition7,n_condition10,interpretation
+AE 0.1-1.0 MHz,-53.52632522583008,-56.29716873168945,2.770843505859375,1.3685715198516846,4.160996913909912,20,20,archived dB-cache contrast only; not a calibrated spectral or causal comparison
+AE >1.0 MHz,-67.54238891601562,-69.94770812988281,2.4053192138671875,1.0657482147216797,3.735095739364624,20,20,archived dB-cache contrast only; not a calibrated spectral or causal comparison
+Vib 0.5-2 kHz,-22.942724227905273,-19.997804641723633,-2.9449195861816406,-3.2174017429351807,-2.671870708465576,20,20,archived dB-cache contrast only; not a calibrated spectral or causal comparison
+Vib 2-15 kHz,-40.80864334106445,-37.66379165649414,-3.1448516845703125,-4.24220609664917,-2.0859007835388184,20,20,archived dB-cache contrast only; not a calibrated spectral or causal comparison
+Vib >15 kHz,-53.421607971191406,-51.09172821044922,-2.3298797607421875,-3.1891937255859375,-1.4806755781173706,20,20,archived dB-cache contrast only; not a calibrated spectral or causal comparison

@@ -1,0 +1,1365 @@
+\section{Results}\label{results}
+
+\subsection{Predictive accuracy}\label{predictive-accuracy}
+
+The reproducible current fixed RF on AE-dB-z + Vib-dB-z gives a mean
+LOGO MAE of \(0.0210~\upmu\)m, median \(0.0093~\upmu\)m, and maximum
+\(0.1478~\upmu\)m. Cache-matched inner-grouped runs give 0.0207~\(\upmu\)m
+for dB-z and 0.0206~\(\upmu\)m for log-mel, supporting a leading
+representation group by mean MAE rather than a unique winner. Their tails are
+not equivalent: the current nested maximum fold MAE is 0.1402~\(\upmu\)m for
+dB-z and 0.2061~\(\upmu\)m for log-mel. Thus, dB-z has materially better
+observed worst-condition robustness in this 16-fold analysis. Table~\ref{tbl:top10}
+and Figure~\ref{fig:ranking} retain the historical canonical benchmark for
+comparison with the archived 14-test family; those artifacts cannot be
+regenerated exactly in the current environment. In that historical ranking,
+the dB-z RF gives 0.0200~\(\upmu\)m, median 0.0089~\(\upmu\)m, and maximum
+0.1437~\(\upmu\)m. In both current and historical pipelines the mean is dominated by a single
+difficult condition. The
+largest single-fold errors are driven by condition 7 (see
+Section~\ref{sec:conditions} and Figure~\ref{fig:top-models-fold-mae}).
+Configuration abbreviations are defined in
+Table~\ref{tbl:config-abbreviations}.
+
+\begin{table}[htbp]
+\centering
+\caption{Primary reproducible current RF results. Fixed and nested runs use
+the same 14 training conditions in each outer fold; nested runs differ only
+through inner grouped hyperparameter selection.}
+\label{tbl:current-rf-primary}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Representation/protocol & Training conditions & Mean & Median & Maximum \\
+\midrule
+dB-z, fixed RF & 14 & 0.0210 & 0.0093 & 0.1478 \\
+dB-z, inner-grouped RF & 14 & 0.0207 & 0.0093 & 0.1402 \\
+Log-mel, inner-grouped RF & 14 & 0.0206 & 0.0087 & 0.2061 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{nested_rf_dbz_logmel_folds.png}
+\caption{Paired outer-fold MAE for the current nested dB-z and implemented
+log-mel RF analyses. Their means are nearly identical, but log-mel has the
+larger Condition~7 and maximum-fold error.}\label{fig:nested-rf-tail}
+\end{figure}
+
+Table~\ref{tbl:top10} should be read as a post-selection ranking because
+model family and representation vary together. First, multimodal fusion gives the best point
+estimate, but the gain over the best vibration-only configuration
+(Random Forest on Vib-log-mel, rank~7; MAE 0.0211~\(\upmu\)m, and the
+vibration-only ablation in Section~\ref{sec:robustness}, MAE
+0.0207~\(\upmu\)m) is small and should not be interpreted as a
+statistically established multimodal advantage. Second, per-sample-standardised full-resolution dB descriptors and
+log-mel descriptors occupy the top ranks, but the difference
+relative to dB spectrograms is small
+and not statistically significant under the present LOGO protocol (see
+Section~\ref{statistical-comparison}). Third, adding process parameters
+(PP) to the top dB-z/log-mel configurations has a negligible effect (MAE
+changes by \(<0.0006~\upmu\)m). Because each condition is a unique
+process-parameter combination, LOGO tests generalization to withheld
+process-parameter combinations within the sampled factor space; the poor
+added value of PP may therefore reflect the sparse 16-condition design
+rather than true physical irrelevance.
+
+\subsubsection{Seed-repeat validation of stochastic
+architectures}\label{sec:seed-repeat}
+
+To quantify training stochasticity, the main stochastic architectures
+were each repeated over five random seeds under the same 16 LOGO folds
+(Supplementary Table~\ref{tab:supp-seed-level}). The repeated neural models
+and RF use the same canonical 14-condition training budget in each fold. For
+the current random forest on AE-dB-z + Vib-dB-z, the seed-averaged MAE is
+\(0.0203 \pm 0.0360~\upmu\)m, with per-seed overall MAEs of 0.0210,
+0.0205, 0.0204, 0.0201, and 0.0197~\(\upmu\)m. The seed-level standard
+deviation of these five overall MAEs is 0.00043~\(\upmu\)m, showing
+that the RF result is stable across seeds; this internal stability does
+not, however, address measurement uncertainty or external generalisation. The deep-learning baselines
+exhibit larger seed-to-seed instability: ResNetVibCNN seed-level MAEs
+range from 0.0283 to 0.0441~\(\upmu\)m, ResNetFusion from 0.0369 to
+0.0487~\(\upmu\)m, BilinearFusionNetwork from 0.0414 to 0.0492~\(\upmu\)m,
+TrajectoryCNN from 0.0439 to 0.0484~\(\upmu\)m, ResNetAECNN from 0.0353 to
+0.0478~\(\upmu\)m, and ChannelAttentionCNN from 0.0334 to 0.0503~\(\upmu\)m.
+Their seed-averaged MAEs (ResNetVibCNN 0.0384, ResNetFusion 0.0417,
+BilinearFusionNetwork 0.0447, TrajectoryCNN 0.0450, ResNetAECNN 0.0423,
+and ChannelAttentionCNN 0.0423~\(\upmu\)m) are higher than their seed-42
+point estimates because seed 42 lies near the lower-error end of the
+observed neural-network seed distribution. Supplementary
+Table~\ref{tab:supp-seed-repeat-all} gives the per-condition
+seed-averaged errors for the equal-budget current random forest and the six
+repeated deep-learning baselines. The seed-averaged per-condition
+MAE for the current random forest remains dominated by Condition~7
+(0.1509~\(\upmu\)m), followed by Condition~8 (0.0585~\(\upmu\)m), so the
+seed-repeat analysis shares the same failure mode as the primary
+benchmark. The $\pm$ values in the seed-averaged MAE paragraph refer to
+fold-level variability across the 16 LOGO conditions; seed-level
+variability is reported separately through the per-seed overall MAEs.
+
+Paired Wilcoxon signed-rank tests on the 16 condition-level seed-averaged
+MAEs show that the random forest is significantly lower than the six
+repeated deep-learning baselines after Holm--Bonferroni correction for the
+six comparisons (all \(p_{\text{Holm}} < 0.01\); the largest corrected
+\(p\)-value is 0.0027 versus TrajectoryCNN). This equal-budget sensitivity analysis
+provides a robustness check for training stochasticity: the RF advantage
+persists after averaging out neural-network seed variation. The inference
+family here contains only the six selected repeated stochastic baselines
+and should not be combined with the 14-comparison primary family. Because
+the repeated model set was selected from the broader benchmark, this
+result is reported as robustness evidence rather than as the primary
+inferential comparison.
+
+The validation-condition rotation diagnostic provides a separate check on
+the deep early-stopping split. With fixed default architectures and training
+settings, ResNetVibCNN changes from 0.0393~\(\upmu\)m under the canonical
+seed-42 validation draw to 0.0471~\(\upmu\)m under the cyclic-next
+assignment; ResNetAECNN is similar at 0.0440 and 0.0435~\(\upmu\)m,
+respectively (Supplementary Table~\ref{tab:supp-deep-validation-rotation}).
+These values are a validation-assignment sensitivity analysis, not a
+replacement for the separately tuned canonical benchmarks, because the
+original per-fold tuning states are not reconstructed here.
+
+Table~\ref{tbl:top10-summary} supplements the mean and standard
+deviation with median MAE, interquartile range, bootstrap 95\% CI, and
+the minimum and maximum fold MAE for the top five models. The bootstrap
+CI is computed by resampling the 16 LOGO folds with replacement. The
+summary confirms that the top models are strongly tail-sensitive:
+the maximum fold MAE is an order of magnitude larger than the median for
+every leading model. Because the expanded profilometer uncertainty is
+0.025~\(\upmu\)m, the best MAE of 0.020~\(\upmu\)m should be interpreted as
+error against the averaged measured \(R_a\), not against latent true
+roughness. Raw trace-level repeatability is unavailable, so the reported
+MAE combines model error and measurement uncertainty; the true
+roughness-prediction error cannot be separated from measurement
+uncertainty, and ranking differences smaller than approximately
+0.005--0.010~\(\upmu\)m should be treated as exploratory.
+
+\begin{table}[htbp]
+\centering
+\caption{Historical canonical benchmark: distribution of fold-level MAE for the top five
+model--configuration pairs. These archived results are not the reproducible
+current RF reruns. The 10\% trimmed mean removes the lowest and
+highest folds and is descriptive only; CI = bootstrap 95\% confidence
+interval for the mean obtained by resampling folds.}
+\label{tbl:top10-summary}
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+Model / Config & Mean & Median & IQR & 10\% trim. & Min & Max & 95\% CI \\
+\midrule
+Random forest / AE-dB-z + Vib-dB-z & 0.0200 & 0.0089 & 0.0055 & 0.0124 & 0.0031 & 0.1437 & 0.0077--0.0405 \\
+Random forest / AE-log-mel + Vib-log-mel & 0.0201 & 0.0084 & 0.0044 & 0.0083 & 0.0048 & 0.2010 & 0.0072--0.0448 \\
+Random forest / AE-dB-z + Vib-dB-z + PP & 0.0205 & 0.0091 & 0.0047 & 0.0127 & 0.0032 & 0.1472 & 0.0076--0.0417 \\
+Random forest / AE-log-mel + Vib-log-mel + PP & 0.0205 & 0.0091 & 0.0053 & 0.0084 & 0.0046 & 0.2067 & 0.0072--0.0459 \\
+Random forest / AE-dB + Vib-dB + PP & 0.0210 & 0.0094 & 0.0039 & 0.0110 & 0.0033 & 0.1785 & 0.0084--0.0437 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The ranking should be interpreted using both mean and worst-condition
+performance because the mean is dominated by Condition~7. The distribution
+is strongly tail-sensitive: the median fold MAE for the best RF is
+0.0089~\(\upmu\)m, but the maximum fold MAE is 0.1437~\(\upmu\)m
+(Condition~7), so the mean is dominated by a single difficult condition. The 10\% trimmed mean (excluding the lowest and
+highest folds) is 0.0124~\(\upmu\)m, and the 20\% trimmed mean is
+0.0090~\(\upmu\)m, confirming that typical-condition performance is
+lower-error than the mean, while worst-condition performance remains the
+practical limiting case. These trimmed means are descriptive only and do not
+replace the main LOGO mean.
+
+Figure~\ref{fig:ranking} extends this historical view to the top 20. Auditable
+tree-ensemble model--configuration pairs occupy the top ranks, with the
+first nine places held exclusively by random forests. The first non-tree
+model, Trajectory CNN on Vib-traj, appears at rank 13 (MAE
+\(= 0.0259 \pm 0.0565~\upmu\)m), about 30\% higher in point estimate
+than the best random forest, although the primary corrected paired
+comparison is not statistically significant. The best spectrogram-based
+deep CNN, ResNetVibCNN on Vib-dB, is at rank 14 (MAE
+\(= 0.0268 \pm 0.0443~\upmu\)m), about 34\% higher in point estimate
+and likewise non-significant after Holm--Bonferroni correction.
+This ordering is noteworthy because the deep models have tens of
+thousands of gradient-trained weights, whereas the tree ensembles store
+split thresholds and leaf statistics rather than conventional network
+weights. The ranking should not, however, be read as a controlled
+model-only comparison: model family and representation are partly
+confounded, because a model may rank highly in part because it was paired
+with a stronger representation.
+
+A model-selection caveat applies to this comparison. The deep-learning
+entries were tuned by random search over model and training hyperparameters
+on the same outer LOGO folds, while the tree-based models used fixed
+hyperparameters (Table~\ref{tbl:hyperparams}). This non-nested design may
+favour the deep-learning estimates \cite{varma2006bias}; the ranking should
+therefore be interpreted as a relative performance ordering under a fixed
+evaluation budget rather than an unbiased estimate of population
+generalisation.
+
+\begin{table}[htbp]
+\centering
+\caption{Historical canonical benchmark: top 10 model--configuration pairs
+ranked by LOGO MAE. Current reproducible fixed and inner-grouped RF results
+are reported in the opening paragraph of Section~\ref{predictive-accuracy}.}
+\label{tbl:top10}
+\begin{tabular}{@{}rlcc@{}}
+\toprule
+Rank & Model & Configuration & MAE (\(\upmu\)m) \\
+\midrule
+1 & Random forest & AE-dB-z + Vib-dB-z & 0.0200 \\
+2 & Random forest & AE-log-mel + Vib-log-mel & 0.0201 \\
+3 & Random forest & AE-dB-z + Vib-dB-z + PP & 0.0205 \\
+4 & Random forest & AE-log-mel + Vib-log-mel + PP & 0.0205 \\
+5 & Random forest & AE-dB + Vib-dB + PP & 0.0210 \\
+6 & Random forest & AE-dB + Vib-dB & 0.0210 \\
+7 & Random forest & Vib-log-mel & 0.0211 \\
+8 & Random forest & Vib-dB & 0.0221 \\
+9 & Random forest & Vib-dB-z & 0.0223 \\
+10 & Ridge regression & AE-dB & 0.0246 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Because the best reported MAE (0.020~\(\upmu\)m) is only about twice the
+manufacturer-quoted profilometer repeatability and raw trace-level
+repeatability is unavailable, differences smaller than approximately
+0.005--0.010~\(\upmu\)m among the top RF variants should be treated as
+exploratory.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{submission_ranking_top20.png}
+\caption{Historical canonical top-20 model-configuration pairs ranked by LOGO MAE.
+Auditable tree-ensemble model--configuration pairs occupy the upper
+ranks by point-estimate MAE, although model and representation effects
+are partly confounded.}\label{fig:ranking}
+\end{figure}
+
+Figure~\ref{fig:scatter-top3} shows predicted versus observed surface
+roughness for the three best-performing configurations. The points cluster
+around the ideal \(y=x\) line across most of the measured range,
+consistent with useful predictive accuracy. The scatter is wider at
+higher roughness values, where condition 7 contributes several large
+residuals (see Section~\ref{sec:conditions}). Residuals are generally
+small within the training-target support, but they show marked
+regime-dependent bias outside that support. Condition~7 is
+systematically underpredicted, consistent with regression toward the
+training target range. Overall, the random forest on AE-dB-z +
+Vib-dB-z is one of the leading point-estimate candidates, but its fold-level
+variance limits how strongly its condition-wise reliability can be
+asserted.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{submission_prediction_scatter_top3.png}
+\caption{Historical canonical benchmark predictions versus observed surface
+roughness for the top three model-configuration pairs. The dashed black line marks ideal
+\(y=x\) calibration.}\label{fig:scatter-top3}
+\end{figure}
+
+To test whether these accuracy differences are statistically robust, the
+next subsection reports a systematic pairwise comparison of the leading
+models.
+
+\subsection{Primary post-selection statistical comparison}\label{statistical-comparison}
+
+The planned family used for the historical canonical analysis contains 14
+Holm--Bonferroni-corrected Wilcoxon signed-rank tests on
+per-fold LOGO MAEs (Section~\ref{validation-protocol}); the five-seed
+sensitivity analysis in Section~\ref{sec:seed-repeat} is reported
+separately as robustness evidence and is not included in this family.
+Because model and representation selection used observed LOGO results, the
+paired tests are post-selection diagnostics rather than confirmatory
+population-level inference. To assess whether the accuracy
+differences in Section~\ref{predictive-accuracy} are robust, we performed
+nine of the planned pairwise Wilcoxon signed-rank tests on per-fold LOGO
+MAEs; the raw \(p\)-values were corrected with Holm--Bonferroni across
+the full family of 14 planned comparisons (Table~\ref{tbl:statistical};
+the complete family is given in Supplementary
+Table~\ref{tab:supp-holm}). The nine comparisons shown here isolate
+specific effects: the strongest auditable classical model versus the strongest
+deep CNN; the best random forest versus the best wavelet-scattering
+model; the same fused spectrogram input given to a random forest or a
+ridge regressor; a random forest on spectrograms versus a shallow MLP on
+hand-crafted features; the same vibration spectrogram given to a random
+forest or ResNetVibCNN; and dB-z versus dB spectrograms within the
+random forest.
+
+\subsubsection{Pairwise model comparisons}\label{sec:pairwise-comparisons}
+
+\begin{table}[htbp]
+\centering
+\caption{Historical canonical benchmark pairwise statistical tests (Holm-Bonferroni corrected
+across the full family of 14 planned comparisons). HL \(\Delta\) is the
+Hodges--Lehmann paired location shift for model~A minus model~B, with an
+unadjusted descriptive bootstrap 95\% confidence interval; \(r_{rb}\) is the Wilcoxon
+rank-biserial correlation. Negative values favour model~A.}\label{tbl:statistical}
+\resizebox{\linewidth}{!}{\input{main/statistical_comparison_table.tex}}
+\end{table}
+
+Only one comparison survives Holm-Bonferroni correction: the random
+forest on AE-dB + Vib-dB is markedly better than the shallow MLP on
+AE/Vib feats + PP (Hodges--Lehmann paired difference
+\(-0.0249~\upmu\)m, \(p_{\text{Holm}}=4.27\times10^{-4}\)). This is a
+comparison of the archived implementations: the historical MLP used an
+internal random validation fraction rather than the designated condition.
+A corrected grouped-validation, target-scaled shallow MLP gives mean MAE
+0.0529~\(\upmu\)m (maximum 0.2645~\(\upmu\)m), compared with 0.0210 for
+the current RF; the descriptive paired Wilcoxon raw \(p\)-value is
+\(3.05\times10^{-5}\) (Supplementary
+Table~\ref{tab:supp-grouped-mlp}). This sensitivity supports the observed
+separation but is not part of the historical Holm family. All other
+displayed comparisons are non-significant after correction. Most favour
+the auditable or simpler model by point estimate, but not all:
+RF on AE-dB versus ResNetAECNN favours the CNN by point estimate
+(\(p_{\text{Holm}}=1.0\)). The signed-rank tests use
+only 16 paired observations, so the study is underpowered for small
+model differences; non-significant results should not be interpreted as
+equivalence. The reported Hodges--Lehmann confidence intervals and
+rank-biserial correlations are standard non-parametric effect-size
+summaries, but the effective paired sample size is 16 conditions and the
+confidence intervals quantify fold-level uncertainty within this design,
+not population-level uncertainty. The Holm-Bonferroni
+adjustment was applied across the full family of 14 planned
+comparisons (Table~\ref{tbl:statistical} and Supplementary
+Table~\ref{tab:supp-holm}); the corrected values should be interpreted
+within this family. The lack of significance is driven by high fold-level
+variance: condition 7 (Section~\ref{sec:conditions}) inflates the MAE of
+every model and is the largest contributor to the LOGO error budget.
+
+The closest comparison is the random forest versus ResNetVibCNN on the
+same Vib-dB input (HL \(\Delta=-0.0032~\upmu\)m,
+\(p_{\text{Holm}}=0.6921\)). Although the point estimate favours the
+random forest, the wide fold-level variance prevents a definitive
+conclusion. The same pattern holds for the best random forest versus the
+best spectrogram-based CNN (HL \(\Delta=-0.0042~\upmu\)m,
+\(p_{\text{Holm}}=1.0000\)) and versus the best gradient-boosted model
+(LightGBM on Vib-dB-z, reported in Supplementary
+Table~\ref{tab:supp-holm}, HL \(\Delta=-0.0008~\upmu\)m,
+\(p_{\text{Holm}}=1.0\)). Even the
+ridge regressor on the same fused spectrogram is not significantly worse
+than the random forest (\(p_{\text{Holm}}=0.4360\)), suggesting that the
+representation itself carries most of the predictive signal. The
+dB-z versus dB-spectrogram comparison within the random forest is
+essentially a null result (HL \(\Delta=-0.0006~\upmu\)m,
+\(p_{\text{Holm}}=1.0\)); the small ranking advantage of the dB-z cache
+seen in Table~\ref{tbl:top10} is therefore not statistically decisive
+under LOGO.
+
+Because condition 7 is the dominant source of fold-level variance,
+Table~\ref{tbl:condition7-sensitivity} reports the median paired
+difference, Wilcoxon \(p\)-value, and bootstrap 95\% confidence interval
+for three key comparisons with and without condition 7. Excluding
+condition 7 narrows the point estimates but does not change the
+qualitative conclusion: the random forest remains favourable by point
+estimate, yet the reduction in variance is modest because other
+conditions also contribute spread. This sensitivity analysis is
+illustrative only; condition 7 is retained in all main reported metrics.
+
+\begin{table}[htbp]
+\centering
+\caption{Exploratory sensitivity of paired differences to excluding
+condition 7. Negative \(\Delta\) favours model A. Values are median
+paired LOGO MAE differences (\(\upmu\)m) with unadjusted Wilcoxon
+\(p\)-values and bootstrap 95\% CIs; these \(p\)-values are reported only
+for post-hoc sensitivity analysis.}
+\label{tbl:condition7-sensitivity}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{3}{c}{All folds} & \multicolumn{3}{c}{Excl. condition 7} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Comparison & \(\Delta\) & \(p\) & 95\% CI & \(\Delta\) & \(p\) & 95\% CI \\
+\midrule
+Best RF vs RF AE-dB + Vib-dB + PP & \(-0.0005\) & 0.528 & \(-0.0024, 0.0011\) & \(-0.0002\) & 0.804 & \(-0.0014, 0.0031\) \\
+Best RF vs ResNetVibCNN (Vib-dB) & \(-0.0042\) & 0.093 & \(-0.0083, 0.0015\) & \(-0.0040\) & 0.169 & \(-0.0071, 0.0029\) \\
+Best RF vs LightGBM (Vib-dB-z) & \(-0.0005\) & 0.375 & \(-0.0026, 0.0007\) & \(-0.0002\) & 0.599 & \(-0.0022, 0.0007\) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{results_statistical_comparison_pairs.png}
+\caption{Historical canonical benchmark: paired mean LOGO MAE and fold
+standard deviation for the nine statistical comparisons in
+Table~\ref{tbl:statistical}. Comparison IDs
+C1--C9 follow the table order. Stars mark Holm-Bonferroni significance
+(*~\(p<0.05\)).}\label{fig:statistical-pairs}
+\end{figure}
+
+Figure~\ref{fig:statistical-pairs} restates the nine displayed comparisons as
+paired mean MAEs with fold-level standard deviations. Most auditable classical or
+simpler configurations sit on the lower-error side of their pair, but the
+AE-only RF versus ResNetAECNN comparison is an exception. The overlapping
+error bars explain why only the shallow-MLP comparison is formally
+significant.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{results_statistical_comparison_forest.png}
+\caption{Historical canonical benchmark forest plot of median paired LOGO MAE differences for the nine
+comparisons in Table~\ref{tbl:statistical}, with descriptive 95\% bootstrap
+confidence intervals. These intervals are unadjusted and should not be interpreted as Holm--Bonferroni significance. Negative values favour Model~A.}\label{fig:statistical-forest}
+\end{figure}
+
+Figure~\ref{fig:statistical-forest} recasts the same comparisons as a
+forest plot of median paired differences with descriptive 95\% bootstrap confidence
+intervals. Two unadjusted descriptive intervals exclude zero: RF dB spectrogram versus Ridge dB spectrogram and RF dB spectrogram versus shallow MLP. Only the RF-versus-MLP comparison remains significant after Holm--Bonferroni correction; the Holm-corrected inference comes from Table~\ref{tbl:statistical}, rather than from the plotted intervals. Taken together, the
+tests support clear superiority over the shallow MLP baseline, while the
+remaining comparisons show favourable but non-significant point-estimate
+differences. Because the remaining variance appears to be driven by how
+sensor information is represented, the next subsection compares the
+signal-representation families directly.
+
+\subsection{Signal-representation
+comparison}\label{signal-representation-comparison}
+
+Table~\ref{tbl:representations} summarises the historical canonical best LOGO-only result
+obtained with each signal-representation family, and
+Figure~\ref{fig:representations-bar} visualises the corresponding mean
+LOGO MAEs. Because the best-performing model within each family was
+selected separately, representation and model choice are confounded in
+this table; it shows the best observed model--representation combination
+within each family rather than a controlled representation-only
+comparison. Table~\ref{tbl:controlled-representations} and
+Figure~\ref{fig:representation-controlled} instead hold the exact
+input configuration fixed within each representation row for Random
+Forest, Ridge, and LightGBM. They are a controlled
+learner-by-representation sensitivity analysis, not a post-selection
+ranking. The observed values span a substantial
+range across the three stable learners. The fixed-input rows are a
+representation sensitivity analysis, not a ranking that identifies a
+unique best representation. Preprocessing parameters for these
+representations are given in Section~\ref{signal-representations}.
+
+\begin{table}[htbp]
+\centering
+\caption{Historical canonical best-observed LOGO-only result per signal
+representation. These values are retained for benchmark provenance rather
+than as the reproducible current representation ranking.}\label{tbl:representations}
+\begin{tabular}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1700}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0800}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Representation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Config
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+MAE (\(\upmu\)m)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+MSE (\(\upmu\)m\(^2\))
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Folds
+\end{minipage} \\
+\midrule
+dB-z spectrogram & Random forest & \texttt{AE-dB-z + Vib-dB-z}
+& \(0.0200 \pm 0.0356\) & \(0.0016 \pm 0.0052\) & 16 \\
+Log-mel spectrogram & Random forest & \texttt{AE-log-mel + Vib-log-mel} &
+\(0.0201 \pm 0.0483\) & \(0.0028 \pm 0.0107\) & 16 \\
+Spectrogram & Random forest & AE-dB + Vib-dB + PP &
+\(0.0210 \pm 0.0425\) & \(0.0023 \pm 0.0083\) & 16 \\
+Wavelet scattering & LightGBM & \texttt{Vib-WST} &
+\(0.0225 \pm 0.0358\) & \(0.0019 \pm 0.0050\) & 16 \\
+Trajectory & Trajectory CNN & \texttt{Vib-traj} &
+\(0.0259 \pm 0.0565\) & \(0.0040 \pm 0.0140\) & 16 \\
+Time-domain features & Bilinear fusion &
+\texttt{AE/Vib feats + phys + PP} & \(0.0358 \pm 0.0424\) &
+\(0.0034 \pm 0.0073\) & 16 \\
+Process parameters & TabTransformer & \texttt{Process params} &
+\(0.0418 \pm 0.0672\) & \(0.0060 \pm 0.0162\) & 16 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The exact input configurations in
+Table~\ref{tbl:controlled-representations} are, by row, AE-dB + Vib-dB,
+AE-dB-z + Vib-dB-z, AE-log-mel + Vib-log-mel, AE-WST + Vib-WST,
+AE/Vib time-domain features, and process parameters. The same 16 seed-42
+LOGO folds, auxiliary-input policy, and fixed learner hyperparameters are
+used for all cells. This design isolates the representation/input choice
+within each learner more directly than the best-observed ranking in
+Table~\ref{tbl:representations}; it does not turn the broader benchmark
+into nested confirmatory inference.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{methods_signal_representation_comparison.png}
+\caption{Historical canonical best-observed mean LOGO MAE for each signal representation family.
+Error bars show fold standard deviation across the 16 LOGO folds; lower
+whiskers are capped at zero because MAE is non-negative.}
+\label{fig:representations-bar}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\caption{Fixed-input representation comparison across three stable tabular
+learners. Every cell within a row uses the exact configuration named in
+the first column, the same 16 seed-42 LOGO folds, and no auxiliary inputs
+unless they are named. Values are mean LOGO MAE across folds; fold standard
+deviations are shown in Figure~\ref{fig:representation-controlled}. The
+shallow MLP is excluded because its raw-target fixed-input fits failed
+numerically; a target-scaled and tuned MLP comparison would be a separate
+experiment.}
+\label{tbl:controlled-representations}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Fixed input & RF & Ridge & LightGBM \\
+\midrule
+AE-dB + Vib-dB & 0.0212 & 0.0248 & 0.0321 \\
+AE-dB-z + Vib-dB-z & 0.0210 & 0.0237 & 0.0326 \\
+AE-log-mel + Vib-log-mel & 0.0205 & 0.0396 & 0.0287 \\
+AE-WST + Vib-WST & 0.0331 & 0.0329 & 0.0302 \\
+AE/Vib time-domain features & 0.0493 & 0.0451 & 0.0453 \\
+Process parameters & 0.0803 & 0.0591 & 0.0733 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{representation_controlled_comparison.png}
+\caption{Fixed-input mean LOGO MAE comparison across three stable tabular
+learners. Each row uses the exact AE/vibration or process-parameter input
+named in Table~\ref{tbl:controlled-representations}; cells show mean
+MAE $\pm$ fold standard deviation across the 16 seed-42 LOGO folds.
+Trajectory is not shown because no common trajectory input exists for all
+three fixed learners.}
+\label{fig:representation-controlled}
+\end{figure}
+
+The shallow MLP is excluded from this fixed-input table because its
+raw-target high-dimensional fits failed numerically. Its values would not
+be evidence about representation quality; a target-scaled and tuned MLP
+comparison is required before it can be reintroduced. The fixed-input
+comparison is therefore most informative for the representation sensitivity
+of the three stable tabular learners.
+
+\subsubsection{Modality and fusion effects}\label{sec:modality-fusion}
+
+The leading canonical point estimates are pass-level fused AE and vibration
+dB-z descriptors (0.0200~\(\upmu\)m) and log-mel descriptors
+(0.0201~\(\upmu\)m), followed by fused dB descriptors with process
+parameters (0.0210~\(\upmu\)m). The documented current dB-z pipeline
+regenerates 0.0210~\(\upmu\)m rather than the canonical artifact, so this
+near-tie should be treated as an observed top group rather than a unique
+representation winner. A current-cache inner-grouped sensitivity gives
+0.0207~\(\upmu\)m for dB-z and 0.0206~\(\upmu\)m for log-mel RF inputs
+(Supplementary Table~\ref{tab:supp-nested-logo}). After inner selection,
+each RF is refitted on the same 14 conditions used by the fixed RF; the
+archived validation condition remains excluded, so this comparison does not
+gain a fifteenth training condition. This independently
+supports a leading representation group rather than a unique winner.
+This clustering suggests that frequency-domain content carries much
+of the predictive information, although model and representation effects
+are not fully separated. The vibration-only wavelet-scattering transform gives a close
+point estimate (0.0225~\(\upmu\)m), although the difference relative to
+pass-level fused dB-z descriptors is not statistically decisive. The trajectory CNN (0.0259~\(\upmu\)m) sits in a middle tier:
+it outperforms hand-crafted features and process parameters but does
+not reach the spectrogram family. Under the evaluated architectures and
+training budget, the trajectory configuration performs less well than the
+leading spectral configurations.
+
+Time-domain statistics (0.0358~\(\upmu\)m) and process parameters alone
+(0.0418~\(\upmu\)m) fall substantially behind. Their lower performance is
+consistent with loss of frequency-localised information, although feature
+construction, learner choice, dimensionality, and tuning are not fully
+separated. The evaluated scalar statistics compress the selected
+steady-state signal windows and may therefore discard localised spectral
+structure, while process parameters only capture the nominal grinding state
+and cannot resolve condition-specific dynamics. Taken together, these results suggest that,
+among the evaluated configurations, frequency-domain vibration-dominant
+inputs provide the strongest signal; adding AE gives only a small
+mean-level improvement in the recommended RF configuration.
+
+\subsubsection{Time--frequency representation and preprocessing effects}\label{sec:preprocessing-effects}
+
+The observed ranking is consistent with several preprocessing effects,
+although these are not isolated experimentally. A controlled comparison
+of STFT magnitude, STFT power, log-STFT, mel, and log-mel variants would
+be needed to determine whether dynamic-range compression or frequency
+binning drives the RF advantage. The small gap between dB spectrograms and
+wavelet scattering (0.0210 versus 0.0225~\(\upmu\)m) shows that
+frequency-domain inputs are consistently competitive, but the relative
+contributions of frequency resolution, compression, normalisation, and
+learner choice remain unresolved. A strict ablation removing per-sample/channel standardisation from the
+top RF/dB-z configuration leaves the overall LOGO MAE essentially
+close (0.0210~\(\upmu\)m with per-sample standardisation and
+0.0213~\(\upmu\)m without it), so frequency-shape
+information appears sufficient for the mean MAE of this RF/dB-z
+configuration. The worst-condition tail is not unchanged, however: the
+maximum condition MAE increases from 0.1478 to 0.1863~\(\upmu\)m
+(Supplementary Table~\ref{tab:supp-psnorm-ablation}). The ablation therefore supports
+mean-level robustness but not tail robustness, and it was not
+performed for all models, representations, or uncertainty analyses, so the
+conclusion is limited to this RF configuration. Third, adding process parameters or physics
+features to the top dB-z/log-mel configurations has a small effect (MAE
+changes by \(<0.0006~\upmu\)m), suggesting that the spectrograms already
+encode most of the condition-related information in this sparse design.
+This result should not be interpreted as physical irrelevance of process
+parameters; it may reflect the sparse fractional design and the fact
+that condition information is indirectly encoded in the sensor signals.
+Because frequency-domain content appears to be the strongest source of
+predictive information among the evaluated configurations, the next
+question is whether the models exploit physically plausible frequency
+regions.
+
+\subsection{Interpretability and physics
+consistency}\label{interpretability-and-physics-consistency}
+
+\subsubsection{Feature-attribution methods}\label{sec:feature-attribution}
+
+To understand what the models learn, we examined gradient-based and
+tree-based explanations. Grad-CAM was applied to ResNetVibCNN on the
+vibration spectrogram only; TreeSHAP was applied to LightGBM on the fused
+AE and vibration spectrograms. Both methods assign importance to input
+frequency bins, but Grad-CAM does not provide an AE explanation.
+Table~\ref{tbl:bandmass} summarises the distribution of importance mass
+across physical frequency bands. For vibration, the bands separate
+low-frequency wheel/spindle dynamics (\(<500\)~Hz), mid-frequency
+structural response (500~Hz--2~kHz), the chatter/structural band where
+wheel--workpiece interactions are prominent (2--15~kHz), and the
+high-frequency vibration response (\(>15\)~kHz). For the vibration spectrogram, Grad-CAM and TreeSHAP
+concentrate most importance in the chatter/structural and high-frequency
+bands, with only small fractions below 2~kHz. AE is reported only with
+modality-appropriate bands in Table~\ref{tab:ae-bands}; for the current
+out-of-fold random forest 34.21\% of AE attribution mass lies above 1~MHz, outside
+the historically reported nominal response band, and should be treated as a model
+attribution rather than calibrated physical AE energy. For the recommended RF/dB-z model, TreeSHAP shows AE
+importance concentrated above approximately 300~kHz and vibration
+importance primarily between approximately 16 and 24~kHz; the AE importance above 1~MHz remains
+sensor-response-limited (Supplementary Figure~\ref{fig:supp-shap-rf}).
+
+\begin{table}[htbp]
+\centering
+\caption{Importance mass by physical frequency
+band.}\label{tbl:bandmass}
+\begin{tabular}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1515}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1212}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2273}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Modality
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(<500\) Hz
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+500 Hz--2 kHz
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+2--15 kHz
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(>15\) kHz
+\end{minipage} \\
+\midrule
+Vibration & Grad-CAM & 0.09\% & 2.26\% & 44.55\% & 53.10\% \\
+Vibration & LightGBM global TreeSHAP & 3.55\% & 4.97\% & 13.33\% & 78.15\% \\
+Vibration & RF OOF TreeSHAP & 0.21\% & 0.26\% & 10.89\% & 88.63\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textit{Note:} This shared-band table is restricted to vibration. AE
+interpretation uses the modality-specific bands in Table~\ref{tab:ae-bands}.
+
+\begin{table}[htbp]
+\centering
+\caption{Out-of-fold TreeSHAP importance mass for the reproducible current
+random forest using AE-appropriate frequency bands.}\label{tab:ae-bands}
+\begin{tabular}{@{}lc@{}}
+\toprule
+AE frequency band & Importance mass \\
+\midrule
+\(<100\)~kHz & 2.58\% \\
+100--300~kHz & 6.59\% \\
+300--800~kHz & 33.96\% \\
+800~kHz--1~MHz & 22.66\% \\
+\(>1\)~MHz & 34.21\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Frequency-domain consistency with grinding mechanics}\label{sec:frequency-consistency}
+
+Figure~\ref{fig:bandmass} visualises the same distribution. The
+attribution distributions differ clearly between modalities: AE
+explanations are almost entirely localised at high frequencies, whereas
+vibration explanations are spread across the chatter and high-frequency
+bands. The shared four-band taxonomy in Table~\ref{tbl:bandmass} is
+retained only for visual comparison; AE-specific interpretation should
+use separate bands such as \(<100\)~kHz, 100--300~kHz, 300--800~kHz,
+800~kHz--1~MHz, and \(>1\)~MHz. Within vibration, Grad-CAM places
+44.6\% of its mass in the 2--15~kHz chatter/structural band, while
+RF out-of-fold TreeSHAP assigns 88.63\% to \(>15\)~kHz; the separate
+LightGBM global TreeSHAP profile assigns 78.15\%. These differences cannot be
+assigned to the explainer alone because model architecture, input
+configuration, fitted predictor, and attribution aggregation also differ.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{results_interpretability_bandmass.png}
+\caption{Vibration importance mass by physical frequency band for
+ResNetVibCNN Grad-CAM, LightGBM global TreeSHAP, and RF out-of-fold
+TreeSHAP. The differing model and input
+configurations mean this is a descriptive comparison, not an isolated
+comparison of explainers.}\label{fig:bandmass}
+\end{figure}
+
+\subsubsection{Physical interpretation of top features}\label{sec:top-features}
+
+The dominant bins are compatible with grinding-related spectral activity,
+but they do not identify a unique surface-generation mechanism. The
+frequency-band ablation, sensor-response limitations, and absence of
+archived no-cut spectra prevent a causal conclusion. TreeSHAP on vibration ranks bin 209 (\(20.9\) kHz)
+first, accounting for 69.5\% of total importance mass. Grad-CAM peaks at
+\(4.1\) kHz (bin 41), with the top ten bins spanning 3.7--12.0 kHz.
+TreeSHAP on AE peaks at \(1.22\) MHz (bin 182), which lies above the
+historically reported 100~kHz--1~MHz nominal AE response band; this bin
+should therefore be interpreted cautiously unless the sensor transfer
+function above 1~MHz is independently verified. The top three AE bins
+all lie above 840~kHz and together account for 55.3\% of AE importance
+mass. A single dominant vibration bin contributes a large fraction of
+importance; this may represent a structural or chatter-related resonance,
+but mounting, sensor-response, preprocessing, or condition-specific
+artefacts cannot be excluded. Fold-specific TreeSHAP was computed for the
+reproducible current RF/dB-z pipeline using only each held-out condition's
+predictions. The pooled out-of-fold profile peaks at 16.2~kHz for vibration
+and 334~kHz for AE; vibration peaks remain mainly in the 16--24~kHz region,
+whereas the dominant AE bin varies more strongly among folds
+(Supplementary Figure~\ref{fig:supp-shap-rf}). The current refits reproduce
+an overall OOF MAE of 0.0210~\(\upmu\)m. The separate faster impurity-based
+diagnostic in Supplementary Figure~\ref{fig:supp-shap-stability} provides a
+qualitatively related stability check but is not SHAP. The AE attribution
+should therefore be interpreted more cautiously. Additional
+sensor-transfer-function and background-noise checks are needed to
+exclude instrumentation artefacts. Because no-cut spectra and definitive
+attribution stability are unavailable, the physical interpretation should
+be treated as plausible but not validated.
+
+Figure~\ref{fig:xai} illustrates model- and modality-specific explanations
+from TreeSHAP (LightGBM on AE-dB + Vib-dB) and Grad-CAM
+(ResNetVibCNN on Vib-dB). The TreeSHAP panel shows sparse AE importance
+with labels converted from internal feature indices to MHz, while the
+Grad-CAM panel shows a broader vibration-frequency profile. The profiles
+share a broad separation between higher-frequency AE information and
+structural-frequency vibration information, but their dominant bins differ
+substantially by model and representation.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{shap_importance_LightGBMModel_ae_spec+vib_spec.png}
+\caption{Explainability analysis. Left: TreeSHAP mean absolute
+importance for the top AE frequency bins (LightGBM on
+AE-dB + Vib-dB), labelled by physical frequency.
+Right: Grad-CAM frequency
+importance for ResNetVibCNN on Vib-dB. The panels illustrate modality- and model-specific attribution patterns and should not be interpreted as direct agreement between explainers. AE attributions above 1 MHz should be interpreted cautiously. The ablation tests are reported separately for their exact frequency ranges and do not make the attributed bands causally essential.}\label{fig:xai}
+\end{figure}
+
+\subsection{Uncertainty
+quantification}\label{uncertainty-quantification}
+
+\subsubsection{Coverage failure of MC-dropout epistemic-only intervals}\label{sec:aggregate-coverage}
+
+MC-dropout was applied to ResNetVibCNN on Vib-dB under the
+same 16-fold LOGO protocol used for accuracy, so every condition,
+including Condition~7, appears as a held-out test set once under grouped
+condition shift. Fifty
+stochastic forward passes were run with dropout active and
+batch-normalisation frozen in evaluation mode so that small test batches
+did not shift the population statistics. The 95\% intervals are
+\(\hat y \pm 1.96\,\sigma_{\text{MC}}\). Across all 319 held-out
+LOGO samples the aggregate coverage is 50.2\%, the mean interval width
+is \(0.0479~\upmu\)m, and the mean absolute error of the stochastic mean
+prediction is \(0.0452~\upmu\)m. The exact same checkpoints give a
+deterministic mean fold MAE of 0.0443~\(\upmu\)m and a stochastic-mean
+fold MAE of 0.0452~\(\upmu\)m; their mean absolute prediction shift is
+0.0023~\(\upmu\)m. The separate canonical 0.0268~\(\upmu\)m result is not a
+same-checkpoint comparator. Supplementary Table~\ref{tab:supp-mcdropout-deterministic}
+reports the fold-specific deterministic MAE, stochastic-mean MAE, and
+mean absolute prediction shift. Activating dropout changes the point
+predictor only slightly for this checkpoint set; the principal failure is
+the severe interval undercoverage, so the output should be treated as an
+uncertainty diagnostic rather than a calibrated predictive model.
+Condition~7 has 0\% coverage, with a mean interval width of
+\(0.041~\upmu\)m and a mean absolute error of \(0.247~\upmu\)m
+(Supplementary Table~\ref{tab:supp-mcdropout-full-logo}). Condition~1
+also has 0\% coverage (MAE \(0.044~\upmu\)m), so the undercoverage is
+not confined to the extreme Condition~7 outlier; it affects any
+held-out condition whose residual exceeds the narrow dropout variance.
+Coverage is at or below 25\% for six of the 16 conditions, including
+the hardest Conditions 7 and 8, reflecting a general inability of
+dropout variance to scale with grouped condition shift. MC-dropout
+therefore does not provide a predictive interval for this CNN's observed targets,
+but it does carry ranking information: the Pearson correlation between
+predicted standard deviation and absolute error is 0.48, the Spearman
+correlation is 0.61, and the area under the ROC curve for detecting the
+top 20\% highest-error samples is 0.82.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{mc_dropout_intervals_ResNetVibCNN_vib_spec.png}
+\caption{Full 16-fold LOGO MC-dropout intervals for
+ResNetVibCNN on Vib-dB. Blue band: nominal 95\%
+MC-dropout epistemic interval; orange dots: observed \(R_a\). Samples are sorted by predicted
+mean. Descriptive target coverage is 50.2\% across 319 held-out LOGO samples; the
+mean interval width is 0.0479~\(\upmu\)m.}\label{fig:uncertainty}
+\end{figure}
+
+Figure~\ref{fig:uncertainty} shows the intervals sorted by predicted
+mean. The intervals are far too narrow: many observed points lie outside
+the band, especially in the difficult held-out conditions. The failure is
+not restricted to Condition~7; coverage exceeds 75\% for five conditions
+and reaches 75\% for one additional condition, but it is at or below
+25\% for six conditions. This result
+overturns the earlier 59-sample case study (Conditions 1, 2, and 6),
+which reported 100\% coverage with a mean width of 0.073~\(\upmu\)m;
+the apparent calibration of MC-dropout is therefore highly sensitive to
+which conditions are included.
+
+\subsubsection{Reliability by uncertainty bins}\label{sec:reliability-bins}
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{mc_dropout_reliability.png}
+\caption{Reliability diagram for full 16-fold LOGO MC-dropout on
+ResNetVibCNN on Vib-dB. Left: empirical coverage per
+uncertainty bin versus the nominal 95\% level. Right: mean absolute error
+and nominal interval half-width per bin. Coverage remains below the nominal level in most bins; interval
+half-width is too small to cover the observed error in high-error bins and some difficult conditions show systematic prediction bias.}\label{fig:reliability}
+\end{figure}
+
+Figure~\ref{fig:reliability} examines reliability by binning the 319
+samples into five nearly equal-sized bins by predicted standard
+deviation. The left panel shows empirical coverage for each bin. Most bins
+are below the nominal 95\% level, so MC-dropout is generally
+overconfident. The right panel shows that the mean nominal 95\% interval half-width is
+much smaller than the mean absolute error in the highest-error bins,
+confirming that the stochastic-forward variance underestimates prediction
+error for the hardest samples.
+
+\subsubsection{Sample-level calibration}\label{sec:sample-calibration}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{results_uncertainty_calibration.png}
+\caption{Full 16-fold LOGO MC-dropout predicted standard deviation
+versus observed absolute error for ResNetVibCNN on
+Vib-dB. Pass-level Pearson $r=0.488$, Spearman $\rho=0.594$; the
+empirical coverage is 50.2\%. Points above the diagonal are
+outside one predicted standard deviation; the nominal 95\% boundary
+would be error \(=1.96\sigma\). Many points lie above the one-standard-deviation
+diagonal, especially at higher error. Green points are covered by the
+nominal interval and red points are uncovered.}\label{fig:uncertainty-calibration}
+\end{figure}
+
+Figure~\ref{fig:uncertainty-calibration} disaggregates the reliability
+assessment to individual samples. The pass-level Pearson correlation between
+predicted uncertainty and absolute error is 0.488 (Spearman 0.594; AUROC for
+detecting the top 20\% highest-error samples 0.818), indicating that
+MC-dropout has some ranking ability---larger dropout variance tends to
+accompany larger error---but the 95\% intervals are too narrow to cover
+the observed error for roughly half of the samples. Calibration and
+discrimination are therefore distinct: MC-dropout can partially rank
+samples by predicted difficulty yet still fail as a calibrated
+prediction interval. It should not be used as a standalone process-warning
+signal for this CNN. Because passes are clustered within 16 conditions,
+these pass-level quantities are descriptive. Across the 16 condition means,
+the correlation between mean predicted standard deviation and mean absolute
+error is Pearson $r=0.492$ (Spearman $\rho=0.732$). A condition-cluster
+bootstrap gives wide 95\% intervals for the pass-level Pearson correlation
+([0.202, 0.951]), Spearman correlation ([0.252, 0.817]), and AUROC
+([0.471, 0.992]); Supplementary Table~\ref{tab:supp-clustered-uncertainty}
+reports the corresponding leave-one-condition-out sensitivity.
+
+Because MC-dropout is evaluated on a CNN, we also constructed diagnostic
+intervals for a separate 15-condition RF uncertainty variant
+(AE-dB-z + Vib-dB-z). The interval is computed as
+\(\hat y \pm c \, \sigma_{\text{tree}}\), where
+\(\sigma_{\text{tree}}\) is the standard deviation of the individual
+tree predictions and the scaling factor \(c\) is calibrated using
+out-of-bag (OOB) residuals from the training folds so that the test-fold
+residuals do not influence interval width. The resulting 95\% intervals
+achieve 80.3\% sample-weighted coverage across all 319 LOGO test samples
+(Figure~\ref{fig:rf-conformal}), with a mean width of
+\(0.070~\upmu\)m. This is below the nominal 95\% level, indicating that
+OOB-based calibration is anti-conservative on this small dataset and
+produces intervals that are too narrow. Coverage is uneven across
+conditions: Condition~7 has 0\% coverage, whereas several well-behaved
+conditions reach 100\% (Supplementary
+Table~\ref{tab:rf-oob-coverage}). The undercoverage suggests that OOB
+residuals underestimate held-out-condition residuals under grouped
+distribution shift; future calibration should be condition-level, not
+sample-level. A more fundamental limitation is that Condition~7 is
+uncovered by every calibration strategy tested. Condition~7 has the
+largest negative prediction bias (mean predicted $R_a$ about 0.217~\(\upmu\)m
+versus observed about 0.360~\(\upmu\)m) and its observed $R_a$ lies above the
+range seen in the training conditions, so the failure combines a
+systematic directional bias with extrapolation outside the training-target
+support. Condition~8, the next hardest condition, has the widest
+calibrated interval (0.291~\(\upmu\)m) and 100\% coverage because its
+observed $R_a$ remains inside the training-target range; Condition~7's
+interval, although the second widest, is still too narrow because the
+target lies outside that range. Tree variance alone cannot widen the
+interval enough to cover this shift; future calibration must explicitly
+model condition-level bias or reserve held-out conditions at the
+parameter-space frontier.
+We therefore compared the global OOB-scaled interval with three alternatives: a condition-aware factor calibrated from the three
+nearest training conditions in normalised process-parameter space, a
+split-conformal factor calibrated on one held-out condition, and a naive
+residual interval using the 95th percentile of absolute OOB residuals
+without tree-variance scaling. Table~\ref{tab:calibration-strategies}
+shows that the global OOB-scaled interval actually gives the highest
+mean condition-level coverage (80.3\%); the condition-aware and
+split-conformal variants achieve 77.8\% and 72.4\%, respectively, and the
+naive residual interval only 67.5\%. The split-conformal variant is
+limited by having only one held-out calibration condition per fold, so it
+cannot reliably calibrate condition-level tails. The interval uses the same
+held-out LOGO test conditions as the accuracy evaluation, but its RF is fitted
+on all 15 non-test conditions rather than the 14-condition current benchmark
+split. It is therefore a separate uncertainty variant and a post-hoc
+diagnostic, not an interval for the exact recommended RF or a full conformal
+prediction guarantee.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of nominal 95\% interval strategies for a 15-condition
+RF uncertainty variant. Coverage and width are averaged over the 16
+LOGO test folds (mean per-condition coverage; the sample-weighted
+aggregate for the global OOB strategy is the same to one decimal place,
+80.3\%).}\label{tab:calibration-strategies}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Strategy & Mean coverage & Mean width (\(\upmu\)m) \\
+\midrule
+Global OOB scaled & 80.3\% & 0.0704 \\
+Condition-aware k-NN & 77.8\% & 0.0693 \\
+Split conformal (1 calib. condition) & 72.4\% & 0.0810 \\
+Naive residual 95\% & 67.5\% & 0.0264 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{rf_conformal_intervals.png}
+\caption{OOB-calibrated nominal 95\% intervals for a 15-condition RF
+uncertainty variant (AE-dB-z + Vib-dB-z). Blue band: OOB-scaled interval; blue
+dots: observed \(R_a\). Samples are sorted by predicted mean. Coverage is
+80.3\% across all 319 held-out LOGO samples; mean width is
+0.070~\(\upmu\)m.}
+\label{fig:rf-conformal}
+\end{figure}
+
+\subsection{Condition-level failure analysis}\label{sec:conditions}
+
+\subsubsection{Hard conditions and error-budget decomposition}\label{sec:hard-conditions}
+
+Table~\ref{tbl:conditions} lists the grinding conditions with the
+highest mean MAE across all model-configuration pairs. The ranking is
+computed over 16 distinct conditions and all trained
+model--configuration pairs. Condition~7 is a robust prediction failure:
+its mean MAE of \(0.234~\upmu\)m is 2.2 times that of Condition~8 and
+5.8 times that of Condition~10. Across the evaluated model--configuration
+inventory, it accounts for 35.2\% of the summed condition-level mean MAEs;
+this inventory-weighted quantity depends on the included configurations.
+For the recommended RF alone, Condition~7 is discussed separately through
+its held-out mean MAE and target-support diagnostic, while the top
+three conditions (7, 8 and 10) together account for 57.4\%. Condition~7
+also has the highest mean $R_a$ in the design, but its mean AE and
+tri-axial vibration RMS values (0.437 and 1.591, respectively) are not
+the highest (Supplementary Table~\ref{tab:supp-condition-diagnostics}),
+ruling out a simple broadband RMS explanation. This does not exclude spectral, burst, thermal, force, coolant, or wheel-state mechanisms. By contrast, the median
+condition MAE across all 16 conditions is only \(0.024~\upmu\)m, and
+the remaining 11 conditions fall below \(0.030~\upmu\)m. For the canonical
+recommended RF, descriptively excluding Condition~7 reduces mean fold MAE
+from 0.0200 to 0.0118~\(\upmu\)m. Condition~7 remains part of every
+principal result and should not be removed unless it
+is proven to be invalid data, because difficult conditions are often the
+most important cases in process monitoring.
+
+\begin{table}[htbp]
+\centering
+\caption{Hardest grinding conditions (mean MAE across all
+models).}\label{tbl:conditions}
+\begin{tabular}[]{@{}ll@{}}
+\toprule
+Condition ID & Mean MAE (\(\upmu\)m) \\
+\midrule
+7 & 0.2337 \\
+8 & 0.1073 \\
+10 & 0.0402 \\
+11 & 0.0343 \\
+9 & 0.0300 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Condition~7 is a consistent prediction outlier across models, but direct
+process evidence for a distinct regime is not yet available. The failure
+motivates spectral, force, power, or wheel-state diagnostics. Because workpiece speed and depth of
+cut are not fully crossed in the fractional design, the Condition~7
+interpretation is partly confounded with interaction effects that the
+16-condition experiment cannot cleanly isolate. Until additional process
+evidence is collected, Condition~7 should be treated as a difficult
+prediction condition rather than as a confirmed process-regime outlier.
+Conditions 8 and 10 are also elevated: Condition~8 has a mean MAE of
+\(0.107~\upmu\)m, more than four times the median, and Condition~10 has
+a mean MAE of \(0.040~\upmu\)m, still 1.7 times the median. These three
+conditions are the only ones that lie clearly above the central cluster,
+suggesting they represent distinct difficult grinding conditions rather
+than random prediction noise.
+For the recommended RF, absolute-residual Spearman correlation with run
+order is 0.220, weaker than the corresponding correlations with
+training-target support distance (0.429) and measured \(R_a\) (0.291);
+therefore, the Condition~7 failure is not explained by a simple monotonic
+run-order trend.
+
+Figure~\ref{fig:condition-bars} shows the full condition ranking. The
+spike is observed for the best random forest, ResNetVibCNN, and the best
+LightGBM configuration, confirming that Condition~7 is a robust
+prediction failure rather than an artefact of any single model. The
+visual emphasises how disproportionately Condition~7 contributes to the
+error budget---its bar is more than twice the height of the next largest and roughly an
+order of magnitude above the median---so the practical priority is to identify
+and monitor the few high-contribution conditions rather than to squeeze average MAE across
+the remaining conditions. Because these condition-level differences have
+direct implications for which model can be deployed, the next subsection
+compares the deployment characteristics of the top candidates.
+
+\begin{figure}
+\centering
+\includegraphics[width=140mm]{results_condition_error_bars.png}
+\caption{Mean MAE across all model-configuration pairs for each
+grinding condition, sorted from lowest to highest. Condition~7 is
+highlighted as the largest outlier.}\label{fig:condition-bars}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{top_models_fold_mae.png}
+\caption{Per-fold MAE for the top five model--configuration pairs. The
+vertical dashed line marks condition 7, which produces the largest errors
+for every leading model.}\label{fig:top-models-fold-mae}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{top_models_per_condition_mae.png}
+\caption{Per-condition fold MAE heatmap for the top five
+model--configuration pairs. Condition 7 stands out as the dominant source
+of fold-level error.}\label{fig:top-models-per-condition}
+\end{figure}
+
+\subsection{Robustness and ablation
+experiments}\label{sec:robustness}
+
+\subsubsection{Cross-validation schemes}
+
+Table~\ref{tab:cv-schemes} compares the separate 15-condition RF robustness
+pipeline under
+the available validation schemes. Standard 16-fold LOGO and the
+workpiece-speed and grinding-depth grouped LOGO schemes give MAEs around
+0.020--0.021~\(\upmu\)m. In contrast, LOGO grouped by wheel speed gives
+0.0382~\(\upmu\)m, indicating that generalisation across wheel-speed
+groups is materially harder for this model than generalisation across the
+other two grouped process-parameter axes. This result should be
+interpreted cautiously because each wheel-speed fold aggregates only four
+design conditions, but the per-group results show that the 30~m/s group
+(Conditions 5--8, including Condition~7) drives the degradation
+(MAE 0.1088~\(\upmu\)m). The 25 and 40~m/s groups are both near
+0.009~\(\upmu\)m, and the 35~m/s group reaches 0.0260~\(\upmu\)m.
+Thus, the grouped result reflects both wheel-speed transfer difficulty and
+the known high-error Condition~7 regime; it is not evidence of a uniform
+wheel-speed effect across all four levels.
+Random 5-fold CV and random 80/20 splits give
+much lower MAEs (0.0053~\(\upmu\)m), which is below the
+manufacturer-quoted repeatability and illustrates the optimism that
+arises when highly similar passes from the same grinding condition appear in both training and test sets. Such random-split MAEs should not be interpreted
+as physically meaningful predictive performance. The grouped designs are
+therefore essential for an honest estimate of generalisation.
+
+\begin{table}[htbp]
+\centering
+\caption{Validation-scheme comparison for the 15-condition RF robustness
+pipeline (AE-dB-z + Vib-dB-z). For each grouped scheme, the complete indicated
+group is withheld and all remaining groups are used for fitting. This is not
+the 14-condition current benchmark RF.}\label{tab:cv-schemes}
+\begin{tabular}{@{}lrc@{}}
+\toprule
+Scheme & Folds & MAE (\(\upmu\)m) \\
+\midrule
+LOGO (16 conditions) & 16 & 0.0202 \\
+LOGO by workpiece speed & 4 & 0.0210 \\
+LOGO by grinding depth & 4 & 0.0204 \\
+LOGO by wheel speed & 4 & 0.0382 \\
+Random 5-fold CV (mean of 5 seeds) & 5 & 0.0053 \\
+Random 80/20 split (mean of 10 seeds) & 10 & 0.0053 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Per-group errors for wheel-speed grouped validation of the
+recommended random forest. Each group is withheld as four complete design
+conditions.}\label{tab:wheel-speed-groups}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Wheel speed (m/s) & Held-out conditions & MAE (\(\upmu\)m) \\
+\midrule
+25 & 1--4 & 0.0088 \\
+30 & 5--8 & 0.1088 \\
+35 & 9--12 & 0.0260 \\
+40 & 13--16 & 0.0086 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The 0.0200~\(\upmu\)m value in Table~\ref{tbl:top10} is the canonical
+top-ranking LOGO summary. The strict regenerated normalisation ablation
+uses the recorded seed-42 LOGO validation exclusions, current cache hashes,
+and the documented RF settings, but gives 0.0210~\(\upmu\)m for dB-z
+inputs and 0.0213~\(\upmu\)m for raw dB inputs. These values and their
+experiment identifier are reported in Supplementary
+Table~\ref{tab:supp-psnorm-ablation}. The 0.0010~\(\upmu\)m difference
+from the canonical artifact means that this ablation is a reproducible
+current-cache sensitivity analysis, not an exact reproduction of the
+earlier canonical prediction artifact; it remains below the stated
+practical metrology scale.
+
+\subsubsection{Pass-position sensitivity}
+
+The cached descriptor averages local spectrogram maps over an entire pass,
+which removes temporal ordering. To test whether this averaging hides a
+large position effect, the recommended RF was retrained on the early,
+middle, or late third of the available local-map axis for every pass,
+using the same 16 seed-42 LOGO folds and per-sample dB-z normalisation.
+The mean MAEs were 0.0213, 0.0204, and 0.0198~\(\upmu\)m, respectively
+(Supplementary Table~\ref{tab:supp-pass-position}). Concatenating the three
+ordered third descriptors before fitting gives 0.0195~\(\upmu\)m
+(fold SD 0.0338~\(\upmu\)m). This small numerical difference is below the
+practical metrology scale used for top-model ranking and does not validate a
+streaming system: all variants are retrospective partitions of archived pass
+data, and the cache does not retain the information needed to compare fixed
+physical-distance windows.
+
+For context, simple LOGO baselines that use only the training targets are
+substantially weaker: the training-target mean gives 0.0453~\(\upmu\)m MAE,
+the training-target median gives 0.0340~\(\upmu\)m, and the nearest
+training condition in standardised process-parameter space gives
+0.0591~\(\upmu\)m. These baselines confirm that the recommended RF improves
+on trivial target-distribution and parameter-neighbour predictors, while
+still failing on the high-roughness frontier.
+
+\subsubsection{Sensor-modality ablation}
+
+Table~\ref{tab:modality-ablation} reports a 15-condition robustness RF when
+only AE, only vibration, or both modalities are used. Vibration alone
+achieves 0.0207~\(\upmu\)m, almost identical to the fused configuration
+(0.0202~\(\upmu\)m), whereas AE alone degrades to 0.0296~\(\upmu\)m. Under
+the current sensor channels, preprocessing, and unequal window lengths,
+vibration therefore carries most of the predictive information. The
+0.0005~\(\upmu\)m AE-fusion difference is below the stated practical
+metrology scale and is not evidence of a practically meaningful average
+accuracy gain.
+
+\begin{table}[htbp]
+\centering
+\caption{Sensor-modality ablation for the 15-condition robustness RF under
+16-fold LOGO. Within each fold only the test condition is excluded.}\label{tab:modality-ablation}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Input & MAE (\(\upmu\)m) \\
+\midrule
+AE only & 0.0296 \\
+Vib only & 0.0207 \\
+AE + Vib & 0.0202 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Frequency-band ablation}
+
+Table~\ref{tab:frequency-ablation} reports the original 15-condition robustness-pipeline evaluation-time
+masking experiment, in which selected standardized features are replaced by
+their training-fold mean in an already trained RF. Removing the AE content
+above 1~MHz or the vibration 2--15~kHz band individually changes MAE by
+less than 0.0001~\(\upmu\)m; removing both gives a small numerical increase
+to 0.0208~\(\upmu\)m. Supplementary
+Table~\ref{tab:supp-retrained-band-ablation} then retrains the RF after
+setting the selected dB-z features to zero before both fitting and testing.
+Removing vibration above 15~kHz raises MAE from 0.0210 to
+0.0285~\(\upmu\)m; the mean paired increase is 0.00755~\(\upmu\)m with a
+descriptive condition-bootstrap 95\% interval of [0.00149, 0.01532]. Removing
+only the narrower 16--24~kHz region gives 0.0234~\(\upmu\)m, but its paired
+interval includes zero. Thus, the AE >1~MHz and vibration 2--15~kHz bands
+are redundant under these RF experiments, whereas the broader vibration
+region above 15~kHz contributes predictive information when removed in full.
+Because those bins were zeroed after the original full-spectrum dB-z
+normalisation, retained bins could still encode the removed band's contribution
+to the sample mean and variance. A stricter sensitivity deletes the vibration
+band from the dB cache before recomputing each sample/channel z-score
+(Supplementary Table~\ref{tab:supp-prez-band-ablation}). The recomputed full
+baseline gives 0.0209~\(\upmu\)m; removing >15~kHz gives 0.0255~\(\upmu\)m
+(paired increase 0.00455, descriptive 95\% interval [0.00063, 0.01066]), and
+removing 16--24~kHz gives 0.0254~\(\upmu\)m (increase 0.00447, interval
+[-0.00035, 0.01050]). Thus, direct upper-band dB-z features are predictive,
+and the broader >15~kHz sensitivity persists when indirect normalisation
+information is removed.
+These ablations do not establish that any band is physically causal. In
+particular, the >1~MHz AE result remains a model-response finding rather than
+a calibrated physical-energy claim. The (>15)~kHz vibration region also
+lies close to the 25.6~kHz Nyquist limit. Because the accelerometer response,
+analogue anti-alias filter, and mounting transfer function were not archived,
+its predictive value cannot be assigned to a mechanical mechanism rather
+than acquisition-chain roll-off or resonance.
+
+\input{main/supp_frequency_ablation.tex}
+
+\subsection{Deployment
+characteristics}\label{deployment-characteristics}
+
+\subsubsection{Latency--accuracy frontier}\label{sec:latency-accuracy}
+
+The present deployment analysis is limited to feature-precomputed
+model-inference timing; full online latency from raw signal to prediction
+remains future work. Table~\ref{tbl:latency} summarises single-sample CPU
+inference latency after feature extraction and
+checkpoint size for representative top model--configuration pairs. The
+timings were measured on a single logical core of an Intel Xeon Silver
+4514Y (2.0~GHz base, 3.4~GHz max turbo, Ubuntu 22.04 with kernel
+5.15.0-179, `powersave' governor, PyTorch 2.5.1, scikit-learn 1.6.1) with
+all threading libraries pinned to one thread, batch size one, and 100 warm-up repetitions excluded; garbage collection was disabled during each timing block, and the benchmark was repeated in five independent blocks of 200 runs each. The results quantify model inference only and do not include signal acquisition, STFT/dB-z/log-mel computation, feature scaling, communication overhead, or edge-hardware scheduling. These
+software versions are those
+of the latency-measurement environment; the original LOGO
+training/evaluation runs were performed under earlier package versions
+and may differ in minor dependency details. The `powersave' governor can
+increase latency variability, so the reported p95 values are timing
+diagnostics under the measurement environment and should not be
+interpreted as hard real-time bounds. They should be repeated under a fixed
+performance governor for a hard real-time assessment. Each row pools timing
+over the same 16 canonical repeat-0 outer-fold checkpoints that produce its
+reported 16-fold MAE. Every checkpoint is timed in five independent blocks of
+200 calls using the first held-out sample from its corresponding condition,
+giving 16,000 calls per configuration. Checkpoint paths, complete SHA-256
+digests, and fold-specific timing summaries are provided in
+\texttt{edge\_latency\_benchmark\_per\_fold.csv}. Random forest on dB-z has
+a pooled median latency of 8.0 ms, p95 latency of 13.7 ms, and median
+checkpoint size of 2.92 MB. The RF on AE-dB + Vib-dB has a similar pooled
+median of 8.0 ms and a tighter p95 of 8.2 ms.
+
+The CNNs are the fastest options: ResNetVibCNN on Vib-dB
+has a pooled median latency of 1.3 ms and ResNetAECNN on AE-dB of
+2.3 ms, and their median checkpoints are the smallest (0.35 MB). Their MAE,
+however, is \(0.0268\)--\(0.0300~\upmu\)m, worse than the best RF by
+34--50\%. LightGBM on \texttt{Vib-dB-z}
+sits between the two: MAE \(0.0250~\upmu\)m and pooled median latency 4.9 ms,
+with a p95 of 5.0 ms; it remains less accurate than the best RF while
+offering a much smaller checkpoint. Bilinear fusion on
+AE-dB + Vib-dB + phys + PP is the largest deep-learning
+entry (171k parameters, 4.0 ms median latency, 4.0 ms p95). This is its
+overall best configuration, distinct from the time-domain-feature
+variant in Table~\ref{tbl:representations}; even so, its accuracy
+(\(0.0317~\upmu\)m) is no better than the much simpler CNNs.
+
+\begin{table}[htbp]
+\centering
+\caption{CPU feature-precomputed model-inference latency and checkpoint
+storage footprint. Each row combines the 16-fold benchmark MAE with timing
+pooled over the same 16 historical canonical repeat-0 fold checkpoints. Each checkpoint
+uses five independent blocks of 200 runs, with warm-up excluded and garbage
+collection disabled; p50 is the pooled median. Checkpoint size is the median
+serialized size across the 16 checkpoints, not peak runtime memory. Tree
+ensembles do not have gradient-trained neural weights, but they store
+learned split thresholds, feature indices, and leaf predictions.}
+\label{tbl:latency}
+\scriptsize
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}llccccccc@{}}
+\toprule
+Model & Config & Benchmark MAE (\(\upmu\)m) & p50 (ms) & p90 (ms) & p95 (ms) & p99 (ms) & Max (ms) & Median checkpoint (MB) \\
+\midrule
+Random forest & \texttt{AE-dB-z + Vib-dB-z} & 0.0200 & 8.0 & 8.2 & 13.7 & 14.0 & 15.3 & 2.92 \\
+Random forest & AE-dB + Vib-dB & 0.0210 & 8.0 & 8.1 & 8.2 & 8.3 & 10.8 & 2.74 \\
+LightGBM & \texttt{Vib-dB-z} & 0.0250 & 4.9 & 5.0 & 5.0 & 5.0 & 7.7 & 0.70 \\
+ResNetVibCNN & Vib-dB & 0.0268 & 1.3 & 1.3 & 1.3 & 1.4 & 4.1 & 0.35 \\
+ResNetAECNN & AE-dB & 0.0300 & 2.3 & 2.3 & 2.3 & 2.9 & 5.2 & 0.35 \\
+Bilinear fusion & AE-dB + Vib-dB + phys + PP & 0.0317 & 4.0 & 4.0 & 4.0 & 4.2 & 6.9 & 0.72 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+Supplementary Table~\ref{tab:supp-runtime-memory} reports a separate
+fresh-process resident-memory diagnostic. After cached inputs are loaded,
+model loading and one warm-up inference add 5--7~MB for the tree models,
+14--15~MB for the single-modality CNNs, and 20~MB for bilinear fusion.
+This is an incremental resident-memory measurement under the timing
+environment, not peak deployment memory or an end-to-end edge-hardware
+requirement.
+
+The latency--accuracy trade-off is visualised in Figure~\ref{fig:pareto}.
+Under the observed feature-precomputed inference comparison, the evaluated
+tree-based configurations occupy the lowest-error region of the frontier: no
+CNN reaches their low error, while LightGBM, bilinear fusion, and both CNNs
+achieve approximately sub-5-ms pooled median model inference. These
+configurations therefore occupy the faster-but-less-accurate region of the
+plot. After cached features are available, every listed configuration exceeds
+50 model calls per second by pooled median latency; this is not a 50~Hz
+process-monitoring update rate. ResNetVibCNN provides the lowest median and
+p95 latency. The reported cache
+averages 2,910 local windows over the recorded pass, so its observation
+horizon is the full pass (approximately 14.6~s in the raw AE record), not
+110~ms. A streaming system with shorter or overlapping aggregation windows
+would require a separate end-to-end evaluation. When the priority is minimising
+point-estimate prediction error under the current evaluation, the random
+forest is the preferred candidate. The deployment analysis is limited to
+feature-precomputed model-inference timing; full online latency remains
+future work.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{latency_vs_accuracy.png}
+\caption{Feature-precomputed latency versus accuracy for representative
+models. Points use median latency; rightward horizontal whiskers extend to
+p95 latency from Table~\ref{tbl:latency}. The y-axis shows mean LOGO MAE
+without symmetric fold-standard-deviation bars because MAE is nonnegative
+and the fold distribution is tail-sensitive.}\label{fig:pareto}
+\end{figure}
+
+\subsubsection{Footprint and maintainability}\label{sec:footprint-maintainability}
+
+Figure~\ref{fig:deployment-tradeoffs} places the same models in a
+three-way accuracy--latency--footprint space. Bubble size encodes
+checkpoint size and colour distinguishes model configurations. The two random
+forest configurations remain the preferred point-estimate candidates
+under feature-precomputed model-inference timing: they combine the lowest
+error with
+pooled medians of approximately 8 ms, p95 values of 8.2--13.7 ms, and the
+largest median checkpoints (2.7--2.9 MB). The
+tree ensembles store learned split thresholds, feature indices, and leaf
+predictions rather than gradient-trained weights. Their stored structure permits inspection of split rules and feature attributions, whereas retraining effort and engineer auditability were not measured. LightGBM lies in the middle of the latency--error
+plane with a moderate median checkpoint (0.70 MB) and a pooled p95 of 5.0 ms.
+The deep-learning CNNs cluster in the fast, small-footprint
+lower-left region with \(\sim\)86k parameters, indicating that their
+advantages are deployment size and speed, not accuracy under this LOGO
+protocol. These trade-offs frame the practical recommendations discussed
+in Section~\ref{discussion}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{results_deployment_tradeoffs.png}
+\caption{Deployment trade-offs for representative models using the exact
+Table~\ref{tbl:latency} median latencies. Bubble size is proportional to
+checkpoint size and colour distinguishes model configurations; numbered markers identify
+models in the legend below the plot. Auditable tree ensembles occupy the
+accuracy-efficient region of the frontier.}\label{fig:deployment-tradeoffs}
+\end{figure}

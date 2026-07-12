@@ -1,0 +1,3 @@
+variant,config,overall_mae,median_per_condition_mae,max_per_condition_mae,experiment_id
+with per-sample norm,ae_logspec+vib_logspec,0.02100934460759163,0.009285329341227734,0.14781706581402898,psnorm-strict-logo-seed42-v4
+without per-sample norm,ae_spec+vib_spec (raw dB),0.02125585824251175,0.009206570658143556,0.18629818767945486,psnorm-strict-logo-seed42-v4

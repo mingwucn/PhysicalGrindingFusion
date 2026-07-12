@@ -1,0 +1,976 @@
+\section{Materials and methods}\label{materials-and-methods}
+
+\subsection{Dataset and experimental setup}\label{dataset-and-experimental-setup}
+
+The experiments were conducted on a Blohm Orbit 36 precision surface-grinding machine tool. The grinding process used a vitrified-bond cubic boron nitride (cBN) grinding wheel (specification B126-V240, diameter 400~mm). The workpiece material was hardened AISI 52100 bearing steel (approximate hardness 60~HRC). A water-soluble 5\% emulsion coolant was applied at a nozzle pressure of 2.5~bar and a flow rate of 40~L/min. During each grinding pass, three modalities were acquired simultaneously:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Acoustic emission (AE):} a two-channel AE acquisition sampled at
+  $4.0$~MHz. The raw AE files contain two physical acquisition columns:
+  column~1 is labelled narrowband AE and column~2 broadband AE in
+  \texttt{data/AE meta.txt}; these map respectively to AE planes~1 and~2 in
+  the cached spectrograms. Both physical channels are retained in every
+  AE-dB and AE-dB-z configuration. The archive does not preserve sensor
+  models, analogue filter bands/orders, gains, or calibration records, so
+  the labels establish channel provenance but not a calibrated transfer
+  function. The two archived channels provide empirical high-frequency
+  descriptors of contact-related activity. Interpretation of broadband
+  content (0.1--2.0~MHz) remains sensor- and mounting-dependent.
+\item
+  \textbf{Vibration:} a tri-axial accelerometer sampled at $51.2$~kHz.
+  All three axes are retained to capture the full structural response; the Z-axis is shown in the illustrative
+  figures because it is perpendicular to the grinding direction and most
+  sensitive to wheel--workpiece normal dynamics.
+\item
+  \textbf{Process parameters:} wheel speed $v_s$ (m/s), workpiece rotational speed $v_w$ (r/min), and grinding depth $a_p$ (\(\upmu\)m). The workpiece was clamped on a rotating index spindle (cylindrical configuration) with an outer diameter $d_w = 214$~mm, converting the rotational speed to a linear surface speed of $v_w \in \{0.224, 0.448, 0.672, 0.896\}$~m/s for kinematic calculations. The 16 grinding conditions correspond to a fractional factorial design crossing four levels of wheel speed $v_s \in \{25, 30, 35, 40\}$~m/s, four levels of workpiece speed $v_w \in \{20, 40, 60, 80\}$~r/min, and four levels of grinding depth $a_p \in \{20, 30, 40, 50\}$~\(\upmu\)m.
+\item
+  \textbf{Target:} post-process surface roughness $R_a$ measured with a
+  stylus profilometer and reported in \(\upmu\)m.
+\end{itemize}
+
+Measurement and acquisition details are as follows. The stylus
+profilometer measurements (stylus tip radius of 2~\(\upmu\)m, expanded uncertainty of 0.025~\(\upmu\)m, with a new stylus to minimize wear effects) used a 0.8~mm Gaussian cutoff and a 4~mm
+evaluation length; three traces were taken on each ground surface and
+averaged to obtain the reported $R_a$. The profilometer was calibrated
+before each measurement session with a certified roughness standard; the
+manufacturer-quoted repeatability is 0.01~\(\upmu\)m. Surface roughness values
+in this study range from 0.066 to 0.381~\(\upmu\)m, so the best reported MAE
+(0.020~\(\upmu\)m) is only about twice the manufacturer-quoted repeatability.
+Only the final averaged $R_a$ value per pass is available; the
+individual trace profiles and trace-level $R_a$ values were not archived,
+so an experimental repeatability or gauge R\&R cannot be computed here.
+The reported MAE combines model error and measurement uncertainty;
+because trace-level repeatability is unavailable, the latent error
+relative to latent roughness cannot be separated from
+measurement uncertainty. This limitation is especially relevant because rank
+differences among the top RF variants are smaller than 0.001~\(\upmu\)m,
+far below the manufacturer-quoted repeatability. Future work should
+retain trace-level $R_a$ values and raw profiles for gauge R\&R.
+Consequently, improvements smaller than approximately 0.005--0.010~\(\upmu\)m
+should be interpreted cautiously because only manufacturer-quoted
+repeatability, not experiment-specific repeatability, is available, and
+differences among the top-ranked random-forest variants below this range
+should not be treated as practically meaningful. The
+ranking among the top five RF variants is therefore exploratory.
+Historical campaign notes describe a nominal AE response band of
+100~kHz--1~MHz and mounting on the workpiece fixture with acoustic
+couplant; the underlying sensor specification is not archived. The
+tri-axial accelerometer was mounted near the grinding contact zone.
+Campaign documentation indicates analogue anti-aliasing before digitisation,
+but the filter cut-offs and orders were not archived. Non-archived no-cut recordings were inspected informally but
+are not used as reproducible evidence.
+The archived campaign metadata do not retain sensor model numbers,
+calibration sensitivities, preamplifier gains, analogue filter cut-offs or
+orders, or mounting torque/attachment records. These missing sensor-chain
+details limit transfer-function interpretation. The frozen archive will
+explicitly record their absence; future acquisition protocols must retain
+them.
+
+The 16 conditions were run in a single randomised order; the wheel was
+dressed before the start of the campaign and coolant flow was held
+constant. We therefore cannot separate condition effects from potential
+wheel-wear or thermal-drift trends across the run order. A run-order plot
+of measured $R_a$ is provided as Supplementary
+Figure~\ref{fig:supp-runorder} and should be considered when
+interpreting Condition~7 as an outlier. Supplementary Figure~\ref{fig:supp-runorder-diagnostics} overlays best-RF
+residuals, AE broadband RMS, and tri-axial vibration RMS on the run-order
+plot. Condition~7 does not coincide with a monotonic run-order trend in
+sensor RMS, so a simple wheel-wear or thermal-drift explanation is not
+supported by the available diagnostics; in other words, the available
+run-order diagnostics do not show a simple monotonic drift explanation
+for Condition~7. They do not, however, exclude non-monotonic wheel-state
+effects such as local wheel loading, dressing variations, or transient
+coolant/temperature events.
+
+The campaign nominally contained 20 passes per condition; after
+excluding Condition~1, sample~1, Condition~1 contributed 19 valid
+model-evaluation samples and the remaining conditions contributed 20.
+Each condition corresponds to a unique combination of the three process
+parameters: $v_s \in \{25,30,35,40\}$~m/s, $v_w \in
+\{20,40,60,80\}$~r/min, and $a_p \in \{20,30,40,50\}$~\(\upmu\)m.
+The 16-run design is a fractional factorial design inspired by
+L16-style coverage of the factor levels; it is not the full
+$4 \times 4 \times 4 = 64$ factorial. The design provides balanced coverage for wheel speed against the other
+two factors, but the workpiece-speed/depth-of-cut pairing is not fully
+balanced (Supplementary Table~\ref{tab:supp-balance}). The exact
+factor-level combinations are listed in Table~\ref{tbl:condition-design}.
+Because the design is fractional, two- and three-way interactions among
+wheel speed, workpiece speed, and grinding depth are not independently
+estimable and may be aliased or under-sampled, which limits
+interaction-effect generalisation.
+
+\begin{table}[htbp]
+\centering
+\caption{Fractional factorial experimental design. The 16 grinding
+conditions are unique combinations of wheel speed $v_s$, workpiece speed
+$v_w$, and grinding depth $a_p$ selected from the full
+$4 \times 4 \times 4$ factorial. Each condition was nominally replicated
+20 times; Condition~1 has 19 valid model-evaluation passes after
+exclusion of one corrupt/missing AE/vibration file.}
+\label{tbl:condition-design}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+Condition & $v_s$ (m/s) & $v_w$ (r/min) & $a_p$ (\(\upmu\)m) & Passes \\
+\midrule
+1  & 25 & 20 & 20 & 19 \\
+2  & 25 & 40 & 30 & 20 \\
+3  & 25 & 60 & 40 & 20 \\
+4  & 25 & 80 & 50 & 20 \\
+5  & 30 & 40 & 40 & 20 \\
+6  & 30 & 60 & 50 & 20 \\
+7  & 30 & 80 & 20 & 20 \\
+8  & 30 & 20 & 30 & 20 \\
+9  & 35 & 60 & 50 & 20 \\
+10 & 35 & 80 & 20 & 20 \\
+11 & 35 & 20 & 30 & 20 \\
+12 & 35 & 40 & 40 & 20 \\
+13 & 40 & 80 & 30 & 20 \\
+14 & 40 & 20 & 40 & 20 \\
+15 & 40 & 40 & 50 & 20 \\
+16 & 40 & 60 & 20 & 20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Consequently, samples within the same condition are more similar to each
+other than to samples from different conditions. To evaluate
+generalisation to unseen process states, all models are assessed with
+leave-one-condition-out (LOGO) cross-validation, detailed in
+Section~\ref{validation-protocol}. Essential code, experiment definitions,
+and small result manifests are available in the PhysicalGrindingFusion
+repository. Large raw recordings and intermediate caches are available for
+research use on request rather than mirrored in Git.
+
+\subsection{Signal representations}\label{signal-representations}
+
+Rather than feeding raw waveforms directly to the models, we convert AE
+and vibration signals into frequency-domain descriptors covering vibration
+bands below 25~kHz and AE bands up to the 2~MHz Nyquist limit from the
+4~MHz sampling rate. All
+representations are pre-computed and cached so that every model is
+trained and evaluated on identical inputs. The overall preprocessing
+pipeline is shown in Figure~\ref{fig:preprocessing-pipeline}.
+
+\begin{figure}[htbp]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  node distance=1.2cm and 1.4cm,
+  box/.style={pub/representation, minimum width=2.4cm, minimum height=0.9cm},
+  param/.style={pub/base, dashed, fill=pubSlateFill, minimum width=2.2cm, minimum height=0.7cm},
+  arrow/.style={pub/arrow},
+  splitarrow/.style={pub/flow}
+]
+\node[box] (raw) {Raw\\waveform};
+\node[box, right=of raw] (stft) {Hann-window\\STFT};
+\node[box, right=of stft] (lin) {STFT\\magnitude\\spectrum};
+\node[box, above right=0.8cm and 1.2cm of lin] (db) {Mean dB\\spectrogram\\(\texttt{ae\_spec},\\\texttt{vib\_spec})};
+\node[box, right=2.2cm of db] (z) {Optional per-sample\\z-standardisation\\(\texttt{ae\_logspec},\\\texttt{vib\_logspec})};
+\node[box, below right=0.8cm and 1.2cm of db] (mel) {Inverse dB $\rightarrow$ power\\mel bank $\rightarrow$ dB\\(\texttt{ae\_mel},\\\texttt{vib\_mel})};
+\node[param, above=0.4cm of stft] (stftp) {$N_{\rm FFT}$, hop};
+\node[param, below=0.4cm of mel] (melp) {$M=64$ mel filters};
+\draw[arrow] (raw) -- (stft);
+\draw[arrow] (stft) -- (lin);
+\draw[splitarrow] (lin) -- (db);
+\draw[splitarrow] (db) -- (z);
+\draw[splitarrow] (db) -- (mel);
+\draw[arrow, dashed] (stftp) -- (stft);
+\draw[arrow, dashed] (melp) -- (mel);
+\end{tikzpicture}%
+}
+\caption{Preprocessing pipeline for AE and vibration signals. Raw
+waveforms are transformed by a Hann-window STFT. The magnitude branch is
+converted to dB and averaged over local maps; an optional per-sample
+z-standardisation creates the historical \texttt{*\_logspec} caches. The
+implemented log-mel branch inverse-converts the pass-mean dB cache to power,
+applies the mel filter bank, and converts the result back to dB. All
+representations are cached before model training. Because local maps are
+averaged in dB before inverse conversion, this branch mel-filters a
+geometric-mean power quantity rather than the arithmetic mean of local power
+or log-mel maps.}
+\label{fig:preprocessing-pipeline}
+\end{figure}
+
+\subsubsection{Time--frequency representations}
+
+Short-time Fourier transforms are computed with a Hann window. For the
+AE channel, the fast Fourier transform length is $N_{\text{FFT}}^{\rm
+AE}=598$ samples and the hop length is $H^{\rm AE}=426$ samples,
+yielding 300 frequency bins and 47 time frames per local AE map. For vibration,
+$N_{\text{FFT}}^{\rm vib}=512$ and $H^{\rm vib}=426$, yielding 257
+frequency bins and 13 time frames per local vibration map. The STFT complex coefficients are converted to magnitude and then to a decibel scale (clipped at $-80$~dB), producing local dB spectrogram maps. The AE cache has two planes labelled ``narrowband'' and ``broadband'' in the archived intermediate files; the available cache-generation code does not preserve the analogue/digital filter provenance needed to calibrate the channels' transfer paths. Raw-file metadata identify plane~1 as physical narrowband AE and plane~2 as physical broadband AE; this establishes channel provenance but not filter calibration. Both planes are included in every AE-dB and AE-dB-z configuration. The vibration arrays retain the three accelerometer axes. The effective frequency resolutions are
+approximately $6.69$~kHz/bin for AE and
+$100$~Hz/bin for vibration. Because the sampling rates differ by two
+orders of magnitude, the stated STFT parameters yield different
+effective physical window durations (transform lengths): approximately 150~\(\upmu\)s for AE and
+10~ms for vibration, corresponding to total segment durations of approximately 5~ms and 
+110~ms, respectively. The cached per-pass descriptor is not a single
+middle-pass window. The per-pass intermediate \texttt{*\_spec.npz} files
+contain \(N_p=2{,}910\) local maps for each modality and pass; the final
+dataset-level \texttt{mean\_specs.npz} cache stores only their arithmetic
+pass means with shapes \((319,2,300,47)\) and \((319,3,257,13)\). The retained intermediate cache does not
+record the upstream local-map hop, overlap, terminal-window policy, or an
+AE--vibration timestamp correspondence; consequently, ``aligned'' is not
+claimed at event level. If the reported approximately 14.6~s pass duration
+and uniform placement are assumed, 2,910 maps imply a nominal index spacing
+of about 5.0~ms. This would imply negligible overlap for a 5~ms AE segment
+and approximately 95\% overlap for a 110~ms vibration segment, but these are
+arithmetic implications rather than recovered acquisition settings. The
+common map index supports corresponding pass-position thirds only. For each pass \(p\), channel \(c\), frequency bin
+\(f\), and STFT time frame \(t\), \texttt{compute\_mean\_spectrogram()}
+stores
+\begin{equation}
+\bar S_{p,c,f,t}=\frac{1}{N_p}\sum_{j=1}^{N_p}S_{p,j,c,f,t}.
+\label{eq:local-map-mean}
+\end{equation}
+This is a simple arithmetic mean over the local-map axis, with no temporal
+weighting, selection, or learned aggregation. Thus the reported models use
+a pass-level mean of local 5~ms AE and 110~ms vibration descriptors. This
+averaging suppresses temporal ordering and transient localisation. A
+retrospective early/middle/late-third and ordered three-window-concatenation
+sensitivity analysis is reported in Supplementary
+Table~\ref{tab:supp-pass-position}; fixed-distance windows and streaming
+dispersion features remain future extensions. Both representations come
+from the same grinding pass, but the fused inputs concatenate pass-level
+descriptors with unequal local time extents. They are therefore not an
+event-synchronised fusion. For tabular models, the maps are flattened and
+concatenated, producing 38,223 features for fused full-resolution dB or dB-z
+(\(2\times300\times47 + 3\times257\times13\)) and 8,512 features for fused
+64-bin log-mel (\(2\times64\times47 + 3\times64\times13\)). Dimensions of the main
+time--frequency representations are summarised in
+Table~\ref{tbl:representation-dims}.
+
+\begin{table}[htbp]
+\centering
+\caption{Dimensions of the principal time--frequency representations.
+$N_{\rm FFT}$ is the transform length, $H$ the hop length, $C$ the number
+of retained input planes or axes, $F$ the number of frequency bins, and
+$T$ the number of time frames. For AE, $C=2$ denotes the physical narrowband and broadband AE channels; analogue filter specifications and gains are unavailable; for vibration, $C=3$ denotes the three accelerometer axes. The \texttt{*\_logspec} caches are per-sample z-standardised versions of the full-resolution dB maps, whereas the \texttt{*\_mel} caches are 64-bin log-mel maps.}
+\label{tbl:representation-dims}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Representation & $N_{\rm FFT}$ & $H$ & $C$ & $F$ & $T$ \\
+\midrule
+\texttt{ae\_spec} & 598 & 426 & 2 & 300 & 47 \\
+\texttt{vib\_spec} & 512 & 426 & 3 & 257 & 13 \\
+\texttt{ae\_logspec} & 598 & 426 & 2 & 300 & 47 \\
+\texttt{vib\_logspec} & 512 & 426 & 3 & 257 & 13 \\
+\texttt{ae\_mel} & -- & -- & 2 & 64 & 47 \\
+\texttt{vib\_mel} & -- & -- & 3 & 64 & 13 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The historical \texttt{ae\_logspec} and \texttt{vib\_logspec} names denote
+full-resolution dB spectrograms after per-sample, per-plane z-standardisation;
+they do not apply an additional logarithm. They retain the 300 AE and
+257 vibration frequency bins shown in Table~\ref{tbl:representation-dims}
+and are standardised per sample and per channel. No subsequent fold-wise
+spectral scaler is used in the RF experiments reported here. The 64-bin
+log-mel descriptors are stored separately as \texttt{ae\_mel} and
+\texttt{vib\_mel}. They are generated from the pass-mean dB cache by inverse
+conversion to linear power, followed by multiplication by $M=64$ mel-spaced
+filters covering the full Nyquist band. If $D$ is the pass-mean dB cache, the
+implemented output is $10\log_{10}[\varepsilon + M(10^{D/10})]$ with a fixed global floor
+$\varepsilon = 10^{-10}$ to avoid numerical underflow.
+Because \(D\) is averaged over local maps in dB before this inverse
+conversion, \(10^{D/10}\) is a geometric-mean power quantity. The implemented
+cache is therefore distinct from an arithmetic pass-average of local
+power-mel or log-mel maps; mel filtering and local-map averaging are not
+interchangeable operations. Although originally
+developed for audio, the mel-style filter bank is used here as a
+logarithmic frequency-compression scheme rather than as a psychoacoustic
+model. The mel-scale maps frequency $f$ (Hz) to
+\begin{equation}
+m = 2595 \log_{10}\!\left(1 + \frac{f}{700}\right),
+\label{eq:mel}
+\end{equation}
+For the AE channel, the spectral representations cover the full Nyquist
+band for empirical discrimination, but components above 1~MHz lie outside
+the historically reported nominal AE response band and are interpreted
+cautiously.
+The full-resolution dB and 64-bin log-mel representations differ in both
+frequency binning and amplitude transform. The dB-z caches differ from the
+dB caches only by per-sample, per-plane z-standardisation. The canonical and
+current RF spectral pipelines do not apply an additional fold-wise scaler to
+spectrogram bins; therefore, the comparison is not a pure test of
+mel-scale compression. The log-mel
+variants (\texttt{ae\_mel}, \texttt{vib\_mel}) do not receive
+per-sample normalisation; they therefore offer a partial sensitivity check
+on whether removing absolute-energy information alters predictive
+performance. A strict ablation omitting only per-sample/channel standardisation
+is reported in Supplementary
+Table~\ref{tab:supp-psnorm-ablation} and gives a small numerical mean-MAE
+increase from 0.0210 to 0.0213~\(\upmu\)m without per-sample
+standardisation. The maximum condition MAE increases from 0.1478 to
+0.1863~\(\upmu\)m (Condition~7), so the ablation supports
+mean-level robustness but not tail robustness.
+
+Exact cache definitions, shapes, and SHA-256 provenance checksums are listed in Supplementary Table~\ref{tab:supp-cache-provenance}.
+The available provenance for the two physical AE columns is separated from
+the unavailable transfer-function information in Supplementary
+Table~\ref{tab:supp-ae-plane-provenance}.
+
+\subsubsection{Wavelet scattering and hand-crafted features}
+
+Two-dimensional wavelet scattering transforms
+(\texttt{ae\_wst}, \texttt{vib\_wst}) are computed with
+\texttt{kymatio} \cite{mallat2012group}. We use second-order scattering
+(\texttt{max\_order=2}) with $J=3$ octaves, Morlet wavelets, and
+$L=8$ angular orientations (the constructor is
+\texttt{Scattering2D(J=3, shape=(H,W), L=8, max\_order=2)}). Scattering coefficients are averaged over the
+spatial (frequency--time) dimensions, producing a compact,
+translation-invariant descriptor for each channel. The computation is
+shown schematically in Figure~2. Note that for the vibration channel, the temporal dimension of the spectrogram is small ($T=13$ time frames). Using $J=3$ octaves corresponds to a maximum spatial support of $2^J = 8$ frames, which is close to the total signal length. Consequently, the wavelet filters at the largest scale ($j=2$) suffer from significant edge/boundary effects, and spatial averaging over this scale acts as a global smoother that discards almost all localized temporal variation, retaining only static spectral structures.
+
+\begin{figure}[htbp]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  node distance=1.4cm,
+  box/.style={pub/representation, minimum width=2.6cm, minimum height=0.9cm},
+  arrow/.style={pub/arrow}
+]
+\node[box] (spec) {2D spectrogram\\input};
+\node[box, right=of spec] (psi1) {Morlet wavelet\\filter bank\\$L=8, J=3$};
+\node[box, right=of psi1] (mod1) {Modulus\\$|\\cdot|$};
+\node[box, right=of mod1] (psi2) {Second-order\\Morlet filters};
+\node[box, right=of psi2] (mod2) {Modulus\\$|\\cdot|$};
+\node[box, below=1.0cm of mod2] (avg) {Spatial\\averaging};
+\node[box, left=of avg] (out) {Scattering\\coefficients};
+\draw[arrow] (spec) -- (psi1);
+\draw[arrow] (psi1) -- (mod1);
+\draw[arrow] (mod1) -- (psi2);
+\draw[arrow] (psi2) -- (mod2);
+\draw[arrow] (mod2) -- (avg);
+\draw[arrow] (avg) -- (out);
+\end{tikzpicture}%
+}
+\caption{Wavelet scattering transform pipeline. A 2D spectrogram is
+passed through two Morlet filter banks separated by modulus
+nonlinearities, then spatially averaged to produce a compact,
+translation-invariant descriptor per grinding pass.}
+\label{fig:wst-pipeline}
+\end{figure}
+
+Time-domain statistics (\texttt{ae\_features}, \texttt{vib\_features})
+include mean, standard deviation, skewness, kurtosis, RMS, peak, crest
+factor, and frequency-domain band energy. Process parameters
+(\texttt{pp}) are $v_s$, $v_w$, $a_p$. Physics-informed features
+(\texttt{physics}) are heuristic indicators derived from process
+parameters and sensor envelopes rather than dimensionally exact physical
+quantities: AE wavelet energy (narrow 50--400\,kHz and broad 150--2000\,kHz
+bands; the upper limit is capped at the AE Nyquist frequency of 2\,MHz,
+and for the \texttt{cmor3-3} scales used the effective maximum frequency
+is approximately 1.33\,MHz), AE burst rate (for each pass and band, $\sigma$ is computed from the
+pass-level AE envelope after bandpass filtering; burst rate is the count
+of envelope peaks above $4\sigma$, separated by at least 0.1\,ms. Because
+$\sigma$ is computed per pass, the threshold is self-normalised and burst
+rate captures relative burstiness rather than absolute AE amplitude), an equivalent chip-thickness proxy ($ec$), a normalized depth-of-cut
+indicator ($bid=a_p/30$), a temperature-proxy term ($st$), envelope kurtosis for
+the X/Y/Z vibration axes, and an overall vibration magnitude ($mag$). Each
+indicator is aggregated over time by mean, standard deviation, maximum,
+and minimum, producing a nominal 44-dimensional vector. A fold-wise audit
+finds five globally constant aggregate columns (the two burst-rate minima
+and the standard-deviation aggregates of (ec), (bid), and (st));
+thus 39 columns vary across the campaign. These zero-variance columns are
+retained for reproducibility, but fold-wise standardisation maps them to
+zero and they must not be interpreted as independent physical
+measurements. The audit is reported in Supplementary
+Table~\ref{tab:supp-physics-audit}. The implemented process-derived and
+temperature-indicator algorithms are specified directly in Supplementary
+Table~\ref{tab:physics_features} and Equations~\eqref{eq:ec-implemented}--\eqref{eq:st-implemented}.
+The archive does not preserve all filter settings for the burst features,
+so those cached intermediate-derived values can be reused but are not
+claimed to be fully reconstructible from raw signals. Because the
+archived notes report the nominal AE response only up to 1~MHz, the 1--2\,MHz portion of
+the broad band is retained only as an empirical descriptor and is not
+interpreted as calibrated AE energy.
+
+Tabular feature vectors and process parameters are standardised per fold
+using training-set statistics. Spectrogram caches are not fold-wise scaled
+in the canonical RF and current RF sensitivity pipelines. The dB-z cache is
+instead normalised per sample and per channel before fitting; this removes
+absolute energy information that may be physically meaningful. A strict
+ablation that keeps the same RF architecture and omits only this per-sample
+normalisation gives an overall LOGO
+MAE of 0.0213~\(\upmu\)m, compared with 0.0210~\(\upmu\)m with
+per-sample normalisation (Supplementary Table~\ref{tab:supp-psnorm-ablation}).
+The result therefore does not
+appear to depend on per-sample energy removal for mean LOGO MAE;
+frequency-shape information appears sufficient for mean LOGO MAE in
+this RF/dB-z configuration, although tail performance changes. Multimodal
+tabular inputs are concatenated; multimodal deep-learning inputs are fed
+through separate encoder branches that are fused before the regression
+head.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{methods_signal_representations.png}
+\caption{Example signal representations for condition 10, sample 1
+($R_a = 0.098~\upmu$m). (a)~AE dB spectrogram, (b)~AE log-mel
+spectrogram, (c)~vibration (Z-axis) dB spectrogram, and
+(d)~vibration log-mel spectrogram. The examples show dominant lower-frequency
+energy in both modalities. Vibration below 5~kHz is compatible with structural
+dynamics, whereas AE is treated as an empirical contact-related descriptor
+because its transfer function is unavailable. Higher-frequency AE energy above 0.5~MHz and vibration energy near
+17~kHz are located in frequency ranges commonly associated with
+grain-contact and chatter-related dynamics, respectively.}
+\label{fig:representations}
+\end{figure}
+
+\subsection{Predictive models}\label{predictive-models}
+
+The model families share the outer LOGO test folds and metrics, with
+model-specific training, validation, and preprocessing procedures
+(Figure~\ref{fig:taxonomy}).
+
+\textbf{Auditable classical baselines.} Ridge coefficients can be inspected
+directly; the tree ensembles are analysed with post-hoc attribution. This is relevant to monitoring
+workflows where model updates may be required after changes in wheel
+grade, workpiece material, or dressing condition, although this workflow
+is not tested here.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Ridge regression:} L2-regularised linear regression with
+  $\alpha=1.0$; coefficients provide a signed importance score for every
+  frequency bin.
+\item
+  \textbf{Random forest:} 200 trees, maximum depth 8, minimum 1 sample
+  per leaf, $n_{\text{jobs}}=1$.
+\item
+  \textbf{LightGBM and XGBoost:} gradient-boosted trees with 200
+  estimators, maximum depth 5, learning rate $0.05$, subsample
+  $0.8$, and column sampling $0.8$.
+\item
+  \textbf{Shallow MLP:} two hidden layers of 128 and 64 units, L2
+  penalty $\alpha=10^{-4}$, Adam optimiser with learning rate
+  $10^{-3}$, early stopping on 10\% validation data, maximum 500
+  iterations.
+\end{itemize}
+
+\textbf{Deep-learning baselines.} These models represent recent
+literature on grinding monitoring:
+
+\begin{itemize}
+\tightlist
+\item
+  ResNet-style encoders for AE and vibration spectrograms
+  (ResNetAECNN, ResNetVibCNN).
+\item
+  ResNet-based multimodal fusion (ResNetFusion).
+\item
+  Bilinear attention-based fusion network (BilinearFusionNetwork).
+\item
+  Multi-resolution spectrogram CNN.
+\item
+  Trajectory-based sequence CNN (TrajectoryCNN).
+\item
+  Graph-neural-network fusion (GraphNeuralNetworkFusion), TabTransformer (TabTransformerRegressor), and attention-based
+  regressors.
+\end{itemize}
+
+Specifically, the advanced deep-learning baselines are structured as follows:
+\begin{itemize}
+\item \textbf{BilinearFusionNetwork:} uses dual ResNet encoders to extract feature maps from AE and vibration spectrograms, then applies low-rank bilinear pooling to fuse these representations with process parameters and physics-informed indicators before MLP regression.
+\item \textbf{TrajectoryCNN:} is a sequence-based model that utilizes 1D temporal convolutions to process temporal sub-band energy trajectories from AE and vibration, capturing localized time-dependent dynamics instead of relying on time-averaged summaries.
+\item \textbf{GraphNeuralNetworkFusion:} frames multimodal fusion as a graph learning task where individual modalities (AE, vibration, physics, parameters) represent nodes in a fully-connected graph. Node features are processed via Graph Attention Network (GAT) layers for cross-modal message passing, followed by global average graph pooling.
+\item \textbf{TabTransformerRegressor:} embeds continuous features (physics, process parameters) by scaling a learned feature-specific embedding vector by the continuous scalar value and adding a bias. These embedded feature sequences are then processed by a multi-layer Transformer encoder.
+\end{itemize}
+
+The best-performing spectrogram CNN, ResNetVibCNN, processes vibration
+dB spectrograms of shape $(3, 257, 13)$ through a stem convolution,
+two residual blocks with squeeze-and-excitation attention and dropout
+$p=0.3$, global average pooling, and a fully connected regressor with a
+64-dimensional hidden layer. Its architecture is shown in
+Figure~4. All deep-learning models are trained
+with AdamW (learning rate $10^{-3}$, weight decay $10^{-4}$), MSE loss,
+a ReduceLROnPlateau scheduler (factor $0.5$, patience 5 epochs), early
+stopping (patience 20 epochs), and a maximum of 200 epochs. Batch sizes
+are 16 for the ResNet encoders and 32 otherwise. The historical planned
+comparison uses the canonical seed-42 results for all model--configuration
+pairs; reproducible current RF reruns are reported before those artifacts in
+the Results. To quantify training stochasticity, a secondary equal-budget
+sensitivity analysis repeats the main stochastic architectures over five
+seeds; details are provided in Section~\ref{experimental-workflow}.
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.98\linewidth}{!}{\input{tikz/resnetvibcnn_architecture}}
+\caption{ResNetVibCNN architecture for vibration dB spectrogram
+regression. The three-axis input is processed by a stem convolution and
+two stride-two SE-residual blocks. Each residual block contains batch
+normalisation, squeeze-and-excitation attention, and dropout; global average
+pooling and a 64-unit dense head produce the measured-$R_a$ estimate.}
+\label{fig:resnetvibcnn-arch}
+\end{figure}
+
+Table~\ref{tbl:dl-baselines} summarises the deep-learning baselines and
+their input configurations.
+
+\begin{table}[htbp]
+\centering
+\caption{Overview of the deep-learning baselines. The column ``Input''
+uses the abbreviations defined in Table~\ref{tbl:config-abbreviations}.}
+\label{tbl:dl-baselines}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Model & Input & Key mechanism & Fusion \\
+\midrule
+ResNetAECNN & AE-dB & ResNet encoder + SE & Single modality \\
+ResNetVibCNN & Vib-dB & ResNet encoder + SE & Single modality \\
+ResNetFusion & AE-dB + Vib-dB & Dual ResNet encoders & Early fusion \\
+BilinearFusion & AE-dB + Vib-dB + phys + PP & Bilinear attention & Late fusion \\
+Multi-resolution CNN & Vib-dB & Multi-scale convolutions & Single modality \\
+Trajectory CNN & \texttt{Vib-traj} & 1D sequence CNN on temporal sub-bands & Single modality \\
+GNN fusion & AE-dB + Vib-dB & Graph neural network & Structured fusion \\
+TabTransformer & \texttt{AE/Vib feats + phys + PP} & Transformer on tabular & Tabular multimodal \\
+Attention regressor & AE-dB + Vib-dB & Self-attention & Late fusion \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\resizebox{0.98\linewidth}{!}{\input{tikz/model_taxonomy}}
+\caption{Model taxonomy evaluated in this study. The left branch contains
+a directly inspectable regularised linear model and auditable tree ensembles
+supported by post-hoc SHAP values. The right branch uses deep-learning
+baselines whose decisions are analysed post-hoc with Grad-CAM and
+MC-dropout. Both branches predict $R_a$ and are compared under the same
+LOGO protocol.}
+\label{fig:taxonomy}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\caption{Key hyperparameters of the main auditable classical and baseline models.
+Fixed hyperparameters were applied uniformly across all LOGO folds; deep-learning
+entries (Shallow MLP) used additional early-stopping on the validation fold.}
+\label{tbl:hyperparams}
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}llr@{}}
+\toprule
+\textbf{Model} & \textbf{Hyperparameter} & \textbf{Value} \\
+\midrule
+Ridge                & Regularisation strength $\alpha$   & 1.0 \\
+\addlinespace[4pt]
+Random forest        & Number of trees                    & 200 \\
+                     & Max depth                          & 8 \\
+                     & Min samples per leaf               & 1 \\
+\addlinespace[4pt]
+LightGBM             & Number of estimators               & 200 \\
+                     & Max tree depth                     & 5 \\
+                     & Learning rate                      & 0.05 \\
+                     & Subsample ratio                    & 0.8 \\
+\addlinespace[4pt]
+XGBoost              & Number of estimators               & 200 \\
+                     & Max tree depth                     & 5 \\
+                     & Learning rate                      & 0.05 \\
+                     & Subsample ratio                    & 0.8 \\
+\addlinespace[4pt]
+Shallow MLP          & Hidden layers                      & (128, 64) \\
+                     & L2 regularisation $\alpha$         & $10^{-4}$ \\
+                     & Learning rate                      & $10^{-3}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Validation protocol}\label{validation-protocol}
+
+We use strict leave-one-condition-out (LOGO) cross-validation with 16
+outer folds. In each fold, one condition is held out as the test set, a
+second condition is reserved for early-stopping validation, and the
+remaining 14 conditions are used for training
+(Figure~\ref{fig:logo}). The validation condition is selected from the
+remaining conditions by successive draws from
+\texttt{numpy.random.RandomState(42)} in ascending test-condition order.
+The resulting train/validation/test split is
+therefore identical for every model evaluated on a given fold. This prevents
+information leakage across samples that share the same grinding
+condition and measures whether a model generalises to previously unseen
+process states. Typical fold sizes are approximately 280 training,
+20 validation, and 20 test samples. The deterministic fold assignment is
+shown in Figure~\ref{fig:logo-matrix}. Because only one validation
+condition is used per fold, the validation loss is potentially volatile and
+sensitive to that condition's characteristics. A fixed-hyperparameter
+rotation diagnostic is reported for ResNetVibCNN and ResNetAECNN in
+Supplementary Table~\ref{tab:supp-deep-validation-rotation}: it compares
+the canonical seed-42 validation draw with a cyclic-next-condition
+validation assignment. It tests early-stopping sensitivity only; it does
+not rerun the original hyperparameter search or provide inner grouped model
+selection. Tabular models such as RF use fixed hyperparameters and do not
+rely on this early-stopping signal.
+The exact 16 assignments are listed in Supplementary
+Table~\ref{tab:supp-logo-assignments}; Figure~\ref{fig:logo-matrix} is
+generated from the same rule and archived assignment CSV.
+
+A model-selection caveat applies. The deep-learning entries were tuned
+by random search over model and training hyperparameters (with a hyperparameter search space size of approximately 20 configurations per architecture) using the same
+outer LOGO folds (the validation fold was used for early stopping and the
+test fold was used for final model selection). The tree-based models used
+fixed hyperparameters (Table~\ref{tbl:hyperparams}). This is not a fully
+nested leave-one-condition-out comparison; using the held-out test fold
+for final model selection means the deep-learning results are
+post-selection estimates rather than unbiased generalisation estimates.
+The reported differences should therefore be read as rankings under a
+fixed evaluation budget rather than as population estimates of
+generalisation error. This post-selection caveat applies to the selected
+best RF as well as to the deep-learning entries. The primary purpose of
+the benchmark is comparative evidence within this dataset, not an
+unbiased population estimate.
+
+The primary planned statistical testing is performed on the canonical seed-42 results using paired Wilcoxon signed-rank tests. However, because training sets overlap substantially across folds (each pair of training sets shares 13 out of 14 conditions), the fold MAEs are not strictly independent. This violation of the independence assumption means the resulting p-values must be interpreted as exploratory indicators of relative performance rather than strict, independent probability assessments. A secondary sensitivity analysis using five random seeds (42--46) is conducted to assess training stochasticity, as described in Section~\ref{experimental-workflow}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=89mm]{methods_logo_matrix.png}
+\caption{Leave-one-condition-out fold assignment. Rows correspond to the
+16 LOGO folds; columns correspond to the 16 grinding conditions. In each
+fold the test condition is red, the validation condition is orange, and
+the 14 training conditions are blue.}
+\label{fig:logo-matrix}
+\end{figure}
+
+\begin{figure}
+\centering
+\input{tikz/logo_scheme}
+\caption{Leave-one-condition-out cross-validation, illustrated with
+canonical fold 1 (Condition 1 test; Condition 8 validation). Each of the 16
+conditions is used once as the test fold (red); a different condition
+serves as the validation fold (orange); the remaining 14 conditions are
+used for training (blue). Per-fold performance is summarised by MAE, and
+the 16 per-fold MAEs are aggregated as mean~$\pm$~std. Pairwise model
+comparisons use the Wilcoxon signed-rank test with Holm-Bonferroni
+correction.}
+\label{fig:logo}
+\end{figure}
+
+The primary metric is mean absolute error (MAE) in micrometres:
+\begin{equation}
+\mathrm{MAE} = \frac{1}{N}\sum_{i=1}^{N} |y_i - \hat{y}_i|.
+\label{eq:mae}
+\end{equation}
+We report mean~$\pm$~standard deviation of MAE across the 16 folds.
+Bootstrap 95\% confidence intervals are computed with $B=1000$
+replicates on the per-fold MAEs using the percentile method. Pairwise
+comparisons use the two-sided Wilcoxon signed-rank test paired by LOGO
+fold, with Holm-Bonferroni correction at family-wise error rate
+$\alpha=0.05$. This statistical workflow is shown in
+Figure~\ref{fig:statistical-workflow}.
+The implementation uses \texttt{scipy.stats.wilcoxon} with
+\texttt{zero\_method='zsplit'}; tied absolute differences receive average
+ranks. Hodges--Lehmann intervals use 5,000 percentile bootstrap resamples
+of the 16 paired fold differences with random seed 42. The point estimate
+is the median of all Walsh averages $\{(d_i+d_j)/2:i\leq j\}$ of the
+paired differences. These intervals are unadjusted descriptive intervals;
+multiplicity correction applies only to the Wilcoxon $p$-values. Rank-biserial
+correlation is the signed-rank sum divided by the total rank sum after
+removing zero differences. No exact zero paired differences occur in the
+reported 14 comparisons, so this removal does not create a discrepancy with
+the Wilcoxon zero-handling rule.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=1.6cm,
+  box/.style={pub/representation, minimum width=3.2cm, minimum height=0.9cm},
+  arrow/.style={pub/arrow}
+]
+\node[box] (mae) {16 per-fold MAEs\\for each model};
+\node[box, right=of mae] (boot) {Bootstrap\\$B=1000$ replicates\\(percentile CI)};
+\node[box, below=of mae] (pair) {Pair by fold\\Wilcoxon signed-rank};
+\node[box, below=of pair] (holm) {Holm--Bonferroni\\correction};
+\node[box, right=of holm] (decide) {Reject/retain\\at $\alpha=0.05$};
+\draw[arrow] (mae) -- (boot);
+\draw[arrow] (mae) -- (pair);
+\draw[arrow] (pair) -- (holm);
+\draw[arrow] (holm) -- (decide);
+\end{tikzpicture}
+\caption{Statistical comparison workflow. Per-fold MAEs are used both to
+build bootstrap confidence intervals and to perform paired Wilcoxon tests;
+$p$-values are adjusted with Holm--Bonferroni correction.}
+\label{fig:statistical-workflow}
+\end{figure}
+
+\subsection{Explainability and uncertainty}\label{explainability-and-uncertainty}
+
+To assess whether the predictions can be audited, selected top models
+are analysed using coefficient-, SHAP-, Grad-CAM-, and uncertainty-based
+diagnostics.
+
+\textbf{Model-attribution analyses.}
+Ridge regression yields a signed coefficient for every frequency bin,
+providing a global linear attribution; Figure~\ref{fig:xai-methods}a
+shows the coefficient magnitudes for \texttt{vib\_spec}, which
+concentrate in the low-frequency chatter and structural bands. TreeSHAP is applied to both (i)~the LightGBM model trained on
+\texttt{ae\_spec+vib\_spec} as a representative tree-based model, and
+(ii)~the recommended random forest trained on fused AE and vibration
+dB-z descriptors (\texttt{AE-dB-z + Vib-dB-z}). For the
+LightGBM model the training set is used as the background distribution
+with exact TreeSHAP computations; for the random forest we use the
+path-dependent TreeSHAP approximation. The LightGBM vibration profile
+contains a sparse high-importance bin near 22~kHz. This lies in a
+structural-frequency region, but neither a specific grinding mechanism nor
+sensor/fixture resonance can be separated from the present data
+(Figure~\ref{fig:xai-methods}b). The full ranked
+SHAP importance for the LightGBM model is shown in Figure~\ref{fig:xai},
+and the pooled out-of-fold SHAP profile for the current 14-condition RF/dB-z
+pipeline is shown in Supplementary Figure~\ref{fig:supp-shap-rf}. It shows
+AE importance above approximately
+300~kHz and dominant vibration importance between approximately 16 and
+24~kHz, with the largest pooled bin near 16.2~kHz. The profiles share a broad separation between
+higher-frequency AE information and structural-frequency vibration
+information, but their dominant bins differ by model and representation.
+For each TreeSHAP analysis, feature importance is first defined as the mean
+absolute SHAP value over the sampled explanatory passes. It is then averaged
+over STFT time frames, retained separately by AE plane or vibration axis,
+and summed within each reported physical-frequency band. Each modality and
+explainer is normalised independently to 100\% only after this pooling.
+The flattened arrays use NumPy C order. Within a modality, flattened feature
+index $k=((cF)+f)T+t$ maps to channel/plane $c$, frequency bin $f$, and time
+frame $t$; the vibration block begins after the $2\times300\times47$ AE
+features. Physical frequency is $f f_s/N_{\rm FFT}$. This mapping is used by
+both the plotted profiles and the archived per-frequency CSV files.
+The attribution protocols are distinct. First, LightGBM uses a global
+explanatory refit with 30 background and 50 explained passes as an
+illustrative exact-tree explanation. Second, the RF analysis refits the
+reproducible current 14-condition RF/dB-z pipeline in each LOGO fold and
+explains only that fold's held-out condition using path-dependent TreeSHAP;
+fold-specific profiles are pooled only after out-of-fold explanation. It
+therefore explains the current RF predictions, not the historical canonical
+0.0200~\(\upmu\)m artifact. Third, ResNetVibCNN uses Grad-CAM as described
+below. No global RF explanation is used for the reported RF frequency profile.
+
+For the deep-learning baseline ResNetVibCNN, Grad-CAM is computed on the
+last convolutional layer to visualise the spectrogram regions that drive
+predictions. The aggregated Grad-CAM frequency profile highlights chatter
+and structural frequencies below 15~kHz, with additional high-frequency
+vibration sensitivity above 15~kHz that may reflect wheel--spindle
+structural response or high-frequency vibration modes. Because the input
+is vibration, this high-frequency sensitivity should not be interpreted as
+acoustic-emission energy (Figure~\ref{fig:xai-methods}c).
+For Grad-CAM, the absolute activation map is averaged over all analysed
+passes after bilinear interpolation from the final convolutional map to the
+original \(257\times13\) vibration-STFT grid, then averaged over time frames
+to produce the frequency profile. Thus CSV frequency bin \(k\) maps to
+\(k\times 51{,}200/512\)~Hz. Interpolation supplies a common display grid;
+the saliency still represents the receptive fields of the pooled
+convolutional features rather than an isolated original-STFT bin.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{methods_xai_comparison.png}
+\caption{Explainability methods applied to real grinding data. (a)~Ridge
+regression coefficient magnitudes for Vib-dB. (b)~TreeSHAP
+mean $|\text{SHAP}|$ for LightGBM on Vib-dB.
+(c)~Grad-CAM frequency importance for ResNetVibCNN on Vib-dB.
+Shaded bands mark low-frequency structural modes (green) and
+higher-frequency vibration/chatter regions (blue).}
+\label{fig:xai-methods}
+\end{figure}
+
+\textbf{Physics-consistency checks.}
+Important bins are mapped to physical frequencies. For AE spectrograms
+the bin spacing is approximately $6.69$~kHz/bin; for vibration
+spectrograms it is approximately $100$~Hz/bin. A bin is considered
+consistent with a known grinding mechanism if its centre frequency lies
+within $\pm$10\% of an expected peak frequency for that mechanism; the
+tolerance is intended only for narrow peak matching, whereas broad bands
+such as 2--15~kHz are interpreted qualitatively. The band edges are
+approximate and the tolerance is applied to the centre frequency rather
+than to the band edges. In this study the expected bands are approximated
+as: spindle rigid-body motion and low-order spindle drift below 500~Hz;
+chatter and structural vibration roughly 2--15~kHz; and grain-contact
+acoustic emission above 100~kHz, with the historically reported
+100~kHz--1~MHz nominal band used only as a cautious reporting convention.
+Figure~\ref{fig:bandmass} shows how the total attribution
+mass is distributed across physical frequency bands for the three
+explainers; the mass is concentrated in frequency regions that are
+physically plausible for grinding dynamics.
+
+\textbf{Uncertainty quantification.}
+MC-dropout with 50 stochastic forward passes is used to quantify
+predictive uncertainty for ResNetVibCNN on Vib-dB. All 16
+uncertainty-analysis LOGO checkpoints are loaded without retraining,
+substitution, or non-strict state-dictionary matching. Deterministic and
+stochastic predictions are recomputed from each same checkpoint in one run.
+These checkpoints give a deterministic mean fold MAE of 0.0443~\(\upmu\)m
+and are not the distinct canonical 0.0268~\(\upmu\)m result artifact.
+Dropout layers remain active at test time while
+batch-normalisation layers are kept in evaluation mode so that small test
+batches do not shift the population statistics. All dropout layers in the
+network are activated for the stochastic passes, so the stochastic-forward
+mean is treated as an uncertainty diagnostic and not as a recalibrated
+deterministic predictor. The mean and variance of the 50 outputs form the
+point prediction and the epistemic standard deviation, respectively. The
+reported 95\% interval is computed as
+\(\hat y \pm 1.96\,\sigma_{\text{MC}}\) and should be interpreted as an
+illustrative epistemic interval rather than a calibrated predictive
+interval including aleatoric uncertainty. The MC-dropout analysis is
+evaluated under the same 16-fold LOGO protocol used for accuracy, so
+every condition---including Condition~7---appears as a held-out test set
+once. Figure~\ref{fig:uncertainty-methods} shows the resulting prediction
+intervals sorted by predicted mean, a reliability diagram relating
+predicted standard deviation to observed absolute error, and the
+empirical coverage within each uncertainty bin. Across all 319 held-out
+samples the aggregate coverage is 50.2\%, the mean interval width is
+0.0479~\(\upmu\)m, the mean absolute error of the stochastic-mean prediction
+is 0.0452~\(\upmu\)m, and the Pearson correlation between predicted standard
+deviation and observed absolute error is 0.488. Although predicted
+standard deviation is therefore correlated with absolute error, the
+intervals remain far below the nominal 95\% level; MC-dropout does not
+provide a calibrated predictive interval for this CNN. Condition~7 has
+0\% coverage. A smaller 59-sample subset (Conditions 1, 2, and 6)
+previously gave 100\% coverage but with a wider mean width
+(0.073~\(\upmu\)m versus 0.0479~\(\upmu\)m under full LOGO), showing that the
+apparent calibration of MC-dropout is highly sensitive to which conditions
+are included.
+Figure~\ref{fig:uncertainty-calibration} shows the per-sample
+relationship between predicted standard deviation and observed absolute
+error for the full LOGO evaluation.
+
+For a separate 15-condition RF uncertainty variant, intervals are computed as
+\(\hat y \pm c \, \sigma_{\text{tree}}\), where
+\(\sigma_{\text{tree}}\) is the standard deviation of the individual
+tree predictions. Within outer fold \(g\), let \(\bar y_i^{\rm OOB}\) and
+\(s_i^{\rm OOB}\) be the mean and standard deviation over trees for which
+training sample \(i\) is out of bag. The global factor is
+\[
+c_g=Q_{0.95}\left\{\frac{|y_i-\bar y_i^{\rm OOB}|}
+{s_i^{\rm OOB}+10^{-8}}:i\in\mathcal T_g\right\},
+\]
+where \(Q_{0.95}\) is NumPy's default linear empirical quantile. The
+condition-aware variant uses the same score restricted to samples from the
+three Euclidean-nearest training conditions after min--max normalisation of
+wheel speed, workpiece speed, and depth. The split variant removes the
+single nearest condition from model fitting and applies the same scaled-score
+quantile on that calibration condition. The naive variant uses
+\(Q_{0.95}(|y_i-\bar y_i^{\rm OOB}|)\) directly, without tree-variance
+scaling. Zero tree standard deviations are stabilised by \(10^{-8}\), and
+all fitting, neighbour selection, and calibration are repeated independently
+inside each outer fold. These are diagnostic post-hoc intervals, not formal
+finite-sample conformal guarantees or intervals for the current 14-condition
+benchmark RF.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{methods_uncertainty_overview.png}
+\caption{Full 16-fold LOGO MC-dropout uncertainty for ResNetVibCNN on
+Vib-dB. (a)~Nominal 95\% MC-dropout epistemic intervals and observed $R_a$
+sorted by predicted mean. (b)~Reliability diagram: mean predicted
+standard deviation versus mean observed absolute error per bin.
+(c)~Empirical coverage per uncertainty bin against the nominal 95\%
+level. Aggregate coverage is 50.2\% and mean interval width is
+0.0479~\(\upmu\)m, indicating that MC-dropout is under-covering on this
+CNN; the intervals are correlated with error but are not calibrated.}
+\label{fig:uncertainty-methods}
+\end{figure}
+
+\subsection{Experimental workflow}\label{experimental-workflow}
+
+The study follows a four-stage workflow: (1)~preprocessing of raw AE and
+vibration signals and caching of all candidate representations; (2)~LOGO
+training and evaluation of every model--configuration pair under the
+same protocol; (3)~ranking, bootstrap confidence intervals, and
+statistical testing; and (4)~post-hoc explainability and uncertainty
+analysis of the top-performing systems. A high-level overview of the
+pipeline is shown in Figure~\ref{fig:workflow}.
+
+Because the 16 LOGO folds are deterministic and exhaustive over the
+available grinding conditions, repeating the outer cross-validation would
+not create new validation evidence. The historical planned comparison uses
+the canonical seed-42 results and the pre-defined 14-comparison
+Holm-corrected testing family.  To quantify training stochasticity, a
+secondary sensitivity analysis trained the main stochastic architectures
+(ResNetVibCNN, TrajectoryCNN, ResNetAECNN, ChannelAttentionCNN, ResNetFusion, BilinearFusionNetwork, and
+the recommended random forest) under the same 16 outer LOGO folds with
+five different random seeds. In every outer fold, the repeated RF excludes
+the same canonical validation condition as the neural models and therefore
+uses the same 14-condition training-data budget. The earlier 15-condition RF
+repeat is retained only as a deployment-style sensitivity and is excluded
+from the paired model-family tests. The reported seed-averaged MAE is the mean
+over these five seeds; seed-level overall MAEs are given in
+Supplementary Table~\ref{tab:supp-seed-level}.  For the sensitivity
+analysis, per-condition MAEs were first averaged over seeds, preserving
+the 16 condition-level paired observations; the 16 condition-level values
+were not inflated by treating folds and seeds as independent samples.
+This seed-repeat analysis provides a robustness check for training
+stochasticity and is not treated as the primary inferential comparison.
+
+The historical shallow-MLP baseline used scikit-learn's internal random
+10\% validation fraction and is therefore an implementation-specific member
+of the archived 14-comparison family. A corrected sensitivity uses the same
+designated whole validation condition as the other models, standardises inputs
+and targets from the 14-condition fitting subset only, disables the internal
+random validation split, and selects among three training-only
+architecture/regularisation settings. This corrected run is reported as a
+separate sensitivity rather than substituted into the historical family.
+
+\begin{figure}[htbp]
+\centering
+\input{tikz/workflow_schematic}
+\caption{End-to-end experimental workflow. Raw AE and vibration signals
+are converted into physics-aware representations, optionally combined
+with process parameters and physics-informed features, and evaluated by
+auditable classical or deep-learning models under the unified LOGO protocol. The
+two AE spectrogram planes map to the physical narrowband and broadband raw
+AE columns; their analogue filter specifications and gains were not
+archived. The full 27-model, 38-input inventory is given in the
+Supplementary Materials.}
+\label{fig:workflow}
+\end{figure}
+
+Software versions used for the experiments are Python 3.11, NumPy 1.26,
+SciPy 1.14, scikit-learn 1.5, LightGBM 4.5, XGBoost 2.1, PyTorch 2.4,
+Kymatio 0.3.0, and SHAP 0.51.0.
+
+\subsection{Configuration abbreviations}\label{sec:config-abbreviations}
+
+Table~\ref{tbl:config-abbreviations} lists the short labels used for
+input configurations in the Results tables and figures. The labels follow
+the convention \texttt{modality--representation} (e.g.~AE-dB-z for the
+acoustic-emission per-sample-standardised dB spectrogram), with fused inputs joined by a plus
+sign and auxiliary feature groups (physics-informed features, process
+parameters) indicated by \texttt{phys} and \texttt{PP}.
+
+\begin{table}[htbp]
+\centering
+\caption{Abbreviations for model input configurations used in the
+Results section.}\label{tbl:config-abbreviations}
+\begin{tabular}[]{@{}ll@{}}
+\toprule
+Abbreviation & Full configuration \\
+\midrule
+AE-dB-z & AE per-sample-standardised dB spectrogram \\
+Vib-dB-z & Vibration per-sample-standardised dB spectrogram \\
+AE-dB-z + Vib-dB-z & Pass-level fused AE and vibration dB-z descriptors \\
+AE-dB-z + Vib-dB-z + PP & Pass-level fused dB-z descriptors + process parameters \\
+AE-log-mel & AE log-mel spectrogram \\
+Vib-log-mel & Vibration log-mel spectrogram \\
+AE-log-mel + Vib-log-mel & Pass-level fused AE and vibration log-mel descriptors \\
+AE-log-mel + Vib-log-mel + PP & Pass-level fused log-mel descriptors + process parameters \\
+AE-dB & AE dB spectrogram \\
+Vib-dB & Vibration dB spectrogram \\
+AE-dB + Vib-dB & Pass-level fused AE and vibration dB descriptors \\
+AE-dB + Vib-dB + PP & Pass-level fused dB descriptors + process parameters \\
+AE-dB + Vib-dB + phys & Pass-level fused dB descriptors + physics-informed features \\
+AE-dB + Vib-dB + phys + PP & Pass-level fused dB descriptors + physics + process parameters \\
+Vib-WST & Vibration wavelet scattering transform \\
+Vib-traj & Vibration trajectory/image representation \\
+AE/Vib feats + phys + PP & AE and vibration hand-crafted features + physics + process parameters \\
+Process params & Process parameters only \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In internal file names and cached feature files the full-resolution
+dB-z descriptors are labelled \texttt{ae\_logspec} and
+\texttt{vib\_logspec}, which correspond one-to-one to the AE-dB-z and
+Vib-dB-z labels used here and in the result tables. The 64-bin log-mel
+representations are stored as \texttt{ae\_mel} and \texttt{vib\_mel}.

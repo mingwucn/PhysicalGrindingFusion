@@ -1,0 +1,5 @@
+model,config,rotation,mean_mae,fold_sd,mean_selected_epochs
+ResNetAECNN,ae_spec,canonical_seed42,0.04396586699294858,0.06604330009345924,22.625
+ResNetAECNN,ae_spec,cyclic_next,0.043522381281945854,0.0686438387296626,23.6875
+ResNetVibCNN,vib_spec,canonical_seed42,0.03930114343529567,0.05190145558808979,29.75
+ResNetVibCNN,vib_spec,cyclic_next,0.04714135592803359,0.06745473572851365,23.8125

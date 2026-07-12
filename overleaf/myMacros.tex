@@ -1,0 +1,148 @@
+\usepackage[author={Ming Wu},date=date{},icon=Note,color=yellow]{pdfcomment}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{textcomp,mathcomp,upgreek,outlines,physics}
+\usepackage[version=4]{mhchem}
+\usepackage{nicefrac,amsmath,mathtools,relsize}
+\usepackage{algorithm,algpseudocode}
+\usepackage{eqparbox,array}
+\usepackage{xcolor}
+% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{amssymb}
+% \usepackage{natbib}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs,longtable}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{hyperref}
+\usepackage{authblk}%author
+\usepackage{lipsum}
+\usepackage{lineno}
+\usepackage{filecontents}
+\linenumbers
+% \usepackage{siunitx}
+
+\newcommand{\tightlist}{}
+\newcommand{\micron}{$\mathrm{\(\upmu\)m}$ }
+
+% SVG
+% \svgsetup{inkscapeversion=1,inkscapepath=./figures/, inkscape=force, inkscapedpi=600, inkscapearea=page, inkscapeformat=pdf, inkscapelatex=false}
+\svgsetup{inkscapeversion=1,inkscapepath=./figures/, inkscapedpi=600, inkscapearea=page, inkscapelatex=false, extractformat={pdf,eps},clean=true}
+
+% PDF comments
+\pdfcommentsetup{final}
+
+
+% subsubsubsection
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\newcommand{\subsubsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+%% style
+\usepackage[left=1cm,right=1cm,top=2cm,bottom=2cm,paperwidth=20cm,paperheight=30cm]{geometry}% Easy control of page dimensions
+% paperwidth=100cm,paperheight=300cm
+\usepackage{changepage}%Alter page layout
+\usepackage[font=small,labelfont=bf]{caption} %make Figure in bold, and make the caption content small.
+
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor   = blue  %Colour of citations
+}
+
+\newcommand{\MW}[1]{\textcolor{blue}{\textbf{(MW: #1)}}}
+\newcommand{\MV}[1]{\textcolor{magenta}{\textbf{(MV: #1)}}}
+\newcommand{\MA}[1]{\textcolor{orange}{\textbf{(MA: #1)}}}
+\newcommand{\BM}[1]{\textcolor{purple}{\textbf{(BM: #1)}}}
+\newcommand{\BG}[1]{\textcolor{violet}{\textbf{(BG: #1)}}}
+
+\providecommand{\keywords}[1]
+{
+  \small
+  \textbf{\textit{Keywords---}} #1
+}
+
+\newcommand*{\matr}[1]{\mathbfit{#1}}
+\newcommand*{\tran}{^{\mkern-1.5mu\mathsf{T}}}
+\newcommand*{\conj}[1]{\overline{#1}}
+\newcommand*{\hermconj}{^{\mathsf{H}}}
+
+\newcommand*{\Register}{\textsuperscript{\tiny\textregistered}}
+
+\newcommand*{\figref}[2][]{% \figref [<sub caption>][<figure label>]
+  \hyperref[{#2}]{%
+    Fig.~\ref*{#2}%
+    \ifx\\#1\\%
+    \else
+      \,($\mathrm{#1}$)%
+    \fi
+  }%
+}
+\newcommand*{\secref}[1]{% \secref [ref]
+  \hyperref[{#1}]{%
+    Section~\ref*{#1}%
+  }%
+}
+
+\newcommand*{\refcite}[1]{
+  \hyperref[{#1}]{%
+    Ref.~\cite{#1}%
+  }%
+}
+
+\newcommand*{\apref}[1]{
+  \hyperref[{#1}]{%
+    Appendix~\ref*{#1}%
+  }%
+}
+\newcommand*{\tableref}[1]{%
+  \hyperref[{#1}]{%
+    Table~\ref*{#1}%
+  }%
+}
+\newcommand*{\equationref}[1]{%
+  \hyperref[{#1}]{%
+    Equation~\ref*{#1}%
+  }%
+}
+
+
+\newcommand*{\algoref}[1]{%
+  \hyperref[{#1}]{%
+    Algorithm~\ref*{#1}%
+  }%
+}
+
+\newcommand{\SI}[2]{${#1} \mskip3mu \mathrm{#2}$}
+
+% Algorithms
+% Comments
+\algrenewcommand{\algorithmiccomment}[1]{\hfill// \eqparbox{COMMENT\thealgorithm}{#1}}
+\algnewcommand{\LongComment}[1]{\hfill// \begin{minipage}[t]{\eqboxwidth{COMMENT\thealgorithm}}#1\strut\end{minipage}}
+% Fun and Var
+\definecolor{functionColor}{RGB}{255, 199, 6}
+\definecolor{casblue}{RGB}{0, 112, 155}
+% \newcommand{\var}[1]{\text{\texttt{#1}}}
+\newcommand{\func}[1]{\textcolor{BlueViolet}{\texttt{#1}}}
+% \newcommand{\func}[1]{\text{\textsl{#1}}}
+% ForEach
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+% Sections
+\newcounter{phase}[algorithm]
+\newlength{\phaserulewidth}
+\newcommand{\setphaserulewidth}{\setlength{\phaserulewidth}}
+\newcommand{\phase}[1]{%
+  \vspace{-1.25ex}
+  % Top phase rule
+  \Statex\leavevmode\llap{\rule{\dimexpr\labelwidth+\labelsep}{\phaserulewidth}}\rule{\linewidth}{\phaserulewidth}
+  \Statex\strut\refstepcounter{phase}\textit{Phase~\thephase~--~#1}% Phase text
+  % Bottom phase rule
+  \vspace{-1.25ex}\Statex\leavevmode\llap{\rule{\dimexpr\labelwidth+\labelsep}{\phaserulewidth}}\rule{\linewidth}{\phaserulewidth}}
+\makeatother
+\setphaserulewidth{.7pt}

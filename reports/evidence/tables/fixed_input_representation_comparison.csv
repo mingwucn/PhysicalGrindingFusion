@@ -1,0 +1,25 @@
+family,config,learner,mean_mae,std_mae
+dB,ae_spec+vib_spec,RandomForestModel,0.021205604182015253,0.043013902324292266
+dB,ae_spec+vib_spec,RidgeRegressionModel,0.024833595321979374,0.030556148763496927
+dB,ae_spec+vib_spec,LightGBMModel,0.032057997880263596,0.06312565782392159
+dB,ae_spec+vib_spec,ShallowMLPModel,1.0751383360475302,0.7528900263160481
+dB-z,ae_logspec+vib_logspec,RandomForestModel,0.020960630412459026,0.03611018471032474
+dB-z,ae_logspec+vib_logspec,RidgeRegressionModel,0.02368596149608493,0.030659008645686443
+dB-z,ae_logspec+vib_logspec,LightGBMModel,0.03258638417652313,0.06789709201466455
+dB-z,ae_logspec+vib_logspec,ShallowMLPModel,5.612065099179745,8.977495637979194
+log-mel,ae_mel+vib_mel,RandomForestModel,0.020458803154484607,0.04799692562903394
+log-mel,ae_mel+vib_mel,RidgeRegressionModel,0.03960714454296976,0.05223178971187206
+log-mel,ae_mel+vib_mel,LightGBMModel,0.028747303474130195,0.06394284367899569
+log-mel,ae_mel+vib_mel,ShallowMLPModel,9.875137871131301,35.68411720697681
+WST,ae_wst+vib_wst,RandomForestModel,0.033136747820511556,0.052977852215676774
+WST,ae_wst+vib_wst,RidgeRegressionModel,0.03290106187341735,0.03888478321695057
+WST,ae_wst+vib_wst,LightGBMModel,0.03020017976965355,0.06345663295760343
+WST,ae_wst+vib_wst,ShallowMLPModel,0.31841048691421747,0.16827234202388483
+time-domain,ae_features+vib_features,RandomForestModel,0.04925217774889135,0.06327364078946453
+time-domain,ae_features+vib_features,RidgeRegressionModel,0.045071273227222264,0.04431396133519102
+time-domain,ae_features+vib_features,LightGBMModel,0.04531058658910381,0.05772075259729398
+time-domain,ae_features+vib_features,ShallowMLPModel,0.09153221547603607,0.0680154341044354
+process parameters,pp,RandomForestModel,0.08026829222632834,0.09940804778147577
+process parameters,pp,RidgeRegressionModel,0.05914354950073175,0.06621242348123653
+process parameters,pp,LightGBMModel,0.07330355648484922,0.08566812975332491
+process parameters,pp,ShallowMLPModel,0.0964849543524906,0.08322472616190504

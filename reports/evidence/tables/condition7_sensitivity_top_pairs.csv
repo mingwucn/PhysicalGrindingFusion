@@ -1,0 +1,4 @@
+model_a,config_a,model_b,config_b,mean_diff_all,mean_diff_excl_c7,median_diff_all,median_diff_excl_c7
+RandomForestModel,ae_logspec+vib_logspec,RandomForestModel,ae_spec+vib_spec+pp,-0.000979653513818341,0.0012791921636932007,-0.0005292614044249177,-0.00020060780647217398
+RandomForestModel,ae_logspec+vib_logspec,ResNetVibCNN,vib_spec,-0.0068071372658028125,-0.004327077809062122,-0.004235610597237159,-0.003967842666281904
+RandomForestModel,ae_logspec+vib_logspec,LightGBMModel,vib_logspec,-0.0049907714585627535,-0.0035149378930381856,-0.0004986453518543016,-0.00022100214412124584

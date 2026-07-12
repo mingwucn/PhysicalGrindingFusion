@@ -1,0 +1,9 @@
+feature,mean_abs_shap
+ae_broad_skewness,0.0005787029828221111
+ae_broad_kurtosis,0.0005237946943478291
+ae_narrow_skewness,0.0005046216085950372
+ae_narrow_kurtosis,0.00042744243930850385
+ae_broad_rms,0.0004262624309182279
+ae_narrow_crest_factor,0.0003981065416773863
+ae_narrow_rms,0.000397041576931182
+ae_broad_crest_factor,0.00018262650681315917

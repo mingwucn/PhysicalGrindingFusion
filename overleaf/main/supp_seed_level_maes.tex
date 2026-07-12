@@ -1,0 +1,13 @@
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Model & Config & Seed 1 & Seed 2 & Seed 3 & Seed 4 & Seed 5 \\
+\midrule
+BilinearFusion & \texttt{AE-dB + Vib-dB + physics + PP} & 0.0445 & 0.0419 & 0.0467 & 0.0414 & 0.0492 \\
+ChannelAttentionCNN & \texttt{AE-dB} & 0.0503 & 0.0378 & 0.0480 & 0.0334 & 0.0421 \\
+RandomForest & \texttt{AE-dB-z + Vib-dB-z} & 0.0210 & 0.0205 & 0.0204 & 0.0201 & 0.0197 \\
+ResNetAECNN & \texttt{AE-dB} & 0.0380 & 0.0475 & 0.0478 & 0.0353 & 0.0428 \\
+ResNetFusion & \texttt{AE-dB + Vib-dB + physics} & 0.0369 & 0.0380 & 0.0390 & 0.0487 & 0.0459 \\
+ResNetVibCNN & \texttt{Vib-dB} & 0.0404 & 0.0283 & 0.0441 & 0.0422 & 0.0369 \\
+TrajectoryCNN & \texttt{Vib trajectory} & 0.0439 & 0.0445 & 0.0450 & 0.0452 & 0.0484 \\
+\bottomrule
+\end{tabular}

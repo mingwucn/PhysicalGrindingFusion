@@ -1,0 +1,21 @@
+learner,family,config,mean_mae,std_mae
+RandomForestModel,Log-spectrogram,ae_logspec+vib_logspec,0.0200084976130886,0.0356318907840697
+RandomForestModel,Mel spectrogram,ae_mel+vib_mel,0.0201155263654328,0.0483033585243139
+RandomForestModel,Process params,pp,0.0637600070794517,0.0826295862324129
+RandomForestModel,Spectrogram,ae_spec+vib_spec+pp,0.020988151126907,0.0424863143526617
+RandomForestModel,Time-domain features,ae_features,0.0497145760803895,0.0553263285804079
+RandomForestModel,WST,vib_wst,0.0247936710829382,0.0335901463229425
+RidgeRegressionModel,Process params,pp,0.0591435574950944,0.068383891027547
+RidgeRegressionModel,Spectrogram,ae_spec,0.024617718908274,0.0362252647634624
+RidgeRegressionModel,Time-domain features,ae_features+vib_features+pp,0.0501018883287255,0.045864411721553
+RidgeRegressionModel,WST,vib_wst,0.0310243747662752,0.0356086804286296
+LightGBMModel,Log-spectrogram,vib_logspec,0.0249992690716514,0.0469554570557082
+LightGBMModel,Mel spectrogram,vib_mel,0.0341200946280817,0.0560580869438861
+LightGBMModel,Process params,pp,0.0733035559385354,0.0884776633797326
+LightGBMModel,Spectrogram,vib_spec,0.0277206574905078,0.0535803841934101
+LightGBMModel,Time-domain features,ae_features,0.0435614461730566,0.0494997628916702
+LightGBMModel,WST,vib_wst,0.0225490321542909,0.0357516476437309
+ShallowMLPModel,Process params,pp,0.0715267907815838,0.0864884777146312
+ShallowMLPModel,Spectrogram,vib_spec,0.07163077818975,0.1036872693020088
+ShallowMLPModel,Time-domain features,ae_features+vib_features+pp,0.0495435924949369,0.0584132355923434
+ShallowMLPModel,WST,vib_wst,0.0374879827722907,0.0435554317647805

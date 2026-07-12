@@ -1,0 +1,10 @@
+runtime:
+  execution_pool:
+    default_pool_size: 3
+    default_worker_type: opencode
+  worker:
+    timeout_seconds: 1800
+  retry:
+    max_retries: 1
+    backoff_strategy: fixed
+    backoff_seconds: 5

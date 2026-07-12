@@ -1,0 +1,1136 @@
+[
+  {
+    "model": "AttentionMLP",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "AttentionMLP",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C03",
+    "effective_input": "AE features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C04",
+    "effective_input": "AE features + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C06",
+    "effective_input": "AE features + Vib features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C07",
+    "effective_input": "AE features + Vib features + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C17",
+    "effective_input": "AE-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C18",
+    "effective_input": "AE-dB + Vib-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C19",
+    "effective_input": "AE-dB + Vib-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C20",
+    "effective_input": "AE-dB + Vib-dB + physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C21",
+    "effective_input": "AE-dB + Vib-dB + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C25",
+    "effective_input": "all inputs",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C26",
+    "effective_input": "physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C30",
+    "effective_input": "Vib features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C31",
+    "effective_input": "Vib features + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "BilinearFusionNetwork",
+    "configuration_id": "C36",
+    "effective_input": "Vib-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ChannelAttentionCNN",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(in_channels: 'int' = 2, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "CrossAttentionFusion",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, query_modality: 'str' = 'physics', config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "FeatureOnlyModel",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "FeatureOnlyModel",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C03",
+    "effective_input": "AE features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C04",
+    "effective_input": "AE features + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C06",
+    "effective_input": "AE features + Vib features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C07",
+    "effective_input": "AE features + Vib features + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C17",
+    "effective_input": "AE-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C18",
+    "effective_input": "AE-dB + Vib-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C19",
+    "effective_input": "AE-dB + Vib-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C20",
+    "effective_input": "AE-dB + Vib-dB + physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C21",
+    "effective_input": "AE-dB + Vib-dB + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C25",
+    "effective_input": "all inputs",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C26",
+    "effective_input": "physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C30",
+    "effective_input": "Vib features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C31",
+    "effective_input": "Vib features + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "GraphNeuralNetworkFusion",
+    "configuration_id": "C36",
+    "effective_input": "Vib-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "HierarchicalAttentionNetwork",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 1, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C03",
+    "effective_input": "AE features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C05",
+    "effective_input": "AE features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C06",
+    "effective_input": "AE features + Vib features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C10",
+    "effective_input": "AE-dB-z",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C11",
+    "effective_input": "AE-dB-z + Vib-dB-z",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C12",
+    "effective_input": "AE-dB-z + Vib-dB-z + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C13",
+    "effective_input": "AE-log-mel",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C14",
+    "effective_input": "AE-log-mel + Vib-log-mel",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C15",
+    "effective_input": "AE-log-mel + Vib-log-mel + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C18",
+    "effective_input": "AE-dB + Vib-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C21",
+    "effective_input": "AE-dB + Vib-dB + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C30",
+    "effective_input": "Vib features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C32",
+    "effective_input": "Vib features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C33",
+    "effective_input": "Vib-dB-z",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C34",
+    "effective_input": "Vib-log-mel",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "LightGBMModel",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "MeanTrajectoryMLP",
+    "configuration_id": "C22",
+    "effective_input": "AE trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "MeanTrajectoryMLP",
+    "configuration_id": "C23",
+    "effective_input": "AE trajectory + Vib trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "MeanTrajectoryMLP",
+    "configuration_id": "C24",
+    "effective_input": "AE trajectory + Vib trajectory + PP",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "MeanTrajectoryMLP",
+    "configuration_id": "C37",
+    "effective_input": "Vib trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "MeanTrajectoryMLP",
+    "configuration_id": "C38",
+    "effective_input": "Vib trajectory + PP",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "MultiHeadAttentionFusion",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "MultiHeadAttentionFusion",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "MultiscaleSpectrogramCNN",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(in_channels: 'int' = 2, base_channels: 'int' = 16, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "Vib-dB requires effective in_channels=3; the archived override was not retained, so this artifact is not claimed as exactly reconstructable"
+  },
+  {
+    "model": "ParamsMLP",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsGuidedAttentionNetwork",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 32, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsInformedFusionNet",
+    "configuration_id": "C25",
+    "effective_input": "all inputs",
+    "constructor_defaults": "(embed_dim: 'int' = 64, num_heads: 'int' = 4, num_layers: 'int' = 2, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsMLP",
+    "configuration_id": "C03",
+    "effective_input": "AE features",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsMLP",
+    "configuration_id": "C06",
+    "effective_input": "AE features + Vib features",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsMLP",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsMLP",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsMLP",
+    "configuration_id": "C18",
+    "effective_input": "AE-dB + Vib-dB",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsMLP",
+    "configuration_id": "C21",
+    "effective_input": "AE-dB + Vib-dB + PP",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsMLP",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "PhysicsMLP",
+    "configuration_id": "C30",
+    "effective_input": "Vib features",
+    "constructor_defaults": "() -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C03",
+    "effective_input": "AE features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C05",
+    "effective_input": "AE features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C06",
+    "effective_input": "AE features + Vib features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C10",
+    "effective_input": "AE-dB-z",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C11",
+    "effective_input": "AE-dB-z + Vib-dB-z",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C12",
+    "effective_input": "AE-dB-z + Vib-dB-z + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C13",
+    "effective_input": "AE-log-mel",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C14",
+    "effective_input": "AE-log-mel + Vib-log-mel",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C15",
+    "effective_input": "AE-log-mel + Vib-log-mel + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C18",
+    "effective_input": "AE-dB + Vib-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C21",
+    "effective_input": "AE-dB + Vib-dB + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C30",
+    "effective_input": "Vib features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C32",
+    "effective_input": "Vib features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C33",
+    "effective_input": "Vib-dB-z",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C34",
+    "effective_input": "Vib-log-mel",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RandomForestModel",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetAECNN",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(dropout: 'float' = 0.3, hidden_dim: 'int' = 64) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C17",
+    "effective_input": "AE-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C18",
+    "effective_input": "AE-dB + Vib-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C19",
+    "effective_input": "AE-dB + Vib-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C20",
+    "effective_input": "AE-dB + Vib-dB + physics features + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C21",
+    "effective_input": "AE-dB + Vib-dB + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C25",
+    "effective_input": "all inputs",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetFusion",
+    "configuration_id": "C36",
+    "effective_input": "Vib-dB + physics features",
+    "constructor_defaults": "(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "ResNetVibCNN",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(dropout: 'float' = 0.3, hidden_dim: 'int' = 64) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RidgeRegressionModel",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(alpha: 'float' = 1.0, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RidgeRegressionModel",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(alpha: 'float' = 1.0, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RidgeRegressionModel",
+    "configuration_id": "C18",
+    "effective_input": "AE-dB + Vib-dB",
+    "constructor_defaults": "(alpha: 'float' = 1.0, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RidgeRegressionModel",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "(alpha: 'float' = 1.0, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "RidgeRegressionModel",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(alpha: 'float' = 1.0, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "SSLResNetVibCNN",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(modality: 'str' = 'ae', embed_dim: 'int' = 64, proj_dim: 'int' = 32, dropout: 'float' = 0.3) -> 'None'",
+    "resolution_note": "Vib-dB requires effective modality='vib'; the archived override was not retained, so this artifact is not claimed as exactly reconstructable"
+  },
+  {
+    "model": "ShallowMLPModel",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(hidden_layer_sizes: 'tuple[int, ...]' = (128, 64), alpha: 'float' = 0.0001, learning_rate_init: 'float' = 0.001, max_iter: 'int' = 500, early_stopping: 'bool' = True, validation_fraction: 'float' = 0.1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected grouped-validation sensitivity uses the designated condition, train-only input/target scaling, and no internal split"
+  },
+  {
+    "model": "ShallowMLPModel",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "(hidden_layer_sizes: 'tuple[int, ...]' = (128, 64), alpha: 'float' = 0.0001, learning_rate_init: 'float' = 0.001, max_iter: 'int' = 500, early_stopping: 'bool' = True, validation_fraction: 'float' = 0.1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected grouped-validation sensitivity uses the designated condition, train-only input/target scaling, and no internal split"
+  },
+  {
+    "model": "ShallowMLPModel",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(hidden_layer_sizes: 'tuple[int, ...]' = (128, 64), alpha: 'float' = 0.0001, learning_rate_init: 'float' = 0.001, max_iter: 'int' = 500, early_stopping: 'bool' = True, validation_fraction: 'float' = 0.1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected grouped-validation sensitivity uses the designated condition, train-only input/target scaling, and no internal split"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C03",
+    "effective_input": "AE features",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C04",
+    "effective_input": "AE features + physics features",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C05",
+    "effective_input": "AE features + PP",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C06",
+    "effective_input": "AE features + Vib features",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C07",
+    "effective_input": "AE features + Vib features + physics features",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C26",
+    "effective_input": "physics features + PP",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C30",
+    "effective_input": "Vib features",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C31",
+    "effective_input": "Vib features + physics features",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TabTransformerRegressor",
+    "configuration_id": "C32",
+    "effective_input": "Vib features + PP",
+    "constructor_defaults": "(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryAttention",
+    "configuration_id": "C22",
+    "effective_input": "AE trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 64, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryAttention",
+    "configuration_id": "C23",
+    "effective_input": "AE trajectory + Vib trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 64, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryAttention",
+    "configuration_id": "C24",
+    "effective_input": "AE trajectory + Vib trajectory + PP",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 64, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryAttention",
+    "configuration_id": "C37",
+    "effective_input": "Vib trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 64, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryAttention",
+    "configuration_id": "C38",
+    "effective_input": "Vib trajectory + PP",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 64, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryCNN",
+    "configuration_id": "C22",
+    "effective_input": "AE trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, channels: 'list[int] | None' = None, kernel_size: 'int' = 5, dropout: 'float' = 0.5, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryCNN",
+    "configuration_id": "C23",
+    "effective_input": "AE trajectory + Vib trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, channels: 'list[int] | None' = None, kernel_size: 'int' = 5, dropout: 'float' = 0.5, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryCNN",
+    "configuration_id": "C24",
+    "effective_input": "AE trajectory + Vib trajectory + PP",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, channels: 'list[int] | None' = None, kernel_size: 'int' = 5, dropout: 'float' = 0.5, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryCNN",
+    "configuration_id": "C37",
+    "effective_input": "Vib trajectory",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, channels: 'list[int] | None' = None, kernel_size: 'int' = 5, dropout: 'float' = 0.5, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TrajectoryCNN",
+    "configuration_id": "C38",
+    "effective_input": "Vib trajectory + PP",
+    "constructor_defaults": "(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, channels: 'list[int] | None' = None, kernel_size: 'int' = 5, dropout: 'float' = 0.5, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TransferFeatureMLP",
+    "configuration_id": "C01",
+    "effective_input": "AE embedding + Vib embedding",
+    "constructor_defaults": "(embed_dim: 'int' = 512, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TransferFeatureMLP",
+    "configuration_id": "C02",
+    "effective_input": "AE embedding + Vib embedding + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 512, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TransferFeatureMLP",
+    "configuration_id": "C28",
+    "effective_input": "Vib embedding",
+    "constructor_defaults": "(embed_dim: 'int' = 512, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "TransferFeatureMLP",
+    "configuration_id": "C29",
+    "effective_input": "Vib embedding + PP",
+    "constructor_defaults": "(embed_dim: 'int' = 512, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C03",
+    "effective_input": "AE features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C05",
+    "effective_input": "AE features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C06",
+    "effective_input": "AE features + Vib features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C08",
+    "effective_input": "AE features + Vib features + physics features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C09",
+    "effective_input": "AE features + Vib features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C16",
+    "effective_input": "AE-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C18",
+    "effective_input": "AE-dB + Vib-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C21",
+    "effective_input": "AE-dB + Vib-dB + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C27",
+    "effective_input": "PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C30",
+    "effective_input": "Vib features",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C32",
+    "effective_input": "Vib features + PP",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  },
+  {
+    "model": "XGBoostModel",
+    "configuration_id": "C35",
+    "effective_input": "Vib-dB",
+    "constructor_defaults": "(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
+    "resolution_note": "constructor defaults used by the archived runner"
+  }
+]

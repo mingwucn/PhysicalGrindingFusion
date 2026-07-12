@@ -1,0 +1,2 @@
+model,config,n_samples,coverage_95,mean_interval_width,median_interval_width,mean_abs_error,correlation_std_mae
+ResNetAECNN,ae_spec,319,0.567398119122257,0.04186904430389404,0.03177361190319061,0.03510722145438194,-0.10048078860621402

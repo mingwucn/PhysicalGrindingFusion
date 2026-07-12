@@ -1,0 +1,7 @@
+model,config,rss_before_model_mb,rss_after_warmup_mb,resident_delta_mb,protocol
+RandomForestModel,ae_logspec+vib_logspec,722.98046875,728.87890625,5.8984375,fresh process; cached inputs loaded before baseline; model loaded and warmed once
+RandomForestModel,ae_spec+vib_spec,723.6953125,728.9609375,5.265625,fresh process; cached inputs loaded before baseline; model loaded and warmed once
+LightGBMModel,vib_logspec,722.76171875,730.0,7.23828125,fresh process; cached inputs loaded before baseline; model loaded and warmed once
+ResNetVibCNN,vib_spec,722.6328125,738.02734375,15.39453125,fresh process; cached inputs loaded before baseline; model loaded and warmed once
+ResNetAECNN,ae_spec,723.69921875,737.53125,13.83203125,fresh process; cached inputs loaded before baseline; model loaded and warmed once
+BilinearFusionNetwork,ae_spec+vib_spec+physics+pp,724.2109375,744.4453125,20.234375,fresh process; cached inputs loaded before baseline; model loaded and warmed once

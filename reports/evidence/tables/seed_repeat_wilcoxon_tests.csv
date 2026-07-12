@@ -1,0 +1,7 @@
+model_a,config_a,model_b,config_b,n_conditions,mean_mae_a,mean_mae_b,wilcoxon_statistic,pvalue_raw,pvalue_holm,significant_05
+RandomForestModel,ae_logspec+vib_logspec,BilinearFusionNetwork,ae_spec+vib_spec+physics+pp,16,0.020309610054810304,0.044731348537607116,4.0,0.000213623046875,0.00042724609375,True
+RandomForestModel,ae_logspec+vib_logspec,ChannelAttentionCNN,ae_spec,16,0.020309610054810304,0.042332296376116574,0.0,3.0517578125e-05,0.00018310546875,True
+RandomForestModel,ae_logspec+vib_logspec,ResNetAECNN,ae_spec,16,0.020309610054810304,0.0422882872982882,2.0,9.1552734375e-05,0.000274658203125,True
+RandomForestModel,ae_logspec+vib_logspec,ResNetFusion,ae_spec+vib_spec+physics,16,0.020309610054810304,0.0416941380884964,0.0,3.0517578125e-05,0.00018310546875,True
+RandomForestModel,ae_logspec+vib_logspec,ResNetVibCNN,vib_spec,16,0.020309610054810304,0.03837456323090009,1.0,6.103515625e-05,0.000244140625,True
+RandomForestModel,ae_logspec+vib_logspec,TrajectoryCNN,vib_trajectory,16,0.020309610054810304,0.0450138687738217,13.0,0.002685546875,0.002685546875,True

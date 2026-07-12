@@ -1,0 +1,16 @@
+feature,mean_abs_shap
+vib_x_skewness,0.020677337
+vib_x_rms,0.014970135
+vib_y_crest_factor,0.014536408
+vib_z_crest_factor,0.012572503
+vib_x_crest_factor,0.0063890824
+vib_x_kurtosis,0.003962883
+workpiece_speed,0.0033869846
+vib_y_kurtosis,0.0016533153
+grinding_depth,0.0013195534
+vib_z_skewness,0.0011145253
+vib_y_skewness,0.0006999912
+vib_y_rms,0.00068444817
+vib_z_rms,0.00059755717
+vib_z_kurtosis,0.00036787672
+wheel_speed,0.00031905336

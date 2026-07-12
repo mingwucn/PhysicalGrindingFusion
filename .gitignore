@@ -1,0 +1,13 @@
+data/
+checkpoints/
+logs/
+*.npz
+*.npy
+*.pt
+*.pth
+*.pkl
+__pycache__/
+.pytest_cache/
+*.aux
+*.log
+*.out

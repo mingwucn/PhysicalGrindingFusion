@@ -1,0 +1,14 @@
+\begin{table}[htbp]
+\centering
+\caption{Evaluation-time frequency-band masking for the 15-condition robustness RF under 16-fold LOGO. Only the test condition is excluded; this is not an exact ablation of the 14-condition current benchmark RF.}\label{tab:frequency-ablation}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Input & MAE ($\upmu$m) \\
+\midrule
+Full AE + Vib & 0.0202 \\
+AE \textgreater 1~MHz removed & 0.0203 \\
+Vib 2--15~kHz removed & 0.0202 \\
+Both removed & 0.0208 \\
+\bottomrule
+\end{tabular}
+\end{table}

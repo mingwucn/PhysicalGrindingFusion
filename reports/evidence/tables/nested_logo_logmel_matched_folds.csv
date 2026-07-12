@@ -1,0 +1,17 @@
+model,config,fold,test_condition,best_hparams,inner_val_mae,outer_test_mae
+RandomForestModel,ae_mel+vib_mel,0,1,"{""n_estimators"": 200, ""max_depth"": 8, ""random_state"": 42, ""n_jobs"": 2}",0.0312511889763441,0.0050868847173205
+RandomForestModel,ae_mel+vib_mel,1,2,"{""n_estimators"": 100, ""max_depth"": 10, ""random_state"": 42, ""n_jobs"": 2}",0.0276146830196891,0.0051046717842258
+RandomForestModel,ae_mel+vib_mel,2,3,"{""n_estimators"": 200, ""max_depth"": null, ""random_state"": 42, ""n_jobs"": 2}",0.0216220367425052,0.009071249730885
+RandomForestModel,ae_mel+vib_mel,3,4,"{""n_estimators"": 100, ""max_depth"": 10, ""random_state"": 42, ""n_jobs"": 2}",0.0211307536551317,0.0117435923655468
+RandomForestModel,ae_mel+vib_mel,4,5,"{""n_estimators"": 100, ""max_depth"": null, ""random_state"": 42, ""n_jobs"": 2}",0.019788880595146,0.0047730997279286
+RandomForestModel,ae_mel+vib_mel,5,6,"{""n_estimators"": 200, ""max_depth"": null, ""random_state"": 42, ""n_jobs"": 2}",0.0212870533837068,0.00841124862805
+RandomForestModel,ae_mel+vib_mel,6,7,"{""n_estimators"": 200, ""max_depth"": null, ""random_state"": 42, ""n_jobs"": 2}",0.021270088451323,0.206074998697266
+RandomForestModel,ae_mel+vib_mel,7,8,"{""n_estimators"": 100, ""max_depth"": null, ""random_state"": 42, ""n_jobs"": 2}",0.0282303696711774,0.0129534040801227
+RandomForestModel,ae_mel+vib_mel,8,9,"{""n_estimators"": 100, ""max_depth"": 10, ""random_state"": 42, ""n_jobs"": 2}",0.0164414100064383,0.0115031431406749
+RandomForestModel,ae_mel+vib_mel,9,10,"{""n_estimators"": 100, ""max_depth"": 10, ""random_state"": 42, ""n_jobs"": 2}",0.0265172100132564,0.0094184897867283
+RandomForestModel,ae_mel+vib_mel,10,11,"{""n_estimators"": 200, ""max_depth"": null, ""random_state"": 42, ""n_jobs"": 2}",0.0220277388690849,0.0051870004944503
+RandomForestModel,ae_mel+vib_mel,11,12,"{""n_estimators"": 100, ""max_depth"": 10, ""random_state"": 42, ""n_jobs"": 2}",0.016009352648739,0.0107770772875178
+RandomForestModel,ae_mel+vib_mel,12,13,"{""n_estimators"": 100, ""max_depth"": 10, ""random_state"": 42, ""n_jobs"": 2}",0.0271527163010545,0.0062063945007329
+RandomForestModel,ae_mel+vib_mel,13,14,"{""n_estimators"": 100, ""max_depth"": 10, ""random_state"": 42, ""n_jobs"": 2}",0.0258821436326026,0.0057289139075787
+RandomForestModel,ae_mel+vib_mel,14,15,"{""n_estimators"": 200, ""max_depth"": null, ""random_state"": 42, ""n_jobs"": 2}",0.0299289158278507,0.0102197503186762
+RandomForestModel,ae_mel+vib_mel,15,16,"{""n_estimators"": 100, ""max_depth"": 10, ""random_state"": 42, ""n_jobs"": 2}",0.0207270960889615,0.0073972002335665

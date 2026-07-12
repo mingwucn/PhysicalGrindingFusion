@@ -1,0 +1,4 @@
+variant,mean_mae,fold_sd,maximum_fold_mae,mean_difference_vs_full,protocol,difference_ci95_low,difference_ci95_high
+Full dB-z recomputed from dB,0.0209259637184736,0.0360151988677526,0.1474910308027087,0.0,band deleted from dB cache before per-sample/per-channel z-score; RF refitted on 14 conditions,0.0,0.0
+Remove Vib >15 kHz before z-score,0.025472401198419,0.0459160331900466,0.1909757563577893,0.0045464374799453,band deleted from dB cache before per-sample/per-channel z-score; RF refitted on 14 conditions,0.0006291022576918601,0.010661821561074581
+Remove Vib 16--24 kHz before z-score,0.0253912685383615,0.0434967224917989,0.1854485058792616,0.0044653048198878,band deleted from dB cache before per-sample/per-channel z-score; RF refitted on 14 conditions,-0.0003491360701050359,0.010500836326595014

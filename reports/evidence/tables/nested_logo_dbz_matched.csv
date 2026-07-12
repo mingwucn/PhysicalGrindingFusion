@@ -1,0 +1,2 @@
+model,config,mean_mae,std_mae,n_folds
+RandomForestModel,ae_logspec+vib_logspec,0.020683856688833574,0.034697113131764816,16

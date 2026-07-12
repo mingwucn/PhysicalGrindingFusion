@@ -1,0 +1,49 @@
+variant,condition,mae
+Full dB-z recomputed from dB,1,0.0053934019602681
+Full dB-z recomputed from dB,2,0.003178289829746669
+Full dB-z recomputed from dB,3,0.009751132757609023
+Full dB-z recomputed from dB,4,0.008327656779758882
+Full dB-z recomputed from dB,5,0.003261964123684704
+Full dB-z recomputed from dB,6,0.006007580057216624
+Full dB-z recomputed from dB,7,0.14749103080270873
+Full dB-z recomputed from dB,8,0.06960776469511647
+Full dB-z recomputed from dB,9,0.008888036094555424
+Full dB-z recomputed from dB,10,0.011234087369051885
+Full dB-z recomputed from dB,11,0.008218317952179718
+Full dB-z recomputed from dB,12,0.009588320525957181
+Full dB-z recomputed from dB,13,0.012356408024997309
+Full dB-z recomputed from dB,14,0.016392572056090814
+Full dB-z recomputed from dB,15,0.009826711787723826
+Full dB-z recomputed from dB,16,0.005292144678913701
+Remove Vib >15 kHz before z-score,1,0.005060251885334055
+Remove Vib >15 kHz before z-score,2,0.0028081277219881725
+Remove Vib >15 kHz before z-score,3,0.009844062692405026
+Remove Vib >15 kHz before z-score,4,0.007059799467650863
+Remove Vib >15 kHz before z-score,5,0.004583525829554444
+Remove Vib >15 kHz before z-score,6,0.008325158598110036
+Remove Vib >15 kHz before z-score,7,0.19097575635778932
+Remove Vib >15 kHz before z-score,8,0.07473324472783413
+Remove Vib >15 kHz before z-score,9,0.011817058186411562
+Remove Vib >15 kHz before z-score,10,0.016034413991886383
+Remove Vib >15 kHz before z-score,11,0.007790590791921545
+Remove Vib >15 kHz before z-score,12,0.011609793776008879
+Remove Vib >15 kHz before z-score,13,0.01232864948752899
+Remove Vib >15 kHz before z-score,14,0.030698019773618197
+Remove Vib >15 kHz before z-score,15,0.00828611950992687
+Remove Vib >15 kHz before z-score,16,0.005603846376735942
+Remove Vib 16--24 kHz before z-score,1,0.005298101166879268
+Remove Vib 16--24 kHz before z-score,2,0.0027585169280579585
+Remove Vib 16--24 kHz before z-score,3,0.009555993683445011
+Remove Vib 16--24 kHz before z-score,4,0.021745155102353964
+Remove Vib 16--24 kHz before z-score,5,0.003452838511638184
+Remove Vib 16--24 kHz before z-score,6,0.006536511077107105
+Remove Vib 16--24 kHz before z-score,7,0.18544850587926165
+Remove Vib 16--24 kHz before z-score,8,0.05648454465826146
+Remove Vib 16--24 kHz before z-score,9,0.015918030868416623
+Remove Vib 16--24 kHz before z-score,10,0.015785239759152477
+Remove Vib 16--24 kHz before z-score,11,0.00681302863747342
+Remove Vib 16--24 kHz before z-score,12,0.012227107573054629
+Remove Vib 16--24 kHz before z-score,13,0.012438470539182081
+Remove Vib 16--24 kHz before z-score,14,0.03719296210199733
+Remove Vib 16--24 kHz before z-score,15,0.009250419826480293
+Remove Vib 16--24 kHz before z-score,16,0.005354870301023059

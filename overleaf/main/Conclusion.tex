@@ -1,0 +1,75 @@
+\section{Conclusion}\label{conclusion}
+
+We present a broad model--representation LOGO benchmark showing that regularised linear models and auditable tree ensembles
+using physics-motivated signal representations achieve competitive and often lower
+point-estimate errors than the evaluated deep-learning baselines under
+strict leave-one-condition-out validation. The main conclusions are:
+\begin{itemize}
+\tightlist
+\item
+  Random forests on pass-level fused acoustic-emission and vibration
+	  dB-z and log-mel descriptors form the leading observed point-estimate
+	  group. The reproducible current fixed dB-z pipeline gives
+	  0.0210~\(\upmu\)m, and cache-matched inner-grouped reruns give
+	  0.0207~\(\upmu\)m for dB-z and 0.0206~\(\upmu\)m for log-mel.
+	  The nearly equal means mask different tails: nested maximum fold MAE is
+	  0.1402~\(\upmu\)m for dB-z and 0.2061~\(\upmu\)m for log-mel, making
+	  dB-z the better observed worst-condition candidate in this dataset.
+	  Historical canonical values of 0.0200 and 0.0201~\(\upmu\)m are retained
+	  for provenance and the planned post-selection comparison, not as a
+	  uniquely reproducible winner. The primary planned comparison of 14
+  Holm--Bonferroni-corrected Wilcoxon tests finds clear superiority only
+  over the implementation-specific historical shallow MLP baseline; a corrected
+  grouped-validation MLP sensitivity remains worse, while the remaining pairwise differences are
+  favourable by point estimate but not significant. A secondary five-seed
+  sensitivity analysis corroborates this pattern. The ranking among the
+  top RF variants is exploratory because the MAE differences are smaller
+  than the available measurement-resolution evidence, and the comparison
+	  remains non-nested/post-selection.
+\item
+	  The modality ablation indicates that vibration carries most of the
+	  predictive signal in the present setup, with AE giving only a small
+	  mean-level improvement.
+\item
+  Quantitative explainability analysis associates model decisions with
+  physically plausible frequencies: vibration importance lies in the
+  chatter/structural and high-frequency bands, and acoustic-emission
+  importance has leading peaks near 334 and 883~kHz, with 34.21\% of the
+  current RF's out-of-fold AE attribution above the nominal 1~MHz response
+  limit; this requires sensor-transfer-function verification before it
+  can be treated as validated physics.
+\item
+  Uncertainty calibration is currently the weakest component. Full
+  16-fold LOGO MC-dropout on the separately regenerated ResNetVibCNN
+  checkpoint set (deterministic MAE 0.0443~\(\upmu\)m) gives only 50.2\% empirical coverage
+  (0\% on Condition~7), and OOB-calibrated tree-standard-deviation
+  intervals for a separate 15-condition RF uncertainty variant under-cover the nominal 95\% level
+  (80.3\% sample-weighted coverage, 0\% on Condition~7). Future
+  calibration must be condition-aware.
+\item
+  The fitted RF depends predictively on vibration content above 15~kHz, but
+  this region lies close to the 25.6~kHz Nyquist limit. Without archived
+  accelerometer, anti-alias-filter, and mounting transfer functions, this
+  dependence cannot be assigned to a mechanical mechanism.
+\item
+  Deployment timing is limited to feature-precomputed model-inference
+  latency. The cached descriptors are full-pass aggregates, so the present
+  benchmark does not establish within-pass, closed-loop, or end-to-end
+  prediction latency; streaming aggregation and independent external
+  validation remain future work.
+\end{itemize}
+
+For engineering-informatics practice, the results support considering
+physics-motivated signal representations and auditable classical learners as strong baseline
+models that should be evaluated before selecting higher-capacity deep
+architectures. On small-data monitoring
+problems, this combination can deliver competitive point-estimate
+accuracy and auditability through tree-based attribution methods; the
+evidence is not strong enough to claim universal superiority over deep
+learning and full online latency remains future work. These findings
+remain limited to the present machine, wheel, material, and sensor setup
+and require external validation before industrial generalisation. Future
+work will archive all profilometer traces, compute gauge R\&R, add
+cyclostationary and multi-window features, extend uncertainty calibration
+to all top models, report end-to-end latency from raw signals, and
+validate latency-memory trade-offs on dedicated edge hardware.

@@ -1,0 +1,812 @@
+\section*{Supplementary Materials}
+
+\subsection*{Full family of pairwise comparisons}
+
+Table~\ref{tab:supp-holm} lists all 14 planned pairwise comparisons on
+which the Holm-Bonferroni correction in Table~\ref{tbl:statistical} was
+based. Nine of these comparisons are highlighted in the main text.
+
+\begin{table}[htbp]
+\centering
+\caption{Full family of pairwise Wilcoxon signed-rank tests with
+Holm-Bonferroni correction.}\label{tab:supp-holm}
+\resizebox{\linewidth}{!}{\input{main/supp_holm_table.tex}}
+\end{table}
+
+\subsection*{Nested grouped sensitivity for tree models}
+
+The canonical benchmark remains post-selection. As a sensitivity analysis,
+representative tree-model configurations were re-evaluated with outer 16-fold
+LOGO and inner grouped five-fold selection among a small fixed hyperparameter
+grid. This is not a nested comparison of every model family, but it tests
+whether the observed tree-model ordering is highly dependent on the fixed tree
+hyperparameters used in the canonical analysis. The legacy log-mel run and
+the subsequent cache-matched reruns are both retained below: their discrepancy
+is a provenance finding, not evidence that either representation is uniquely
+superior.
+
+\begin{table}[htbp]
+\centering
+\caption{Nested LOGO sensitivity analysis for representative tree-model
+configurations. Each outer test condition is excluded from inner selection.}
+\label{tab:supp-nested-logo}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Model & Configuration & Outer LOGO MAE (\(\upmu\)m) & Fold SD (\(\upmu\)m) \\
+\midrule
+Random forest & AE-dB + Vib-dB & 0.0213 & 0.0441 \\
+Random forest & AE-dB-z + Vib-dB-z (current rerun) & 0.0207 & 0.0347 \\
+Random forest & AE-log-mel + Vib-log-mel (legacy) & 0.0455 & 0.0590 \\
+Random forest & AE-log-mel + Vib-log-mel (current rerun) & 0.0206 & 0.0480 \\
+LightGBM & AE-dB + Vib-dB & 0.0296 & 0.0514 \\
+LightGBM & Vib-dB & 0.0281 & 0.0514 \\
+Random forest & AE/Vib features + physics + PP & 0.0493 & 0.0613 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The legacy log-mel result is not reproduced by the current cache-matched
+rerun. The matched
+dB-z and log-mel analyses give 0.0207 and 0.0206~\(\upmu\)m, respectively,
+under the same outer/inner fold design and RF grid. This confirms the central
+limitation of the point-estimate ranking: the leading dB-z and log-mel
+representations form an observed group rather than a uniquely selected winner.
+The RF grid was \{100 trees/unlimited depth, 200 trees/unlimited depth,
+100 trees/depth 10, 200 trees/depth 8\}; every candidate used random seed
+42. Five grouped inner folds selected the lowest mean validation MAE within
+each outer fold, after which the selected model was refitted on all
+outer-training conditions. Per-fold selections are archived in
+\texttt{nested\_logo\_dbz\_matched\_folds.csv} and
+\texttt{nested\_logo\_logmel\_matched\_folds.csv}.
+
+\input{main/supp_nested_rf_selections.tex}
+
+\input{main/supp_logo_assignments.tex}
+
+\input{main/supp_rf_experiment_provenance.tex}
+
+\begin{table}[htbp]
+\centering
+\caption{Deep validation-condition rotation sensitivity. Each model is
+retrained with fixed default architecture and training settings
+($\mathrm{lr}=10^{-3}$, weight decay $10^{-4}$, maximum 100 epochs,
+patience 15); only the whole-condition validation assignment changes.
+This is not a re-tuned or nested comparison of the canonical deep models.}
+\label{tab:supp-deep-validation-rotation}
+\begin{tabular}{@{}llccc@{}}
+\toprule
+Model & Validation assignment & Mean MAE (\(\upmu\)m) & Fold SD & Mean epochs \\
+\midrule
+ResNetVibCNN & Seed-42 draw & 0.0393 & 0.0519 & 29.8 \\
+ResNetVibCNN & Cyclic next condition & 0.0471 & 0.0675 & 23.8 \\
+ResNetAECNN & Seed-42 draw & 0.0440 & 0.0660 & 22.6 \\
+ResNetAECNN & Cyclic next condition & 0.0435 & 0.0686 & 23.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Physics-feature variance audit across the 16 LOGO training folds.
+Five of the nominal 44 aggregate columns are constant in every training
+fold and are mapped to zero by fold-wise standardisation.}
+\label{tab:supp-physics-audit}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Quantity & Count & Detail \\
+\midrule
+Constructed aggregate columns & 44 & 11 indicators $\times$ 4 aggregates \\
+Nonconstant campaign columns & 39 & Retain variation across passes \\
+Constant in every LOGO training fold & 5 & burst\_rate\_narrow\_min, burst\_rate\_broad\_min, $ec$\_std, $bid$\_std, $st$\_std \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Per-sample normalisation ablation}
+
+Table~\ref{tab:supp-psnorm-ablation} compares the recommended random
+forest trained on AE-dB-z + Vib-dB-z with and without
+per-sample/channel standardisation. Removing the per-sample operation while
+leaving the otherwise unscaled RF spectral pipeline unchanged produces only
+a small numerical change in overall LOGO MAE.
+
+\begin{table}[htbp]
+\centering
+\caption{Strict per-sample normalisation ablation for the recommended
+random forest. Both variants use 200 trees, maximum depth 8, minimum one
+sample per leaf, and no fold-wise spectrogram scaling, matching the
+canonical RF pipeline; the ``without'' variant omits only per-sample
+standardisation. Both variants use the canonical seed-42 LOGO
+validation-condition exclusions; experiment ID:
+\texttt{psnorm-strict-logo-seed42-v4}.}\label{tab:supp-psnorm-ablation}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Variant & Overall MAE (\(\upmu\)m) & Median condition MAE (\(\upmu\)m) & Max condition MAE (\(\upmu\)m) \\
+\midrule
+With per-sample norm & 0.0210 & 0.0093 & 0.1478 \\
+Without per-sample norm & 0.0213 & 0.0093 & 0.1863 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Retrained frequency-band ablation for the 14-condition current
+benchmark RF. Selected
+per-sample dB-z feature bins are set to zero before fitting and testing in
+every seed-42 LOGO fold. Intervals are descriptive 95\% bootstrap intervals
+for the mean paired condition-level MAE difference versus the full dB-z RF.}
+\label{tab:supp-retrained-band-ablation}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Variant & Mean MAE (\(\upmu\)m) & Difference vs full (\(\upmu\)m) & 95\% CI \\
+\midrule
+Full dB-z & 0.0210 & 0.00000 & [0.00000, 0.00000] \\
+Without AE >1~MHz & 0.0210 & 0.00001 & [-0.00075, 0.00082] \\
+Without Vib 2--15~kHz & 0.0208 & -0.00021 & [-0.00085, 0.00034] \\
+Without both bands & 0.0212 & 0.00024 & [-0.00142, 0.00222] \\
+Without Vib >15~kHz & 0.0285 & 0.00755 & [0.00149, 0.01532] \\
+Without Vib 16--24~kHz & 0.0234 & 0.00239 & [-0.00318, 0.00846] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Strict pre-normalisation vibration-band ablation for the
+14-condition current RF. Bands are deleted from the dB cache, each
+sample/channel z-score is recomputed using retained frequencies only, and the
+RF is refitted. Intervals are descriptive paired condition-bootstrap 95\%
+intervals versus the recomputed full dB-z baseline.}
+\label{tab:supp-prez-band-ablation}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Variant & Mean MAE (\(\upmu\)m) & Difference vs full (\(\upmu\)m) & 95\% CI \\
+\midrule
+Full dB-z recomputed from dB & 0.0209 & 0.00000 & [0.00000, 0.00000] \\
+Remove Vib >15~kHz before z-score & 0.0255 & 0.00455 & [0.00063, 0.01066] \\
+Remove Vib 16--24~kHz before z-score & 0.0254 & 0.00447 & [-0.00035, 0.01050] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Fresh-process runtime-memory diagnostic for the latency candidates.
+Cached inputs are loaded before the baseline RSS measurement; the reported
+increment is measured after model loading and one warm-up inference. It is
+not a peak-memory or end-to-end deployment measurement.}
+\label{tab:supp-runtime-memory}
+\begin{tabular}{@{}llc@{}}
+\toprule
+Model & Configuration & Resident delta (MB) \\
+\midrule
+Random forest & AE-dB-z + Vib-dB-z & 5.90 \\
+Random forest & AE-dB + Vib-dB & 5.27 \\
+LightGBM & Vib-dB-z & 7.24 \\
+ResNetVibCNN & Vib-dB & 15.39 \\
+ResNetAECNN & AE-dB & 13.83 \\
+Bilinear fusion & AE-dB + Vib-dB + physics + PP & 20.23 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Pass-position sensitivity}
+
+The canonical cache averages all local dB spectrogram maps within a pass.
+For a temporal-position sensitivity analysis, every pass was partitioned
+into nonempty early, middle, and late thirds of its own local-map axis;
+the two modality maps in each third were averaged and per-plane z-scored
+before fitting the same 200-tree, depth-eight RF under the 16 seed-42
+LOGO folds. The ordered multi-window row concatenates all three
+third-level descriptors before fitting; it is not a mean of independently
+trained predictions. This is an archived-pass analysis, not an online
+fixed-window or fixed-distance experiment.
+
+\begin{table}[htbp]
+\centering
+\caption{Pass-position sensitivity for the recommended RF using
+AE-dB-z + Vib-dB-z inputs. Values are mean $\pm$ standard deviation of
+the 16 condition-level LOGO MAEs.}
+\label{tab:supp-pass-position}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Local-map segment & Mean MAE (\(\upmu\)m) & Fold SD (\(\upmu\)m) \\
+\midrule
+Early third & 0.0213 & 0.0351 \\
+Middle third & 0.0204 & 0.0349 \\
+Late third & 0.0198 & 0.0335 \\
+Ordered early + middle + late & 0.0195 & 0.0338 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Run order and measured roughness}
+
+The campaign nominally contained 320 passes. Condition~1, sample~1 was
+excluded because the corresponding AE/vibration intermediate files were
+corrupt or missing, leaving 319 valid passes. Figure~\ref{fig:supp-runorder}
+shows the measured surface roughness in experimental run order; Condition~7
+is highlighted. A run-order effect cannot be ruled out because the 16
+conditions were run in a single randomized sequence and wheel-wear or
+thermal-drift trends may be confounded with the condition effect.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{supp_run_order.png}
+\caption{Run-order plot of measured $R_a$ for the nominal 320 passes;
+one pass was excluded only from model evaluation because its
+AE/vibration files were missing. The red \textsf{x} marks
+Condition~7.}\label{fig:supp-runorder}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{supp_runorder_diagnostics.png}
+\caption{Run-order diagnostics for the best random forest (AE-dB-z +
+Vib-dB-z). (a)~Measured $R_a$. (b)~RF prediction residual
+($\hat y - y$). (c)~AE broadband RMS. (d)~Tri-axial vibration RMS.
+Condition~7 is highlighted in red; it does not coincide with a clear
+run-order trend in sensor RMS.}\label{fig:supp-runorder-diagnostics}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{supp_full_residual_diagnostics.png}
+\caption{Residual diagnostics for the recommended random forest
+(AE-dB-z + Vib-dB-z). Residuals are plotted against measured \(R_a\),
+predicted \(R_a\), wheel speed, workpiece speed, depth of cut, run order,
+AE RMS, vibration RMS, and the distance outside the training-target
+support. Condition~7 samples are highlighted in red.}
+\label{fig:supp-full-residual-diagnostics}
+\end{figure}
+
+Across the same samples, RF residuals are most strongly associated with
+measured \(R_a\) (Spearman \(\rho=-0.484\) for signed residual) and
+training-target support distance (\(\rho=-0.355\) for signed residual and
+\(\rho=0.429\) for absolute residual). Absolute residuals also increase
+with predicted \(R_a\) (\(\rho=0.421\)). Correlations with process
+settings and sensor RMS are weaker: absolute-residual Spearman
+correlations are 0.159 for wheel speed, 0.083 for workpiece speed,
+\(-0.155\) for depth of cut, 0.220 for run order, \(-0.162\) for AE RMS,
+and \(-0.124\) for vibration RMS. Samples outside the training-target
+support have mean residual \(-0.1228~\upmu\)m and mean absolute residual
+0.1271~\(\upmu\)m, compared with 0.0057 and 0.0117~\(\upmu\)m for
+in-support samples, respectively.
+
+\begin{table}[htbp]
+\centering
+\caption{Cluster-aware diagnostics for full LOGO MC-dropout uncertainty.
+Pass-level quantities are descriptive because the 319 passes are clustered
+within 16 conditions. Cluster-bootstrap intervals resample conditions.}
+\label{tab:supp-clustered-uncertainty}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Metric & Pass-level & Cluster-bootstrap 95\% CI & Condition means ($n=16$) \\
+\midrule
+Pearson $r$ & 0.488 & [0.202, 0.951] & 0.492 \\
+Spearman $\rho$ & 0.594 & [0.252, 0.817] & 0.732 \\
+AUROC (top 20\% error) & 0.818 & [0.471, 0.992] & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Per-condition LOGO MAE for top models}
+
+Figure~\ref{fig:supp-per-condition-mae} shows the per-condition LOGO MAE
+for the best random forest, the best spectrogram CNN
+(ResNetVibCNN on Vib-dB), and the best gradient-boosted model (LightGBM on
+Vib-dB-z). The historical fold-level Vib-WST artifact is unavailable and is
+therefore not drawn. Condition~7 is a large error spike for all three models,
+indicating a robust prediction failure rather than a model-specific
+failure.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{supp_per_condition_mae.png}
+\caption{Per-condition LOGO MAE for three top models. The vertical dashed
+line marks Condition~7.}\label{fig:supp-per-condition-mae}
+\end{figure}
+
+\subsection*{Physics-informed feature definitions}
+
+The 44-dimensional physics-informed feature vector is obtained by
+aggregating the indicators listed in Table~\ref{tab:physics_features}
+over time (mean, standard deviation, maximum, minimum). The indicators
+are computed from the raw AE and vibration signals as follows.
+
+\begin{table}[htbp]
+\centering
+\caption{Physics-informed feature indicators.}\label{tab:physics_features}
+\begin{tabular}{@{}p{2.6cm}p{7.2cm}ll@{}}
+\toprule
+Feature & Formula / definition & Units & Agg. \\
+\midrule
+wavelet\_energy\_narrow & $\sum_{f\in[50,400]\,\text{kHz}} |W_f|^2$ (complex Morlet CWT, \texttt{cmor3-3}, scales 1--99) & a.u. & mean, std, max, min \\
+wavelet\_energy\_broad & $\sum_{f\in[150,2000]\,\text{kHz}} |W_f|^2$ capped at the AE Nyquist frequency of 2~MHz (complex Morlet CWT, \texttt{cmor3-3}, scales 1--99) & a.u. & mean, std, max, min \\
+burst\_rate\_narrow & Count of peaks above $4\sigma$ in the 50--400~kHz AE band, minimum spacing $0.1$~ms, divided by window length & counts/s & mean, std, max, min \\
+burst\_rate\_broad & Count of peaks above $4\sigma$ in the 150--2000~kHz AE band capped at 2~MHz Nyquist, minimum spacing $0.1$~ms, divided by window length & counts/s & mean, std, max, min \\
+$EC$ & $F_t=1.2 a_p^{0.8} v_s^{-0.2}$; $e_c=\frac{F_t v_s}{a_p v_w 214}$ and $EC=e_c v_{w,\text{ref}}$, where $v_{w,\text{ref}}$ linearly maps $v_w\in[20,80]$ to $[0.85,1.15]$; the cached feature is $EC$ & a.u. & mean, std, max, min \\
+$bid$ & $a_p / 30$ (normalised depth-of-cut indicator) & a.u. & mean, std, max, min \\
+$st$ & $\frac{T_{\max}}{800}$, from the implemented transient semi-infinite heating ODE in Eqs.~\eqref{eq:ec-implemented}--\eqref{eq:st-implemented} & a.u. & mean, std, max, min \\
+env\_kurtosis\_x & $\text{kurtosis}(|x(t)+j\hat x(t)|)$ (Hilbert envelope) & a.u. & mean, std, max, min \\
+env\_kurtosis\_y & $\text{kurtosis}(|y(t)+j\hat y(t)|)$ & a.u. & mean, std, max, min \\
+env\_kurtosis\_z & $\text{kurtosis}(|z(t)+j\hat z(t)|)$ & a.u. & mean, std, max, min \\
+$mag$ & $\sqrt{x^2(t)+y^2(t)+z^2(t)}$ & a.u. & mean, std, max, min \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Here $v_w$ (r/min), $v_s$ (m/s), and $a_p$ (\(\upmu\)m) are the workpiece
+speed, wheel speed, and grinding depth recorded in the process-parameter
+file. The pre-processing used for the cached burst-rate features is
+encoded in cached intermediate files. The archive does not preserve the
+complete filter design and edge-handling settings, so these cached burst
+values can be reused but not independently reconstructed from raw signals.
+
+The temperature indicator $st$ used in the cached ML features is the
+following implemented heuristic. First compute
+\begin{equation}
+\label{eq:ec-implemented}
+F_t=1.2a_p^{0.8}v_s^{-0.2},\qquad
+e_c=\frac{F_t v_s}{a_p v_w\,214},\qquad
+EC=e_c\left[0.85+0.30\frac{v_w-20}{60}\right].
+\end{equation}
+Here \(e_c\) is an intermediate unadjusted proxy. The cached
+44-dimensional vector stores the speed-adjusted quantity \(EC\), not both
+\(e_c\) and \(EC\); \(EC\) is also the quantity used by the temperature
+heuristic below. The constant 214 is the workpiece outer diameter in mm, retained in the
+cached empirical formula. Define $q=0.8v_s EC$, thermal conductivity
+$K=46\times10^{-3}$ W/(mm K), and volumetric heat capacity
+$\rho c_p=3.8\times10^{-3}$ J/(mm$^3$ K). The implementation solves
+\begin{equation}
+\label{eq:st-implemented}
+\frac{dT}{dt}=\frac{q\sqrt{a_p}}{K\sqrt{\pi(K/(\rho c_p))t}},\qquad
+T(10^{-6}\,\mathrm{s})=25^\circ\mathrm{C},\qquad
+T_{\max}=T(10\,\mathrm{s}),\qquad st=\frac{T_{\max}}{800},
+\end{equation}
+with SciPy's Radau integrator. The documented reference calculation gives
+\(T_{\max}\approx26.9^\circ\mathrm{C}\) and \(st\approx0.0336\).
+This is a cached process-derived severity heuristic, not a calibrated
+grinding-temperature measurement or a dimensionally exact thermal model.
+
+\subsection*{Design balance}
+
+Table~\ref{tab:supp-balance} shows the pairwise occurrence counts of the
+factor levels in the 16-run design. Wheel speed ($v_s$) is fully crossed
+with workpiece speed ($v_w$) and depth of cut ($a_p$), but $v_w$ and
+$a_p$ are not fully crossed: each level pair appears once or twice.
+
+\begin{table}[htbp]
+\centering
+\caption{Pairwise factor-level occurrence counts in the 16-run
+fractional factorial design.}\label{tab:supp-balance}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+$v_s$ (m/s) & $v_w=20$ & $v_w=40$ & $v_w=60$ & $v_w=80$ \\
+\midrule
+25 & 1 & 1 & 1 & 1 \\
+30 & 1 & 1 & 1 & 1 \\
+35 & 1 & 1 & 1 & 1 \\
+40 & 1 & 1 & 1 & 1 \\
+\bottomrule
+\end{tabular}
+\vspace{0.5em}
+
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+$v_s$ (m/s) & $a_p=20$ & $a_p=30$ & $a_p=40$ & $a_p=50$ \\
+\midrule
+25 & 1 & 1 & 1 & 1 \\
+30 & 1 & 1 & 1 & 1 \\
+35 & 1 & 1 & 1 & 1 \\
+40 & 1 & 1 & 1 & 1 \\
+\bottomrule
+\end{tabular}
+\vspace{0.5em}
+
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+$v_w$ (r/min) & $a_p=20$ & $a_p=30$ & $a_p=40$ & $a_p=50$ \\
+\midrule
+20 & 1 & 2 & 1 & 0 \\
+40 & 0 & 1 & 2 & 1 \\
+60 & 1 & 0 & 1 & 2 \\
+80 & 2 & 1 & 0 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{MC-dropout uncertainty subset (earlier exploratory case study)}
+
+The 59-sample MC-dropout case study corresponds to all passes from
+Conditions 1, 2, and 6 selected by random seed 42, as summarized in Table~\ref{tab:supp-mcdropout-subset}. It was an exploratory
+pilot used before the full 16-fold LOGO evaluation and is retained here
+only for comparison; the current main result is the full-LOGO evaluation
+in Table~\ref{tab:supp-mcdropout-full-logo}. Condition~7 is not
+represented in this subset.
+
+\begin{table}[htbp]
+\centering
+\caption{Composition of the 59-sample MC-dropout uncertainty subset.}
+\label{tab:supp-mcdropout-subset}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Condition & Passes in subset & Passes available \\
+\midrule
+1 & 19 & 19 \\
+2 & 20 & 20 \\
+6 & 20 & 20 \\
+\midrule
+Total & 59 & 59 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{MC-dropout full LOGO evaluation}
+
+Table~\ref{tab:supp-mcdropout-full-logo} reports per-condition results
+for the full 16-fold LOGO MC-dropout evaluation of ResNetVibCNN on
+Vib-dB. Aggregate coverage is 50.2\% across 319 held-out
+samples; Condition~7 has 0\% coverage.
+
+\input{main/supp_mcdropout_full_logo.tex}
+
+\input{main/supp_mcdropout_deterministic.tex}
+
+\subsection*{Model--configuration inventory}
+
+The complete inventory of evaluated model--configuration pairs, together
+with each pair's mean LOGO MAE and whether it entered the LOGO-only
+ranking, is provided in the file
+\texttt{reports/evidence/tables/supp\_model\_inventory.csv} in the
+repository. A concise matrix of model variants versus representation
+families is shown in Table~\ref{tab:supp-inventory}.
+
+\begin{table}[htbp]
+\centering
+\caption{Evaluated model--representation matrix. A checkmark indicates
+that at least one model--input configuration in that representation family
+was evaluated under the LOGO protocol. It does not imply that every fused
+fixed-learner configuration shown in Table~\ref{tbl:controlled-representations}
+exists.}
+\label{tab:supp-inventory}
+\footnotesize
+\begin{tabular}{@{}lccccccccc@{}}
+\toprule
+Model family & PP & Physics & AE features & Vib features & AE-dB & Vib-dB & AE-dB-z & Vib-dB-z & WST \\
+\midrule
+Ridge & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+Random forest & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+LightGBM & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+MLP & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+ResNetVibCNN & -- & -- & -- & -- & -- & \checkmark & -- & -- & -- \\
+ResNetAECNN & -- & -- & -- & -- & \checkmark & -- & -- & -- & -- \\
+ChannelAttentionCNN & -- & -- & -- & -- & \checkmark & -- & -- & -- & -- \\
+TrajectoryCNN & \checkmark & -- & -- & -- & \checkmark & \checkmark & -- & -- & -- \\
+ResNetFusion & -- & -- & -- & -- & \checkmark & \checkmark & \checkmark & \checkmark & -- \\
+BilinearFusion & -- & -- & -- & -- & \checkmark & \checkmark & \checkmark & \checkmark & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Cache provenance and exact representation definitions}
+
+Table~\ref{tab:supp-cache-provenance} lists the six principal cached
+time--frequency representations used in the manuscript together with
+their source quantity, transform chain, normalization order, array shape,
+and SHA-256 provenance checksum.
+
+\input{main/supp_cache_provenance.tex}
+
+\begin{table}[htbp]
+\centering
+\caption{Available provenance for the two AE cache planes. The archived
+raw-file metadata identify physical acquisition columns, whereas analogue
+bandpass settings, gain, sensor model, mounting, and transfer-function
+measurements were not retained. Both planes are used in every AE-dB and
+AE-dB-z configuration.}
+\label{tab:supp-ae-plane-provenance}
+\small
+\begin{tabular}{@{}cclp{2.5cm}p{4.2cm}@{}}
+\toprule
+Plane & Raw AE column & Archived label & Cache transformation & Unavailable provenance \\
+\midrule
+1 & 1 & Narrowband & STFT magnitude $\rightarrow$ dB $\rightarrow$ pass mean & Filter band/order, gain, sensor and mounting response \\
+2 & 2 & Broadband & STFT magnitude $\rightarrow$ dB $\rightarrow$ pass mean & Filter band/order, gain, sensor and mounting response \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Condition-level diagnostics}
+
+Table~\ref{tab:supp-condition-diagnostics} reports per-condition mean
+$R_a$ (from the single averaged value per pass), the within-condition
+standard deviation of $R_a$, and the mean AE broadband RMS and tri-axial
+vibration RMS computed from the cached time-domain features. Condition~7
+has the highest mean $R_a$ by a wide margin, but its mean AE RMS and
+vibration RMS are not the highest in the design. This pattern is
+consistent with condition-specific distribution shift, although it does
+not uniquely identify the mechanism.
+
+\begin{table}[htbp]
+\centering
+\caption{Per-condition mean $R_a$ and mean sensor RMS values.}
+\label{tab:supp-condition-diagnostics}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Condition & Mean $R_a$ (\(\upmu\)m) & Std $R_a$ (\(\upmu\)m) & AE broad RMS & Vib RMS \\
+\midrule
+1 & 0.103 & 0.006 & 0.494 & 1.035 \\
+2 & 0.089 & 0.004 & 0.579 & 1.531 \\
+3 & 0.091 & 0.010 & 0.625 & 1.630 \\
+4 & 0.096 & 0.011 & 0.833 & 1.876 \\
+5 & 0.097 & 0.005 & 0.743 & 1.458 \\
+6 & 0.090 & 0.007 & 0.937 & 1.794 \\
+7 & 0.360 & 0.012 & 0.437 & 1.591 \\
+8 & 0.242 & 0.011 & 0.301 & 0.896 \\
+9 & 0.085 & 0.009 & 0.362 & 1.475 \\
+10 & 0.078 & 0.008 & 0.512 & 1.522 \\
+11 & 0.108 & 0.005 & 0.306 & 0.747 \\
+12 & 0.093 & 0.008 & 0.434 & 1.149 \\
+13 & 0.089 & 0.008 & 0.713 & 1.496 \\
+14 & 0.106 & 0.005 & 0.793 & 0.789 \\
+15 & 0.102 & 0.006 & 0.965 & 1.339 \\
+16 & 0.101 & 0.007 & 0.955 & 1.544 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{LOGO fold target-support analysis}
+
+Table~\ref{tab:supp-logo-extrapolation} shows, for each of the 16 LOGO
+folds, the training-set target range and the test-set target range, and
+classifies each fold as requiring interpolation or extrapolation.
+Because Condition~7 contains by far the highest observed pass-level
+$R_a$ values (0.336--0.381~\(\upmu\)m), the training set for all other folds
+spans this range, placing all remaining test conditions except
+Condition~10 inside the training-label support. Condition~10 is a minor
+lower-bound extrapolation because its test minimum is slightly below the
+training minimum, but it does not dominate the error budget. The reverse
+is true when Condition~7 is held out: the training set maximum drops to
+0.259~\(\upmu\)m (Condition~8, the next-roughest condition), so
+the evaluated constant-leaf random forest cannot represent targets beyond
+the range represented by its terminal-leaf training responses and must
+underpredict test targets up to
+0.381~\(\upmu\)m by clamping, explaining the large prediction
+errors on this fold.
+
+\begin{table}[htbp]
+\centering
+\caption{LOGO fold target-support analysis. Condition~7 is the only
+high-roughness extrapolation fold; Condition~10 is a minor lower-bound
+extrapolation.}
+\label{tab:supp-logo-extrapolation}
+\resizebox{\linewidth}{!}{%
+\input{main/supp_logo_extrapolation.tex}
+}
+\end{table}
+
+\subsection*{Input-space novelty and Condition~7/Condition~10 cache contrast}
+
+Table~\ref{tab:supp-input-ood} evaluates a target-free input-space novelty
+score retrospectively. For each LOGO fold, the score is the RMS distance
+between the held-out condition centroid and its nearest remaining condition
+centroid after feature-wise standardisation fitted on the training samples.
+The score is associated with the canonical held-out RF error, but the
+association was assessed after observing the errors and involves only 16
+conditions. It is therefore a candidate input-space monitoring feature, not
+a validated or calibrated OOD detector.
+
+\begin{table}[htbp]
+\centering
+\caption{Condition-level association between a target-free dB-z
+input-space novelty score and canonical RF LOGO MAE. The leave-one-condition-
+out range recomputes Spearman \(\rho\) after removing each one of the 16
+conditions. P-values are unadjusted descriptive values.}
+\label{tab:supp-input-ood}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Score & Spearman \(\rho\) with LOGO MAE & Unadjusted \(p\) \\
+\midrule
+Nearest dB-z condition-centroid distance & 0.512 & 0.043 \\
+Nearest process-parameter distance & -0.256 & 0.339 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.4em}
+\small Leave-one-condition-out range for the dB-z association: 0.414--0.625.
+\end{table}
+
+Table~\ref{tab:supp-condition7-condition10-bands} quantifies the archived
+dB-cache contrast between Conditions~7 and~10, which share workpiece speed
+and depth of cut but differ in wheel speed. The intervals bootstrap passes
+within each condition (20 per condition) and quantify cache-level
+differences only; they do not calibrate the sensor response or establish a
+causal grinding mechanism.
+
+\begin{table}[htbp]
+\centering
+\caption{Condition~7 minus Condition~10 archived dB-cache band contrast.
+Positive values indicate higher mean dB level for Condition~7.}
+\label{tab:supp-condition7-condition10-bands}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Band & Difference (dB) & Pass-bootstrap 95\% CI (dB) \\
+\midrule
+AE 0.1--1.0 MHz & 2.77 & [1.37, 4.16] \\
+AE $>$1.0 MHz & 2.41 & [1.07, 3.74] \\
+Vibration 0.5--2 kHz & -2.94 & [-3.22, -2.67] \\
+Vibration 2--15 kHz & -3.14 & [-4.24, -2.09] \\
+Vibration $>$15 kHz & -2.33 & [-3.19, -1.48] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Out-of-fold SHAP attribution for the current benchmark random forest}
+
+Figure~\ref{fig:supp-shap-rf} shows out-of-fold TreeSHAP frequency profiles
+under three aggregation rules: sample-pooled absolute attribution,
+condition-balanced attribution after normalising each fold to 100\%, and the
+same condition-balanced calculation excluding Condition~7 as a descriptive
+sensitivity. The latter two prevent folds with larger output deviations or
+attribution magnitudes from dominating solely through scale. The sample-pooled
+profile remains the direct summary over held-out passes; agreement or movement
+across the balanced profiles quantifies whether the high-frequency pattern is
+representative across conditions. In the vibration profile, the
+condition-balanced mass above 15~kHz is 85.76\%, and it remains 85.74\% after
+excluding Condition~7; both peak at 16.2~kHz. The observed upper-band pattern
+is therefore not created solely by the difficult fold, although the
+sensor-chain caveat near Nyquist remains essential.
+
+The sample-pooled out-of-fold TreeSHAP mean
+absolute importance for the reproducible current random forest trained on
+fused AE and vibration dB-z descriptors. A separate RF is fitted in each
+LOGO fold after excluding its test and validation conditions, and SHAP is
+computed only for that fold's held-out test condition. The 319 held-out
+profiles are then pooled by sample count. AE importance is concentrated
+above approximately 300~kHz (strongest pooled bin 334~kHz), and vibration
+importance is concentrated mainly between approximately 16 and 24~kHz,
+with the largest pooled bin at 16.2~kHz. The
+high-frequency AE peak is lower than the 1.22~MHz peak reported for the
+LightGBM model on dB spectrograms; this shift is consistent with the
+dB-z scaling and the random-forest split structure, and
+reinforces the need for sensor-transfer-function verification before
+treating any single bin as a validated physical signature.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{rf_dbz_oof_treeshap.png}
+\caption{Out-of-fold TreeSHAP frequency profiles for the reproducible current
+RF on AE-dB-z + Vib-dB-z. Curves show sample-pooled attribution,
+equal-condition aggregation after fold-wise normalisation, and the latter
+excluding Condition~7. Each held-out pass is explained only by the RF trained
+without its condition. This analysis reproduces the current
+0.0210~\(\upmu\)m OOF MAE but does not attribute the historical canonical
+artifact.}\label{fig:supp-shap-rf}
+\end{figure}
+
+\subsection*{Seed-repeat results}
+
+Table~\ref{tab:supp-seed-repeat-all} reports the seed-averaged
+per-condition LOGO MAE for the equal-budget current random forest and the six
+deep-learning baselines that were repeated over five random seeds
+(42--46).  Condition~7 remains the largest outlier for every model.
+The equal-budget random-forest seed-averaged overall MAE is
+\(0.0203 \pm 0.0360~\upmu\)m; the DL baselines range from
+\(0.0384 \pm 0.0452~\upmu\)m (ResNetVibCNN) to
+\(0.0450 \pm 0.0650~\upmu\)m (TrajectoryCNN).
+
+\input{main/supp_seed_repeat_all.tex}
+
+Paired Wilcoxon signed-rank tests were performed on the 16 condition-level seed-averaged MAEs to describe whether the 14-condition random forest's performance is lower than the repeated 14-condition deep-learning baselines. Table~\ref{tab:supp-seed-repeat-wilcoxon} reports the test statistic, raw p-value, Holm--Bonferroni corrected p-value, and mean MAEs for each comparison. Because the repeated set was selected from the observed benchmark, these results support robustness of the observed RF advantage within the selected repeated-baseline set; they are not independent confirmatory inference.
+
+\begin{table}[htbp]
+\centering
+\caption{Paired Wilcoxon signed-rank tests comparing the equal-budget
+14-condition RF with the six repeated deep-learning baselines. Holm correction
+is applied only across this selected six-comparison robustness family.}
+\label{tab:supp-seed-repeat-wilcoxon}
+\resizebox{\linewidth}{!}{\input{main/supp_seed_repeat_wilcoxon.tex}}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Corrected grouped-validation shallow-MLP sensitivity. The MLP uses
+the designated complete validation condition, train-only input and target
+standardisation, and a three-candidate training-only hyperparameter grid. The
+paired \(p\)-value is descriptive and is not inserted into the historical
+14-comparison family.}\label{tab:supp-grouped-mlp}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Model & Mean MAE & Fold SD & Median MAE & Maximum MAE \\
+\midrule
+Current RF, dB-z & 0.0210 & 0.0361 & 0.0093 & 0.1478 \\
+Grouped-validation shallow MLP & 0.0529 & 0.0627 & 0.0275 & 0.2645 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:supp-seed-repeat-rf} gives the same information for the
+random forest only, for readers who want the finest numerical detail.
+
+\input{main/supp_seed_repeat_rf.tex}
+
+\subsection*{Seed-level overall MAEs}
+
+Table~\ref{tab:supp-seed-level} lists the overall LOGO MAE for each of
+the five repeated seeds across the equal-budget current random forest and six
+deep-learning baselines. The random-forest overall MAE varies by less
+than 0.001~\(\upmu\)m across seeds; the deep-learning baselines show
+substantially larger seed-to-seed variation.
+
+\begin{table}[htbp]
+\centering
+\caption{Overall LOGO MAE (\(\upmu\)m) by random seed for the equal-budget
+14-condition random forest and six repeated 14-condition deep-learning baselines.}
+\label{tab:supp-seed-level}
+\input{main/supp_seed_level_maes.tex}
+\end{table}
+
+\subsection*{Fold-wise attribution stability}
+
+Figure~\ref{fig:supp-shap-stability} shows the dominant vibration and AE
+frequency bins from out-of-fold random-forest feature-importance
+estimates. The dominant vibration bin is stable around 22~kHz for most
+held-out conditions, with a few folds shifting to 17 or 21~kHz. The
+dominant AE bin is more variable, shifting between approximately
+330~kHz, 880~kHz, and 1.0~MHz depending on the held-out condition.
+Because these estimates were obtained with a smaller, faster tree
+ensemble for computational reasons, they should be read as a stability
+illustration rather than as a definitive per-fold SHAP ranking.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{shap_fold_stability.png}
+\caption{Dominant frequency bins from out-of-fold random-forest
+impurity-based feature-importance estimates. Top: vibration. Bottom: AE.}\label{fig:supp-shap-stability}
+\end{figure}
+
+\subsection*{RF OOB coverage by condition}
+
+Table~\ref{tab:rf-oob-coverage} reports the empirical coverage of the
+95\% OOB-calibrated intervals for a separate 15-condition RF uncertainty
+variant, broken down by grinding condition. Coverage is highly uneven:
+Condition~7 has 0\% coverage, while several conditions reach 100\%.
+This pattern motivates the condition-level calibration discussion in the
+main text.
+
+\begin{table}[htbp]
+\centering
+\caption{Per-condition descriptive target coverage of nominal 95\%
+OOB-calibrated intervals for a separate 15-condition RF uncertainty variant
+(AE-dB-z + Vib-dB-z).}
+\label{tab:rf-oob-coverage}
+\input{main/supp_rf_oob_coverage.tex}
+\end{table}
+
+\subsection*{Measurement uncertainty caveat}
+
+Only the manufacturer-quoted profilometer repeatability (0.01~\(\upmu\)m) is
+available. The raw profilometer trace files needed to compute an
+experimental repeatability or gauge R\&R were not archived. The best
+reported MAE (0.020~\(\upmu\)m) is therefore close to the manufacturer
+repeatability, so differences smaller than roughly 0.005--0.010~\(\upmu\)m
+should be interpreted cautiously.
+
+\subsection*{Deep Learning Baselines Architecture Details}
+
+To support replication, Table~\ref{tab:supp-dl-arch} details the architectural configurations, layer dimensions, activation functions, regularization (dropout), and parameter counts for the nine architecturally documented deep-learning baselines. The complete 27-model, 38-input canonical LOGO inventory is listed below; models not covered by Table~\ref{tab:supp-dl-arch} are retained as benchmark variants and their archived configurations are named explicitly in the inventory.
+
+\input{main/supp_dl_architectures.tex}
+
+\subsection*{Complete model and input inventory}
+\input{main/supp_model_inventory.tex}
+
+Table~\ref{tab:supp-model-constructors} reports the exact constructor
+arguments and defaults used by the canonical benchmark for every model in
+the inventory. Neural models use the common optimisation protocol stated in
+Section~\ref{predictive-models}; model-specific input configuration IDs remain
+separate because they determine which constructor branches are active.
+
+\input{main/supp_model_constructor_defaults.tex}

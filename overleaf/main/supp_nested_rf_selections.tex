@@ -1,0 +1,49 @@
+\begin{longtable}{@{}lrrrrr@{}}
+\caption{Per-outer-fold selections for the current nested RF sensitivity.
+The five inner folds are grouped by grinding condition. Selection minimises
+mean inner-fold MAE; the selected RF is refitted on the same 14 outer-training
+conditions used by the fixed RF, while the archived validation condition
+remains excluded, and is evaluated once on the held-out outer condition.}
+\label{tab:supp-nested-rf-selections}\\
+\toprule
+Representation & Test condition & Trees & Maximum depth & Inner MAE & Outer MAE \\
+\midrule
+\endfirsthead
+\toprule
+Representation & Test condition & Trees & Maximum depth & Inner MAE & Outer MAE \\
+\midrule
+\endhead
+dB-z & 1 & 100 & 10 & 0.0282 & 0.0052 \\
+dB-z & 2 & 100 & 10 & 0.0254 & 0.0035 \\
+dB-z & 3 & 100 & None & 0.0211 & 0.0097 \\
+dB-z & 4 & 200 & None & 0.0203 & 0.0080 \\
+dB-z & 5 & 200 & 8 & 0.0226 & 0.0033 \\
+dB-z & 6 & 200 & 8 & 0.0189 & 0.0059 \\
+dB-z & 7 & 100 & 10 & 0.0170 & 0.1402 \\
+dB-z & 8 & 100 & None & 0.0283 & 0.0727 \\
+dB-z & 9 & 200 & None & 0.0170 & 0.0090 \\
+dB-z & 10 & 100 & None & 0.0202 & 0.0107 \\
+dB-z & 11 & 100 & None & 0.0215 & 0.0086 \\
+dB-z & 12 & 200 & 8 & 0.0166 & 0.0096 \\
+dB-z & 13 & 100 & None & 0.0215 & 0.0126 \\
+dB-z & 14 & 100 & 10 & 0.0210 & 0.0170 \\
+dB-z & 15 & 200 & 8 & 0.0276 & 0.0098 \\
+dB-z & 16 & 200 & 8 & 0.0226 & 0.0052 \\
+log-mel & 1 & 200 & 8 & 0.0313 & 0.0051 \\
+log-mel & 2 & 100 & 10 & 0.0276 & 0.0051 \\
+log-mel & 3 & 200 & None & 0.0216 & 0.0091 \\
+log-mel & 4 & 100 & 10 & 0.0211 & 0.0117 \\
+log-mel & 5 & 100 & None & 0.0198 & 0.0048 \\
+log-mel & 6 & 200 & None & 0.0213 & 0.0084 \\
+log-mel & 7 & 200 & None & 0.0213 & 0.2061 \\
+log-mel & 8 & 100 & None & 0.0282 & 0.0130 \\
+log-mel & 9 & 100 & 10 & 0.0164 & 0.0115 \\
+log-mel & 10 & 100 & 10 & 0.0265 & 0.0094 \\
+log-mel & 11 & 200 & None & 0.0220 & 0.0052 \\
+log-mel & 12 & 100 & 10 & 0.0160 & 0.0108 \\
+log-mel & 13 & 100 & 10 & 0.0272 & 0.0062 \\
+log-mel & 14 & 100 & 10 & 0.0259 & 0.0057 \\
+log-mel & 15 & 200 & None & 0.0299 & 0.0102 \\
+log-mel & 16 & 100 & 10 & 0.0207 & 0.0074 \\
+\bottomrule
+\end{longtable}

@@ -1,0 +1,56 @@
+\begin{longtable}{@{}p{2.25cm}p{2.15cm}ccp{2.45cm}p{2.6cm}c@{}}
+\caption{RF experiment-provenance map. The canonical split manifest is
+\texttt{reports/evidence/tables/canonical\_logo\_assignments.csv}; cache
+hashes are given in Table~\ref{tab:supp-cache-provenance}. Unless stated
+otherwise, current RFs use 200 trees, depth eight, one minimum sample per
+leaf, random state 42, no fold-wise spectral scaler, Python 3.11.11,
+NumPy 2.1.3, and scikit-learn 1.6.1.}
+\label{tab:supp-rf-provenance}\\
+\toprule
+Experiment ID & Input/role & Train conditions & Per-sample z & Split or selection & Distinguishing implementation & Mean MAE \\
+\midrule
+\endfirsthead
+\toprule
+Experiment ID & Input/role & Train conditions & Per-sample z & Split or selection & Distinguishing implementation & Mean MAE \\
+\midrule
+\endhead
+canonical-db-z & AE/Vib dB-z ranking & 14 & Yes & Canonical seed-42; historical & Exact package environment unavailable & 0.0200 \\
+canonical-log-mel & AE/Vib log-mel ranking & 14 & No & Canonical seed-42; historical & Exact package environment unavailable & 0.0201 \\
+robustness-base & AE/Vib dB-z ablation baseline & 15 & Yes & Test condition only excluded & Regenerated suite; explains 0.0202 baseline & 0.0202 \\
+current-fixed-db-z & AE/Vib dB-z primary current & 14 & Yes & Canonical seed-42 & Validation condition remains excluded & 0.0210 \\
+current-fixed-db & AE/Vib dB current & 14 & No & Canonical seed-42 & Validation condition remains excluded & 0.0213 \\
+nested-db-z & AE/Vib dB-z sensitivity & 14 & Yes & Five inner grouped folds & Selected model refitted on same 14 conditions & 0.0207 \\
+nested-log-mel & AE/Vib log-mel sensitivity & 14 & No & Five inner grouped folds & Selected model refitted on same 14 conditions & 0.0206 \\
+rf-seed-repeat-14 & AE/Vib dB-z equal-budget seed sensitivity & 14 & Yes & Canonical test and validation excluded & Seeds 42--46; seed-42 0.0210, five-seed mean 0.0203; used for paired model-family sensitivity & 0.0203 \\
+rf-seed-repeat-15 & AE/Vib dB-z deployment-style seed sensitivity & 15 & Yes & Test condition only excluded & Historical seeds 42--46; seed-42 0.0201, five-seed mean 0.0195; excluded from model-family tests & 0.0195 \\
+modality-mask-suite & Modality and test-time masking & 15 & Yes & Test condition only excluded & Same regenerated 0.0202 full-input baseline & 0.0202 \\
+retrained-band & Retrained band removal & 14 & Yes & Canonical seed-42 & Features zeroed before fit and test & 0.0210 \\
+rf-oob-uq & OOB-scaled uncertainty only & 15 & Yes & Test condition only excluded & Fold scaler; 200 trees; depth 8; min leaf 2 & -- \\
+rf-oof-shap & OOF attribution & 14 & Yes & Canonical seed-42 & Approximate path-dependent TreeSHAP on held-out passes & 0.0210 \\
+latency-rf-db-z & Fold-complete timing & 14 & Yes & All 16 canonical repeat-0 checkpoints & Pooled 16,000-call timing; complete checkpoint hashes in \texttt{edge\_latency\_benchmark\_per\_fold.csv} & 0.0200 \\
+\bottomrule
+\end{longtable}
+
+The 14-condition seed repeat uses the same training-data budget as the neural
+baselines. The retained 15-condition seed repeat and robustness-suite values
+do not reproduce the 14-condition current fixed RF because they use the
+validation condition for fitting; they are not used for paired model-family
+inference.
+The latency row pools timings over the same 16 canonical repeat-0 checkpoints
+that produce the historical 16-fold benchmark aggregate, so its latency and
+accuracy now refer to the same fitted-model family. Modality, masking, and OOB analyses use 15 non-test
+conditions and are therefore method-specific diagnostics rather than exact
+refits of the recommended 14-condition pipeline.
+
+The historical 14-comparison family reads its 16 fold records per
+model--configuration from \texttt{full\_results\_logo\_only.csv} (SHA-256
+\nolinkurl{b91bae9e26c8ff3f2f9e965e570d93e6cf6d3c72b103bdda41f6f79463ba0ca0}).
+The canonical split manifest has SHA-256
+\nolinkurl{5b19e7babe5f7de3f38f064dc4797fc37adf31aaab1d9f7cd6f3f7b425971ea5},
+and the generated statistical table has SHA-256
+\nolinkurl{f902e18c29105f4a09f7a9b64765eb55b0fe15608f0eb9344093f318ae220cca}.
+The 240 fold-level prediction files used across the 15 unique
+model--configuration sources in that family are listed with complete hashes
+in \texttt{canonical\_prediction\_manifest.csv}; the manifest itself has
+SHA-256
+\nolinkurl{96cfe7989a2666b6add9023570a690e7e2de0dd42c235818df339c4c1bc5c286}.

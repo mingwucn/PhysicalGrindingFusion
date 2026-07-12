@@ -1,0 +1,27 @@
+\begin{tikzpicture}[
+    node distance=0.72cm and 0.82cm,
+    stage/.style={pub/model, text width=4.25cm, minimum height=1.12cm},
+    arrow/.style={pub/arrow},
+]
+\node[pub/input, text width=4.25cm, minimum height=1.12cm] (input)
+  {Vib-dB input\\$3\times257\times13$};
+\node[stage, right=of input] (stem)
+  {Stem\\$3\times3$ Conv + BN + ReLU\\$16\times257\times13$};
+\node[stage, right=of stem] (res1)
+  {SE-residual block 1\\$3\times3$ Conv $\times2$, stride 2\\$32\times129\times7$};
+
+\node[stage, below=of res1] (res2)
+  {SE-residual block 2\\$3\times3$ Conv $\times2$, stride 2\\$64\times65\times4$};
+\node[pub/explanation, text width=4.25cm, minimum height=1.12cm, left=of res2] (gap)
+  {Global average pooling\\$64$ features};
+\node[pub/target, text width=4.25cm, minimum height=1.12cm, left=of gap] (head)
+  {Dense head and output\\$64$ ReLU + dropout $p=0.3$\\Measured $R_a$ (\textmu m)};
+
+\draw[arrow] (input) -- (stem);
+\draw[arrow] (stem) -- (res1);
+\draw[arrow] (res1) -- (res2);
+\draw[arrow] (res2) -- (gap);
+\draw[arrow] (gap) -- (head);
+\node[pub/note, text width=13.6cm, align=center, below=0.55cm of gap]
+  {Each residual block applies batch normalization, squeeze-and-excitation attention, and dropout $p=0.3$.};
+\end{tikzpicture}%

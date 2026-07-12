@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\caption{Detailed architectural specifications and hyperparameter configurations for the nine evaluated deep-learning baselines.}
+\label{tab:supp-dl-arch}
+\begin{tabular}{lp{4cm}ccc}
+\toprule
+Model Baseline & Key Layer Blocks & Hidden Dim / Embed Dim & Dropout $p$ & Parameter Count \\
+\midrule
+\texttt{ResNetAECNN} & 2D Conv stem, 2 SE-ResNet blocks, GAP, MLP regressor & 64 & 0.3 & 86,402 \\
+\texttt{ResNetVibCNN} & 2D Conv stem, 2 SE-ResNet blocks, GAP, MLP regressor & 64 & 0.3 & 86,546 \\
+\texttt{ResNetFusion} & Dual ResNet encoders, feature concatenation, MLP regressor & 128 & 0.3 & 167,506 \\
+\texttt{BilinearFusionNetwork} & Dual ResNet encoders, low-rank bilinear pooling layer, MLP & 64 & 0.3 & 171,425 \\
+\texttt{TrajectoryCNN} & 1D sequence CNN stem, 2 temporal blocks, GAP, MLP regressor & 64 & 0.5 & 47,905 \\
+\texttt{GraphNeuralNetworkFusion} & 4 Modality MLP encoders, 2 Graph Attention (GAT) layers, GAP, MLP & 32 & 0.3 & 152,673 \\
+\texttt{TabTransformerRegressor} & Feature-wise linear embedding, 2 Transformer encoder layers, MLP & 16 & 0.3 & 6,353 \\
+\texttt{ChannelAttentionCNN} & 2D Conv, CBAM block (Channel + Spatial attention), GAP, MLP & 64 & 0.3 & 30,216 \\
+\texttt{MultiscaleSpectrogramCNN} & Multi-resolution 2D Conv filter banks, GAP, MLP regressor & 128 & 0.3 & 34,466 \\
+\bottomrule
+\end{tabular}
+\end{table}

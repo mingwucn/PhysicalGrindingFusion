@@ -1,0 +1,4 @@
+model,category,mae_mean,mae_mean,mae_mean
+,,mean,std,count
+RandomForestModel,fusion,0.03358118881073519,0.0002544149484414284,2
+RandomForestModel,single,0.02479367108293826,,1

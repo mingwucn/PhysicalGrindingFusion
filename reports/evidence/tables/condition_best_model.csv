@@ -1,0 +1,17 @@
+model,config,condition_id,mae
+XGBoostModel,ae+spec+vib+spec+pp,1,0.00473229940000333
+RandomForestModel,ae+logspec,2,0.0024903888415850214
+BilinearFusionNetwork,ae+spec+vib+spec,3,0.005705374851822846
+LightGBMModel,vib+wst,4,0.006656294019913735
+RandomForestModel,ae+spec+vib+spec,5,0.0032169181259415125
+LightGBMModel,vib+logspec,6,0.0052988800644732294
+MultiscaleSpectrogramCNN,vib+spec,7,0.11440178453922274
+RandomForestModel,ae+mel+vib+mel+pp,8,0.010307618500500229
+LightGBMModel,ae+spec,9,0.005232561226206014
+LightGBMModel,vib+mel,10,0.0059068257743367545
+BilinearFusionNetwork,ae+features+vib+features+pp,11,0.0040102485567331345
+RandomForestModel,ae+features+pp,12,0.006989584438092111
+ResNetFusion,ae+spec+physics,13,0.005244258418679242
+BilinearFusionNetwork,ae+spec+vib+spec+pp,14,0.003099232539534564
+GraphNeuralNetworkFusion,ae+spec,15,0.0046250011771917345
+RandomForestModel,vib+logspec,16,0.0044330740528709415

@@ -1,0 +1,9 @@
+metric,estimate_type,estimate,ci_low,ci_high
+pearson_r,pass_level_descriptive,0.4878424490940165,,
+pearson_r,condition_cluster_bootstrap_95ci,0.4878424490940165,0.20183155527219665,0.9514714717586885
+spearman_rho,pass_level_descriptive,0.5943732625539717,,
+spearman_rho,condition_cluster_bootstrap_95ci,0.5943732625539717,0.25210498150852717,0.8165886096209657
+auroc_top20_error,pass_level_descriptive,0.8177696078431372,,
+auroc_top20_error,condition_cluster_bootstrap_95ci,0.8177696078431372,0.47065135721705703,0.9924288310115081
+pearson_r,condition_mean_n16,0.4922123422912007,,
+spearman_rho,condition_mean_n16,0.7323529411764707,,

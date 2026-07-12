@@ -1,0 +1,2 @@
+comparison,n_conditions,rf_mean_mae,mlp_mean_mae,wilcoxon_statistic,pvalue_raw_descriptive
+current 14-condition RF dB-z vs grouped-validation target-scaled shallow MLP,16,0.020960630412458988,0.05293294979492197,0.0,3.0517578125e-05

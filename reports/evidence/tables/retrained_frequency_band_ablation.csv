@@ -1,0 +1,7 @@
+variant,mean_mae,fold_sd,mean_difference_vs_full,difference_ci95_low,difference_ci95_high,protocol
+Full dB-z,0.020960630412459033,0.03611018471032474,0.0,0.0,0.0,retrained LOGO RF; removed dB-z features set to zero before fit and test
+Retrained without AE >1 MHz,0.020969889592643114,0.035860325893698315,9.259180184081374e-06,-0.0007466546159820323,0.000821352505128092,retrained LOGO RF; removed dB-z features set to zero before fit and test
+Retrained without Vib 2--15 kHz,0.020750575160279238,0.035440325496794094,-0.0002100552521797926,-0.000850682098649814,0.00033806248134247426,retrained LOGO RF; removed dB-z features set to zero before fit and test
+Retrained without both bands,0.02119691557075492,0.03551838287520012,0.00023628515829589124,-0.0014165728661650284,0.002220933232462608,retrained LOGO RF; removed dB-z features set to zero before fit and test
+Retrained without Vib >15 kHz,0.028507243959118335,0.04945430803543105,0.007546613546659301,0.0014848679965997038,0.015314597858132797,retrained LOGO RF; removed dB-z features set to zero before fit and test
+Retrained without Vib 16--24 kHz,0.023352215643711618,0.04264403483775794,0.0023915852312525864,-0.003180952642891769,0.008460747819742528,retrained LOGO RF; removed dB-z features set to zero before fit and test

@@ -1,0 +1,5 @@
+comparison,model_a,config_a,mean_mae_a,model_b,config_b,mean_mae_b,median_diff,wilcoxon_statistic,pvalue,significant_05
+Best DL (spectrogram) vs Best LightGBM,ResNetVibCNN,cv_results_ResNetVibCNN_vib_spec,0.02681563487889147,LightGBMModel,cv_results_LightGBMModel_vib_spec,0.027720657490507835,0.0019451858589643843,50.0,0.375457763671875,False
+Best DL (spectrogram) vs Best DL (feature-only),ResNetVibCNN,cv_results_ResNetVibCNN_vib_spec,0.02681563487889147,BilinearFusionNetwork,cv_results_BilinearFusionNetwork_ae_features_vib_features_physics_pp,0.03582732802330468,-0.0063206810504198106,41.0,0.17535400390625,False
+Best DL (spectrogram) vs Best ML full-input,ResNetVibCNN,cv_results_ResNetVibCNN_vib_spec,0.02681563487889147,LightGBMModel,cv_results_LightGBMModel_ae_features_vib_features_physics_pp,0.06615584419943857,-0.01955821405009927,19.0,0.009185791015625,True
+Best fusion DL vs LightGBMModel,BilinearFusionNetwork,cv_results_BilinearFusionNetwork_ae_spec_vib_spec_physics_pp,0.031665092729963366,LightGBMModel,cv_results_LightGBMModel_vib_spec,0.027720657490507835,0.004715816479963201,40.0,0.1590576171875,False

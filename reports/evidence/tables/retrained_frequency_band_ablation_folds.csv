@@ -1,0 +1,97 @@
+variant,condition,mae
+Full dB-z,1,0.005420325180779273
+Full dB-z,2,0.0030747166575197196
+Full dB-z,3,0.009652393304394758
+Full dB-z,4,0.008169607553608191
+Full dB-z,5,0.0033233874611621125
+Full dB-z,6,0.0059394560885748125
+Full dB-z,7,0.147817065814029
+Full dB-z,8,0.06981357902025631
+Full dB-z,9,0.008927700101770172
+Full dB-z,10,0.011190870714761481
+Full dB-z,11,0.008219613716475501
+Full dB-z,12,0.009642958580685288
+Full dB-z,13,0.01234606525572315
+Full dB-z,14,0.016817687995131735
+Full dB-z,15,0.00978105007001533
+Full dB-z,16,0.005233609084457658
+Retrained without AE >1 MHz,1,0.005753990480797795
+Retrained without AE >1 MHz,2,0.00391371030080905
+Retrained without AE >1 MHz,3,0.009378608118505525
+Retrained without AE >1 MHz,4,0.007782001739766414
+Retrained without AE >1 MHz,5,0.003273692200605758
+Retrained without AE >1 MHz,6,0.006072068185989302
+Retrained without AE >1 MHz,7,0.14521770311676327
+Retrained without AE >1 MHz,8,0.07359550576269377
+Retrained without AE >1 MHz,9,0.00835458516165775
+Retrained without AE >1 MHz,10,0.009923256166031682
+Retrained without AE >1 MHz,11,0.009938317698753566
+Retrained without AE >1 MHz,12,0.010048147225231854
+Retrained without AE >1 MHz,13,0.010929015363030889
+Retrained without AE >1 MHz,14,0.014329750708878578
+Retrained without AE >1 MHz,15,0.012021965348727497
+Retrained without AE >1 MHz,16,0.0049859159040471
+Retrained without Vib 2--15 kHz,1,0.005573866596010905
+Retrained without Vib 2--15 kHz,2,0.003360187555445483
+Retrained without Vib 2--15 kHz,3,0.009841832541310418
+Retrained without Vib 2--15 kHz,4,0.007632871907396236
+Retrained without Vib 2--15 kHz,5,0.0032145775539451694
+Retrained without Vib 2--15 kHz,6,0.006455583919055363
+Retrained without Vib 2--15 kHz,7,0.14413341800922624
+Retrained without Vib 2--15 kHz,8,0.07127311599804816
+Retrained without Vib 2--15 kHz,9,0.008987445924895653
+Retrained without Vib 2--15 kHz,10,0.010128959087907854
+Retrained without Vib 2--15 kHz,11,0.008817162875184666
+Retrained without Vib 2--15 kHz,12,0.010201074172379828
+Retrained without Vib 2--15 kHz,13,0.013676626334980865
+Retrained without Vib 2--15 kHz,14,0.01518164762542741
+Retrained without Vib 2--15 kHz,15,0.008716257149677208
+Retrained without Vib 2--15 kHz,16,0.004814575313576361
+Retrained without both bands,1,0.005652081578597414
+Retrained without both bands,2,0.00362906718808393
+Retrained without both bands,3,0.009668235996369543
+Retrained without both bands,4,0.0081475445290942
+Retrained without both bands,5,0.0033400170463323948
+Retrained without both bands,6,0.006300925378059469
+Retrained without both bands,7,0.13985694917285607
+Retrained without both bands,8,0.08159888250405073
+Retrained without both bands,9,0.008335921090685055
+Retrained without both bands,10,0.009182043379604458
+Retrained without both bands,11,0.009853058562198121
+Retrained without both bands,12,0.010518000836348134
+Retrained without both bands,13,0.01213672710541331
+Retrained without both bands,14,0.016183241286190968
+Retrained without both bands,15,0.010552361336161397
+Retrained without both bands,16,0.0041955921420335695
+Retrained without Vib >15 kHz,1,0.006195936829132868
+Retrained without Vib >15 kHz,2,0.0026690754536139345
+Retrained without Vib >15 kHz,3,0.009475888898330117
+Retrained without Vib >15 kHz,4,0.008187961716893727
+Retrained without Vib >15 kHz,5,0.003288401470595117
+Retrained without Vib >15 kHz,6,0.006307676540871915
+Retrained without Vib >15 kHz,7,0.19749617552548773
+Retrained without Vib >15 kHz,8,0.09972993759070538
+Retrained without Vib >15 kHz,9,0.010783280882134035
+Retrained without Vib >15 kHz,10,0.023747414038565253
+Retrained without Vib >15 kHz,11,0.006641500692670163
+Retrained without Vib >15 kHz,12,0.012496717590050947
+Retrained without Vib >15 kHz,13,0.012198872342678621
+Retrained without Vib >15 kHz,14,0.04231229447908454
+Retrained without Vib >15 kHz,15,0.00879553320334433
+Retrained without Vib >15 kHz,16,0.005789236091734624
+Retrained without Vib 16--24 kHz,1,0.0056025937250588275
+Retrained without Vib 16--24 kHz,2,0.002863309855247337
+Retrained without Vib 16--24 kHz,3,0.009551961135710779
+Retrained without Vib 16--24 kHz,4,0.011424220346000855
+Retrained without Vib 16--24 kHz,5,0.003213116327365808
+Retrained without Vib 16--24 kHz,6,0.006178075383218821
+Retrained without Vib 16--24 kHz,7,0.18320671479834882
+Retrained without Vib 16--24 kHz,8,0.04332465344851394
+Retrained without Vib 16--24 kHz,9,0.010308621544331592
+Retrained without Vib 16--24 kHz,10,0.014944508487993974
+Retrained without Vib 16--24 kHz,11,0.007749539790285901
+Retrained without Vib 16--24 kHz,12,0.012268349406587198
+Retrained without Vib 16--24 kHz,13,0.013462834227660985
+Retrained without Vib 16--24 kHz,14,0.03522983331020934
+Retrained without Vib 16--24 kHz,15,0.008729347820640627
+Retrained without Vib 16--24 kHz,16,0.005577770692211076

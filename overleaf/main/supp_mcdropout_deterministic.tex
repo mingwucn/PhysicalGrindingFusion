@@ -1,0 +1,30 @@
+\begin{table}[htbp]
+\centering
+\caption{Fold-specific diagnostic comparing deterministic checkpoint
+predictions with the mean of 50 stochastic MC-dropout forwards for
+ResNetVibCNN on Vib-dB. Prediction shift is the mean absolute difference
+between deterministic and stochastic-mean predictions.}
+\label{tab:supp-mcdropout-deterministic}
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+Condition & Deterministic MAE & Stochastic MAE & Prediction shift & Coverage (\%) \\
+\midrule
+1 & 0.0389 & 0.0434 & 0.0048 & 0.0 \\
+2 & 0.0073 & 0.0074 & 0.0009 & 80.0 \\
+3 & 0.0087 & 0.0085 & 0.0011 & 95.0 \\
+4 & 0.1312 & 0.1330 & 0.0059 & 15.0 \\
+5 & 0.0064 & 0.0081 & 0.0019 & 80.0 \\
+6 & 0.0076 & 0.0077 & 0.0008 & 85.0 \\
+7 & 0.2489 & 0.2472 & 0.0022 & 0.0 \\
+8 & 0.0845 & 0.0877 & 0.0034 & 10.0 \\
+9 & 0.0787 & 0.0823 & 0.0041 & 20.0 \\
+10 & 0.0155 & 0.0161 & 0.0008 & 20.0 \\
+11 & 0.0154 & 0.0134 & 0.0022 & 70.0 \\
+12 & 0.0084 & 0.0084 & 0.0004 & 55.0 \\
+13 & 0.0093 & 0.0096 & 0.0008 & 70.0 \\
+14 & 0.0040 & 0.0048 & 0.0016 & 85.0 \\
+15 & 0.0343 & 0.0379 & 0.0043 & 40.0 \\
+16 & 0.0090 & 0.0077 & 0.0020 & 75.0 \\
+\bottomrule
+\end{tabular}
+\end{table}

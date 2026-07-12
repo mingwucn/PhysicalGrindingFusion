@@ -1,0 +1,42 @@
+\begin{abstract}
+Pass-end prediction of grinding surface roughness (\(R_a\)) from signals
+acquired in process may support
+earlier detection of surface-quality deviations, but small condition-structured
+datasets make model selection, validation, and interpretation difficult. This
+study benchmarks 27 model variants across 38 input configurations using
+strict leave-one-condition-out cross-validation over 16 grinding conditions.
+Inputs include process parameters, scalar signal features, full-resolution dB
+spectrograms, per-sample-standardised dB (dB-z) spectrograms, log-mel
+spectrograms, and two-dimensional wavelet-scattering descriptors.
+
+The leading observed point-estimate group comprises random forests on fused
+acoustic-emission and vibration dB-z and log-mel descriptors. The
+reproducible current fixed dB-z pipeline gives \(0.0210~\upmu\)m, while
+cache-matched inner-grouped reruns give \(0.0207~\upmu\)m for dB-z and
+\(0.0206~\upmu\)m for log-mel. Their mean errors are nearly tied, but the
+nested maximum fold errors are 0.1402 and 0.2061~\(\upmu\)m, respectively,
+so dB-z has better observed worst-condition robustness. Historical canonical ranking artifacts
+(0.0200 and 0.0201~\(\upmu\)m) are retained for provenance and the planned
+post-selection comparison, not as evidence of a unique winner. For the
+current fixed dB-z model, the median fold MAE is \(0.0093~\upmu\)m but the
+maximum is \(0.1478~\upmu\)m on Condition~7, exposing substantial unseen-condition
+tail risk. These differences are also close to the available measurement
+uncertainty scale. In the planned post-selection family of 14
+Holm--Bonferroni-corrected Wilcoxon tests, only the comparison with the
+implementation-specific historical shallow MLP remains significant after
+correction; a corrected whole-condition-validation MLP sensitivity remains
+worse but is not part of that historical family. Vibration alone nearly
+matches the fused RF, so the observed mean-level contribution of AE is small.
+
+TreeSHAP, ridge coefficients, and Grad-CAM identify model-associated
+frequency regions, but sensor-response limitations preclude causal
+interpretation of high-frequency AE attributions. For a separately regenerated
+ResNetVibCNN checkpoint set with deterministic MAE of \(0.0443~\upmu\)m,
+nominal MC-dropout epistemic-band coverage is 50.2\%; out-of-bag-scaled intervals for a separate 15-condition RF uncertainty variant also
+under-cover difficult conditions, including
+Condition~7. The results support auditable random forests with dB-z or
+log-mel pass-level spectral descriptors as strong observed baselines in this
+dataset, rather than general superiority over deep learning. The comparison
+is post-selection and non-nested, and full-pass feature aggregation does not
+establish within-pass or closed-loop readiness.
+\end{abstract}

@@ -1,0 +1,3 @@
+model,category,mae_mean,mae_mean,mae_mean
+,,mean,std,count
+RandomForestModel,other,0.03065201623480288,0.00507666420218799,3

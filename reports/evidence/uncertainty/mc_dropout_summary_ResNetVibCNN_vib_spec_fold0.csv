@@ -1,0 +1,2 @@
+model,config,fold,n_samples,coverage_95,mean_interval_width,median_interval_width,mean_abs_error,correlation_std_mae
+ResNetVibCNN,vib_spec,0,19,0.5263157894736842,0.5642281770706177,0.47029584646224976,0.34231218695640564,0.6178261915312405

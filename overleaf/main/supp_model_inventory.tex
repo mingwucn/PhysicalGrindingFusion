@@ -1,0 +1,90 @@
+\begin{longtable}{@{}p{0.42\linewidth}cp{0.43\linewidth}@{}}
+\caption{Complete LOGO-only model inventory. The archived canonical benchmark contains 27 model variants evaluated across 38 distinct input configurations.}\label{tab:supp-model-inventory}\\
+\toprule
+Model variant & Inputs ($n$) & Configuration IDs \\
+\midrule
+\endfirsthead
+\toprule
+Model variant & Inputs ($n$) & Configuration IDs \\
+\midrule
+\endhead
+\texttt{AttentionMLP} & 2 & \texttt{C08, C09} \\
+\texttt{BilinearFusionNetwork} & 19 & \texttt{C03, C04, C06, C07, C08, C09, C16, C17, C18, C19, C20, C21, C25, C26, C27, C30, C31, C35, C36} \\
+\texttt{ChannelAttentionCNN} & 1 & \texttt{C16} \\
+\texttt{CrossAttentionFusion} & 1 & \texttt{C08} \\
+\texttt{FeatureOnlyModel} & 2 & \texttt{C08, C09} \\
+\texttt{GraphNeuralNetworkFusion} & 19 & \texttt{C03, C04, C06, C07, C08, C09, C16, C17, C18, C19, C20, C21, C25, C26, C27, C30, C31, C35, C36} \\
+\texttt{HierarchicalAttentionNetwork} & 1 & \texttt{C09} \\
+\texttt{LightGBMModel} & 20 & \texttt{C03, C05, C06, C08, C09, C10, C11, C12, C13, C14, C15, C16, C18, C21, C27, C30, C32, C33, C34, C35} \\
+\texttt{MeanTrajectoryMLP} & 5 & \texttt{C22, C23, C24, C37, C38} \\
+\texttt{MultiHeadAttentionFusion} & 2 & \texttt{C08, C09} \\
+\texttt{MultiscaleSpectrogramCNN} & 1 & \texttt{C35} \\
+\texttt{ParamsMLP} & 1 & \texttt{C27} \\
+\texttt{PhysicsGuidedAttentionNetwork} & 1 & \texttt{C09} \\
+\texttt{PhysicsInformedFusionNet} & 1 & \texttt{C25} \\
+\texttt{PhysicsMLP} & 8 & \texttt{C03, C06, C08, C09, C18, C21, C27, C30} \\
+\texttt{RandomForestModel} & 20 & \texttt{C03, C05, C06, C08, C09, C10, C11, C12, C13, C14, C15, C16, C18, C21, C27, C30, C32, C33, C34, C35} \\
+\texttt{ResNetAECNN} & 1 & \texttt{C16} \\
+\texttt{ResNetFusion} & 9 & \texttt{C16, C17, C18, C19, C20, C21, C25, C35, C36} \\
+\texttt{ResNetVibCNN} & 1 & \texttt{C35} \\
+\texttt{RidgeRegressionModel} & 5 & \texttt{C09, C16, C18, C27, C35} \\
+\texttt{SSLResNetVibCNN} & 1 & \texttt{C35} \\
+\texttt{ShallowMLPModel} & 3 & \texttt{C09, C27, C35} \\
+\texttt{TabTransformerRegressor} & 12 & \texttt{C03, C04, C05, C06, C07, C08, C09, C26, C27, C30, C31, C32} \\
+\texttt{TrajectoryAttention} & 5 & \texttt{C22, C23, C24, C37, C38} \\
+\texttt{TrajectoryCNN} & 5 & \texttt{C22, C23, C24, C37, C38} \\
+\texttt{TransferFeatureMLP} & 4 & \texttt{C01, C02, C28, C29} \\
+\texttt{XGBoostModel} & 12 & \texttt{C03, C05, C06, C08, C09, C16, C18, C21, C27, C30, C32, C35} \\
+\bottomrule
+\end{longtable}
+
+\begin{longtable}{@{}cp{0.82\linewidth}@{}}
+\caption{Configuration key for Table~\ref{tab:supp-model-inventory}.}\\
+\toprule
+ID & Input configuration \\
+\midrule
+\endfirsthead
+\toprule
+ID & Input configuration \\
+\midrule
+\endhead
+C01 & AE embedding + Vib embedding \\
+C02 & AE embedding + Vib embedding + PP \\
+C03 & AE features \\
+C04 & AE features + physics features \\
+C05 & AE features + PP \\
+C06 & AE features + Vib features \\
+C07 & AE features + Vib features + physics features \\
+C08 & AE features + Vib features + physics features + PP \\
+C09 & AE features + Vib features + PP \\
+C10 & AE-dB-z \\
+C11 & AE-dB-z + Vib-dB-z \\
+C12 & AE-dB-z + Vib-dB-z + PP \\
+C13 & AE-log-mel \\
+C14 & AE-log-mel + Vib-log-mel \\
+C15 & AE-log-mel + Vib-log-mel + PP \\
+C16 & AE-dB \\
+C17 & AE-dB + physics features \\
+C18 & AE-dB + Vib-dB \\
+C19 & AE-dB + Vib-dB + physics features \\
+C20 & AE-dB + Vib-dB + physics features + PP \\
+C21 & AE-dB + Vib-dB + PP \\
+C22 & AE trajectory \\
+C23 & AE trajectory + Vib trajectory \\
+C24 & AE trajectory + Vib trajectory + PP \\
+C25 & all inputs \\
+C26 & physics features + PP \\
+C27 & PP \\
+C28 & Vib embedding \\
+C29 & Vib embedding + PP \\
+C30 & Vib features \\
+C31 & Vib features + physics features \\
+C32 & Vib features + PP \\
+C33 & Vib-dB-z \\
+C34 & Vib-log-mel \\
+C35 & Vib-dB \\
+C36 & Vib-dB + physics features \\
+C37 & Vib trajectory \\
+C38 & Vib trajectory + PP \\
+\bottomrule
+\end{longtable}

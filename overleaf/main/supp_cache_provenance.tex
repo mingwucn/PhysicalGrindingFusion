@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\caption{Exact cache definitions and provenance checksums for the principal time--frequency representations. The SHA-256 digest is computed from contiguous array bytes loaded from the archived cache; complete digests are retained in the frozen archive manifest.}
+\label{tab:supp-cache-provenance}
+\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}l p{2.55cm} p{2.45cm} p{2.55cm} p{2.15cm} l p{3.0cm}@{}}
+\toprule
+Cache & Source quantity & Frequency transform & Amplitude transform & Normalization & Shape & SHA-256 \\
+\midrule
+ae_spec & Arithmetic mean of 2,910 local AE dB maps & Linear STFT bins (NFFT 598, 300 bins) & Magnitude -> dB, clipped at -80 dB, mean over local-map axis & None in cache; no fold-wise scaling in RF spectral runs & (319, 2, 300, 47) & \texttt{\detokenize{e19ab882af8980dba983fe09b594e2a1a23ceaf9bc6ede324e338c61e90c35b6}} \\
+vib_spec & Arithmetic mean of 2,910 local vibration dB maps & Linear STFT bins (NFFT 512, 257 bins) & Magnitude -> dB, clipped at -80 dB, mean over local-map axis & None in cache; no fold-wise scaling in RF spectral runs & (319, 3, 257, 13) & \texttt{\detokenize{7f9573cb3fe9635563aeefbc04158e1b50fa8ecdcb8827563e680f335e1bea1b}} \\
+ae_logspec & Pass-mean AE dB cache & None & Per-sample z-score of dB spectrogram & Per-sample/channel standardization after dB transform & (319, 2, 300, 47) & \texttt{\detokenize{33e9bade3f4b8eeb234e0b952a77f15eaacf024fc4b3446bd72b88547bbc05ed}} \\
+vib_logspec & Pass-mean vibration dB cache & None & Per-sample z-score of dB spectrogram & Per-sample/channel standardization after dB transform & (319, 3, 257, 13) & \texttt{\detokenize{eaf5bd9e879ffe0d00ef9008093d248f6c02d3503a9d98f4f687110d936843ae}} \\
+ae_mel & Pass-mean AE dB cache, inverse-converted to power & 64-bin mel filter bank & Power -> mel sum -> dB & None in cache; no per-sample z-score & (319, 2, 64, 47) & \texttt{\detokenize{ddc30dfd872afdbaae2946811f02aa188b04345a09a0a10921620b37729d0156}} \\
+vib_mel & Pass-mean vibration dB cache, inverse-converted to power & 64-bin mel filter bank & Power -> mel sum -> dB & None in cache; no per-sample z-score & (319, 3, 64, 13) & \texttt{\detokenize{b1f04f5e4e95559472fb8e1406c68447ae59ab69140dacac92698d29f31c29a4}} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}

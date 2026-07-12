@@ -1,0 +1,10 @@
+{
+  "model": "ResNetVibCNN",
+  "config": "vib_spec",
+  "n_test": 59,
+  "mae": 0.010149509645998478,
+  "mean_std": 0.018524713814258575,
+  "coverage_95": 1.0,
+  "mean_pi_width": 0.07261687517166138,
+  "n_passes": 50
+}

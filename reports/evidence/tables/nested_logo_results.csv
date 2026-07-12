@@ -1,0 +1,6 @@
+model,config,mean_mae,std_mae,n_folds
+RandomForestModel,ae_spec+vib_spec,0.02134585936183217,0.04408467993589916,16
+RandomForestModel,ae_mel+vib_mel,0.04548377344088475,0.05901985243162111,16
+LightGBMModel,ae_spec+vib_spec,0.029611101336081837,0.05141121984320373,16
+LightGBMModel,vib_spec,0.028126809371171565,0.05135415574032789,16
+RandomForestModel,ae_features+vib_features+physics+pp,0.04926371360786863,0.061258329393645186,16

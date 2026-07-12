@@ -1,0 +1,38 @@
+% Shared visual system for native TikZ manuscript figures.
+% Keep semantic categories and typography stable; individual figures may vary geometry only.
+\definecolor{pubInk}{HTML}{243746}
+\definecolor{pubMuted}{HTML}{5F6B73}
+\definecolor{pubBlueFill}{HTML}{DCEAF5}
+\definecolor{pubTealFill}{HTML}{D9EEE9}
+\definecolor{pubAmberFill}{HTML}{F7E7B7}
+\definecolor{pubRedFill}{HTML}{F5D9D7}
+\definecolor{pubSlateFill}{HTML}{E5EAED}
+\definecolor{pubGreenFill}{HTML}{DDEBD7}
+
+\tikzset{
+  pub/base/.style={draw=pubInk, line width=0.55pt, rounded corners=2pt,
+    align=center, font=\footnotesize, inner xsep=5pt, inner ysep=4pt},
+  pub/input/.style={pub/base, fill=pubBlueFill},
+  pub/representation/.style={pub/base, fill=pubTealFill},
+  pub/process/.style={pub/base, fill=pubAmberFill},
+  pub/physics/.style={pub/base, fill=pubGreenFill},
+  pub/model/.style={pub/base, fill=pubSlateFill},
+  pub/explanation/.style={pub/base, fill=pubAmberFill},
+  pub/target/.style={pub/base, fill=pubRedFill},
+  pub/arrow/.style={-{Stealth[length=2mm,width=1.35mm]}, draw=pubInk,
+    line width=0.8pt},
+  pub/flow/.style={-{Stealth[length=2.3mm,width=1.5mm]}, draw=pubInk,
+    line width=1.05pt},
+  pub/dashed/.style={pub/arrow, dashed, draw=pubMuted},
+  pub/heading/.style={font=\footnotesize\bfseries, text=pubInk,
+    align=center},
+  pub/note/.style={font=\scriptsize, text=pubMuted, align=left},
+  pub/legend/.style={font=\scriptsize, text=pubInk, anchor=west},
+  % \scriptsize is reserved for legends, notes, and dense condition grids.
+  % All semantic nodes and headings use the shared \footnotesize base.
+  pub/condition/.style={pub/base, minimum width=1.05cm, minimum height=0.78cm,
+    font=\scriptsize\bfseries},
+  pub/train/.style={pub/condition, fill=pubBlueFill},
+  pub/validation/.style={pub/condition, fill=pubAmberFill},
+  pub/test/.style={pub/condition, fill=pubRedFill},
+}

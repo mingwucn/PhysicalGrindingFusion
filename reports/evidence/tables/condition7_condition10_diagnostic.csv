@@ -1,0 +1,3 @@
+condition,wheel_speed_m_s,workpiece_speed_r_min,depth_um,n_passes,mean_measured_ra_um,std_measured_ra_um
+7,30.0,80.0,20.0,20,0.3539699986577034,0.013149947983136769
+10,35.0,80.0,20.0,20,0.07826000042259693,0.00776893894232667

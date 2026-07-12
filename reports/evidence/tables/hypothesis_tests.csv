@@ -1,0 +1,18 @@
+hypothesis,model,baseline_config,baseline_mae,test_config,test_mae,improvement_pct,note
+H1_Fusion_vs_Single,RandomForestModel,pp,0.0153228217222561,ae_spec+vib_spec,0.0090320314360395,41.05503803571211,Best fusion vs best single-modality per model
+H1_Fusion_vs_Single,LightGBMModel,pp,0.0252204623894205,vib_spec,0.0112199249189105,55.51261215727335,Best fusion vs best single-modality per model
+H1_Fusion_vs_Single,XGBoostModel,pp,0.0143265742168913,vib_spec,0.0126798032891768,11.494519923492426,Best fusion vs best single-modality per model
+H1_Fusion_vs_Single,BilinearFusionNetwork,pp,0.019243309638202,ae_spec+vib_spec+physics+pp,0.0136628875022836,28.999284638854906,Best fusion vs best single-modality per model
+H1_Fusion_vs_Single,GraphNeuralNetworkFusion,pp,0.0153704227139525,all,0.01401226389069,8.836183939363172,Best fusion vs best single-modality per model
+H1_Fusion_vs_Single,TabTransformerRegressor,pp,0.0185040004478161,vib_features+pp,0.0172581344514231,6.7329548543111875,Best fusion vs best single-modality per model
+H1_Fusion_vs_Single,PhysicsMLP,pp,0.0412170961525303,ae_spec+vib_spec+pp,0.0415591535754035,-0.8298920952785166,Best fusion vs best single-modality per model
+H2_Physics_Informed,RandomForestModel,ae_features+vib_features,0.026974808462408,ae_features+vib_features+pp,0.0229929119805463,14.761537556089992,Effect of adding process parameters (PP proxy)
+H2_Physics_Informed,LightGBMModel,ae_features+vib_features,0.0268934363757513,ae_features+vib_features+pp,0.0223405964561143,16.929186200028006,Effect of adding process parameters (PP proxy)
+H2_Physics_Informed,XGBoostModel,ae_features+vib_features,0.0241577123421075,ae_features+vib_features+pp,0.0202698968176262,16.093475530399214,Effect of adding process parameters (PP proxy)
+H2_Physics_Informed,BilinearFusionNetwork,ae_features+vib_features,0.028962727350984,ae_features+vib_features+pp,0.020001432171613,30.940784929450167,Effect of adding process parameters (PP proxy)
+H2_Physics_Informed,GraphNeuralNetworkFusion,ae_features+vib_features,0.0265692379142433,ae_features+vib_features+pp,0.0168735566275001,36.492131682653635,Effect of adding process parameters (PP proxy)
+H2_Physics_Informed,TabTransformerRegressor,ae_features+vib_features,0.0225007349120493,ae_features+vib_features+pp,0.019051442260945,15.329688850550294,Effect of adding process parameters (PP proxy)
+H2_Physics_Informed,PhysicsMLP,ae_features+vib_features,0.0419603858021078,ae_features+vib_features+pp,0.041858202143136,0.24352411689853073,Effect of adding process parameters (PP proxy)
+H3_Spectrogram_vs_Features,N/A,feature_based,,spectrogram_cnn,,,Mixed evidence — see Section 7.5 interpretation
+H4_XAI_Alignment,N/A,N/A,,N/A,,,Qualitative — SHAP completed; Grad-CAM/attention unavailable
+H5_Edge_Deployment,N/A,FeatureOnlyModel,,Best_Full_Model,,,FeatureOnlyModel not benchmarked; theoretical param counts only

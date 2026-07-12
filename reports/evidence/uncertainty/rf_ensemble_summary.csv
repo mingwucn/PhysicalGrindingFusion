@@ -1,0 +1,2 @@
+model,config,n_samples,coverage_95,mean_interval_width,median_interval_width,mean_abs_error,correlation_std_mae
+RandomForestModel,ae_mel+vib_mel,319,0.3887147335423197,1.4882167695125843,0.5077099835092592,0.5377421462396388,0.7386470031296076

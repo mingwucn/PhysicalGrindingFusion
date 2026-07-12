@@ -1,0 +1,8 @@
+group,model,config,MAE (µm),MSE,R²,folds
+dB-z spectrogram,RandomForestModel,ae_logspec+vib_logspec,0.0200 ± 0.0356,0.0016 ± 0.0052,-10.8151 ± 30.2301,16
+Log-mel spectrogram,RandomForestModel,ae_mel+vib_mel,0.0201 ± 0.0483,0.0028 ± 0.0107,-16.2774 ± 61.7972,16
+Spectrogram,RandomForestModel,ae_spec+vib_spec+pp,0.0210 ± 0.0425,0.0023 ± 0.0083,-14.6137 ± 47.2498,16
+WST,LightGBMModel,vib_wst,0.0225 ± 0.0358,0.0019 ± 0.0050,-13.9907 ± 31.4652,16
+Other,TrajectoryCNN,vib_trajectory,0.0259 ± 0.0565,0.0040 ± 0.0140,-25.1187 ± 80.6659,16
+Time-domain features,BilinearFusionNetwork,ae_features+vib_features+physics+pp,0.0358 ± 0.0424,0.0034 ± 0.0073,-33.3835 ± 48.3168,16
+Process params,TabTransformerRegressor,pp,0.0418 ± 0.0672,0.0060 ± 0.0162,-66.8837 ± 146.0751,16
