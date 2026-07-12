@@ -1,6 +1,6 @@
 # Replication Guide - PhysicalGrindingFusion
 
-The immutable public review snapshot is the Git tag `review-v1`. The exact
+The immutable public review snapshot is the Git tag `review-v2`. The exact
 319-sample evaluation target is stored in
 `reports/evidence/tables/final_evaluation_targets.csv`; its SHA-256 digest and
 the excluded sample identifier are recorded in
@@ -33,6 +33,11 @@ large artifacts are not mirrored in Git. Research-use access to available raw
 recordings and caches may be requested from the corresponding author.
 
 ## Reproduction steps
+
+0. **Verify the exact target vector**
+   ```bash
+   PYTHONPATH=src python scripts/generate_evaluation_target_manifest.py
+   ```
 
 1. **Cache signal representations**
    ```bash
@@ -117,3 +122,6 @@ recordings and caches may be requested from the corresponding author.
   publication labels describe their actual transformations.
 * Figure generators and manuscript mappings are listed in
   `docs/figure_script_toc.md` and `reports/publication/figure_toc.md`.
+* The complete experiment-family, XAI, uncertainty, deployment, and known-gap
+  documentation is maintained in
+  `docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md`.

@@ -18,6 +18,9 @@ features, process parameters, and heuristic physics-inspired indicators.
 * `overleaf/`: manuscript and TikZ source.
 * `reports/evidence/`: small result, provenance, XAI, and uncertainty manifests.
 * `docs/figure_script_toc.md`: figure-to-generator mapping.
+* `docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md`: authoritative scientific
+  provenance, experiment-family, result, and limitation ledger.
+* `docs/README.md`: documentation index.
 * `REPLICATION.md`: environment, data placement, and principal commands.
 
 ## Data availability

@@ -11,13 +11,13 @@
   },
   {
     "path": "README.md",
-    "sha256": "7efa040fd52dd8a868454a2fce067a067285a395411393221690d751ef6f7718",
-    "bytes": 1832
+    "sha256": "738bee19aef86bc90252ce08736ac8478ed12ea1f630cc206d66ba5374286754",
+    "bytes": 2012
   },
   {
     "path": "REPLICATION.md",
-    "sha256": "ccb255b09d0a104728ff989209d6248322ce853c494ad12f59c8dc537ab11de5",
-    "bytes": 4270
+    "sha256": "1035da19c5097d856e103ccbaae3c87e88a71d2430ed7183cab68b431bd41008",
+    "bytes": 4560
   },
   {
     "path": "configs/runtime.yaml",
@@ -33,6 +33,16 @@
     "path": "docs/12_VISUALIZATION_CONTRACT.md",
     "sha256": "0fc3597638ed09db71d23af5735df7ec65afea71a942c2565a63edb27fed322a",
     "bytes": 15461
+  },
+  {
+    "path": "docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md",
+    "sha256": "439c5bd3e5ca8dead74b5112283a1e84d3e964fe2656ae19da4beb8f65668070",
+    "bytes": 12809
+  },
+  {
+    "path": "docs/README.md",
+    "sha256": "b2b2c0769c0ab4e9cb6cd5014393bd68cf3fb588f9ecaffd9b0bcc8ac94d083f",
+    "bytes": 1154
   },
   {
     "path": "docs/figure_script_toc.md",
@@ -51,7 +61,7 @@
   },
   {
     "path": "overleaf/main/Acknowledgment.tex",
-    "sha256": "9106f547ae2ee32753c7257cbc38b5585d9ccc13e8baaee43617a325917cb958",
+    "sha256": "ef860aecde299243e873f02728ddbf22cb1bfa0f52001ca95091c8f2fafd4938",
     "bytes": 2589
   },
   {
@@ -1155,6 +1165,11 @@
     "bytes": 2033
   },
   {
+    "path": "scripts/cache_wst_features.py",
+    "sha256": "d83126cb0b2361b9ee0e76b6f6212ac808199ab8ab95a46bc3d04ed4dd9a9c7f",
+    "bytes": 2697
+  },
+  {
     "path": "scripts/clustered_uncertainty_diagnostics.py",
     "sha256": "0a98afd7bb454d08a4241429206410486bfeb7961af407d3b8bbd6b9096923cd",
     "bytes": 3612
@@ -1188,6 +1203,11 @@
     "path": "scripts/generate_evaluation_target_manifest.py",
     "sha256": "dfbc10973a6c1b89dc8cccf9583cac369f24223563784b16f42180d0f671968c",
     "bytes": 2413
+  },
+  {
+    "path": "scripts/generate_findings_summary.py",
+    "sha256": "02f7caee2f882eb5fb8f32d62fb847ea5f02b56a6d4715a21b83367426a79dc6",
+    "bytes": 10352
   },
   {
     "path": "scripts/generate_fixed_input_representation_figure.py",
@@ -1318,6 +1338,11 @@
     "path": "scripts/pass_position_sensitivity.py",
     "sha256": "5e8b3feca024c1116af37ddb9b527bd37986b88eb8399b77b869131218bdd541",
     "bytes": 5560
+  },
+  {
+    "path": "scripts/physics_consistency_check.py",
+    "sha256": "49a55a5efb28be89961ff0bf74fe9118e783f2f4a761e2bb18992f8221ec004e",
+    "bytes": 5618
   },
   {
     "path": "scripts/pre_normalization_band_ablation.py",
