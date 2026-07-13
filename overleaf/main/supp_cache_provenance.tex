@@ -8,12 +8,12 @@
 \toprule
 Cache & Source quantity & Frequency transform & Amplitude transform & Normalization & Shape \\
 \midrule
-ae_spec & Arithmetic mean of 2,910 local AE dB maps & Linear STFT bins (NFFT 598, 300 bins) & Magnitude -> dB, clipped at -80 dB, mean over local-map axis & None in cache; no fold-wise scaling in RF spectral runs & (319, 2, 300, 47) \\
-vib_spec & Arithmetic mean of 2,910 local vibration dB maps & Linear STFT bins (NFFT 512, 257 bins) & Magnitude -> dB, clipped at -80 dB, mean over local-map axis & None in cache; no fold-wise scaling in RF spectral runs & (319, 3, 257, 13) \\
-ae_logspec & Pass-mean AE dB cache & None & Per-sample z-score of dB spectrogram & Per-sample/channel standardization after dB transform & (319, 2, 300, 47) \\
-vib_logspec & Pass-mean vibration dB cache & None & Per-sample z-score of dB spectrogram & Per-sample/channel standardization after dB transform & (319, 3, 257, 13) \\
-ae_mel & Pass-mean AE dB cache, inverse-converted to power & 64-bin mel filter bank & Power -> mel sum -> dB & None in cache; no per-sample z-score & (319, 2, 64, 47) \\
-vib_mel & Pass-mean vibration dB cache, inverse-converted to power & 64-bin mel filter bank & Power -> mel sum -> dB & None in cache; no per-sample z-score & (319, 3, 64, 13) \\
+ae\_spec & Arithmetic mean of 2,910 local AE dB maps & Linear STFT bins (NFFT 598, 300 bins) & Magnitude -> dB, clipped at -80 dB, mean over local-map axis & None in cache; no fold-wise scaling in RF spectral runs & (319, 2, 300, 47) \\
+vib\_spec & Arithmetic mean of 2,910 local vibration dB maps & Linear STFT bins (NFFT 512, 257 bins) & Magnitude -> dB, clipped at -80 dB, mean over local-map axis & None in cache; no fold-wise scaling in RF spectral runs & (319, 3, 257, 13) \\
+ae\_logspec & Pass-mean AE dB cache & None & Per-sample z-score of dB spectrogram & Per-sample/channel standardization after dB transform & (319, 2, 300, 47) \\
+vib\_logspec & Pass-mean vibration dB cache & None & Per-sample z-score of dB spectrogram & Per-sample/channel standardization after dB transform & (319, 3, 257, 13) \\
+ae\_mel & Pass-mean AE dB cache, inverse-converted to power & 64-bin mel filter bank & Power -> mel sum -> dB & None in cache; no per-sample z-score & (319, 2, 64, 47) \\
+vib\_mel & Pass-mean vibration dB cache, inverse-converted to power & 64-bin mel filter bank & Power -> mel sum -> dB & None in cache; no per-sample z-score & (319, 3, 64, 13) \\
 \bottomrule
 \end{tabular}%
 }
@@ -28,12 +28,12 @@ vib_mel & Pass-mean vibration dB cache, inverse-converted to power & 64-bin mel 
 \toprule
 Cache & Shape & SHA-256 prefix \\
 \midrule
-\texttt{ae_spec} & \texttt{(319, 2, 300, 47)} & \texttt{e19ab882af89} \\
-\texttt{vib_spec} & \texttt{(319, 3, 257, 13)} & \texttt{7f9573cb3fe9} \\
-\texttt{ae_logspec} & \texttt{(319, 2, 300, 47)} & \texttt{33e9bade3f4b} \\
-\texttt{vib_logspec} & \texttt{(319, 3, 257, 13)} & \texttt{eaf5bd9e879f} \\
-\texttt{ae_mel} & \texttt{(319, 2, 64, 47)} & \texttt{ddc30dfd872a} \\
-\texttt{vib_mel} & \texttt{(319, 3, 64, 13)} & \texttt{b1f04f5e4e95} \\
+\texttt{ae\_spec} & \texttt{(319, 2, 300, 47)} & \texttt{e19ab882af89} \\
+\texttt{vib\_spec} & \texttt{(319, 3, 257, 13)} & \texttt{7f9573cb3fe9} \\
+\texttt{ae\_logspec} & \texttt{(319, 2, 300, 47)} & \texttt{33e9bade3f4b} \\
+\texttt{vib\_logspec} & \texttt{(319, 3, 257, 13)} & \texttt{eaf5bd9e879f} \\
+\texttt{ae\_mel} & \texttt{(319, 2, 64, 47)} & \texttt{ddc30dfd872a} \\
+\texttt{vib\_mel} & \texttt{(319, 3, 64, 13)} & \texttt{b1f04f5e4e95} \\
 \bottomrule
 \end{tabular}
 \end{table}

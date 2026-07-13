@@ -116,8 +116,8 @@
   },
   {
     "path": "overleaf/main/Supplementary.tex",
-    "sha256": "22af0cfe406446d5ff7051791cf48bcb03866211fd8adb0a1526eb46c5d0e981",
-    "bytes": 36558
+    "sha256": "54a4eeca23c181d401217031dadc76ef7a62774d6e4e4b7129ff0a48ad1d8557",
+    "bytes": 36651
   },
   {
     "path": "overleaf/main/statistical_comparison_table.tex",
@@ -131,8 +131,8 @@
   },
   {
     "path": "overleaf/main/supp_cache_provenance.tex",
-    "sha256": "4d1d8eb565e2a1742451d30d53940ed58c9a4d5756d2c311b6c31cbc93ba910d",
-    "bytes": 2555
+    "sha256": "5ba1e272ae402a810e9427fc3e206753e6b873c33cb7606dae588d661f7d6f6c",
+    "bytes": 2567
   },
   {
     "path": "overleaf/main/supp_dl_architectures.tex",
@@ -2436,8 +2436,8 @@
   },
   {
     "path": "scripts/generate_cache_provenance.py",
-    "sha256": "75ae446407cd81e194f69af8657ebfcc0080b4213a4f2061e7da00aafa8b562d",
-    "bytes": 5633
+    "sha256": "e43693a181c5f23e3136b4b83d6f966ae7f32e4ad6d2006ed31a055ee4607509",
+    "bytes": 6225
   },
   {
     "path": "scripts/generate_evaluation_target_manifest.py",

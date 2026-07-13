@@ -20,6 +20,21 @@ def checksum(arr: np.ndarray) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def latex_escape(value: object) -> str:
+    """Escape generated plain text for use in LaTeX table cells."""
+    replacements = {
+        "\\": "\\textbackslash{}",
+        "&": "\\&",
+        "%": "\\%",
+        "$": "\\$",
+        "#": "\\#",
+        "_": "\\_",
+        "{": "\\{",
+        "}": "\\}",
+    }
+    return "".join(replacements.get(char, char) for char in str(value))
+
+
 def main() -> int:
     mean = np.load(CACHE_DIR / "mean_specs.npz", allow_pickle=True)
     alt = np.load(CACHE_DIR / "alternative_reps.npz", allow_pickle=True)
@@ -98,9 +113,16 @@ def main() -> int:
         "\\midrule",
     ]
     for _, row in df.iterrows():
+        cells = [
+            latex_escape(row["cache"]),
+            latex_escape(row["source"]),
+            latex_escape(row["freq_transform"]),
+            latex_escape(row["amp_transform"]),
+            latex_escape(row["normalization"]),
+            latex_escape(row["shape"]),
+        ]
         definition_lines.append(
-            f"{row['cache']} & {row['source']} & {row['freq_transform']} & {row['amp_transform']} & "
-            f"{row['normalization']} & {row['shape']} \\\\"
+            " & ".join(cells) + " \\\\"
         )
     definition_lines.extend([
         "\\bottomrule",
@@ -122,8 +144,9 @@ def main() -> int:
         "\\midrule",
     ]
     for _, row in df.iterrows():
+        cache = latex_escape(row["cache"])
         checksum_lines.append(
-            f"\\texttt{{{row['cache']}}} & \\texttt{{{row['shape']}}} & "
+            f"\\texttt{{{cache}}} & \\texttt{{{row['shape']}}} & "
             f"\\texttt{{{row['sha256'][:12]}}} \\\\"
         )
     checksum_lines.extend(["\\bottomrule", "\\end{tabular}", "\\end{table}", ""])
