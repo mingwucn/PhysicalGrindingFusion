@@ -104,8 +104,9 @@ def bootstrap_median_ci(diff: np.ndarray, n_boot: int = 10000, alpha: float = 0.
 
 
 def wrap_comparison_label(label: str) -> str:
-    """Render pairwise labels consistently as A / vs / B on three lines."""
-    return label.replace(" vs ", "\nvs\n")
+    """Render pairwise labels consistently as [A] / vs / [B]."""
+    model_a, model_b = label.split(" vs ", maxsplit=1)
+    return PublicationPlotter.comparison_label(model_a, model_b)
 
 
 def plot_statistical_comparison_forest():

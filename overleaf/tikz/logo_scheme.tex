@@ -1,39 +1,85 @@
-\begin{tikzpicture}[
-    train/.style={pub/train},
-    val/.style={pub/validation},
-    test/.style={pub/test},
-    arrow/.style={pub/arrow},
-    ann/.style={pub/heading},
-]
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}
 
-% One representative LOGO fold. The caption supplies the full figure title.
+% Two linked panels: a representative split and the within-fold evaluation.
+\node[pub/panel, minimum width=6.60cm, minimum height=5.75cm] (splitPanel) at (0,0.25) {};
+\node[pub/panel, minimum width=6.75cm, minimum height=5.75cm] (evalPanel)  at (6.95,0.25) {};
+\node[pub/panel, minimum width=13.72cm, minimum height=1.55cm] (repeatPanel) at (3.48,-3.55) {};
+
+% Panel headers
+\node[pub/stage badge] at (-2.82,2.68) {1};
+\node[pub/heading, anchor=west] at (-2.48,2.68) {Representative LOGO fold};
+\node[pub/note, align=center] at (0,2.23) {Example shown: C1 is test; C8 is validation.};
+
+\node[pub/stage badge] at (4.03,2.68) {2};
+\node[pub/heading, anchor=west] at (4.37,2.68) {Fit, select, and score};
+
+% ===== Representative 4 x 4 condition grid ==================================
 \foreach \c in {1,...,16} {
-    \pgfmathsetmacro{\col}{mod(\c-1,8)}
-    \pgfmathsetmacro{\row}{floor((\c-1)/8)}
-    \pgfmathsetmacro{\x}{\col*1.10}
-    \pgfmathsetmacro{\y}{0.45 - \row*1.12}
-    \ifnum\c=1
-        \node[test] (C\c) at (\x,\y) {C\c\\TEST};
-    \else\ifnum\c=8
-        \node[val] (C\c) at (\x,\y) {C\c\\VAL};
-    \else
-        \node[train] (C\c) at (\x,\y) {C\c};
-    \fi\fi
+  \pgfmathtruncatemacro{\col}{mod(\c-1,4)}
+  \pgfmathtruncatemacro{\row}{floor((\c-1)/4)}
+  \pgfmathsetmacro{\xx}{-2.25 + 1.50*\col}
+  \pgfmathsetmacro{\yy}{1.70 - 1.02*\row}
+  \ifnum\c=1
+    \node[pub/test, minimum width=1.25cm, minimum height=0.72cm] (C\c) at (\xx,\yy)
+      {{\bfseries C\c}\\[-1pt]{\normalfont\pubTinyFont test}};
+  \else\ifnum\c=8
+    \node[pub/validation, minimum width=1.25cm, minimum height=0.72cm] (C\c) at (\xx,\yy)
+      {{\bfseries C\c}\\[-1pt]{\normalfont\pubTinyFont validation}};
+  \else
+    \node[pub/train, minimum width=1.25cm, minimum height=0.72cm] (C\c) at (\xx,\yy) {C\c};
+  \fi\fi
 }
 
-\node[ann] (annTest) at (0.0,-2.35) {Held-out test condition};
-\draw[arrow] (annTest.north) -- (C1.south);
-\node[ann] (annVal) at (4.7,-2.35) {Validation condition};
-\draw[arrow] (annVal.north) -- (C8.south);
+% Integrated split summary (no detached legend)
+\node[pub/tag, draw=pubBlue!62, fill=pubBlueFill] at (-1.95,-2.16) {train: 14 conditions};
+\node[pub/tag, draw=pubAmber!72, fill=pubAmberFill] at (0.05,-2.16) {validation: 1};
+\node[pub/tag, draw=pubCoral!68, fill=pubCoralFill] at (1.87,-2.16) {test: 1};
 
-\node[pub/base, fill=white, text width=7.5cm] at (3.85,-3.65) {
-  The remaining 14 conditions train the model. Repeat the split 16 times so each condition is tested once.
-};
+% ===== Within-fold evaluation =================================================
+\node[pub/input, minimum width=1.75cm, minimum height=0.92cm] (trainSet) at (4.95,1.42)
+  {{\bfseries Train}\\14 conditions};
+\node[pub/explanation, minimum width=1.75cm, minimum height=0.92cm] (valSet) at (4.95,0.06)
+  {{\bfseries Validation}\\1 condition};
+\node[pub/test, minimum width=1.75cm, minimum height=0.92cm] (testSet) at (4.95,-1.46)
+  {{\bfseries Test}\\untouched};
 
-\node[train, minimum width=0.8cm, minimum height=0.45cm] (legT) at (0.2,-4.8) {};
-\node[right=0.08cm of legT, pub/legend] {Train (14)};
-\node[val, minimum width=0.8cm, minimum height=0.45cm] (legV) at (3.0,-4.8) {};
-\node[right=0.08cm of legV, pub/legend] {Validation (1)};
-\node[test, minimum width=0.8cm, minimum height=0.45cm] (legTe) at (6.3,-4.8) {};
-\node[right=0.08cm of legTe, pub/legend] {Test (1)};
+\node[pub/model, minimum width=2.25cm, minimum height=1.55cm] (fit) at (7.35,0.74) {};
+\pic[scale=0.58] at (6.76,0.75) {pubNetwork};
+\node[pub/subheading, anchor=west] at (7.42,1.03) {Fit and select};
+\node[pub/note, anchor=west, text=pubInk] at (7.42,0.47) {training loss\\validation criterion};
+
+\node[pub/model, minimum width=2.25cm, minimum height=1.20cm] (evaluate) at (7.35,-1.30) {};
+\node[pub/subheading] at (7.35,-1.05) {Final evaluation};
+\node[pub/note, text=pubInk, align=center] at (7.35,-1.56) {predictions for the\\held-out condition};
+
+\node[pub/target, minimum width=1.75cm, minimum height=1.20cm] (score) at (9.50,-1.30) {};
+\node[pub/subheading] at (9.50,-1.05) {Fold score};
+\node[pub/body] at (9.50,-1.52) {$\hat{R}_a$ vs. $R_a$};
+
+\draw[pub/arrow] (trainSet.east) -- (6.22,1.14);
+\draw[pub/arrow] (valSet.east) -- (6.22,0.38);
+\draw[pub/arrow] (fit.south) -- (evaluate.north);
+\draw[pub/arrow] (testSet.east) -- (evaluate.west);
+\draw[pub/arrow] (evaluate.east) -- (score.west);
+
+% ===== Repeat across all held-out groups =====================================
+\node[pub/stage badge] at (-2.82,-3.55) {3};
+\node[pub/heading, anchor=west] at (-2.48,-3.55) {Rotate the held-out condition};
+
+\node[pub/test, minimum width=0.72cm, minimum height=0.52cm, font=\pubTinyFont\bfseries] (r1) at (2.05,-3.55) {C1};
+\node[pub/test, minimum width=0.72cm, minimum height=0.52cm, font=\pubTinyFont\bfseries] (r2) at (3.10,-3.55) {C2};
+\node[pub/test, minimum width=0.72cm, minimum height=0.52cm, font=\pubTinyFont\bfseries] (r3) at (4.15,-3.55) {C3};
+\node[pub/body] at (5.05,-3.55) {$\cdots$};
+\node[pub/test, minimum width=0.82cm, minimum height=0.52cm, font=\pubTinyFont\bfseries] (r16) at (6.05,-3.55) {C16};
+\draw[pub/arrow] (r1.east) -- (r2.west);
+\draw[pub/arrow] (r2.east) -- (r3.west);
+\draw[pub/arrow] (r3.east) -- (4.72,-3.55);
+\draw[pub/arrow] (5.38,-3.55) -- (r16.west);
+\draw[pub/dashed] (r16.south) to[out=-65,in=-115,looseness=0.85] (r1.south);
+
+\node[pub/tag, draw=pubCoral!62, fill=white, minimum width=3.38cm] at (8.38,-3.55)
+  {average the 16 held-out test scores};
+
 \end{tikzpicture}%
+}

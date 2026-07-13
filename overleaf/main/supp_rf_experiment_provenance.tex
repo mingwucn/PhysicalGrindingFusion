@@ -45,14 +45,11 @@ OOB analyses use 15 non-test conditions and remain method-specific diagnostics
 rather than exact refits of the recommended 14-condition pipeline.
 
 The historical 14-comparison family reads its 16 fold records per
-model--configuration from \texttt{full\_results\_logo\_only.csv} (SHA-256
-\nolinkurl{b91bae9e26c8ff3f2f9e965e570d93e6cf6d3c72b103bdda41f6f79463ba0ca0}).
-The canonical split manifest has SHA-256
-\nolinkurl{5b19e7babe5f7de3f38f064dc4797fc37adf31aaab1d9f7cd6f3f7b425971ea5},
-and the generated statistical table has SHA-256
-\nolinkurl{f902e18c29105f4a09f7a9b64765eb55b0fe15608f0eb9344093f318ae220cca}.
-The 240 fold-level prediction files used across the 15 unique
-model--configuration sources in that family are listed with complete hashes
-in \texttt{canonical\_prediction\_manifest.csv}; the manifest itself has
-SHA-256
-\nolinkurl{96cfe7989a2666b6add9023570a690e7e2de0dd42c235818df339c4c1bc5c286}.
+model--configuration from \texttt{full\_results\_logo\_only.csv}. The 240
+fold-level prediction files used across its 15 unique model--configuration
+sources are indexed in \texttt{canonical\_prediction\_manifest.csv}.
+Compact identifiers for these artifacts and the canonical split and test
+tables are listed in Table~\ref{tab:supp-artifact-hashes}; complete digests
+remain in the public machine-readable manifest.
+
+\input{main/supp_artifact_hashes.tex}

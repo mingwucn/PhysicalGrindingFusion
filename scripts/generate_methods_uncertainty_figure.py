@@ -87,7 +87,6 @@ def main() -> int:
     ax.scatter(x, y_true, c=PublicationPalette.OBSERVED, s=15, zorder=3, label="Observed $R_a$")
     ax.set_xlabel("Sample index (sorted by prediction)")
     ax.set_ylabel("Surface roughness $R_a$ (µm)")
-    ax.set_title("(a) MC-dropout nominal epistemic intervals")
     ax.legend(loc="upper left")
 
     # (b) Reliability: predicted std vs observed error
@@ -97,7 +96,6 @@ def main() -> int:
     ax.scatter(rel["bin_mean_std"], rel["bin_mean_abs_error"], s=120, color=PublicationPalette.UNCERTAINTY, edgecolor="black", zorder=3)
     ax.set_xlabel("Mean predicted std in bin (µm)")
     ax.set_ylabel("Mean observed absolute error (µm)")
-    ax.set_title("(b) Reliability diagram")
     ax.legend(loc="upper left")
 
     # (c) Coverage by uncertainty bin
@@ -107,12 +105,7 @@ def main() -> int:
     ax.set_ylim(0, 1)
     ax.set_xlabel("Uncertainty bin (low → high)")
     ax.set_ylabel("Empirical coverage")
-    ax.set_title("(c) Coverage by uncertainty bin")
     ax.legend(loc="lower right")
-
-    fig.suptitle(
-        "MC-dropout uncertainty quantification for ResNetVibCNN on vibration spectrograms",
-    )
 
     fig.subplots_adjust(left=0.09, right=0.98, bottom=0.10, top=0.90)
     managed.save()

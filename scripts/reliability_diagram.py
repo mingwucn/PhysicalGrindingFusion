@@ -73,7 +73,7 @@ def main():
 
     # Left: coverage per uncertainty bin
     ax = axes[0]
-    ax.axhline(0.95, color="k", linestyle="--", label="nominal 95%")
+    nominal = ax.axhline(0.95, color="k", linestyle="--", label="Nominal 95%")
     ax.bar(
         range(len(table)),
         table["bin_coverage"],
@@ -84,20 +84,21 @@ def main():
     ax.set_ylim(0, 1)
     ax.set_xlabel("Uncertainty bin (low → high)")
     ax.set_ylabel("Empirical coverage")
-    ax.set_title("Coverage by uncertainty bin")
-    ax.legend(loc="lower left", frameon=False)
 
     # Right: mean absolute error and comparable interval half-width per bin
     ax = axes[1]
     x = np.arange(len(table))
-    ax.plot(x, table["bin_mean_abs_error"], "o-", ms=5, color=PublicationPalette.OBSERVED, label="Mean absolute error")
-    ax.plot(x, table["bin_mean_half_width"], "s--", ms=5, color=PublicationPalette.UNCERTAINTY, label="Nominal 95% half-width")
+    error_line, = ax.plot(x, table["bin_mean_abs_error"], "o-", ms=4, color=PublicationPalette.OBSERVED, label="Mean absolute error")
+    half_width_line, = ax.plot(x, table["bin_mean_half_width"], "s--", ms=4, color=PublicationPalette.UNCERTAINTY, label="Nominal 95% half-width")
     ax.set_xlabel("Uncertainty bin (low → high)")
     ax.set_ylabel(r"Value ($\mu$m)")
-    ax.set_title("Error and interval half-width by bin")
-    ax.legend(loc="upper left", frameon=False)
-
-    fig.subplots_adjust(left=0.09, right=0.98, bottom=0.20, top=0.88, wspace=0.32)
+    PublicationPlotter.figure_legend_below(
+        fig,
+        [nominal, error_line, half_width_line],
+        ["Nominal 95%", "Mean absolute error", "Nominal 95% half-width"],
+        ncol=3,
+    )
+    fig.subplots_adjust(left=0.09, right=0.98, bottom=0.29, top=0.91, wspace=0.32)
     managed.save()
 
 if __name__ == "__main__":

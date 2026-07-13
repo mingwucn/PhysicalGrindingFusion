@@ -1,89 +1,113 @@
 \resizebox{\linewidth}{!}{%
-\begin{tikzpicture}[
-    raw/.style={pub/input, minimum width=2.6cm, minimum height=0.85cm, text width=2.5cm},
-    rep/.style={pub/representation, minimum width=2.6cm, minimum height=0.85cm, text width=2.5cm},
-    pp/.style={pub/process, minimum width=2.6cm, minimum height=0.85cm, text width=2.5cm},
-    phys/.style={pub/physics, minimum width=2.6cm, minimum height=0.85cm, text width=2.5cm},
-    config/.style={pub/explanation, minimum width=4.0cm, minimum height=1.05cm, text width=3.8cm},
-    model/.style={pub/model, minimum width=3.6cm, minimum height=1.05cm, text width=3.4cm},
-    target/.style={pub/target, minimum width=2.8cm, minimum height=1.6cm, text width=2.6cm},
-    arrow/.style={pub/arrow},
-    flowarrow/.style={pub/flow},
-    label/.style={pub/heading},
-]
+\begin{tikzpicture}
 
-% ===== Left column: input modalities =====
-\node[raw]  (ae_raw)  at (0, 5.0) {AE Raw\\(4.0 MHz)};
-\node[rep]  (ae_spec) at (0, 3.5) {AE Spectrogram\\(2 channels$\times$300$\times$47)};
-\node[rep]  (ae_feat) at (0, 2.0) {AE Features\\(RMS, Kurt, Skew, Crest)};
-\draw[arrow] (ae_raw)  -- (ae_spec);
-\draw[arrow] (ae_spec) -- (ae_feat);
+% -----------------------------------------------------------------------------
+% Four-stage overview. The panel geometry and semantic colours are shared with
+% the companion taxonomy, LOGO, and architecture figures.
+% -----------------------------------------------------------------------------
 
-\node[raw]  (vib_raw)  at (0, 0.0)  {Vib Raw\\(51.2 kHz)};
-\node[rep]  (vib_spec) at (0,-1.5)  {Vib Spectrogram\\(3$\times$257$\times$13)};
-\node[rep]  (vib_feat) at (0,-3.0)  {Vib Features\\(RMS, Kurt, Skew, Crest)};
-\draw[arrow] (vib_raw)  -- (vib_spec);
-\draw[arrow] (vib_spec) -- (vib_feat);
+% Background panels
+\node[pub/panel, minimum width=4.25cm, minimum height=8.10cm] (pInput)  at (0,0) {};
+\node[pub/panel, minimum width=4.25cm, minimum height=8.10cm] (pConfig) at (5.25,0) {};
+\node[pub/panel, minimum width=4.25cm, minimum height=8.10cm] (pModel)  at (10.25,0) {};
 
-\node[pp]   (pp)   at (0,-5.0) {Process Params\\($v_s,\,v_w,\,a_p$)};
-\node[phys] (phys) at (0,-6.5) {Physics Features\\(11 indic.$\times$4 agg. = 44-D)};
+% Stage headers
+\node[pub/stage badge] at (-1.70,3.55) {1};
+\node[pub/heading, anchor=west] at (-1.38,3.55) {Acquire and represent};
+\node[pub/stage badge] at (3.55,3.55) {2};
+\node[pub/heading, anchor=west] at (3.87,3.55) {Assemble inputs};
+\node[pub/stage badge] at (8.55,3.55) {3};
+\node[pub/heading, anchor=west] at (8.87,3.55) {Benchmark models};
+\node[pub/stage badge] at (13.18,3.55) {4};
+\node[pub/heading, anchor=west] at (13.50,3.55) {Regress};
 
-% Column headers
-\node[label] at (0,   7.2) {Input Modalities};
-\node[label] at (5.5, 7.2) {Input Configuration\\Categories};
-\node[label] at (10.3,7.2) {Representative Model Families};
+% ===== Stage 1: modalities ====================================================
+\node[pub/input, minimum width=3.76cm, minimum height=1.72cm] (ae) at (0,2.18) {};
+\node[pub/subheading] at (0,2.78) {Acoustic emission};
+\pic[scale=0.47] at (-1.18,2.21) {pubWaveform};
+\pic[scale=0.47] at (0,2.21) {pubSpectrogram};
+\pic[scale=0.47] at (1.18,2.21) {pubFeatureBars};
+\node[pub/tiny, text=pubInk] at (-1.18,1.67) {raw\\4.0 MHz};
+\node[pub/tiny, text=pubInk] at (0,1.67) {spectrum\\$2\!\times\!300\!\times\!47$};
+\node[pub/tiny, text=pubInk] at (1.18,1.67) {descriptors\\4 statistics};
 
-% ===== Flow arrows between columns =====
-\draw[flowarrow] (1.5, 0.25) -- (3.3, 0.25) node[midway, above, pub/heading] {combine};
-\draw[flowarrow] (7.7, 0.25) -- (8.7, 0.25) node[midway, above, pub/heading] {evaluate};
-\draw[flowarrow] (12.1,0.25) -- (13.1,0.25) node[midway, above, pub/heading] {predict};
+\node[pub/representation, minimum width=3.76cm, minimum height=1.72cm] (vib) at (0,0.08) {};
+\node[pub/subheading] at (0,0.68) {Vibration};
+\pic[scale=0.47] at (-1.18,0.11) {pubWaveform};
+\pic[scale=0.47] at (0,0.11) {pubSpectrogram};
+\pic[scale=0.47] at (1.18,0.11) {pubFeatureBars};
+\node[pub/tiny, text=pubInk] at (-1.18,-0.43) {raw\\51.2 kHz};
+\node[pub/tiny, text=pubInk] at (0,-0.43) {spectrum\\$3\!\times\!257\!\times\!13$};
+\node[pub/tiny, text=pubInk] at (1.18,-0.43) {descriptors\\4 statistics};
 
-% ===== Middle column: configuration categories =====
-\node[config] (c1) at (5.5, 5.6) {1.\ Process params only};
-\node[config] (c2) at (5.5, 4.2) {2.\ Single modality\\(AE or Vib spectrum/features)};
-\node[config] (c3) at (5.5, 2.8) {3.\ AE+Vib fusion\\(no physics)};
-\node[config] (c4) at (5.5, 1.4) {4.\ AE+Vib+physics\\(+ process params)};
-\node[config] (c5) at (5.5, 0.0) {5.\ Single modality\\+ physics features};
-\node[config] (c6) at (5.5,-1.4) {6.\ Process params\\+ physics features};
-\node[config] (c7) at (5.5,-2.8) {7.\ All modalities combined};
+\node[pub/process, minimum width=1.78cm, minimum height=1.55cm] (proc) at (-0.99,-2.18) {};
+\node[pub/subheading] at (-0.99,-1.70) {Process};
+\pic[scale=0.47] at (-0.99,-2.13) {pubSliders};
+\node[pub/tiny, text=pubInk] at (-0.99,-2.70) {$v_s,\;v_w,\;a_p$};
 
-% ===== Right column: model zoo =====
-\node[model] (m1) at (10.3, 5.6) {Classical ML\\Ridge / RF / XGB / LightGBM\\Shallow MLP};
-\node[model] (m2) at (10.3, 4.2) {Single-Modality CNNs\\ResNetAE / ResNetVib\\ChannelAttention};
-\node[model] (m3) at (10.3, 2.8) {Fusion CNNs\\Bilinear / ResNetFusion};
-\node[model] (m4) at (10.3, 1.4) {Graph Fusion\\GNN};
-\node[model] (m5) at (10.3, 0.0) {Tabular DL\\TabTransformer};
-\node[model] (m6) at (10.3,-1.4) {Attention Fusion\\Cross-modal attention};
-\node[model] (m7) at (10.3,-2.8) {Sequence Models\\TrajectoryCNN};
+\node[pub/physics, minimum width=1.78cm, minimum height=1.55cm] (phys) at (0.99,-2.18) {};
+\node[pub/subheading] at (0.99,-1.70) {Physics};
+\pic[scale=0.47] at (0.99,-2.13) {pubPhysics};
+\node[pub/tiny, text=pubInk] at (0.99,-2.70) {$11\!\times\!4=44$-D};
 
-% ===== Target =====
-\node[target] (target) at (14.5, 0.25) {Surface Roughness $R_a$\\(\textmu m)\\0.066--0.381};
+% ===== Stage 2: input configurations =========================================
+\foreach \yy/\num/\txt in {
+  2.55/1/{Process parameters only},
+  1.73/2/{Single modality: spectrum or descriptors},
+  0.91/3/{AE + vibration fusion},
+  0.09/4/{AE + vibration + physics + process},
+ -0.73/5/{Single modality + physics},
+ -1.55/6/{Process parameters + physics},
+ -2.37/7/{All modalities combined}
+}{
+  \node[pub/explanation, minimum width=3.38cm, minimum height=0.64cm,
+        text width=3.02cm, font=\pubSmallFont] (cfg\num) at (5.38,\yy) {\txt};
+  \node[circle, draw=pubAmber!78!pubInk, fill=white, text=pubInk,
+        minimum size=4.2mm, inner sep=0pt, font=\pubTinyFont\bfseries]
+        at (3.63,\yy) {\num};
+}
+\node[pub/tag, minimum width=3.38cm] at (5.25,-3.20)
+  {identical LOGO partitions for every configuration};
 
-% Representative dashed connectors
-\draw[pub/dashed] (ae_spec.east)  -- ++(0.4,0) |- (c2.west);
-\draw[pub/dashed] (ae_feat.east)  -- ++(0.4,0) |- (c7.west);
-\draw[pub/dashed] (vib_spec.east) -- ++(0.4,0) |- (c3.west);
-\draw[pub/dashed] (pp.east)       -- ++(0.4,0) |- (c1.west);
-\draw[pub/dashed] (phys.east)     -- ++(0.4,0) |- (c6.west);
+% ===== Stage 3: representative model families ===============================
+\node[pub/model, minimum width=3.72cm, minimum height=1.32cm] (mClassical) at (10.25,2.48) {};
+\pic[scale=0.52] at (9.02,2.48) {pubTree};
+\node[pub/subheading, anchor=west, text width=2.18cm, align=left] at (9.72,2.75) {Classical models};
+\node[pub/note, anchor=west, text=pubInk, text width=2.18cm] at (9.72,2.27)
+  {Ridge, RF, XGB\\LightGBM, shallow MLP};
 
-% ===== Compact two-row legend =====
-\node[raw, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg1) at (1.0,-8.25) {};
-\node[right=0.08cm of leg1, pub/legend] {AE raw};
+\node[pub/model, minimum width=3.72cm, minimum height=1.32cm] (mSpectral) at (10.25,0.88) {};
+\pic[scale=0.55] at (9.02,0.86) {pubConvStack};
+\node[pub/subheading, anchor=west, text width=2.18cm, align=left] at (9.72,1.15) {Spectral CNNs};
+\node[pub/note, anchor=west, text=pubInk, text width=2.18cm] at (9.72,0.67)
+  {ResNetAE / ResNetVib\\multiscale CNN};
 
-\node[rep, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg2) at (5.0,-8.25) {};
-\node[right=0.08cm of leg2, pub/legend] {AE representation};
+\node[pub/model, minimum width=3.72cm, minimum height=1.32cm] (mFusion) at (10.25,-0.72) {};
+\pic[scale=0.58] at (9.02,-0.72) {pubFusion};
+\node[pub/subheading, anchor=west, text width=2.18cm, align=left] at (9.72,-0.45) {Fusion networks};
+\node[pub/note, anchor=west, text=pubInk, text width=2.18cm] at (9.72,-0.93)
+  {Bilinear / ResNet fusion\\attention fusion};
 
-\node[pp, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg3) at (10.0,-8.25) {};
-\node[right=0.08cm of leg3, pub/legend] {Process / physics};
+\node[pub/model, minimum width=3.72cm, minimum height=1.32cm] (mStructured) at (10.25,-2.32) {};
+\pic[scale=0.55] at (9.02,-2.32) {pubGraph};
+\node[pub/subheading, anchor=west, text width=2.18cm, align=left] at (9.72,-2.05) {Structured};
+\node[pub/note, anchor=west, text=pubInk, text width=2.18cm] at (9.72,-2.53)
+  {GNN / TabTransformer\\TrajectoryCNN};
 
-\node[config, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg4) at (1.0,-9.0) {};
-\node[right=0.08cm of leg4, pub/legend] {Config. category};
+% ===== Stage 4: target ========================================================
+\node[pub/target, minimum width=2.32cm, minimum height=3.18cm] (target) at (14.35,0) {};
+\pic[scale=0.82] at (14.35,0.82) {pubRoughness};
+\node[pub/subheading] at (14.35,0.15) {Surface roughness};
+\node[pub/body] at (14.35,-0.42) {$R_a$ (\textmu m)};
+\node[pub/tag, draw=pubCoral!62, fill=white] at (14.35,-1.03) {0.066--0.381};
 
-\node[model, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg5) at (5.0,-9.0) {};
-\node[right=0.08cm of leg5, pub/legend] {Model};
-
-\node[target, minimum width=0.55cm, minimum height=0.36cm, text width=0.55cm] (leg6) at (10.0,-9.0) {};
-\node[right=0.08cm of leg6, pub/legend] {Target};
+% Inter-stage flow arrows
+\draw[pub/flow] (2.18,0) -- (3.06,0)
+  node[midway, above=2pt, pub/tiny, text=pubInk] {assemble};
+\draw[pub/flow] (7.43,0) -- (8.06,0)
+  node[midway, above=2pt, pub/tiny, text=pubInk] {evaluate};
+\draw[pub/flow] (12.43,0) -- (13.13,0)
+  node[midway, above=2pt, pub/tiny, text=pubInk] {predict};
 
 \end{tikzpicture}%
 }

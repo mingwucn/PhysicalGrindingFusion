@@ -50,6 +50,7 @@ class PublicationPlotter:
         "#17becf",
     ]
     LEGEND_SIZE = 6
+    PANEL_LABEL_SIZE = 8
     POINT_SIZE = 78
     BUBBLE_LABEL_SIZE = 7
 
@@ -102,10 +103,13 @@ class PublicationPlotter:
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
             # Line and axis styling
-            "axes.linewidth": 0.8,
-            "xtick.major.width": 0.8,
-            "ytick.major.width": 0.8,
-            "lines.linewidth": 1.5,
+            "axes.linewidth": 0.6,
+            "xtick.major.width": 0.6,
+            "ytick.major.width": 0.6,
+            "xtick.minor.width": 0.4,
+            "ytick.minor.width": 0.4,
+            "lines.linewidth": 0.8,
+            "patch.linewidth": 0.5,
             # Accessible color cycle
             "axes.prop_cycle": plt.cycler(color=cls._COLOR_CYCLE),
             # Layout (do not force constrained_layout; legacy tight_layout calls are common)
@@ -130,10 +134,10 @@ class PublicationPlotter:
 
         Nature standard widths: 89 mm (single), 183 mm (double).
         """
-        if width_mm not in (89, 140, 183):
+        if width_mm not in (89, 183):
             warnings.warn(
                 f"Width {width_mm} mm is not a standard Nature width "
-                "(89, 140, 183 mm).",
+                "(89 or 183 mm).",
                 UserWarning,
                 stacklevel=2,
             )
@@ -168,20 +172,42 @@ class PublicationPlotter:
         ax,
         label: str,
         x: float = -0.12,
-        y: float = 1.06,
+        y: float = 1.04,
         **kwargs,
     ) -> None:
         """Add an 8-pt bold lowercase panel label (a, b, c, ...)."""
         defaults = {
-            "fontsize": 8,
+            "fontsize": PublicationPlotter.PANEL_LABEL_SIZE,
             "fontweight": "bold",
             "style": "normal",
             "va": "top",
             "ha": "right",
             "transform": ax.transAxes,
+            "clip_on": False,
+            "color": "black",
         }
         defaults.update(kwargs)
         ax.text(x, y, label, **defaults)
+
+    @staticmethod
+    def comparison_label(model_a: str, model_b: str) -> str:
+        """Return the project-wide compact pair label used on categorical axes."""
+        return f"[{model_a}]\nvs\n[{model_b}]"
+
+    @staticmethod
+    def figure_legend_below(fig: Figure, handles: Sequence, labels: Sequence[str], *, ncol: int) -> None:
+        """Place one shared legend below the axes, outside all data regions."""
+        fig.legend(
+            handles,
+            labels,
+            loc="lower center",
+            bbox_to_anchor=(0.5, 0.01),
+            ncol=ncol,
+            frameon=False,
+            fontsize=PublicationPlotter.LEGEND_SIZE,
+            handlelength=1.8,
+            columnspacing=1.2,
+        )
 
     @classmethod
     def savefig(
@@ -239,7 +265,7 @@ class PublicationPlotter:
             fig.savefig(
                 path,
                 dpi=dpi if fmt == "png" else None,
-                bbox_inches="tight",
+                bbox_inches=None,
                 facecolor=facecolor,
                 format=fmt,
             )

@@ -209,7 +209,9 @@ class Top20RankingFigure(DenseRankingFigure):
     def draw(self) -> None:
         ax = self.ax
         self.top20["label"] = self.top20.apply(
-            lambda row: f"{_abbrev_model(row['model'])}: {_abbrev_config(row['config'])}",
+            lambda row: PublicationPlotter.comparison_label(
+                _abbrev_model(row["model"]), _abbrev_config(row["config"])
+            ),
             axis=1,
         )
         y = np.arange(len(self.top20))
@@ -229,18 +231,20 @@ class Top20RankingFigure(DenseRankingFigure):
         ax.set_xlabel("Mean LOGO MAE (µm)")
         ax.set_title(f"Historical canonical top 20 ({CV_STRATEGY_NAME}, {CV_TOTAL_FOLDS} folds)")
         x_max = float((self.top20["mae_mean"] + self.top20["mae_std"]).max())
-        ax.set_xlim(0, x_max * 1.16)
+        annotation_x = x_max * 1.08
+        ax.set_xlim(0, x_max * 1.24)
         for bar, mae in zip(bars, self.top20["mae_mean"]):
             ax.text(
-                bar.get_width() + x_max * 0.012,
+                annotation_x,
                 bar.get_y() + bar.get_height() / 2,
                 f"{mae:.4f}",
                 va="center",
                 ha="left",
-                fontsize=7,
+                fontsize=6,
+                color="black",
             )
         assert self.fig is not None
-        self.fig.subplots_adjust(left=0.38, right=0.94, top=0.96, bottom=0.05)
+        self.fig.subplots_adjust(left=0.40, right=0.98, top=0.96, bottom=0.06)
 
 
 def fig_ranking_top20(df: pd.DataFrame) -> str:
@@ -268,9 +272,7 @@ def fig_prediction_scatter_top3(df: pd.DataFrame) -> str:
         ax.plot(lims, lims, "k--", lw=1.5, label="Ideal")
         ax.set_xlim(lims); ax.set_ylim(lims); ax.set_aspect("equal", adjustable="box")
         ax.set_xlabel("Measured Ra (µm)"); ax.set_ylabel("Predicted Ra (µm)")
-        ax.set_title(f"{row['model']}\n{publication_config_label(row['config'])}\nMAE = {row['mae_mean']:.4f} µm")
         ax.legend(loc="upper left", fontsize=7)
-    plt.suptitle("Prediction Calibration for the Top-3 Configurations", y=1.02, fontsize=7, fontweight="bold")
     fig.tight_layout()
     managed.apply_panel_row_rules(axes)
     return _finish_submission_figure("prediction_scatter_top3", managed)
@@ -292,8 +294,6 @@ def fig_residual_distribution_top3(df: pd.DataFrame) -> str:
         ax.axvline(0, color="black", linestyle="--", lw=1.5)
         ax.set_xlabel("Residual = Predicted − Measured (µm)")
         ax.set_ylabel("Density")
-        ax.set_title(f"{row['model']}\n{publication_config_label(row['config'])}")
-    plt.suptitle("Residual Distributions for the Top-3 Configurations", y=1.02, fontsize=7, fontweight="bold")
     fig.tight_layout()
     managed.apply_panel_row_rules(axes)
     return _finish_submission_figure("residual_distribution_top3", managed)
@@ -320,9 +320,7 @@ def fig_error_vs_target_top3(df: pd.DataFrame) -> str:
             ax.plot(yt_s, smoothed, color="black", lw=2, label="Moving avg")
         ax.axhline(row["mae_mean"], color="red", linestyle="--", lw=1.5, label="Mean MAE")
         ax.set_xlabel("Measured Ra (µm)"); ax.set_ylabel("Absolute Error (µm)")
-        ax.set_title(f"{row['model']}\n{publication_config_label(row['config'])}")
         ax.legend(loc="upper left", fontsize=7)
-    plt.suptitle("Absolute Error vs. Measured Surface Roughness (Top-3)", y=1.02, fontsize=7, fontweight="bold")
     fig.tight_layout()
     managed.apply_panel_row_rules(axes)
     return _finish_submission_figure("error_vs_target_top3", managed)
@@ -555,9 +553,11 @@ def generate_report(df: pd.DataFrame, git_info: Dict[str, str]) -> Path:
 
 ## Updated LOGO Benchmark Report
 
-**Generated:** {now}  
-**Project:** VibeGrinding  
-**Git commit:** `{git_info['commit']}` (`{git_info['branch']}`, dirty={git_info['dirty']})  
+**Generated:** {now}
+
+**Project:** VibeGrinding
+
+**Git commit:** `{git_info['commit']}` (`{git_info['branch']}`, dirty={git_info['dirty']})
 **Report:** `reports/publication/submission_report.md`
 
 ---

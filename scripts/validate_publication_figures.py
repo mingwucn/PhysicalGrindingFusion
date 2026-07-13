@@ -47,6 +47,7 @@ ARTIFACTS = {
     "shap_importance_LightGBMModel_ae_spec+vib_spec": ("scripts/generate_xai_composite_figure.py", "two_panel_row"),
     "mc_dropout_intervals_ResNetVibCNN_vib_spec": ("scripts/replot_mc_dropout_intervals.py", "double"),
     "mc_dropout_reliability": ("scripts/reliability_diagram.py", "two_panel_row"),
+    "condition7_condition10_spectra": ("scripts/condition7_condition10_diagnostic.py", "two_panel_row"),
     "rf_conformal_intervals": ("scripts/review_rf_oob_figure.py", "double"),
     "latency_vs_accuracy": ("scripts/benchmark_latency_cached.py", "double"),
 }
@@ -76,6 +77,15 @@ def main() -> int:
             errors.append(f"{artifact}: expected profile {profile_name}, found {metadata['profile']['name']}")
         if metadata.get("palette") != "PublicationPalette":
             errors.append(f"{artifact}: missing shared PublicationPalette provenance")
+        width_mm = metadata["profile"].get("width_mm")
+        if width_mm not in {89, 183}:
+            errors.append(f"{artifact}: nonstandard Nature width {width_mm} mm")
+        ratio = float(metadata["profile"].get("ratio", 0.0))
+        if width_mm and width_mm * ratio > 170:
+            errors.append(f"{artifact}: rendered height exceeds Nature's 170 mm maximum")
+        panel_count = int(metadata["profile"].get("nrows", 1)) * int(metadata["profile"].get("ncols", 1))
+        if panel_count > 1 and "panel_labels" not in metadata.get("metadata", {}):
+            errors.append(f"{artifact}: missing automatic Nature panel-label provenance")
 
         source = ROOT / source_rel
         if source_rel not in checked_sources:
@@ -91,6 +101,9 @@ def main() -> int:
         for include in includes.get(artifact, []):
             if re.search(r"width=0\.", include):
                 errors.append(f"{artifact}: nonstandard LaTeX scale factor in {include}")
+            required_width = "89mm" if width_mm == 89 else "183mm"
+            if f"width={required_width}" not in include:
+                errors.append(f"{artifact}: expected final-size width={required_width} in {include}")
 
     if errors:
         print("Publication figure style validation failed:", file=sys.stderr)

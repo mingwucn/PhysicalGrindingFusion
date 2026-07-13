@@ -325,7 +325,10 @@ Do not accept arbitrary plotting scripts as final evidence. Exploratory figures 
 
 # Appendix: Hardcoded Nature-style figure guidelines
 
-This appendix hard-codes the publication figure style used by this project. It is derived from the `MyVis` publication-visualization system and Nature's figure-preparation guidelines.
+This appendix hard-codes the publication figure style used by this project.
+The official Nature Research figure guide and Nature final-submission
+specifications are the controlling sources. Where an older local convention
+conflicts with those sources, the Nature requirement wins.
 
 ## A.1 Scope
 
@@ -351,7 +354,6 @@ All final figures for manuscripts, reports, and evidence must follow these rules
 | Layout | Width | Notes |
 |---|---|---|
 | Single column | **89 mm** | Default |
-| 1.5 column | **140 mm** | Use sparingly |
 | Double column | **183 mm** | Wide multi-panel figures |
 | Maximum height | **170 mm** | Leave room for caption |
 | Aspect ratio | 0.618 (golden) unless content dictates otherwise |
@@ -366,9 +368,9 @@ they use the dedicated double-column profile:
 | Export width | **183 mm** |
 | Maximum height | **170 mm** |
 | Tick labels | **6 pt** at final print size |
-| Value labels | **7 pt** at final print size |
-| Labels | One line; abbreviate model/configuration names before shrinking text |
-| LaTeX inclusion | `width=\linewidth` or `width=\textwidth`; no fractional downscaling |
+| Value labels | **6--7 pt** at final print size, outside error-bar paths |
+| Labels | Three lines: `[model]`, `vs`, `[configuration]`; abbreviate before shrinking text |
+| LaTeX inclusion | `width=183mm`; no fractional downscaling |
 
 ### A.3.2 Three- and four-panel horizontal rows
 
@@ -396,6 +398,14 @@ individual figures may mutate only their data artists and justified layout
 details. Direct standalone `matplotlib.pyplot.subplots` plus direct
 `savefig` calls are not permitted in final figure generators.
 
+The ancestor automatically labels every visible axis in a multi-panel figure
+with 8 pt bold upright lowercase letters in row-major order. Do not add panel
+titles or prose subcaptions inside a panel when the letter and the main figure
+caption are sufficient; the ancestor clears axis titles at export to enforce
+this rule. Each panel must be described in the LaTeX caption as
+`\textbf{a}, ...`, `\textbf{b}, ...`. Legends must be outside data regions;
+use one shared legend for repeated series across panels.
+
 ## A.4 File format and resolution
 
 - **Preferred format**: **PDF** with embedded fonts.
@@ -421,8 +431,8 @@ details. Direct standalone `matplotlib.pyplot.subplots` plus direct
 - Include axis lines and tick marks.
 - Label every axis; place units in parentheses, e.g., `Roughness (µm)`.
 - Avoid overlapping text and labels.
-- Pairwise comparison labels should wrap as `model A`, `vs`, `model B` on
-  separate lines when placed on the categorical axis.
+- Pairwise or model--configuration labels must use the shared three-line form
+  `[A]`, `vs`, `[B]` on the categorical axis.
 - Statistical figures that show the same pairwise family must use the shared
   comparison palette: blue (`PublicationPalette.OBSERVED`) for Model A or
   confidence intervals and orange
@@ -455,10 +465,10 @@ mpl.rcParams.update({
     "figure.dpi": 900,
     "savefig.dpi": 900,
     "pdf.fonttype": 42,
-    "axes.linewidth": 0.8,
-    "xtick.major.width": 0.8,
-    "ytick.major.width": 0.8,
-    "lines.linewidth": 1.5,
+    "axes.linewidth": 0.6,
+    "xtick.major.width": 0.6,
+    "ytick.major.width": 0.6,
+    "lines.linewidth": 0.8,
 })
 ```
 
@@ -497,6 +507,21 @@ def fig_size(width_mm=89, ratio=0.618, max_height_mm=170):
 - [ ] Figure height does not exceed 170 mm.
 - [ ] Output is PDF/EPS (or PNG at 900 DPI if raster is unavoidable).
 
-## A.10 Source
+## A.10 Controlling sources
 
-These rules are a hard-coded project adaptation of the guidelines in the `MyVis` repository (`git@github.com:mingwucn/MyVis.git`), specifically `references/nature_figure_guidelines.md` and `src/visualization/plot_engine.py`.
+These are hard constraints derived from the official sources below:
+
+- Nature Research, *Building and exporting figure panels*:
+  https://research-figure-guide.nature.com/figures/building-and-exporting-figure-panels/
+- Nature Research, *Preparing figures: our specifications*:
+  https://research-figure-guide.nature.com/figures/preparing-figures-our-specifications/
+- Nature, *Final submission*:
+  https://www.nature.com/nature/for-authors/final-submission
+- Nature Reviews, *Figure guidelines*:
+  https://www.nature.com/documents/natrev-figure-guidelines-v1.pdf
+
+Required interpretation: 89 mm and 183 mm are the only final widths; ordinary
+text is 5--7 pt; panel letters are 8 pt bold upright lowercase; strokes are
+0.25--1 pt; text remains editable and fonts embedded; panels are compact,
+alphabetical, and free of overlap. This contract applies to Python figures and
+native TikZ diagrams.

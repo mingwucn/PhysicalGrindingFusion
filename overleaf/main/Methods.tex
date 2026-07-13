@@ -160,7 +160,6 @@ pipeline is shown in Figure~\ref{fig:preprocessing-pipeline}.
 
 \begin{figure}[htbp]
 \centering
-\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[
   node distance=1.2cm and 1.4cm,
   box/.style={pub/representation, minimum width=2.4cm, minimum height=0.9cm},
@@ -184,7 +183,6 @@ pipeline is shown in Figure~\ref{fig:preprocessing-pipeline}.
 \draw[arrow, dashed] (stftp) -- (stft);
 \draw[arrow, dashed] (melp) -- (mel);
 \end{tikzpicture}%
-}
 \caption{Preprocessing pipeline for AE and vibration signals. Raw
 waveforms are transformed by a Hann-window STFT. The magnitude branch is
 converted to dB and averaged over local maps; an optional per-sample
@@ -313,7 +311,10 @@ standardisation. The maximum condition MAE increases from 0.1478 to
 0.1863~\(\upmu\)m (Condition~7), so the ablation supports
 mean-level robustness but not tail robustness.
 
-Exact cache definitions, shapes, and SHA-256 provenance checksums are listed in Supplementary Table~\ref{tab:supp-cache-provenance}.
+Exact transformations are listed in Supplementary
+Table~\ref{tab:supp-cache-definitions}; compact checksum prefixes are given in
+Supplementary Table~\ref{tab:supp-cache-provenance}, with complete digests
+retained in the public machine-readable manifest.
 The available provenance for the two physical AE columns is separated from
 the unavailable transfer-function information in Supplementary
 Table~\ref{tab:supp-ae-plane-provenance}.
@@ -332,7 +333,6 @@ shown schematically in Figure~2. Note that for the vibration channel, the tempor
 
 \begin{figure}[htbp]
 \centering
-\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[
   node distance=1.4cm,
   box/.style={pub/representation, minimum width=2.6cm, minimum height=0.9cm},
@@ -352,7 +352,6 @@ shown schematically in Figure~2. Note that for the vibration channel, the tempor
 \draw[arrow] (mod2) -- (avg);
 \draw[arrow] (avg) -- (out);
 \end{tikzpicture}%
-}
 \caption{Wavelet scattering transform pipeline. A 2D spectrogram is
 passed through two Morlet filter banks separated by modulus
 nonlinearities, then spatially averaged to produce a compact,
@@ -413,11 +412,11 @@ head.
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{methods_signal_representations.png}
+\includegraphics[width=183mm,height=\textheight,keepaspectratio]{methods_signal_representations.png}
 \caption{Example signal representations for condition 10, sample 1
-($R_a = 0.098~\upmu$m). (a)~AE dB spectrogram, (b)~AE log-mel
-spectrogram, (c)~vibration (Z-axis) dB spectrogram, and
-(d)~vibration log-mel spectrogram. The examples show dominant lower-frequency
+($R_a = 0.098~\upmu$m). \textbf{a}, AE dB spectrogram. \textbf{b}, AE
+log-mel spectrogram. \textbf{c}, vibration (Z-axis) dB spectrogram.
+\textbf{d}, vibration log-mel spectrogram. The examples show dominant lower-frequency
 energy in both modalities. Vibration below 5~kHz is compatible with structural
 dynamics, whereas AE is treated as an empirical contact-related descriptor
 because its transfer function is unavailable. Higher-frequency AE activity
@@ -512,7 +511,7 @@ Section~\ref{experimental-workflow}.
 
 \begin{figure}[htbp]
 \centering
-\resizebox{0.98\linewidth}{!}{\input{tikz/resnetvibcnn_architecture}}
+\input{tikz/resnetvibcnn_architecture}
 \caption{ResNetVibCNN architecture for vibration dB spectrogram
 regression. The three-axis input is processed by a stem convolution and
 two stride-two SE-residual blocks. Each residual block contains batch
@@ -548,7 +547,7 @@ Attention regressor & AE-dB + Vib-dB & Self-attention & Late fusion \\
 
 \begin{figure}
 \centering
-\resizebox{0.98\linewidth}{!}{\input{tikz/model_taxonomy}}
+\input{tikz/model_taxonomy}
 \caption{Model taxonomy evaluated in this study. Ridge regression is directly
 inspectable; tree ensembles are audited with post-hoc attribution; the shallow
 MLP is a separate neural baseline; and deeper neural architectures are analysed
@@ -781,11 +780,11 @@ convolutional features rather than an isolated original-STFT bin.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{methods_xai_comparison.png}
-\caption{Explainability methods applied to real grinding data. (a)~Ridge
-regression coefficient magnitudes for Vib-dB. (b)~TreeSHAP
+\includegraphics[width=183mm]{methods_xai_comparison.png}
+\caption{Explainability methods applied to real grinding data. \textbf{a},
+Ridge regression coefficient magnitudes for Vib-dB. \textbf{b}, TreeSHAP
 mean $|\text{SHAP}|$ for LightGBM on Vib-dB.
-(c)~Grad-CAM frequency importance for ResNetVibCNN on Vib-dB.
+\textbf{c}, Grad-CAM frequency importance for ResNetVibCNN on Vib-dB.
 Shaded bands mark low-frequency structural modes (green) and
 higher-frequency vibration/chatter regions (blue).}
 \label{fig:xai-methods}
@@ -876,12 +875,12 @@ benchmark RF.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{methods_uncertainty_overview.png}
+\includegraphics[width=183mm]{methods_uncertainty_overview.png}
 \caption{Full 16-fold LOGO MC-dropout uncertainty for ResNetVibCNN on
-Vib-dB. (a)~Nominal 95\% MC-dropout epistemic intervals and observed $R_a$
-sorted by predicted mean. (b)~Reliability diagram: mean predicted
+Vib-dB. \textbf{a}, Nominal 95\% MC-dropout epistemic intervals and observed $R_a$
+sorted by predicted mean. \textbf{b}, Reliability diagram: mean predicted
 standard deviation versus mean observed absolute error per bin.
-(c)~Empirical coverage per uncertainty bin against the nominal 95\%
+\textbf{c}, Empirical coverage per uncertainty bin against the nominal 95\%
 level. Aggregate coverage is 50.2\% and mean interval width is
 0.0479~\(\upmu\)m, indicating that MC-dropout is under-covering on this
 CNN; the intervals are correlated with error but are not calibrated.}

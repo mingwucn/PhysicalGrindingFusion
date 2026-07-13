@@ -11,7 +11,7 @@ their resolved profile under `reports/evidence/figure_metadata/`.
 | Profile | Physical export size | Intended use |
 |---|---:|---|
 | `single` | 89 mm wide | One compact axis or simple diagnostic |
-| `wide` | 140 mm wide | Label-dense single panel |
+| `wide` | 183 mm wide | Label-dense single panel using the Nature double-column width |
 | `double` | 183 mm wide | Standard manuscript-wide panel |
 | `dense_ranking` | 183 mm wide, up to 170 mm high | One readable 15--25 item ranking |
 | `three_panel_row` | 183 mm wide | Three related panels, one shared legend/colourbar maximum |
@@ -28,11 +28,13 @@ All manuscript TikZ figures must load the shared
 Use `pub/input`, `pub/representation`, `pub/process`, `pub/physics`,
 `pub/model`, `pub/explanation`, and `pub/target` for semantic nodes; use
 `pub/arrow`, `pub/flow`, and `pub/dashed` for connectors. Do not introduce
-figure-local palette definitions, arbitrary rounded-corner radii, or
-`\scalebox` resizing. Use `\resizebox{\linewidth}{!}` only to contain a
-complete schematic, and use a compact horizontal legend only when colour
-carries meaning. Semantic nodes and headings are always `\footnotesize`;
-`\scriptsize` is reserved for legends, notes, and dense condition grids.
+figure-local palette definitions, arbitrary rounded-corner radii, or nested
+scaling. The four canonical full-width schematics may use one outer
+`\resizebox{\linewidth}{!}` because their geometry and type are designed and
+visually verified as a unit; arbitrary local scaling remains forbidden.
+Geometry must target the final 89 mm or 183 mm width, and a compact horizontal legend is permitted only when colour
+carries meaning. Semantic nodes and headings use the shared 7 pt-equivalent
+sans-serif style; legends and notes use the shared 5--6 pt-equivalent style.
 Do not apply figure-local `font=` overrides to semantic nodes or headings.
 Avoid scaling a small diagram up to `\linewidth`: use its natural compact
 width instead. Diagram geometry may vary by task, but typography, strokes,
@@ -42,6 +44,16 @@ below the shared type size. Taxonomies should use the available line width
 with balanced outer margins and at least one node-height of clearance around
 `pub/note` text. Wide schematic legends should use compact swatches in two
 rows instead of forcing the diagram beyond `\linewidth`.
+Multi-panel TikZ figures use `pub/panel label` for 8 pt bold upright lowercase
+letters at the top left. No prose subcaption belongs inside a panel; the main
+LaTeX caption defines `\textbf{a}`, `\textbf{b}`, and subsequent panels.
+
+These are hard constraints from the official Nature figure guidance:
+
+- https://research-figure-guide.nature.com/figures/building-and-exporting-figure-panels/
+- https://research-figure-guide.nature.com/figures/preparing-figures-our-specifications/
+- https://www.nature.com/nature/for-authors/final-submission
+- https://www.nature.com/documents/natrev-figure-guidelines-v1.pdf
 
 ### TikZ Visual Verification
 
@@ -88,7 +100,7 @@ symmetric error bars that extend below zero.
 | `scripts/generate_results_figures.py` | `reports/evidence/plots/results/results_statistical_comparison_pairs.png/.pdf` | `fig:statistical-pairs`; horizontal bars with model A / `vs` / model B wrapped labels |
 | `scripts/generate_results_figures.py` | `reports/evidence/plots/results/results_statistical_comparison_forest.png/.pdf` | `fig:statistical-forest`; blue CI/orange median palette and A / `vs` / B wrapped labels match `fig:statistical-pairs` |
 | `scripts/generate_results_figures.py` | `reports/evidence/plots/results/results_interpretability_bandmass.png/.pdf` | `fig:bandmass`; RF OOF TreeSHAP, LightGBM global TreeSHAP, and ResNetVibCNN Grad-CAM are separate rows |
-| `scripts/generate_results_figures.py` | `reports/evidence/plots/results/results_uncertainty_calibration.png/.pdf` | `fig:uncertainty-calibration` |
+| `scripts/generate_results_figures.py` | `reports/evidence/plots/results/results_uncertainty_calibration.png/.pdf` | `fig:uncertainty-calibration`; Nature single-column profile, included at 89 mm |
 | `scripts/generate_results_figures.py` | `reports/evidence/plots/results/results_condition_error_bars.png/.pdf` | `fig:condition-error-bars` |
 | `scripts/generate_results_figures.py` | `reports/evidence/plots/results/results_deployment_tradeoffs.png/.pdf` | `fig:deployment-tradeoffs` |
 | `scripts/generate_results_figures.py` | `reports/evidence/plots/results/discussion_complexity_accuracy.png/.pdf` | Discussion |
@@ -105,7 +117,8 @@ symmetric error bars that extend below zero.
 | `scripts/mc_dropout_generic.py`; `scripts/replot_mc_dropout_intervals.py` | `reports/evidence/uncertainty/mc_dropout_intervals_ResNetVibCNN_vib_spec.png/.pdf` | Figure 12, Methods Figure 5 panels; the first script creates the seeded same-checkpoint data and the second applies publication labels without rerunning inference |
 | `scripts/generate_review19_diagnostics.py` | `mc_dropout_deterministic_diagnostic.csv`; `supp_mcdropout_deterministic.tex`; `supp_nested_rf_selections.tex` | Same-checkpoint MC diagnostic and per-fold nested RF selections |
 | `scripts/reliability_diagram.py` | `reports/evidence/uncertainty/mc_dropout_reliability.csv` | Figure 12, Methods Figure 5 |
-| `scripts/reliability_diagram.py` | `reports/evidence/uncertainty/mc_dropout_reliability.png/.pdf` | Figure 12, Methods Figure 5 |
+| `scripts/reliability_diagram.py` | `reports/evidence/uncertainty/mc_dropout_reliability.png/.pdf` | Figure 12, Methods Figure 5; bold `a`/`b` labels and one shared legend below both panels |
+| `scripts/condition7_condition10_diagnostic.py` | `reports/evidence/plots/results/condition7_condition10_spectra.png/.pdf` | Condition 7/10 diagnostic; bold `a`/`b` labels and one shared legend below both panels |
 | `scripts/generate_methods_uncertainty_figure.py` | `reports/evidence/plots/methods/methods_uncertainty_overview.png/.pdf` | Figure 5; one full-width panel above two diagnostic panels |
 | `scripts/generate_rf_conformal_intervals.py` | `reports/evidence/uncertainty/rf_conformal_intervals.png/.pdf` | Figure 11 |
 

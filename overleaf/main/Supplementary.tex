@@ -233,7 +233,7 @@ thermal-drift trends may be confounded with the condition effect.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{supp_run_order.png}
+\includegraphics[width=183mm]{supp_run_order.png}
 \caption{Run-order plot of measured $R_a$ for the nominal 320 passes;
 one pass was excluded only from model evaluation because its
 AE/vibration files were missing. The red \textsf{x} marks
@@ -242,17 +242,17 @@ Condition~7.}\label{fig:supp-runorder}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{supp_runorder_diagnostics.png}
+\includegraphics[width=183mm]{supp_runorder_diagnostics.png}
 \caption{Run-order diagnostics for the best random forest (AE-dB-z +
-Vib-dB-z). (a)~Measured $R_a$. (b)~RF prediction residual
-($\hat y - y$). (c)~AE broadband RMS. (d)~Tri-axial vibration RMS.
+Vib-dB-z). \textbf{a}, Measured $R_a$. \textbf{b}, RF prediction residual
+($\hat y - y$). \textbf{c}, AE broadband RMS. \textbf{d}, Tri-axial vibration RMS.
 Condition~7 is highlighted in red; it does not coincide with a clear
 run-order trend in sensor RMS.}\label{fig:supp-runorder-diagnostics}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{supp_full_residual_diagnostics.png}
+\includegraphics[width=183mm]{supp_full_residual_diagnostics.png}
 \caption{Residual diagnostics for the recommended random forest
 (AE-dB-z + Vib-dB-z). Residuals are plotted against measured \(R_a\),
 predicted \(R_a\), wheel speed, workpiece speed, depth of cut, run order,
@@ -303,7 +303,7 @@ failure.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{supp_per_condition_mae.png}
+\includegraphics[width=183mm]{supp_per_condition_mae.png}
 \caption{Per-condition LOGO MAE for three top models. The vertical dashed
 line marks Condition~7.}\label{fig:supp-per-condition-mae}
 \end{figure}
@@ -492,10 +492,10 @@ BilinearFusion & -- & -- & -- & -- & \checkmark & \checkmark & \checkmark & \che
 
 \subsection*{Cache provenance and exact representation definitions}
 
-Table~\ref{tab:supp-cache-provenance} lists the six principal cached
-time--frequency representations used in the manuscript together with
-their source quantity, transform chain, normalization order, array shape,
-and SHA-256 provenance checksum.
+Tables~\ref{tab:supp-cache-definitions} and~\ref{tab:supp-cache-provenance}
+list the six principal cached time--frequency representations, their exact
+transform chains and shapes, and compact checksum prefixes. Complete SHA-256
+digests remain in the public machine-readable manifest.
 
 \input{main/supp_cache_provenance.tex}
 
@@ -759,7 +759,7 @@ illustration rather than as a definitive per-fold SHAP ranking.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{shap_fold_stability.png}
+\includegraphics[width=183mm]{shap_fold_stability.png}
 \caption{Dominant frequency bins from out-of-fold random-forest
 impurity-based feature-importance estimates. Top: vibration. Bottom: AE.}\label{fig:supp-shap-stability}
 \end{figure}

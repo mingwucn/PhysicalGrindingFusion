@@ -41,7 +41,7 @@ class FigureProfiles:
 
     SINGLE = FigureProfile("single", 89, 0.618)
     SQUARE = FigureProfile("square", 89, 1.0)
-    WIDE = FigureProfile("wide", 140, 0.618)
+    WIDE = FigureProfile("wide", 183, 0.50)
     DOUBLE = FigureProfile("double", 183, 0.618)
     DOUBLE_TALL = FigureProfile("double_tall", 183, 0.78)
     TWO_PANEL_ROW = FigureProfile("two_panel_row", 183, 0.46, ncols=2, max_legends=1, max_colorbars=1)
@@ -153,6 +153,8 @@ class PublicationFigure(ABC):
         return self.fig, self.axes
 
     def _validate_profile(self) -> None:
+        if self.profile.width_mm not in {89, 183}:
+            raise ValueError("Nature figures must use the 89 mm or 183 mm final-width profile.")
         if self.profile.ncols >= 3 and self.profile.width_mm != 183:
             raise ValueError("Three- and four-panel rows must use the 183 mm double-column profile.")
         if self.profile.ncols == 4 and not (self.profile.sharex and self.profile.sharey):
@@ -182,6 +184,7 @@ class PublicationFigure(ABC):
     def save(self, formats: Sequence[str] = ("pdf", "png")) -> dict[str, Path]:
         if self.fig is None:
             raise RuntimeError("Call render() before save().")
+        self.apply_nature_panel_labels()
         saved = PublicationPlotter.savefig(
             self.fig,
             self.name,
@@ -197,6 +200,27 @@ class PublicationFigure(ABC):
             out_dir=self.out_dir,
         )
         return saved
+
+    def primary_axes(self) -> list[Any]:
+        """Return visible data axes in deterministic row-major order."""
+        if self.axes is None:
+            return []
+        try:
+            axes = list(self.axes.flat)
+        except AttributeError:
+            axes = list(self.axes) if isinstance(self.axes, (list, tuple)) else [self.axes]
+        return [ax for ax in axes if getattr(ax, "get_visible", lambda: True)()]
+
+    def apply_nature_panel_labels(self) -> None:
+        """Add only bold upright lowercase letters to multi-panel figures."""
+        axes = self.primary_axes()
+        if len(axes) <= 1:
+            return
+        for index, ax in enumerate(axes):
+            ax.set_title("")
+            PublicationPlotter.add_panel_label(ax, chr(ord("a") + index))
+        self.metadata["panel_labels"] = "8 pt bold upright lowercase; row-major"
+        self.metadata["panel_titles"] = "caption-only; axes titles cleared by ancestor"
 
 
 class SingleAxesFigure(PublicationFigure):

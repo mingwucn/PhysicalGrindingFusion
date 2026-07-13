@@ -77,7 +77,6 @@ def plot_panel(ax, freqs: np.ndarray, importance: np.ndarray, title: str, ylabel
     ax.plot(freqs, importance, lw=1.2)
     ax.set_xlabel("Frequency")
     ax.set_ylabel(ylabel)
-    ax.set_title(title)
     ax.set_xlim(left=0)
     ax.set_ylim(bottom=0)
 

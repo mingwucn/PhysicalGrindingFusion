@@ -106,7 +106,6 @@ def plot_panel(ax, spec, extent, title, ylabel, cmap="viridis", vmin=None, vmax=
         vmin=vmin,
         vmax=vmax,
     )
-    ax.set_title(title)
     ax.set_xlabel("Time (s)")
     if ylabel:
         ax.set_ylabel(ylabel)
@@ -123,7 +122,6 @@ def plot_mel_panel(ax, spec, title, ylabel, cmap="viridis", vmin=None, vmax=None
         vmin=vmin,
         vmax=vmax,
     )
-    ax.set_title(title)
     ax.set_xlabel("STFT frame")
     if ylabel:
         ax.set_ylabel(ylabel)
@@ -203,12 +201,7 @@ def main() -> int:
         cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
         cbar.set_label(label)
 
-    fig.suptitle(
-        f"Example signal representations for condition {CONDITION_ID}, sample {SAMPLE_ID} "
-        f"($R_a = {data['target']:.3f}$ µm)",
-    )
-
-    plt.tight_layout(rect=[0, 0.03, 1, 0.96])
+    plt.tight_layout()
 
     managed.save()
     return 0

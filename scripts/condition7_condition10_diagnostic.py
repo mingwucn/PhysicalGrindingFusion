@@ -56,11 +56,11 @@ def main() -> int:
     for condition, colour in ((7, PublicationPalette.CONDITION_7), (10, PublicationPalette.OBSERVED)):
         axes[0].plot(ae_f, spectra[condition][0], label=f"Condition {condition}", color=colour)
         axes[1].plot(vib_f, spectra[condition][1], label=f"Condition {condition}", color=colour)
-    axes[0].set(xlabel="AE frequency (kHz)", ylabel="Mean dB level", title="Archived AE dB spectra")
-    axes[1].set(xlabel="Vibration frequency (kHz)", ylabel="Mean dB level", title="Archived vibration dB spectra")
-    for ax in axes:
-        ax.legend(frameon=False)
-    fig.tight_layout()
+    axes[0].set(xlabel="AE frequency (kHz)", ylabel="Mean dB level")
+    axes[1].set(xlabel="Vibration frequency (kHz)", ylabel="Mean dB level")
+    handles, labels = axes[0].get_legend_handles_labels()
+    PublicationPlotter.figure_legend_below(fig, handles, labels, ncol=2)
+    fig.subplots_adjust(left=0.09, right=0.98, bottom=0.27, top=0.94, wspace=0.30)
     managed.save()
     print(pd.DataFrame(rows).to_string(index=False))
     print(f"Wrote {TABLE}")

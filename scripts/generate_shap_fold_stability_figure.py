@@ -34,12 +34,10 @@ def main() -> int:
 
     axes[0].plot(condition, data["top_vib_freq_kHz"], marker="o", color=PublicationPalette.OBSERVED)
     axes[0].set_ylabel("Dominant vibration bin (kHz)")
-    axes[0].set_title("(a) Out-of-fold vibration attribution peak")
 
     axes[1].plot(condition, data["top_ae_freq_kHz"], marker="o", color=PublicationPalette.MODEL_FAMILY["LightGBMModel"])
     axes[1].set_xlabel("Held-out condition")
     axes[1].set_ylabel("Dominant AE bin (kHz)")
-    axes[1].set_title("(b) Out-of-fold AE attribution peak")
     axes[1].set_xticks(range(1, 17))
 
     for axis in axes:

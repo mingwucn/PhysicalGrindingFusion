@@ -106,7 +106,6 @@ def main() -> int:
         ax.axhline(0, color="black", lw=0.7, linestyle="--")
         ax.set_xlabel(label)
         ax.set_ylabel("Residual (µm)")
-    fig.suptitle("Recommended RF residual diagnostics", y=1.01)
     fig.tight_layout()
     managed.save()
     print(f"Saved {out_csv}")

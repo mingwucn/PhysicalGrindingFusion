@@ -1,39 +1,96 @@
-\begin{tikzpicture}[
-    arrow/.style={pub/arrow},
-    family/.style={pub/explanation, text width=12.4cm, minimum height=0.76cm},
-    modelcard/.style={pub/model, text width=2.75cm, minimum height=0.80cm},
-]
-\node[pub/input, text width=11.6cm, minimum height=0.82cm] (input) at (0,7.6)
-  {Input representations: AE, vibration, process parameters, and physics-inspired features};
-\node[pub/heading] (choice) at (0,6.65)
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}
+
+% ===== Shared input representations ==========================================
+\node[pub/panel, minimum width=14.65cm, minimum height=1.28cm] (inputs) at (0,3.55) {};
+\node[pub/subheading, anchor=west] at (-6.95,3.86) {Shared input representations};
+\node[pub/input, minimum width=2.35cm, minimum height=0.47cm, font=\pubSmallFont] at (-4.45,3.40)
+  {Acoustic emission};
+\node[pub/representation, minimum width=2.35cm, minimum height=0.47cm, font=\pubSmallFont] at (-1.50,3.40)
+  {Vibration};
+\node[pub/process, minimum width=2.35cm, minimum height=0.47cm, font=\pubSmallFont] at (1.45,3.40)
+  {Process parameters};
+\node[pub/physics, minimum width=2.35cm, minimum height=0.47cm, font=\pubSmallFont] at (4.40,3.40)
+  {Physics features};
+
+\node[pub/heading] (root) at (0,2.55)
   {Alternative model families evaluated under the same LOGO protocol};
-\draw[arrow] (input) -- (choice);
+\draw[pub/arrow] (inputs.south) -- (root.north);
 
-\node[family] (linear) at (0,5.7) {Directly inspectable linear baseline};
-\draw[arrow] (choice) -- (linear);
-\node[modelcard] at (0,4.85) {Ridge regression\\(coefficients)};
+% ===== Family cards ===========================================================
+\node[pub/panel white, minimum width=2.55cm, minimum height=4.05cm] (linearCard) at (-6.00,0) {};
+\node[pub/input, minimum width=2.14cm, minimum height=0.54cm, font=\pubSmallFont\bfseries] at (-6.00,1.55)
+  {Linear baseline};
+\pic[scale=0.70] at (-6.00,0.82) {pubLinear};
+\node[pub/subheading] at (-6.00,0.17) {Ridge regression};
+\node[pub/note, align=center, text=pubInk] at (-6.00,-0.42) {directly inspectable\\fitted coefficients};
+\node[pub/tag, draw=pubBlue!58, fill=pubBlueFill] at (-6.00,-1.43) {native explanation};
 
-\node[family] at (0,3.95) {Auditable tree ensembles supported by post-hoc attribution};
-\node[modelcard] at (-2.0,3.05) {Random forest};
-\node[modelcard] at (2.0,3.05) {LightGBM /\\XGBoost};
-\node[pub/note, text width=11.6cm, align=center] at (0,2.25)
-  {Split structure and TreeSHAP support inspection; the ensembles remain complex fitted predictors.};
+\node[pub/panel white, minimum width=2.92cm, minimum height=4.05cm] (treeCard) at (-3.02,0) {};
+\node[pub/representation, minimum width=2.48cm, minimum height=0.54cm, font=\pubSmallFont\bfseries] at (-3.02,1.55)
+  {Tree ensembles};
+\pic[scale=0.72] at (-3.02,0.82) {pubTree};
+\node[pub/subheading] at (-3.02,0.20) {Random forest};
+\node[pub/note, align=center, text=pubInk] at (-3.02,-0.38) {LightGBM\\XGBoost};
+\node[pub/tag, draw=pubTeal!58, fill=pubTealFill] at (-3.02,-1.43) {TreeSHAP attribution};
 
-\node[family] at (0,1.4) {Shallow neural baseline};
-\node[modelcard] at (0,0.55) {Shallow MLP};
+\node[pub/panel white, minimum width=2.55cm, minimum height=4.05cm] (mlpCard) at (0.00,0) {};
+\node[pub/explanation, minimum width=2.14cm, minimum height=0.54cm, font=\pubSmallFont\bfseries] at (0.00,1.55)
+  {Shallow neural};
+\pic[scale=0.70] at (0.00,0.82) {pubNetwork};
+\node[pub/subheading] at (0.00,0.17) {Shallow MLP};
+\node[pub/note, align=center, text=pubInk] at (0.00,-0.42) {compact nonlinear\\reference model};
+\node[pub/tag, draw=pubAmber!65, fill=pubAmberFill] at (0.00,-1.43) {baseline};
 
-\node[family] at (0,-0.4)
-  {Deep neural architectures: spectral and multimodal predictors with Grad-CAM and MC-dropout diagnostics};
-\node[modelcard] at (-4.8,-1.35) {ResNet CNNs\\(AE / vibration)};
-\node[modelcard] at (-1.6,-1.35) {ResNet fusion};
-\node[modelcard] at (1.6,-1.35) {Bilinear fusion};
-\node[modelcard] at (4.8,-1.35) {Multiscale CNN};
-\node[modelcard] at (-3.2,-2.35) {Trajectory CNN};
-\node[modelcard] at (0,-2.35) {GNN /\\TabTransformer};
-\node[modelcard] at (3.2,-2.35) {Attention regressor};
+\node[pub/panel white, minimum width=7.55cm, minimum height=4.05cm] (deepCard) at (5.08,0) {};
+\node[pub/model, minimum width=7.08cm, minimum height=0.54cm, font=\pubSmallFont\bfseries] at (5.08,1.55)
+  {Deep architectures};
 
-\node[pub/note, text width=12.0cm, align=center] at (0,-3.25)
-  {Every listed configuration regresses the same averaged measured target.};
-\node[pub/target, text width=4.0cm, minimum height=0.82cm] at (0,-4.1)
-  {Predict measured $R_a$ (\textmu m)};
+% Deep-model subfamilies
+\pic[scale=0.58] at (2.45,0.76) {pubConvStack};
+\node[pub/subheading] at (2.45,0.12) {Spectral CNNs};
+\node[pub/tiny, text=pubInk] at (2.45,-0.48) {ResNet-AE / Vib\\multiscale CNN};
+
+\pic[scale=0.62] at (4.22,0.76) {pubFusion};
+\node[pub/subheading] at (4.22,0.12) {Fusion};
+\node[pub/tiny, text=pubInk] at (4.22,-0.48) {ResNet fusion\\bilinear fusion};
+
+\pic[scale=0.60] at (6.00,0.76) {pubGraph};
+\node[pub/subheading, text width=1.38cm] at (6.00,0.12) {Graph /\\tabular};
+\node[pub/tiny, text=pubInk] at (6.00,-0.48) {GNN\\TabTransformer};
+
+\pic[scale=0.60] at (7.78,0.76) {pubNetwork};
+\node[pub/subheading, text width=1.48cm] at (7.78,0.12) {Sequence /\\attention};
+\node[pub/tiny, text=pubInk] at (7.78,-0.48) {Trajectory CNN\\attention regressor};
+
+\draw[pub/hairline] (3.32,-0.98) -- (3.32,0.98);
+\draw[pub/hairline] (5.10,-0.98) -- (5.10,0.98);
+\draw[pub/hairline] (6.88,-0.98) -- (6.88,0.98);
+\node[pub/tag, draw=pubSlate!55, fill=pubSlateFill, minimum width=4.55cm] at (5.08,-1.43)
+  {Grad-CAM and MC-dropout diagnostics};
+
+% Branches from the shared protocol
+\coordinate (branch) at (0,2.18);
+\draw[pub/hairline] (-6.00,2.18) -- (5.08,2.18);
+\draw[pub/arrow] (root.south) -- (branch);
+\draw[pub/arrow] (-6.00,2.18) -- (linearCard.north);
+\draw[pub/arrow] (-3.02,2.18) -- (treeCard.north);
+\draw[pub/arrow] (0.00,2.18) -- (mlpCard.north);
+\draw[pub/arrow] (5.08,2.18) -- (deepCard.north);
+
+% ===== Common target ==========================================================
+\coordinate (merge) at (0,-2.55);
+\draw[pub/hairline] (-6.00,-2.55) -- (5.08,-2.55);
+\draw[pub/arrow] (linearCard.south) -- (-6.00,-2.55);
+\draw[pub/arrow] (treeCard.south) -- (-3.02,-2.55);
+\draw[pub/arrow] (mlpCard.south) -- (0.00,-2.55);
+\draw[pub/arrow] (deepCard.south) -- (5.08,-2.55);
+
+\node[pub/target, minimum width=4.15cm, minimum height=0.92cm] (target) at (0,-3.42)
+  {{\bfseries Predict measured $R_a$}\\averaged target (\textmu m)};
+\draw[pub/arrow] (merge) -- (target.north);
+\node[pub/note, anchor=west] at (2.42,-3.42)
+  {Every listed configuration uses the same target definition.};
+
 \end{tikzpicture}%
+}

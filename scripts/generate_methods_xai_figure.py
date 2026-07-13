@@ -62,7 +62,6 @@ def plot_freq_importance(ax, df, title, color):
     ax.bar(df["hz"] / 1e3, df["importance"], width=0.08, color=color, edgecolor="black", linewidth=0.3)
     ax.set_xlabel("Frequency (kHz)")
     ax.set_ylabel("Importance")
-    ax.set_title(title)
     ax.set_xlim(0, 25.6)
     # Mark physical bands
     ax.axvspan(0.5, 2.0, alpha=0.08, color=PublicationPalette.MODEL_FAMILY["LightGBMModel"], label="Low-frequency chatter / structural")
@@ -114,7 +113,6 @@ def main() -> int:
     axes[2].fill_between(gradcam["hz"] / 1e3, gradcam["mean_importance"], alpha=0.4, color=PublicationPalette.MODEL_FAMILY["ResNetVibCNN"])
     axes[2].set_xlabel("Frequency (kHz)")
     axes[2].set_ylabel("Mean |Grad-CAM|")
-    axes[2].set_title("(c) Grad-CAM frequency importance (ResNetVibCNN, Vib-dB)")
     axes[2].set_xlim(0, 25.6)
     axes[2].axvspan(0.5, 2.0, alpha=0.08, color=PublicationPalette.MODEL_FAMILY["LightGBMModel"])
     axes[2].axvspan(2.0, 15.0, alpha=0.08, color=PublicationPalette.OBSERVED)
@@ -127,12 +125,7 @@ def main() -> int:
     ]
     axes[2].legend(handles=legend_elements, loc="upper right", fontsize=7)
 
-    fig.suptitle(
-        "Explainability methods highlight physically plausible vibration-frequency regions",
-        y=0.995,
-    )
-
-    plt.tight_layout(rect=[0, 0.02, 1, 0.98])
+    plt.tight_layout()
 
     managed.save()
     return 0

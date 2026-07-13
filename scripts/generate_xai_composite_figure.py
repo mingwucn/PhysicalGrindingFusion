@@ -68,7 +68,6 @@ def main() -> int:
 
     axes[0].barh(ae["label"], ae["importance"], color=PublicationPalette.MODEL_FAMILY["LightGBMModel"])
     axes[0].set_xlabel("TreeSHAP mean |SHAP|")
-    axes[0].set_title("(a) LightGBM TreeSHAP on AE-dB")
     axes[0].tick_params(axis="y", labelsize=7)
     axes[0].ticklabel_format(axis="x", style="sci", scilimits=(0, 0))
     axes[0].tick_params(axis="x", labelsize=7)
@@ -85,7 +84,6 @@ def main() -> int:
     axes[1].set_xlim(0, 25.6)
     axes[1].set_xlabel("Vibration frequency (kHz)")
     axes[1].set_ylabel("Mean |Grad-CAM|")
-    axes[1].set_title("(b) ResNetVibCNN Grad-CAM on Vib-dB")
     axes[1].legend(loc="upper right", fontsize=7, frameon=False)
 
     fig.tight_layout()

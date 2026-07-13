@@ -40,7 +40,6 @@ def main() -> int:
     ):
         for color, (label, frame) in zip(colors, profiles[modality].items()):
             ax.plot(frame["frequency_khz"], frame["importance_fraction"], linewidth=1.3, color=color, label=label)
-        ax.set_title(title)
         ax.set_xlabel("Frequency (kHz)")
         ax.set_ylabel("Normalized attribution per bin")
         ax.set_xlim(left=0)

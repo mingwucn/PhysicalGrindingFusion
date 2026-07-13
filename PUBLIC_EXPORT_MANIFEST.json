@@ -31,8 +31,8 @@
   },
   {
     "path": "docs/12_VISUALIZATION_CONTRACT.md",
-    "sha256": "0fc3597638ed09db71d23af5735df7ec65afea71a942c2565a63edb27fed322a",
-    "bytes": 15461
+    "sha256": "7fe4d53e0959022b98503a6efce3d92d96132da3bc664c7fb9b0319a7c3c790a",
+    "bytes": 16714
   },
   {
     "path": "docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md",
@@ -46,8 +46,8 @@
   },
   {
     "path": "docs/figure_script_toc.md",
-    "sha256": "a211d0dd9286290171a740c688a494c5f105b201b6c927ce21d6c956173145e8",
-    "bytes": 15038
+    "sha256": "d8cd857a790b0b9fd60e83e63badb16e61c3dbab2595c76d8c06510591a3bc1d",
+    "bytes": 16209
   },
   {
     "path": "overleaf/Manuscript.tex",
@@ -76,8 +76,8 @@
   },
   {
     "path": "overleaf/main/Discussion.tex",
-    "sha256": "3f3c586d3029c076a36076b54453ffd16f375f842b22969ea0afc9deb7f5098e",
-    "bytes": 38744
+    "sha256": "6fc6bd102cc2c730138c87601a6e652c2d6bc83c264d5b72da6274476a729963",
+    "bytes": 38810
   },
   {
     "path": "overleaf/main/Highlights.tex",
@@ -96,8 +96,8 @@
   },
   {
     "path": "overleaf/main/Methods.tex",
-    "sha256": "04aab44cabeed506ab3efbdbdc4fe266e4a126fb7f6b492884556fbb48f69016",
-    "bytes": 58473
+    "sha256": "449f61e5ef8ff0b2f35f30a445d9cab69c1df6d893c7d9f91095cb679650fd19",
+    "bytes": 58532
   },
   {
     "path": "overleaf/main/README.md",
@@ -111,13 +111,13 @@
   },
   {
     "path": "overleaf/main/Results.tex",
-    "sha256": "5ca894adc3c39d4760831380da67e6eda806f56b1093d5e5a05a48c34fdf37b1",
-    "bytes": 77257
+    "sha256": "00d9969fe4655030ee3e4969cd11919ea0b4f3664ace16acc4deae326daa0616",
+    "bytes": 77173
   },
   {
     "path": "overleaf/main/Supplementary.tex",
-    "sha256": "64a91ef8fe92ebb7385b852e63a000e9edf3e0903d70ccaece5ea57928df3bc5",
-    "bytes": 36512
+    "sha256": "22af0cfe406446d5ff7051791cf48bcb03866211fd8adb0a1526eb46c5d0e981",
+    "bytes": 36558
   },
   {
     "path": "overleaf/main/statistical_comparison_table.tex",
@@ -125,9 +125,14 @@
     "bytes": 1111
   },
   {
+    "path": "overleaf/main/supp_artifact_hashes.tex",
+    "sha256": "f989d7bb98b7a348abd96a2df1fd812f42c6ba50edb9dc152740af3e30398045",
+    "bytes": 684
+  },
+  {
     "path": "overleaf/main/supp_cache_provenance.tex",
-    "sha256": "f3aa633db55e76b8e8f9d54ddb020a257c1a3687462d6ba7a3b6063cfa5418f4",
-    "bytes": 2293
+    "sha256": "4d1d8eb565e2a1742451d30d53940ed58c9a4d5756d2c311b6c31cbc93ba910d",
+    "bytes": 2555
   },
   {
     "path": "overleaf/main/supp_dl_architectures.tex",
@@ -171,8 +176,8 @@
   },
   {
     "path": "overleaf/main/supp_model_constructor_defaults.tex",
-    "sha256": "44ad24a3e66801faeb738b075e47c30b929edbae8915f0bb2b74731bf64288b0",
-    "bytes": 4289
+    "sha256": "e1c786b2151c913a2fdaf34446b52db943c3291103d7b1302a5dfdb5fe625dba",
+    "bytes": 4273
   },
   {
     "path": "overleaf/main/supp_model_inventory.tex",
@@ -186,8 +191,8 @@
   },
   {
     "path": "overleaf/main/supp_rf_experiment_provenance.tex",
-    "sha256": "3e9047aafa8efd3139e138cc5bbce341ddce58c0f8adaab77efef60916436847",
-    "bytes": 4656
+    "sha256": "504bbe00864ca21ec7c757730f96c4e5c94e758aa402c868d24019ae97a25c73",
+    "bytes": 4415
   },
   {
     "path": "overleaf/main/supp_rf_oob_coverage.tex",
@@ -226,28 +231,28 @@
   },
   {
     "path": "overleaf/tikz/logo_scheme.tex",
-    "sha256": "e2ee10040fb05f2eec17ffaa35249f539e73c4c056d137ec72be6f2b4d852c28",
-    "bytes": 1457
+    "sha256": "844ef289697069c7a17c0911e16a78ad2dc4474f0d7e7897cd05f812834b8820",
+    "bytes": 4363
   },
   {
     "path": "overleaf/tikz/model_taxonomy.tex",
-    "sha256": "428da6ea2389b0c7ec74359fb0655df4446b7e1f06ab83c129c322337602ff7d",
-    "bytes": 1934
+    "sha256": "83b7e0ccf7268cce1ca08e46a8c1ecefff39a97540c4a65e067141132e44bbba",
+    "bytes": 4915
   },
   {
     "path": "overleaf/tikz/publication_styles.tex",
-    "sha256": "ac27bd66616a8d3811c8fcafcd5422010362b8181cdc373bd2c964c4a260935e",
-    "bytes": 1868
+    "sha256": "8f9fca2b14a5ae6d693dfff5fbbdc6dab462f30b1c8fbe65a5de4bdd4a6d6781",
+    "bytes": 10491
   },
   {
     "path": "overleaf/tikz/resnetvibcnn_architecture.tex",
-    "sha256": "7be55e5477380cf478b5e41049c82c83a45f8641a38fd4a834aab163fe015e8b",
-    "bytes": 1250
+    "sha256": "132f72e07016bcfb084aa3ea0d82f6e0b99075e4b3423519900a9c6112b0df50",
+    "bytes": 5532
   },
   {
     "path": "overleaf/tikz/workflow_schematic.tex",
-    "sha256": "ece62c06f58ba876f173a9d8234a0caff917e2843a737a7484ac032b4814c39b",
-    "bytes": 4671
+    "sha256": "cd51088bf929bded2f4a3c7ec38d2f96a595759613f3332470494346f019cd08",
+    "bytes": 5786
   },
   {
     "path": "reports/evidence/metrics/grouped_validation_shallow_mlp.json",
@@ -2416,8 +2421,8 @@
   },
   {
     "path": "scripts/condition7_condition10_diagnostic.py",
-    "sha256": "1eec9466636f9e90e0e37d68511b21458b41d95ff8d16be35d51e7a1a6d3d9cc",
-    "bytes": 3044
+    "sha256": "2746f01ad2ad7af718e66932b18af7ea270c23363cb18984b06fab87d1fb531b",
+    "bytes": 3111
   },
   {
     "path": "scripts/condition_error_analysis.py",
@@ -2431,8 +2436,8 @@
   },
   {
     "path": "scripts/generate_cache_provenance.py",
-    "sha256": "9e67b4f5f94dabeb1c994a4d732701bcffacef9961c3ad22d6629daaa00938af",
-    "bytes": 4896
+    "sha256": "75ae446407cd81e194f69af8657ebfcc0080b4213a4f2061e7da00aafa8b562d",
+    "bytes": 5633
   },
   {
     "path": "scripts/generate_evaluation_target_manifest.py",
@@ -2451,8 +2456,8 @@
   },
   {
     "path": "scripts/generate_full_residual_diagnostics.py",
-    "sha256": "3f942de0f13959ca0a16eb7cdab153eda7b1c5d679c0991dd3ca9460573dc7b9",
-    "bytes": 4624
+    "sha256": "f58874f577cb50aaf3f87839841b8b182075ebb61942697b668f4c69ce30d2cb",
+    "bytes": 4560
   },
   {
     "path": "scripts/generate_grouped_mlp_documentation.py",
@@ -2476,23 +2481,23 @@
   },
   {
     "path": "scripts/generate_methods_signal_representations.py",
-    "sha256": "fda9384fd6a6044cad563f428fb1416fefa10383f50366712cfdd60664039a12",
-    "bytes": 6103
+    "sha256": "8b7c82356dc48a951c93d2eb29248d0555dc6e6e72708b764f57004bf2a72f24",
+    "bytes": 5868
   },
   {
     "path": "scripts/generate_methods_uncertainty_figure.py",
-    "sha256": "32a381be36c2eeae03cd8449194d037176f4505eedad9708cb79c0db37b0e657",
-    "bytes": 4768
+    "sha256": "71afaa9cdee9928acd7cee8c84e13e005f2c21438a48face974539386f88f462",
+    "bytes": 4492
   },
   {
     "path": "scripts/generate_methods_xai_figure.py",
-    "sha256": "6584480add31196294c5375ed71b992839de5985c20d132b7cbd1fdd70327f27",
-    "bytes": 5103
+    "sha256": "3548ca59d4e98832e35847a59d57742a2058bb1e6328fa6d38a0a806ac1da843",
+    "bytes": 4839
   },
   {
     "path": "scripts/generate_model_constructor_manifest.py",
-    "sha256": "771e3db237fb3ce74ba3d8240f02b53f3e279258ba85859cdc16af7b90c9600d",
-    "bytes": 6762
+    "sha256": "99367b23a7cf2edfc10522e397a2513be6a3dbc08fbb627377e84d2ab0073f0e",
+    "bytes": 6836
   },
   {
     "path": "scripts/generate_model_inventory.py",
@@ -2506,8 +2511,8 @@
   },
   {
     "path": "scripts/generate_results_figures.py",
-    "sha256": "2334fd82b2521ab911da52b59ec3b3a692a42d64e39fd0da64f33465f59a7797",
-    "bytes": 20969
+    "sha256": "5cf7c4018bc14dbc49812452db670d1ff3cec3cf72d0e9676c5568273675beae",
+    "bytes": 21035
   },
   {
     "path": "scripts/generate_review19_diagnostics.py",
@@ -2516,13 +2521,13 @@
   },
   {
     "path": "scripts/generate_rf_oof_shap_figure.py",
-    "sha256": "c58fe6da2673ab49cd71dd723e65aac90ab677fac479418b88e83b2f783b4fb4",
-    "bytes": 2300
+    "sha256": "3bf44df7c99fa455c214a4e9926e5569512a6bdecbb794e9b250371d7cd95303",
+    "bytes": 2272
   },
   {
     "path": "scripts/generate_shap_fold_stability_figure.py",
-    "sha256": "95060137f1b1e392d75bcdb30fb40c9a635f15497703ccdb056fa68033d7cddf",
-    "bytes": 1793
+    "sha256": "e08e6950d81f172a7d1361c8f97cb5f0c94970a60a03653ec7c00499fc8ba650",
+    "bytes": 1664
   },
   {
     "path": "scripts/generate_signal_representation_bar_chart.py",
@@ -2531,13 +2536,13 @@
   },
   {
     "path": "scripts/generate_submission_report.py",
-    "sha256": "9324a32a55798c66715d81c76258240ffef6373f454b0126cef3a1d9f7105ce1",
-    "bytes": 30584
+    "sha256": "183d1a92f6ea169ead1b60081dadadfe10d2b4180467d8d45dfad8ed1fd35230",
+    "bytes": 30071
   },
   {
     "path": "scripts/generate_xai_composite_figure.py",
-    "sha256": "62397e9b648e67586938afc57450d3c4fd2e6aa00c7f00c1b95bd89c66cbb4b2",
-    "bytes": 3303
+    "sha256": "362a7b78dcdc9fb444ec53663e46aef83a3b7fa68fa7d6b71ce012b6f1d56287",
+    "bytes": 3186
   },
   {
     "path": "scripts/gradcam_resnet_vib.py",
@@ -2591,8 +2596,8 @@
   },
   {
     "path": "scripts/reliability_diagram.py",
-    "sha256": "d9124644ffeb8480bd0b4d97cd3cc76e7e221eeb5b1f843b5c5752956899d350",
-    "bytes": 3851
+    "sha256": "7b80aac29234f1773d8ad74a12309e6dbaba3b4b1229752faeef3d47d6766b96",
+    "bytes": 3895
   },
   {
     "path": "scripts/render_publication_figure_audit.py",
@@ -2666,8 +2671,8 @@
   },
   {
     "path": "scripts/shap_rf_logspec.py",
-    "sha256": "7e42cfd11855fdda9158fd8eed140e42dfac77abd430324f4539393e0fb7935f",
-    "bytes": 5492
+    "sha256": "db649e83399c6a7740a781e80309ac48a78902fa94601d49aeaa9c30a98bf501",
+    "bytes": 5468
   },
   {
     "path": "scripts/shap_spectrogram_baselines.py",
@@ -2686,8 +2691,8 @@
   },
   {
     "path": "scripts/validate_publication_figures.py",
-    "sha256": "cca438f4cbf955127775b5cf700a1a6926387589ce34c7e751b24fdf839e90f6",
-    "bytes": 5817
+    "sha256": "6790277f945aa06881f1dad9f05d68e4e2a8df005cf674a09a2113fe049bf6f5",
+    "bytes": 6800
   },
   {
     "path": "src/grinding_physic_fusion/__init__.py",
@@ -2741,12 +2746,12 @@
   },
   {
     "path": "src/grinding_physic_fusion/visualization/publication_figures.py",
-    "sha256": "e67ffb30d0e48ad3908097df29e8d924318ae5651c7f55ba3f47c041eed5b1ff",
-    "bytes": 9696
+    "sha256": "68e8123247d37b9aede7ed5b7ca294e8ec4b31a306461b314383b054159984b1",
+    "bytes": 10831
   },
   {
     "path": "src/grinding_physic_fusion/visualization/publication_plotter.py",
-    "sha256": "1df6aabff9b59c7a9775ce8f475eaed69679346fff8ad2067f11c646b533a37a",
-    "bytes": 9478
+    "sha256": "1e398513107920b159342745a4df332187e574d8742f9cd0343a2b5fb6cf4368",
+    "bytes": 10420
   }
 ]

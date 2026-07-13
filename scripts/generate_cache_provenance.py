@@ -86,23 +86,23 @@ def main() -> int:
     csv_path = TABLE_DIR / "cache_provenance.csv"
     df.to_csv(csv_path, index=False)
 
-    tex_lines = [
+    definition_lines = [
         "\\begin{table}[htbp]",
         "\\centering",
-        "\\caption{Exact cache definitions and provenance checksums for the principal time--frequency representations. The SHA-256 digest is computed from contiguous array bytes loaded from the archived cache; complete digests are retained in the frozen archive manifest.}\n\\label{tab:supp-cache-provenance}",
+        "\\caption{Exact transformation definitions for the principal time--frequency representations. Internal cache identifiers are retained here only for provenance.}\n\\label{tab:supp-cache-definitions}",
         "\\small",
         "\\resizebox{\\linewidth}{!}{%",
-        "\\begin{tabular}{@{}l p{2.55cm} p{2.45cm} p{2.55cm} p{2.15cm} l p{3.0cm}@{}}",
+        "\\begin{tabular}{@{}l p{2.8cm} p{2.7cm} p{3.0cm} p{2.8cm} l@{}}",
         "\\toprule",
-        "Cache & Source quantity & Frequency transform & Amplitude transform & Normalization & Shape & SHA-256 \\\\",
+        "Cache & Source quantity & Frequency transform & Amplitude transform & Normalization & Shape \\\\",
         "\\midrule",
     ]
     for _, row in df.iterrows():
-        tex_lines.append(
+        definition_lines.append(
             f"{row['cache']} & {row['source']} & {row['freq_transform']} & {row['amp_transform']} & "
-            f"{row['normalization']} & {row['shape']} & \\texttt{{\\detokenize{{{row['sha256']}}}}} \\\\"
+            f"{row['normalization']} & {row['shape']} \\\\"
         )
-    tex_lines.extend([
+    definition_lines.extend([
         "\\bottomrule",
         "\\end{tabular}%",
         "}",
@@ -110,8 +110,26 @@ def main() -> int:
         "",
     ])
 
+    checksum_lines = [
+        "\\begin{table}[htbp]",
+        "\\centering",
+        "\\caption{Compact cache checksum index. Prefixes are the first 12 hexadecimal characters of SHA-256 digests computed from contiguous cached-array bytes. Complete 64-character digests are retained in \\texttt{reports/evidence/tables/cache\\_provenance.csv} and the public artifact manifest.}",
+        "\\label{tab:supp-cache-provenance}",
+        "\\small",
+        "\\begin{tabular}{@{}lll@{}}",
+        "\\toprule",
+        "Cache & Shape & SHA-256 prefix \\\\",
+        "\\midrule",
+    ]
+    for _, row in df.iterrows():
+        checksum_lines.append(
+            f"\\texttt{{{row['cache']}}} & \\texttt{{{row['shape']}}} & "
+            f"\\texttt{{{row['sha256'][:12]}}} \\\\"
+        )
+    checksum_lines.extend(["\\bottomrule", "\\end{tabular}", "\\end{table}", ""])
+
     tex_path = OVERLEAF_MAIN / "supp_cache_provenance.tex"
-    tex_path.write_text("\n".join(tex_lines))
+    tex_path.write_text("\n".join(definition_lines + checksum_lines))
 
     mean.close()
     alt.close()
