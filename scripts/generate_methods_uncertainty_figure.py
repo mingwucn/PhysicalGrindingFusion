@@ -72,6 +72,7 @@ def main() -> int:
         axis.remove()
     grid = fig.add_gridspec(2, 2, height_ratios=(1.15, 1.0), hspace=0.52, wspace=0.30)
     axes = [fig.add_subplot(grid[0, :]), fig.add_subplot(grid[1, 0]), fig.add_subplot(grid[1, 1])]
+    managed.axes = axes
 
     # (a) Prediction intervals sorted by predicted mean
     order = np.argsort(df["y_mean"].to_numpy())

@@ -34,6 +34,7 @@ class FigureProfile:
     max_colorbars: int = 1
     max_ticks_per_axis: int | None = None
     require_shared_labels: bool = False
+    panel_count: int | None = None
 
 
 class FigureProfiles:
@@ -65,7 +66,7 @@ class FigureProfiles:
     TWO_BY_TWO = FigureProfile("two_by_two", 183, 0.70, nrows=2, ncols=2)
     TOP_SPAN_TWO_BOTTOM = FigureProfile(
         "top_span_two_bottom", 183, 0.78, nrows=2, ncols=2,
-        max_legends=2, max_colorbars=1,
+        max_legends=2, max_colorbars=1, panel_count=3,
     )
     VERTICAL_TRIPTYCH = FigureProfile("vertical_triptych", 183, 0.75, nrows=3, ncols=1, sharex=True)
     VERTICAL_DUO = FigureProfile("vertical_duo", 183, 0.62, nrows=2, ncols=1, sharex=True)
@@ -209,17 +210,40 @@ class PublicationFigure(ABC):
             axes = list(self.axes.flat)
         except AttributeError:
             axes = list(self.axes) if isinstance(self.axes, (list, tuple)) else [self.axes]
-        return [ax for ax in axes if getattr(ax, "get_visible", lambda: True)()]
+        axes = [
+            ax
+            for ax in axes
+            if getattr(ax, "get_visible", lambda: True)()
+            and getattr(ax, "get_figure", lambda: None)() is self.fig
+        ]
+        if not axes and self.fig is not None:
+            axes = [
+                ax
+                for ax in self.fig.axes
+                if ax.get_visible() and ax.get_label() != "<colorbar>"
+            ]
+        return axes
 
     def apply_nature_panel_labels(self) -> None:
-        """Add only bold upright lowercase letters to multi-panel figures."""
+        """Reserve gutters and add bold upright lowercase panel letters."""
         axes = self.primary_axes()
         if len(axes) <= 1:
             return
+        assert self.fig is not None
+        subplotpars = self.fig.subplotpars
+        adjustments: dict[str, float] = {"top": min(subplotpars.top, 0.90)}
+        if self.profile.ncols > 1:
+            adjustments["wspace"] = max(subplotpars.wspace, 0.30)
+        if self.profile.nrows > 1:
+            adjustments["hspace"] = max(subplotpars.hspace, 0.38)
+        self.fig.subplots_adjust(**adjustments)
         for index, ax in enumerate(axes):
             ax.set_title("")
             PublicationPlotter.add_panel_label(ax, chr(ord("a") + index))
-        self.metadata["panel_labels"] = "8 pt bold upright lowercase; row-major"
+        self.metadata["panel_labels"] = (
+            "8 pt bold upright lowercase; row-major; reserved outer/inter-panel gutter"
+        )
+        self.metadata["panel_count"] = len(axes)
         self.metadata["panel_titles"] = "caption-only; axes titles cleared by ancestor"
 
 

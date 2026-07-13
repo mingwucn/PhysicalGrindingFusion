@@ -171,23 +171,30 @@ class PublicationPlotter:
     def add_panel_label(
         ax,
         label: str,
-        x: float = -0.12,
-        y: float = 1.04,
+        x: float = 0.0,
+        y: float = 1.0,
+        offset_points: tuple[float, float] = (0.0, 6.0),
         **kwargs,
     ) -> None:
-        """Add an 8-pt bold lowercase panel label (a, b, c, ...)."""
+        """Place an 8-pt panel label in the reserved gutter above an axis."""
         defaults = {
             "fontsize": PublicationPlotter.PANEL_LABEL_SIZE,
             "fontweight": "bold",
             "style": "normal",
-            "va": "top",
-            "ha": "right",
-            "transform": ax.transAxes,
+            "va": "bottom",
+            "ha": "left",
             "clip_on": False,
             "color": "black",
         }
         defaults.update(kwargs)
-        ax.text(x, y, label, **defaults)
+        ax.annotate(
+            label,
+            xy=(x, y),
+            xycoords="axes fraction",
+            xytext=offset_points,
+            textcoords="offset points",
+            **defaults,
+        )
 
     @staticmethod
     def comparison_label(model_a: str, model_b: str) -> str:

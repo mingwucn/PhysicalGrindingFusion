@@ -525,3 +525,10 @@ text is 5--7 pt; panel letters are 8 pt bold upright lowercase; strokes are
 0.25--1 pt; text remains editable and fonts embedded; panels are compact,
 alphabetical, and free of overlap. This contract applies to Python figures and
 native TikZ diagrams.
+
+For Python multi-panel figures, the OOP ancestor reserves a gutter above each
+axis and places the panel letter at the upper-left axes corner with a fixed
+point offset. Panel letters must never share the y-tick-label region. Every
+multi-panel manuscript caption must describe each panel explicitly using
+`\textbf{a}`, `\textbf{b}`, and subsequent lowercase letters in row-major
+order.

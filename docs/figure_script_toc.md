@@ -51,6 +51,10 @@ rows instead of forcing the diagram beyond `\linewidth`.
 Multi-panel TikZ figures use `pub/panel label` for 8 pt bold upright lowercase
 letters at the top left. No prose subcaption belongs inside a panel; the main
 LaTeX caption defines `\textbf{a}`, `\textbf{b}`, and subsequent panels.
+Python multi-panel figures reserve an outer/inter-panel gutter above each axis;
+the OOP ancestor places each panel letter in that gutter rather than in the
+y-tick-label region. Every included multi-panel caption must describe all
+lettered panels explicitly.
 
 These are hard constraints from the official Nature figure guidance:
 

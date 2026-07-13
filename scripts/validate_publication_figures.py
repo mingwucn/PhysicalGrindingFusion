@@ -87,6 +87,12 @@ def main() -> int:
                 "use \\input{tikz/<figure_name>}"
             )
 
+    figure_blocks = re.findall(
+        r"\\begin\{figure\*?\}.*?\\end\{figure\*?\}",
+        manuscript_text,
+        flags=re.DOTALL,
+    )
+
     for figure, width in TIKZ_WIDTHS.items():
         expected = f"\\resizebox{{{width}}}{{!}}{{\\input{{tikz/{figure}}}}}"
         if expected not in manuscript_text:
@@ -111,9 +117,23 @@ def main() -> int:
         ratio = float(metadata["profile"].get("ratio", 0.0))
         if width_mm and width_mm * ratio > 170:
             errors.append(f"{artifact}: rendered height exceeds Nature's 170 mm maximum")
-        panel_count = int(metadata["profile"].get("nrows", 1)) * int(metadata["profile"].get("ncols", 1))
+        panel_count = metadata["profile"].get("panel_count")
+        if panel_count is None:
+            panel_count = int(metadata["profile"].get("nrows", 1)) * int(
+                metadata["profile"].get("ncols", 1)
+            )
+        panel_count = int(panel_count)
         if panel_count > 1 and "panel_labels" not in metadata.get("metadata", {}):
             errors.append(f"{artifact}: missing automatic Nature panel-label provenance")
+        if panel_count > 1 and includes.get(artifact):
+            matching_blocks = [block for block in figure_blocks if artifact in block]
+            if not matching_blocks:
+                errors.append(f"{artifact}: included multi-panel figure has no figure-caption block")
+            for block in matching_blocks:
+                for index in range(panel_count):
+                    panel = chr(ord("a") + index)
+                    if f"\\textbf{{{panel}}}" not in block:
+                        errors.append(f"{artifact}: caption does not describe panel {panel}")
 
         source = ROOT / source_rel
         if source_rel not in checked_sources:
