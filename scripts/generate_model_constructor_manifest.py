@@ -20,6 +20,7 @@ RESOLVED_JSON_OUT = ROOT / "reports" / "evidence" / "tables" / "resolved_model_c
 TEX_OUT = ROOT / "overleaf" / "main" / "supp_model_constructor_defaults.tex"
 ALIASES = {"SSLResNetVibCNN": "SelfSupervisedPretrainedCNN"}
 ARCHIVAL = {"MultiscaleSpectrogramCNN", "SSLResNetVibCNN"}
+PUBLIC_ARTIFACT_COMMIT = "7446310571510fd615da7a86a0fb31ebe0ffd31d"
 
 
 def latex_escape(value: str) -> str:
@@ -128,7 +129,8 @@ def main() -> int:
         "Input IDs are defined in Table~\\ref{tab:supp-model-inventory}. Complete signatures and pair-level notes are in "
         "\\texttt{canonical\\_model\\_constructor\\_defaults.json} and "
         "\\texttt{resolved\\_model\\_configuration\\_pairs.json} (SHA-256: "
-        f"\\texttt{{{resolved_sha256}}}). The two archival entries require Vib-dB channel or modality "
+        f"\\texttt{{{resolved_sha256}}}) at public artifact commit "
+        f"\\texttt{{{PUBLIC_ARTIFACT_COMMIT}}}. The two archival entries require Vib-dB channel or modality "
         "overrides that were not retained. The historical shallow MLP used an internal random 10\\% "
         "validation split; the corrected grouped-validation sensitivity is reported separately.}\n"
         "\\label{tab:supp-model-constructors}\\\\\n"

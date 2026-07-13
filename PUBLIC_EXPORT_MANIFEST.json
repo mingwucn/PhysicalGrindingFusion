@@ -16,8 +16,8 @@
   },
   {
     "path": "REPLICATION.md",
-    "sha256": "06ae8d904645a491d91a20513326fcb42159ff937e0e0fc1522652d394d3fdf5",
-    "bytes": 4899
+    "sha256": "1026f499cbf39dfeab022cf87d5f4c09380ac0d4ae0c4f21ca3c9cc7343df8db",
+    "bytes": 5141
   },
   {
     "path": "configs/runtime.yaml",
@@ -36,8 +36,8 @@
   },
   {
     "path": "docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md",
-    "sha256": "64a7cc55c00fdf3cbcbe1be8670f47a6a2466ab434d783d4511bc75bb15ebb5f",
-    "bytes": 13454
+    "sha256": "73735a98af25d9ea41f1fbcaa8fdf34b0c15fee2126c8aaf952c57ccf041e1eb",
+    "bytes": 13527
   },
   {
     "path": "docs/README.md",
@@ -61,8 +61,8 @@
   },
   {
     "path": "overleaf/main/Acknowledgment.tex",
-    "sha256": "ef860aecde299243e873f02728ddbf22cb1bfa0f52001ca95091c8f2fafd4938",
-    "bytes": 2589
+    "sha256": "e01c7e8deb95776a2c092475f7e6755b9ddab0d14752bb74b8cccbbfe681a5db",
+    "bytes": 3295
   },
   {
     "path": "overleaf/main/Author_elsevier.tex",
@@ -171,8 +171,8 @@
   },
   {
     "path": "overleaf/main/supp_model_constructor_defaults.tex",
-    "sha256": "48e44c8cf2728665e06221de750aec5eff7ada5782704cfb5004e68d86c3478e",
-    "bytes": 4213
+    "sha256": "44ad24a3e66801faeb738b075e47c30b929edbae8915f0bb2b74731bf64288b0",
+    "bytes": 4289
   },
   {
     "path": "overleaf/main/supp_model_inventory.tex",
@@ -2491,8 +2491,8 @@
   },
   {
     "path": "scripts/generate_model_constructor_manifest.py",
-    "sha256": "9835490bd9461a1e75ac9eff7a57de1801b84e46d81f88937866da7be6c53320",
-    "bytes": 6619
+    "sha256": "771e3db237fb3ce74ba3d8240f02b53f3e279258ba85859cdc16af7b90c9600d",
+    "bytes": 6762
   },
   {
     "path": "scripts/generate_model_inventory.py",

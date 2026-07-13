@@ -5,6 +5,10 @@ The immutable public review snapshot is the Git tag `review-v3`. The exact
 `reports/evidence/tables/final_evaluation_targets.csv`; its SHA-256 digest and
 the excluded sample identifier are recorded in
 `reports/evidence/tables/final_evaluation_targets_manifest.json`.
+The historical prediction and statistical artifacts are preserved at commit
+`7446310571510fd615da7a86a0fb31ebe0ffd31d`; their per-file digests are in
+`reports/evidence/tables/canonical_prediction_manifest.csv` and the public
+export manifest.
 
 This document describes how to reproduce the grouped benchmark, XAI analysis,
 uncertainty diagnostics, robustness sensitivities, and submission figures.

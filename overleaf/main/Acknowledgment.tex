@@ -6,7 +6,10 @@ small result manifests are available in the
 repository (\url{https://github.com/mingwucn/PhysicalGrindingFusion}). Key artefacts:
 
 The frozen public review snapshot is tagged
-\href{https://github.com/mingwucn/PhysicalGrindingFusion/tree/review-v2}{review-v2}.
+\href{https://github.com/mingwucn/PhysicalGrindingFusion/tree/review-v3}{review-v3}.
+The preserved historical prediction and statistical artifacts are fixed at
+commit
+\href{https://github.com/mingwucn/PhysicalGrindingFusion/commit/7446310571510fd615da7a86a0fb31ebe0ffd31d}{\texttt{7446310571510fd615da7a86a0fb31ebe0ffd31d}}.
 
 \begin{itemize}
 \tightlist
@@ -24,12 +27,23 @@ The frozen public review snapshot is tagged
   Statistical tests:
   \texttt{reports/evidence/tables/statistical\_tests\_updated.csv}
 \item
+  Historical fold predictions and complete hashes:
+  \texttt{reports/evidence/predictions/} and
+  \texttt{reports/evidence/tables/canonical\_prediction\_manifest.csv}
+\item
+  Statistical regeneration script:
+  \texttt{scripts/run\_statistical\_tests\_updated.py}
+\item
   Signal-representation comparison:
   \texttt{reports/evidence/tables/signal\_representation\_comparison.csv}
 \item
   XAI outputs: \texttt{reports/evidence/xai/}
 \item
   Uncertainty outputs: \texttt{reports/evidence/uncertainty/}
+\item
+  Corrected grouped-MLP protocol and matched 14-condition modality outputs:
+  \texttt{grouped\_validation\_shallow\_mlp\_protocol.json} and
+  \texttt{rf\_modality\_ablation\_14condition.csv}
 \item
   Replication guide: \texttt{REPLICATION.md}
 \end{itemize}

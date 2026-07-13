@@ -12,6 +12,7 @@ method-specific diagnostics from being described as the same experiment.
 - Public repository: `https://github.com/mingwucn/PhysicalGrindingFusion`
 - Immutable review tag: `review-v3` (created after this correction cycle)
 - Tagged tree: `https://github.com/mingwucn/PhysicalGrindingFusion/tree/review-v3`
+- Historical artifact commit: `7446310571510fd615da7a86a0fb31ebe0ffd31d`
 - Public export builder: `scripts/sync_physical_grinding_fusion.py`
 - Public export manifest: `PUBLIC_EXPORT_MANIFEST.json`
 
