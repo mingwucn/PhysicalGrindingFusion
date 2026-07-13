@@ -25,6 +25,9 @@ The Top-20 LOGO ranking is produced by
 
 All manuscript TikZ figures must load the shared
 `overleaf/tikz/publication_styles.tex` layer through `overleaf/Manuscript.tex`.
+Each diagram must live in its own `overleaf/tikz/<figure_name>.tex` source and
+be included from the manuscript with `\\input{tikz/<figure_name>}`; inline
+`tikzpicture` environments in `overleaf/main/*.tex` are forbidden.
 Use `pub/input`, `pub/representation`, `pub/process`, `pub/physics`,
 `pub/model`, `pub/explanation`, and `pub/target` for semantic nodes; use
 `pub/arrow`, `pub/flow`, and `pub/dashed` for connectors. Do not introduce

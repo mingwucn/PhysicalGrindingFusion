@@ -20,6 +20,9 @@ TIKZ_DIR = ROOT / "overleaf" / "tikz"
 STYLE_FILE = TIKZ_DIR / "publication_styles.tex"
 RENDER_URL = "https://latexonline.cc/compile"
 DEFAULT_FIGURES = (
+    "preprocessing_pipeline",
+    "wst_pipeline",
+    "statistical_workflow",
     "model_taxonomy",
     "logo_scheme",
     "resnetvibcnn_architecture",

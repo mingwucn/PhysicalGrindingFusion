@@ -1,0 +1,23 @@
+\begin{tikzpicture}[
+  node distance=1.2cm and 1.4cm,
+  box/.style={pub/representation, minimum width=2.4cm, minimum height=0.9cm},
+  param/.style={pub/base, dashed, fill=pubSlateFill, minimum width=2.2cm, minimum height=0.7cm},
+  arrow/.style={pub/arrow},
+  splitarrow/.style={pub/flow}
+]
+\node[box] (raw) {Raw\\waveform};
+\node[box, right=of raw] (stft) {Hann-window\\STFT};
+\node[box, right=of stft] (lin) {STFT\\magnitude\\spectrum};
+\node[box, above right=0.8cm and 1.2cm of lin] (db) {Mean dB\\spectrogram\\(\texttt{ae\_spec},\\\texttt{vib\_spec})};
+\node[box, right=2.2cm of db] (z) {Optional per-sample\\z-standardisation\\(\texttt{ae\_logspec},\\\texttt{vib\_logspec})};
+\node[box, below right=0.8cm and 1.2cm of db] (mel) {Inverse dB \(\rightarrow\) power\\mel bank \(\rightarrow\) dB\\(\texttt{ae\_mel},\\\texttt{vib\_mel})};
+\node[param, above=0.4cm of stft] (stftp) {\(N_{\rm FFT}\), hop};
+\node[param, below=0.4cm of mel] (melp) {\(M=64\) mel filters};
+\draw[arrow] (raw) -- (stft);
+\draw[arrow] (stft) -- (lin);
+\draw[splitarrow] (lin) -- (db);
+\draw[splitarrow] (db) -- (z);
+\draw[splitarrow] (db) -- (mel);
+\draw[arrow, dashed] (stftp) -- (stft);
+\draw[arrow, dashed] (melp) -- (mel);
+\end{tikzpicture}

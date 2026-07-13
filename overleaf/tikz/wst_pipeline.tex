@@ -1,0 +1,19 @@
+\begin{tikzpicture}[
+  node distance=1.4cm,
+  box/.style={pub/representation, minimum width=2.6cm, minimum height=0.9cm},
+  arrow/.style={pub/arrow}
+]
+\node[box] (spec) {2D spectrogram\\input};
+\node[box, right=of spec] (psi1) {Morlet wavelet\\filter bank\\\(L=8,\ J=3\)};
+\node[box, right=of psi1] (mod1) {Modulus\\\(\lvert\cdot\rvert\)};
+\node[box, right=of mod1] (psi2) {Second-order\\Morlet filters};
+\node[box, right=of psi2] (mod2) {Modulus\\\(\lvert\cdot\rvert\)};
+\node[box, below=1.0cm of mod2] (avg) {Spatial\\averaging};
+\node[box, left=of avg] (out) {Scattering\\coefficients};
+\draw[arrow] (spec) -- (psi1);
+\draw[arrow] (psi1) -- (mod1);
+\draw[arrow] (mod1) -- (psi2);
+\draw[arrow] (psi2) -- (mod2);
+\draw[arrow] (mod2) -- (avg);
+\draw[arrow] (avg) -- (out);
+\end{tikzpicture}

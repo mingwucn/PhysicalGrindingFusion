@@ -67,6 +67,13 @@ def main() -> int:
     includes = tex_includes()
     checked_sources: set[str] = set()
 
+    for path in (ROOT / "overleaf" / "main").glob("*.tex"):
+        if "\\begin{tikzpicture}" in path.read_text(encoding="utf-8"):
+            errors.append(
+                f"{path.relative_to(ROOT)}: inline tikzpicture is forbidden; "
+                "use \\input{tikz/<figure_name>}"
+            )
+
     for artifact, (source_rel, profile_name) in ARTIFACTS.items():
         metadata_path = METADATA_DIR / f"{artifact}.json"
         if not metadata_path.exists():

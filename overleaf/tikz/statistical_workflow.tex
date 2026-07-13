@@ -1,0 +1,15 @@
+\begin{tikzpicture}[
+  node distance=1.6cm,
+  box/.style={pub/representation, minimum width=3.2cm, minimum height=0.9cm},
+  arrow/.style={pub/arrow}
+]
+\node[box] (mae) {16 per-fold MAEs\\for each model};
+\node[box, right=of mae] (boot) {Bootstrap\\\(B=1000\) replicates\\(percentile CI)};
+\node[box, below=of mae] (pair) {Pair by fold\\Wilcoxon signed-rank};
+\node[box, below=of pair] (holm) {Holm--Bonferroni\\correction};
+\node[box, right=of holm] (decide) {Reject/retain\\at \(\alpha=0.05\)};
+\draw[arrow] (mae) -- (boot);
+\draw[arrow] (mae) -- (pair);
+\draw[arrow] (pair) -- (holm);
+\draw[arrow] (holm) -- (decide);
+\end{tikzpicture}

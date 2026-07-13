@@ -160,29 +160,7 @@ pipeline is shown in Figure~\ref{fig:preprocessing-pipeline}.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[
-  node distance=1.2cm and 1.4cm,
-  box/.style={pub/representation, minimum width=2.4cm, minimum height=0.9cm},
-  param/.style={pub/base, dashed, fill=pubSlateFill, minimum width=2.2cm, minimum height=0.7cm},
-  arrow/.style={pub/arrow},
-  splitarrow/.style={pub/flow}
-]
-\node[box] (raw) {Raw\\waveform};
-\node[box, right=of raw] (stft) {Hann-window\\STFT};
-\node[box, right=of stft] (lin) {STFT\\magnitude\\spectrum};
-\node[box, above right=0.8cm and 1.2cm of lin] (db) {Mean dB\\spectrogram\\(\texttt{ae\_spec},\\\texttt{vib\_spec})};
-\node[box, right=2.2cm of db] (z) {Optional per-sample\\z-standardisation\\(\texttt{ae\_logspec},\\\texttt{vib\_logspec})};
-\node[box, below right=0.8cm and 1.2cm of db] (mel) {Inverse dB $\rightarrow$ power\\mel bank $\rightarrow$ dB\\(\texttt{ae\_mel},\\\texttt{vib\_mel})};
-\node[param, above=0.4cm of stft] (stftp) {$N_{\rm FFT}$, hop};
-\node[param, below=0.4cm of mel] (melp) {$M=64$ mel filters};
-\draw[arrow] (raw) -- (stft);
-\draw[arrow] (stft) -- (lin);
-\draw[splitarrow] (lin) -- (db);
-\draw[splitarrow] (db) -- (z);
-\draw[splitarrow] (db) -- (mel);
-\draw[arrow, dashed] (stftp) -- (stft);
-\draw[arrow, dashed] (melp) -- (mel);
-\end{tikzpicture}%
+\input{tikz/preprocessing_pipeline}
 \caption{Preprocessing pipeline for AE and vibration signals. Raw
 waveforms are transformed by a Hann-window STFT. The magnitude branch is
 converted to dB and averaged over local maps; an optional per-sample
@@ -333,25 +311,7 @@ shown schematically in Figure~2. Note that for the vibration channel, the tempor
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[
-  node distance=1.4cm,
-  box/.style={pub/representation, minimum width=2.6cm, minimum height=0.9cm},
-  arrow/.style={pub/arrow}
-]
-\node[box] (spec) {2D spectrogram\\input};
-\node[box, right=of spec] (psi1) {Morlet wavelet\\filter bank\\\(L=8,\ J=3\)};
-\node[box, right=of psi1] (mod1) {Modulus\\\(\lvert\cdot\rvert\)};
-\node[box, right=of mod1] (psi2) {Second-order\\Morlet filters};
-\node[box, right=of psi2] (mod2) {Modulus\\\(\lvert\cdot\rvert\)};
-\node[box, below=1.0cm of mod2] (avg) {Spatial\\averaging};
-\node[box, left=of avg] (out) {Scattering\\coefficients};
-\draw[arrow] (spec) -- (psi1);
-\draw[arrow] (psi1) -- (mod1);
-\draw[arrow] (mod1) -- (psi2);
-\draw[arrow] (psi2) -- (mod2);
-\draw[arrow] (mod2) -- (avg);
-\draw[arrow] (avg) -- (out);
-\end{tikzpicture}
+\input{tikz/wst_pipeline}
 \caption{Wavelet scattering transform pipeline. A 2D spectrogram is
 passed through two Morlet filter banks separated by modulus
 nonlinearities, then spatially averaged to produce a compact,
@@ -692,21 +652,7 @@ the Wilcoxon zero-handling rule.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[
-  node distance=1.6cm,
-  box/.style={pub/representation, minimum width=3.2cm, minimum height=0.9cm},
-  arrow/.style={pub/arrow}
-]
-\node[box] (mae) {16 per-fold MAEs\\for each model};
-\node[box, right=of mae] (boot) {Bootstrap\\$B=1000$ replicates\\(percentile CI)};
-\node[box, below=of mae] (pair) {Pair by fold\\Wilcoxon signed-rank};
-\node[box, below=of pair] (holm) {Holm--Bonferroni\\correction};
-\node[box, right=of holm] (decide) {Reject/retain\\at $\alpha=0.05$};
-\draw[arrow] (mae) -- (boot);
-\draw[arrow] (mae) -- (pair);
-\draw[arrow] (pair) -- (holm);
-\draw[arrow] (holm) -- (decide);
-\end{tikzpicture}
+\input{tikz/statistical_workflow}
 \caption{Statistical comparison workflow. Per-fold MAEs are used both to
 build bootstrap confidence intervals and to perform paired Wilcoxon tests;
 $p$-values are adjusted with Holm--Bonferroni correction.}
