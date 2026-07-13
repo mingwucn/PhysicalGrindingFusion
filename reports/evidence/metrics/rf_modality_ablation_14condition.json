@@ -1,0 +1,34 @@
+{
+  "protocol": "current fixed dB-z RF; canonical outer LOGO test and validation conditions; 14 fitting conditions",
+  "cache": "ae_logspec+vib_logspec",
+  "rf_parameters": {
+    "n_estimators": 200,
+    "max_depth": 8,
+    "min_samples_leaf": 1,
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "results": [
+    {
+      "input": "AE only",
+      "mean_mae": 0.028233939843736563,
+      "fold_sd": 0.05328268307854907,
+      "median_mae": 0.009063140888009035,
+      "maximum_mae": 0.20101472784483
+    },
+    {
+      "input": "Vibration only",
+      "mean_mae": 0.02172284831717519,
+      "fold_sd": 0.0363710385444191,
+      "median_mae": 0.008723647874482428,
+      "maximum_mae": 0.14000276072855117
+    },
+    {
+      "input": "AE + vibration",
+      "mean_mae": 0.020960630412459033,
+      "fold_sd": 0.03611018471032474,
+      "median_mae": 0.009285329341227718,
+      "maximum_mae": 0.147817065814029
+    }
+  ]
+}

@@ -10,8 +10,8 @@ method-specific diagnostics from being described as the same experiment.
 ## Frozen snapshot
 
 - Public repository: `https://github.com/mingwucn/PhysicalGrindingFusion`
-- Immutable review tag: `review-v2`
-- Tagged tree: `https://github.com/mingwucn/PhysicalGrindingFusion/tree/review-v2`
+- Immutable review tag: `review-v3` (created after this correction cycle)
+- Tagged tree: `https://github.com/mingwucn/PhysicalGrindingFusion/tree/review-v3`
 - Public export builder: `scripts/sync_physical_grinding_fusion.py`
 - Public export manifest: `PUBLIC_EXPORT_MANIFEST.json`
 
@@ -111,6 +111,9 @@ renamed as a conventional arithmetic pass-average log-mel representation.
 - Uses a three-candidate training-only configuration grid.
 - Mean MAE: `0.05293295` um; maximum fold MAE: `0.26449296` um.
 - Script: `scripts/grouped_validation_shallow_mlp.py`.
+- Candidate grid and fold selections:
+  `reports/evidence/tables/grouped_validation_shallow_mlp_protocol.json`.
+- Documentation generator: `scripts/generate_grouped_mlp_documentation.py`.
 
 ### Current fixed-setting five-seed analysis
 
@@ -131,7 +134,8 @@ The full table is `overleaf/main/supp_rf_experiment_provenance.tex`.
 | Current fixed dB-z/dB | 14 | Primary reproducible fixed results |
 | Current nested dB-z/log-mel | 14 | Matched inner-grouped sensitivity |
 | Equal-budget RF seed repeat | 14 | Current fixed-setting repeated analysis |
-| Robustness/modality/masking RF | 15 | Separate robustness diagnostics |
+| Matched modality RF | 14 | Exact current-split modality ablation |
+| Robustness/masking RF | 15 | Separate robustness diagnostics |
 | RF OOB uncertainty variant | 15 | Method-specific interval diagnostic |
 | OOF TreeSHAP RF | 14 | Explanation of current RF held-out predictions |
 
@@ -148,13 +152,19 @@ training-condition budget.
   analysis.
 - Differences below approximately `0.005-0.010` um are not treated as
   practically meaningful given the available metrological evidence.
-- AE fusion provides only a numerically small mean improvement over vibration
-  alone under the current channels, windows, and preprocessing.
+- The matched 14-condition modality rerun is authoritative for the AE/fusion
+  summary; its generated values are in
+  `reports/evidence/tables/rf_modality_ablation_14condition.csv`.
+- Matched means: AE only `0.02823394` um, vibration only `0.02172285` um,
+  and AE plus vibration `0.02096063` um.
 
 ## Statistical analysis
 
 - Effective paired sample size: sixteen held-out conditions.
 - Primary family: fourteen historical post-selection pairwise comparisons.
+- The family is artifact-based: exact historical prediction files are resolved
+  dynamically from `canonical_prediction_manifest.csv` and are not presented
+  as independently regenerated current results.
 - Test: paired Wilcoxon signed-rank with documented zero handling.
 - Multiplicity: Holm-Bonferroni correction over the fourteen tests.
 - Effect estimate: paired Hodges-Lehmann Walsh-average location shift.

@@ -306,6 +306,9 @@ AE/Vib feats + PP (Hodges--Lehmann paired difference
 \(-0.0249~\upmu\)m, \(p_{\text{Holm}}=4.27\times10^{-4}\)). This is a
 comparison of the archived implementations: the historical MLP used an
 internal random validation fraction rather than the designated condition.
+The primary statistical family is therefore an artifact-based post-selection
+analysis of preserved historical canonical predictions, not an independently
+regenerated comparison.
 A corrected grouped-validation, target-scaled shallow MLP gives mean MAE
 0.0529~\(\upmu\)m (maximum 0.2645~\(\upmu\)m), compared with 0.0210 for
 the current RF; the descriptive paired Wilcoxon raw \(p\)-value is
@@ -746,9 +749,10 @@ should therefore be interpreted cautiously unless the sensor transfer
 function above 1~MHz is independently verified. The top three AE bins
 all lie above 840~kHz and together account for 55.3\% of AE importance
 mass. A single dominant vibration bin contributes a large fraction of
-importance; this may represent a structural or chatter-related resonance,
-but mounting, sensor-response, preprocessing, or condition-specific
-artefacts cannot be excluded. Fold-specific TreeSHAP was computed for the
+importance. This is treated as upper-band predictive sensitivity; its
+mechanical versus acquisition-chain origin cannot be resolved. Mounting,
+sensor-response, preprocessing, or condition-specific artefacts cannot be
+excluded. Fold-specific TreeSHAP was computed for the
 reproducible current RF/dB-z pipeline using only each held-out condition's
 predictions. The pooled out-of-fold profile peaks at 16.2~kHz for vibration
 and 334~kHz for AE; vibration peaks remain mainly in the 16--24~kHz region,
@@ -1180,27 +1184,28 @@ still failing on the high-roughness frontier.
 
 \subsubsection{Sensor-modality ablation}
 
-Table~\ref{tab:modality-ablation} reports a 15-condition robustness RF when
-only AE, only vibration, or both modalities are used. Vibration alone
-achieves 0.0207~\(\upmu\)m, almost identical to the fused configuration
-(0.0202~\(\upmu\)m), whereas AE alone degrades to 0.0296~\(\upmu\)m. Under
+Table~\ref{tab:modality-ablation} reports an exact 14-condition current-pipeline
+ablation when only AE, only vibration, or both modalities are used. Vibration
+alone achieves 0.0217~\(\upmu\)m, close to the fused configuration
+(0.0210~\(\upmu\)m), whereas AE alone degrades to 0.0282~\(\upmu\)m. Under
 the current sensor channels, preprocessing, and unequal window lengths,
 vibration therefore carries most of the predictive information. The
-0.0005~\(\upmu\)m AE-fusion difference is below the stated practical
+0.0008~\(\upmu\)m AE-fusion difference is below the stated practical
 metrology scale and is not evidence of a practically meaningful average
 accuracy gain.
 
 \begin{table}[htbp]
 \centering
-\caption{Sensor-modality ablation for the 15-condition robustness RF under
-16-fold LOGO. Within each fold only the test condition is excluded.}\label{tab:modality-ablation}
+\caption{Sensor-modality ablation for the current 14-condition dB-z RF under
+16-fold LOGO. The canonical test and validation conditions are excluded in
+every fold.}\label{tab:modality-ablation}
 \begin{tabular}{@{}lc@{}}
 \toprule
 Input & MAE (\(\upmu\)m) \\
 \midrule
-AE only & 0.0296 \\
-Vib only & 0.0207 \\
-AE + Vib & 0.0202 \\
+AE only & 0.0282 \\
+Vib only & 0.0217 \\
+AE + Vib & 0.0210 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1277,9 +1282,10 @@ median of 8.0 ms and a tighter p95 of 8.2 ms.
 
 The CNNs are the fastest options: ResNetVibCNN on Vib-dB
 has a pooled median latency of 1.3 ms and ResNetAECNN on AE-dB of
-2.3 ms, and their median checkpoints are the smallest (0.35 MB). Their MAE,
-however, is \(0.0268\)--\(0.0300~\upmu\)m, worse than the best RF by
-34--50\%. LightGBM on \texttt{Vib-dB-z}
+2.3 ms, and their median checkpoints are the smallest (0.35 MB). Their
+point-estimate MAEs are \(0.0068\)--\(0.0100~\upmu\)m above the historical
+best RF value; most corresponding pairwise comparisons are not significant
+after multiplicity correction. LightGBM on \texttt{Vib-dB-z}
 sits between the two: MAE \(0.0250~\upmu\)m and pooled median latency 4.9 ms,
 with a p95 of 5.0 ms; it remains less accurate than the best RF while
 offering a much smaller checkpoint. Bilinear fusion on
@@ -1293,7 +1299,11 @@ variant in Table~\ref{tbl:representations}; even so, its accuracy
 \centering
 \caption{CPU feature-precomputed model-inference latency and checkpoint
 storage footprint. Each row combines the 16-fold benchmark MAE with timing
-pooled over the same 16 historical canonical repeat-0 fold checkpoints. Each checkpoint
+pooled over the same 16 historical canonical repeat-0 fold checkpoints. The
+timed dB-z RF row therefore corresponds to the historical 0.0200~\(\upmu\)m
+artifact, not the reproducible current 0.0210~\(\upmu\)m checkpoint set; the
+current set has the same architecture and feature dimensions but was not timed.
+Each checkpoint
 uses five independent blocks of 200 runs, with warm-up excluded and garbage
 collection disabled; p50 is the pooled median. Checkpoint size is the median
 serialized size across the 16 checkpoints, not peak runtime memory. Tree

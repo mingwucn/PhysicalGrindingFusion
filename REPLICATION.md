@@ -1,6 +1,6 @@
 # Replication Guide - PhysicalGrindingFusion
 
-The immutable public review snapshot is the Git tag `review-v2`. The exact
+The immutable public review snapshot is the Git tag `review-v3`. The exact
 319-sample evaluation target is stored in
 `reports/evidence/tables/final_evaluation_targets.csv`; its SHA-256 digest and
 the excluded sample identifier are recorded in
@@ -65,6 +65,8 @@ recordings and caches may be requested from the corresponding author.
 5. **Run corrected methodological sensitivities**
    ```bash
    python scripts/grouped_validation_shallow_mlp.py
+   python scripts/generate_grouped_mlp_documentation.py
+   python scripts/rf_modality_ablation_14condition.py
    python scripts/pre_normalization_band_ablation.py
    python scripts/retrained_frequency_band_ablation.py
    python scripts/rf_oof_treeshap.py
@@ -110,6 +112,8 @@ recordings and caches may be requested from the corresponding author.
 | `reports/evidence/tables/nested_logo_logmel_matched.csv` | Current matched nested log-mel RF summary |
 | `reports/evidence/tables/statistical_tests_updated.csv` | Wilcoxon tests with Holm correction |
 | `reports/evidence/tables/grouped_validation_shallow_mlp.csv` | Corrected grouped-validation MLP sensitivity |
+| `reports/evidence/tables/grouped_validation_shallow_mlp_protocol.json` | Corrected MLP grid and per-fold selections |
+| `reports/evidence/tables/rf_modality_ablation_14condition.csv` | Matched current-split modality ablation |
 | `reports/evidence/tables/pre_normalization_band_ablation.csv` | Strict pre-normalization band-removal sensitivity |
 | `reports/evidence/xai/` | OOF SHAP and other attribution artifacts |
 | `reports/evidence/uncertainty/` | MC-dropout and RF interval diagnostics |

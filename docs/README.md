@@ -21,4 +21,4 @@
 - `34_LONG_RUNNING_COMMAND_GUARD.md`: long-running job handling.
 
 The root `REPLICATION.md` provides executable reproduction commands. The
-frozen public review snapshot is tag `review-v2` in PhysicalGrindingFusion.
+frozen public review snapshot is tag `review-v3` in PhysicalGrindingFusion.

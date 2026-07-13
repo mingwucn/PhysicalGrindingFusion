@@ -21,7 +21,9 @@ strict leave-one-condition-out validation. The main conclusions are:
   Holm--Bonferroni-corrected Wilcoxon tests finds clear superiority only
   over the implementation-specific historical shallow MLP baseline; a corrected
   grouped-validation MLP sensitivity remains worse, while the remaining pairwise differences are
-  favourable by point estimate but not significant. A secondary current-protocol
+  favourable by point estimate but not significant. This family is an
+  artifact-based post-selection analysis of preserved historical predictions,
+  not an independently regenerated comparison. A secondary current-protocol
   five-seed analysis produces the same qualitative ordering for the selected
   repeated baselines, although it does not exactly reproduce the historical
   tuned checkpoints. The ranking among the
@@ -29,9 +31,10 @@ strict leave-one-condition-out validation. The main conclusions are:
   than the available measurement-resolution evidence, and the comparison
 	  remains non-nested/post-selection.
 \item
-	  The modality ablation indicates that vibration carries most of the
-	  predictive signal in the present setup, with AE giving only a small
-	  mean-level improvement.
+	  In the matched 14-condition modality ablation, vibration alone gives
+	  0.0217~\(\upmu\)m versus 0.0210~\(\upmu\)m for fusion. Vibration therefore
+	  carries most of the predictive signal in the present setup, while the
+	  AE mean-level gain is below the practical metrology scale.
 \item
   Quantitative explainability analysis associates model decisions with
   physically plausible frequencies: vibration importance lies in the

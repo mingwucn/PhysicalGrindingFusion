@@ -24,6 +24,7 @@ nested-log-mel & AE/Vib log-mel sensitivity & 14 & No & Five inner grouped folds
 rf-seed-repeat-14 & AE/Vib dB-z equal-budget seed sensitivity & 14 & Yes & Canonical test and validation excluded & Seeds 42--46; seed-42 0.0210, five-seed mean 0.0203; used for paired model-family sensitivity & 0.0203 \\
 rf-seed-repeat-15 & AE/Vib dB-z deployment-style seed sensitivity & 15 & Yes & Test condition only excluded & Historical seeds 42--46; seed-42 0.0201, five-seed mean 0.0195; excluded from model-family tests & 0.0195 \\
 modality-mask-suite & Modality and test-time masking & 15 & Yes & Test condition only excluded & Same regenerated 0.0202 full-input baseline & 0.0202 \\
+modality-current-14 & AE/Vib modality ablation & 14 & Yes & Canonical test and validation excluded & Exact current fixed split; fusion baseline & 0.0210 \\
 retrained-band & Retrained band removal & 14 & Yes & Canonical seed-42 & Features zeroed before fit and test & 0.0210 \\
 rf-oob-uq & OOB-scaled uncertainty only & 15 & Yes & Test condition only excluded & Fold scaler; 200 trees; depth 8; min leaf 2 & -- \\
 rf-oof-shap & OOF attribution & 14 & Yes & Canonical seed-42 & Approximate path-dependent TreeSHAP on held-out passes & 0.0210 \\
@@ -38,9 +39,10 @@ validation condition for fitting; they are not used for paired model-family
 inference.
 The latency row pools timings over the same 16 canonical repeat-0 checkpoints
 that produce the historical 16-fold benchmark aggregate, so its latency and
-accuracy now refer to the same fitted-model family. Modality, masking, and OOB analyses use 15 non-test
-conditions and are therefore method-specific diagnostics rather than exact
-refits of the recommended 14-condition pipeline.
+accuracy refer to the same fitted-model family. The principal modality
+ablation now uses the exact 14-condition current split. The older masking and
+OOB analyses use 15 non-test conditions and remain method-specific diagnostics
+rather than exact refits of the recommended 14-condition pipeline.
 
 The historical 14-comparison family reads its 16 fold records per
 model--configuration from \texttt{full\_results\_logo\_only.csv} (SHA-256

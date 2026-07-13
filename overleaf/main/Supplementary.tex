@@ -722,6 +722,8 @@ Grouped-validation shallow MLP & 0.0529 & 0.0627 & 0.0275 & 0.2645 \\
 \end{tabular}
 \end{table}
 
+\input{main/supp_grouped_mlp_protocol.tex}
+
 Table~\ref{tab:supp-seed-repeat-rf} gives the same information for the
 random forest only, for readers who want the finest numerical detail.
 
@@ -798,10 +800,11 @@ To support replication, Table~\ref{tab:supp-dl-arch} details the architectural c
 \subsection*{Complete model and input inventory}
 \input{main/supp_model_inventory.tex}
 
-Table~\ref{tab:supp-model-constructors} reports the exact constructor
-arguments and defaults used by the canonical benchmark for every model in
-the inventory. Neural models use the common optimisation protocol stated in
-Section~\ref{predictive-models}; model-specific input configuration IDs remain
-separate because they determine which constructor branches are active.
+Table~\ref{tab:supp-model-constructors} is a print-readable summary of the
+resolved model inventory. Complete signatures and pair-level configuration
+notes remain in the hashed machine-readable JSON records cited in its caption.
+Neural models use the common optimisation protocol stated in
+Section~\ref{predictive-models}; input IDs determine which constructor branches
+are active.
 
 \input{main/supp_model_constructor_defaults.tex}

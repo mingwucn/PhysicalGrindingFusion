@@ -1,36 +1,39 @@
 \begin{tikzpicture}[
     arrow/.style={pub/arrow},
-    family/.style={pub/explanation, text width=12.4cm, minimum height=0.82cm},
-    modelcard/.style={pub/model, text width=2.65cm, minimum height=0.88cm},
+    family/.style={pub/explanation, text width=12.4cm, minimum height=0.76cm},
+    modelcard/.style={pub/model, text width=2.75cm, minimum height=0.80cm},
 ]
-\node[pub/input, text width=11.6cm, minimum height=0.88cm] (input) at (0,6.4)
+\node[pub/input, text width=11.6cm, minimum height=0.82cm] (input) at (0,7.6)
   {Input representations: AE, vibration, process parameters, and physics-inspired features};
-\node[pub/heading] (choice) at (0,5.45)
+\node[pub/heading] (choice) at (0,6.65)
   {Alternative model families evaluated under the same LOGO protocol};
 \draw[arrow] (input) -- (choice);
 
-\node[family] (auditable) at (0,4.45)
-  {Auditable baselines: direct coefficients, split structure, and post-hoc TreeSHAP};
-\draw[arrow] (choice) -- (auditable);
-\node[modelcard] (ridge) at (-5.0,3.25) {Ridge regression};
-\node[modelcard] (rf) at (-1.7,3.25) {Random forest};
-\node[modelcard] (lgbm) at (1.7,3.25) {LightGBM /\\XGBoost};
-\node[modelcard] (mlp) at (5.0,3.25) {Shallow MLP};
-\node[pub/note, text width=12.0cm, align=center] at (0,2.35)
-  {Ridge coefficients, tree split structure, and TreeSHAP support model inspection; ensemble models remain complex fitted predictors.};
+\node[family] (linear) at (0,5.7) {Directly inspectable linear baseline};
+\draw[arrow] (choice) -- (linear);
+\node[modelcard] at (0,4.85) {Ridge regression\\(coefficients)};
 
-\node[family] (deep) at (0,1.35)
-  {Deep-learning baselines: learned spectral and multimodal predictors with Grad-CAM and MC-dropout diagnostics};
-\node[modelcard] at (-5.0,0.15) {ResNet CNNs\\(AE / vibration)};
-\node[modelcard] at (-1.7,0.15) {ResNet fusion};
-\node[modelcard] at (1.7,0.15) {Bilinear fusion};
-\node[modelcard] at (5.0,0.15) {Multiscale CNN};
-\node[modelcard] at (-3.35,-1.05) {Trajectory CNN};
-\node[modelcard] at (0,-1.05) {GNN /\\TabTransformer};
-\node[modelcard] at (3.35,-1.05) {Attention regressor};
+\node[family] at (0,3.95) {Auditable tree ensembles supported by post-hoc attribution};
+\node[modelcard] at (-2.0,3.05) {Random forest};
+\node[modelcard] at (2.0,3.05) {LightGBM /\\XGBoost};
+\node[pub/note, text width=11.6cm, align=center] at (0,2.25)
+  {Split structure and TreeSHAP support inspection; the ensembles remain complex fitted predictors.};
 
-\node[pub/note, text width=12.0cm, align=center] at (0,-1.95)
+\node[family] at (0,1.4) {Shallow neural baseline};
+\node[modelcard] at (0,0.55) {Shallow MLP};
+
+\node[family] at (0,-0.4)
+  {Deep neural architectures: spectral and multimodal predictors with Grad-CAM and MC-dropout diagnostics};
+\node[modelcard] at (-4.8,-1.35) {ResNet CNNs\\(AE / vibration)};
+\node[modelcard] at (-1.6,-1.35) {ResNet fusion};
+\node[modelcard] at (1.6,-1.35) {Bilinear fusion};
+\node[modelcard] at (4.8,-1.35) {Multiscale CNN};
+\node[modelcard] at (-3.2,-2.35) {Trajectory CNN};
+\node[modelcard] at (0,-2.35) {GNN /\\TabTransformer};
+\node[modelcard] at (3.2,-2.35) {Attention regressor};
+
+\node[pub/note, text width=12.0cm, align=center] at (0,-3.25)
   {Every listed configuration regresses the same averaged measured target.};
-\node[pub/target, text width=4.0cm, minimum height=0.88cm] at (0,-2.8)
+\node[pub/target, text width=4.0cm, minimum height=0.82cm] at (0,-4.1)
   {Predict measured $R_a$ (\textmu m)};
 \end{tikzpicture}%

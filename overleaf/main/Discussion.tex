@@ -491,8 +491,9 @@ should not be interpreted as practically meaningful performance. This
 confirms that condition-level grouping is essential and that the modest
 differences among top models are only meaningful under grouped evaluation.
 The current descriptors are temporal means over 2,910 archived local windows per pass; they do not retain early/middle/late temporal ordering. The retrospective early/middle/late-third sensitivity and ordered three-window concatenation have similar mean MAEs, but fixed-distance and streaming-dispersion features remain necessary to test whether transients add information beyond the pass-level mean. The sensor-modality ablation shows that
-vibration alone achieves 0.0207~\(\upmu\)m, nearly matching the fused
-result, while AE alone degrades to 0.0296~\(\upmu\)m. AE therefore
+vibration alone achieves 0.0217~\(\upmu\)m, nearly matching the fused
+0.0210~\(\upmu\)m result, while AE alone degrades to 0.0282~\(\upmu\)m.
+This comparison uses the exact 14-condition current benchmark split. AE therefore
 provides a secondary, condition-specific benefit rather than a dominant
 signal. The frequency-band ablation shows that removing AE content above
 1~MHz or the vibration 2--15~kHz chatter band individually changes MAE by

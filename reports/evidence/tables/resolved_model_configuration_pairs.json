@@ -508,7 +508,7 @@
     "configuration_id": "C35",
     "effective_input": "Vib-dB",
     "constructor_defaults": "(in_channels: 'int' = 2, base_channels: 'int' = 16, dropout: 'float' = 0.3) -> 'None'",
-    "resolution_note": "Vib-dB requires effective in_channels=3; the archived override was not retained, so this artifact is not claimed as exactly reconstructable"
+    "resolution_note": "Vib-dB requires effective in_channels=3; archived override unavailable; not exactly reconstructable"
   },
   {
     "model": "ParamsMLP",
@@ -844,28 +844,28 @@
     "configuration_id": "C35",
     "effective_input": "Vib-dB",
     "constructor_defaults": "(modality: 'str' = 'ae', embed_dim: 'int' = 64, proj_dim: 'int' = 32, dropout: 'float' = 0.3) -> 'None'",
-    "resolution_note": "Vib-dB requires effective modality='vib'; the archived override was not retained, so this artifact is not claimed as exactly reconstructable"
+    "resolution_note": "Vib-dB requires effective modality='vib'; archived override unavailable; not exactly reconstructable"
   },
   {
     "model": "ShallowMLPModel",
     "configuration_id": "C09",
     "effective_input": "AE features + Vib features + PP",
     "constructor_defaults": "(hidden_layer_sizes: 'tuple[int, ...]' = (128, 64), alpha: 'float' = 0.0001, learning_rate_init: 'float' = 0.001, max_iter: 'int' = 500, early_stopping: 'bool' = True, validation_fraction: 'float' = 0.1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
-    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected grouped-validation sensitivity uses the designated condition, train-only input/target scaling, and no internal split"
+    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected sensitivity uses designated condition, train-only input/target scaling, and no internal split"
   },
   {
     "model": "ShallowMLPModel",
     "configuration_id": "C27",
     "effective_input": "PP",
     "constructor_defaults": "(hidden_layer_sizes: 'tuple[int, ...]' = (128, 64), alpha: 'float' = 0.0001, learning_rate_init: 'float' = 0.001, max_iter: 'int' = 500, early_stopping: 'bool' = True, validation_fraction: 'float' = 0.1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
-    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected grouped-validation sensitivity uses the designated condition, train-only input/target scaling, and no internal split"
+    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected sensitivity uses designated condition, train-only input/target scaling, and no internal split"
   },
   {
     "model": "ShallowMLPModel",
     "configuration_id": "C35",
     "effective_input": "Vib-dB",
     "constructor_defaults": "(hidden_layer_sizes: 'tuple[int, ...]' = (128, 64), alpha: 'float' = 0.0001, learning_rate_init: 'float' = 0.001, max_iter: 'int' = 500, early_stopping: 'bool' = True, validation_fraction: 'float' = 0.1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'",
-    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected grouped-validation sensitivity uses the designated condition, train-only input/target scaling, and no internal split"
+    "resolution_note": "historical baseline used internal validation_fraction=0.1; corrected sensitivity uses designated condition, train-only input/target scaling, and no internal split"
   },
   {
     "model": "TabTransformerRegressor",

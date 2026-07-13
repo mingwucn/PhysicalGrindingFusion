@@ -1,44 +1,44 @@
 \begingroup
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{longtable}{@{}p{0.18\linewidth}p{0.47\linewidth}p{0.29\linewidth}@{}}
-\caption{Constructor defaults and resolved benchmark-use caveats for 25 exactly reconstructable variants and two archival variants with incomplete configuration provenance. Input configuration IDs are given in Table~\ref{tab:supp-model-inventory}; the machine-readable pair-level record is \texttt{resolved\_model\_configuration\_pairs.json}. The archived MultiscaleSpectrogramCNN and SSLResNetVibCNN entries require Vib-dB channel/modality overrides that were not retained and are therefore not claimed as exactly reconstructable. The historical shallow MLP used an internal random 10\% validation split; the corrected grouped-validation sensitivity is reported separately.}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{@{}p{0.23\linewidth}p{0.20\linewidth}p{0.39\linewidth}p{0.12\linewidth}@{}}
+\caption{Concise resolved inventory of 25 reconstructable variants and two archival records. Input IDs are defined in Table~\ref{tab:supp-model-inventory}. Complete signatures and pair-level notes are in \texttt{canonical\_model\_constructor\_defaults.json} and \texttt{resolved\_model\_configuration\_pairs.json} (SHA-256: \texttt{aff13bdd271d823bb92808e313523131c37e4a2f291e67403626a2cece7798e2}). The two archival entries require Vib-dB channel or modality overrides that were not retained. The historical shallow MLP used an internal random 10\% validation split; the corrected grouped-validation sensitivity is reported separately.}
 \label{tab:supp-model-constructors}\\
 \toprule
-Model & Constructor arguments and defaults & Resolved benchmark use \\
+Model & Configured input & Key exposed defaults & Status \\
 \midrule
 \endfirsthead
 \toprule
-Model & Constructor arguments and defaults & Resolved benchmark use \\
+Model & Configured input & Key exposed defaults & Status \\
 \midrule
 \endhead
-\texttt{AttentionMLP} & \nolinkurl{(dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'} & C08, C09; constructor defaults used \\
-\texttt{BilinearFusionNetwork} & \nolinkurl{(embed_dim: 'int' = 32, rank: 'int' = 16, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'} & C03, C04, C06, C07, C08, C09, C16, C17, C18, C19, C20, C21, C25, C26, C27, C30, C31, C35, C36; constructor defaults used \\
-\texttt{ChannelAttentionCNN} & \nolinkurl{(in_channels: 'int' = 2, dropout: 'float' = 0.3) -> 'None'} & C16; constructor defaults used \\
-\texttt{CrossAttentionFusion} & \nolinkurl{(embed_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, query_modality: 'str' = 'physics', config: 'str | None' = None) -> 'None'} & C08; constructor defaults used \\
-\texttt{FeatureOnlyModel} & \nolinkurl{() -> 'None'} & C08, C09; constructor defaults used \\
-\texttt{GraphNeuralNetworkFusion} & \nolinkurl{(embed_dim: 'int' = 32, hidden_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'} & C03, C04, C06, C07, C08, C09, C16, C17, C18, C19, C20, C21, C25, C26, C27, C30, C31, C35, C36; constructor defaults used \\
-\texttt{HierarchicalAttentionNetwork} & \nolinkurl{(embed_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 1, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'} & C09; constructor defaults used \\
-\texttt{LightGBMModel} & \nolinkurl{(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, verbosity: 'int' = -1, **kwargs: 'Any') -> 'None'} & C03, C05, C06, C08, C09, C10, C11, C12, C13, C14, C15, C16, C18, C21, C27, C30, C32, C33, C34, C35; constructor defaults used \\
-\texttt{MeanTrajectoryMLP} & \nolinkurl{(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'} & C22, C23, C24, C37, C38; constructor defaults used \\
-\texttt{MultiHeadAttentionFusion} & \nolinkurl{(embed_dim: 'int' = 32, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'} & C08, C09; constructor defaults used \\
-\texttt{MultiscaleSpectrogramCNN} & \nolinkurl{(in_channels: 'int' = 2, base_channels: 'int' = 16, dropout: 'float' = 0.3) -> 'None'} & C35; Vib-dB requires 3 channels; archived override unavailable \\
-\texttt{ParamsMLP} & \nolinkurl{() -> 'None'} & C27; constructor defaults used \\
-\texttt{PhysicsGuidedAttentionNetwork} & \nolinkurl{(embed_dim: 'int' = 32, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'} & C09; constructor defaults used \\
-\texttt{PhysicsInformedFusionNet} & \nolinkurl{(embed_dim: 'int' = 64, num_heads: 'int' = 4, num_layers: 'int' = 2, dropout: 'float' = 0.3) -> 'None'} & C25; constructor defaults used \\
-\texttt{PhysicsMLP} & \nolinkurl{() -> 'None'} & C03, C06, C08, C09, C18, C21, C27, C30; constructor defaults used \\
-\texttt{RandomForestModel} & \nolinkurl{(n_estimators: 'int' = 200, max_depth: 'int' = 8, n_jobs: 'int' = 1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'} & C03, C05, C06, C08, C09, C10, C11, C12, C13, C14, C15, C16, C18, C21, C27, C30, C32, C33, C34, C35; constructor defaults used \\
-\texttt{ResNetAECNN} & \nolinkurl{(dropout: 'float' = 0.3, hidden_dim: 'int' = 64) -> 'None'} & C16; constructor defaults used \\
-\texttt{ResNetFusion} & \nolinkurl{(embed_dim: 'int' = 64, dropout: 'float' = 0.3) -> 'None'} & C16, C17, C18, C19, C20, C21, C25, C35, C36; constructor defaults used \\
-\texttt{ResNetVibCNN} & \nolinkurl{(dropout: 'float' = 0.3, hidden_dim: 'int' = 64) -> 'None'} & C35; constructor defaults used \\
-\texttt{RidgeRegressionModel} & \nolinkurl{(alpha: 'float' = 1.0, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'} & C09, C16, C18, C27, C35; constructor defaults used \\
-\texttt{SSLResNetVibCNN} & \nolinkurl{(modality: 'str' = 'ae', embed_dim: 'int' = 64, proj_dim: 'int' = 32, dropout: 'float' = 0.3) -> 'None'} & C35; Vib-dB requires modality=vib; archived override unavailable \\
-\texttt{ShallowMLPModel} & \nolinkurl{(hidden_layer_sizes: 'tuple[int, ...]' = (128, 64), alpha: 'float' = 0.0001, learning_rate_init: 'float' = 0.001, max_iter: 'int' = 500, early_stopping: 'bool' = True, validation_fraction: 'float' = 0.1, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'} & C09, C27, C35; historical internal 10\% validation; corrected run uses external condition and target scaling \\
-\texttt{TabTransformerRegressor} & \nolinkurl{(max_features: 'int' = 49, embed_dim: 'int' = 16, num_heads: 'int' = 2, num_layers: 'int' = 2, dropout: 'float' = 0.3, config: 'str | None' = None) -> 'None'} & C03, C04, C05, C06, C07, C08, C09, C26, C27, C30, C31, C32; constructor defaults used \\
-\texttt{TrajectoryAttention} & \nolinkurl{(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, hidden_dim: 'int' = 64, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'} & C22, C23, C24, C37, C38; constructor defaults used \\
-\texttt{TrajectoryCNN} & \nolinkurl{(ae_input_dim: 'int' = 6, vib_input_dim: 'int' = 9, channels: 'list[int] | None' = None, kernel_size: 'int' = 5, dropout: 'float' = 0.5, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'} & C22, C23, C24, C37, C38; constructor defaults used \\
-\texttt{TransferFeatureMLP} & \nolinkurl{(embed_dim: 'int' = 512, hidden_dim: 'int' = 128, dropout: 'float' = 0.3, use_ae: 'bool' = True, use_vib: 'bool' = True, use_pp: 'bool' = False, pp_dim: 'int' = 3) -> 'None'} & C01, C02, C28, C29; constructor defaults used \\
-\texttt{XGBoostModel} & \nolinkurl{(n_estimators: 'int' = 200, max_depth: 'int' = 5, learning_rate: 'float' = 0.05, subsample: 'float' = 0.8, colsample_bytree: 'float' = 0.8, random_state: 'int' = 42, **kwargs: 'Any') -> 'None'} & C03, C05, C06, C08, C09, C16, C18, C21, C27, C30, C32, C35; constructor defaults used \\
+\texttt{AttentionMLP} & 2 configurations & dropout=0.3 & Reconstructable \\
+\texttt{BilinearFusionNetwork} & 19 configurations & embed\_dim=32, rank=16, dropout=0.3 & Reconstructable \\
+\texttt{ChannelAttentionCNN} & AE-dB & in\_channels=2, dropout=0.3 & Reconstructable \\
+\texttt{CrossAttentionFusion} & AE features + Vib features + physics features + PP & embed\_dim=32, num\_heads=2, num\_layers=2, dropout=0.3 & Reconstructable \\
+\texttt{FeatureOnlyModel} & 2 configurations & No exposed architecture arguments & Reconstructable \\
+\texttt{GraphNeuralNetworkFusion} & 19 configurations & embed\_dim=32, hidden\_dim=32, num\_heads=2, num\_layers=2 & Reconstructable \\
+\texttt{HierarchicalAttentionNetwork} & AE features + Vib features + PP & embed\_dim=32, num\_heads=2, num\_layers=1, dropout=0.3 & Reconstructable \\
+\texttt{LightGBMModel} & 20 configurations & n\_estimators=200, max\_depth=5, learning\_rate=0.05, subsample=0.8 & Reconstructable \\
+\texttt{MeanTrajectoryMLP} & 5 configurations & ae\_input\_dim=6, vib\_input\_dim=9, hidden\_dim=128, dropout=0.3 & Reconstructable \\
+\texttt{MultiHeadAttentionFusion} & 2 configurations & embed\_dim=32, num\_heads=2, num\_layers=2, dropout=0.3 & Reconstructable \\
+\texttt{MultiscaleSpectrogramCNN} & Vib-dB & in\_channels=2, base\_channels=16, dropout=0.3 & Archival \\
+\texttt{ParamsMLP} & PP & No exposed architecture arguments & Reconstructable \\
+\texttt{PhysicsGuidedAttentionNetwork} & AE features + Vib features + PP & embed\_dim=32, dropout=0.3 & Reconstructable \\
+\texttt{PhysicsInformedFusionNet} & all inputs & embed\_dim=64, num\_heads=4, num\_layers=2, dropout=0.3 & Reconstructable \\
+\texttt{PhysicsMLP} & 8 configurations & No exposed architecture arguments & Reconstructable \\
+\texttt{RandomForestModel} & 20 configurations & n\_estimators=200, max\_depth=8, n\_jobs=1, random\_state=42 & Reconstructable \\
+\texttt{ResNetAECNN} & AE-dB & dropout=0.3, hidden\_dim=64 & Reconstructable \\
+\texttt{ResNetFusion} & 9 configurations & embed\_dim=64, dropout=0.3 & Reconstructable \\
+\texttt{ResNetVibCNN} & Vib-dB & dropout=0.3, hidden\_dim=64 & Reconstructable \\
+\texttt{RidgeRegressionModel} & 5 configurations & alpha=1.0, random\_state=42 & Reconstructable \\
+\texttt{SSLResNetVibCNN} & Vib-dB & modality='ae', embed\_dim=64, proj\_dim=32, dropout=0.3 & Archival \\
+\texttt{ShallowMLPModel} & 3 configurations & hidden\_layer\_sizes=(128, 64), alpha=0.0001, learning\_rate\_init=0.001, max\_iter=500 & Reconstructable \\
+\texttt{TabTransformerRegressor} & 12 configurations & max\_features=49, embed\_dim=16, num\_heads=2, num\_layers=2 & Reconstructable \\
+\texttt{TrajectoryAttention} & 5 configurations & ae\_input\_dim=6, vib\_input\_dim=9, hidden\_dim=64, dropout=0.3 & Reconstructable \\
+\texttt{TrajectoryCNN} & 5 configurations & ae\_input\_dim=6, vib\_input\_dim=9, channels=None, kernel\_size=5 & Reconstructable \\
+\texttt{TransferFeatureMLP} & 4 configurations & embed\_dim=512, hidden\_dim=128, dropout=0.3, use\_ae=True & Reconstructable \\
+\texttt{XGBoostModel} & 12 configurations & n\_estimators=200, max\_depth=5, learning\_rate=0.05, subsample=0.8 & Reconstructable \\
 \bottomrule
 \end{longtable}
 \endgroup

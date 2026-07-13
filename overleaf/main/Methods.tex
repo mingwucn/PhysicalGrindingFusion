@@ -143,6 +143,11 @@ and small result manifests are available in the PhysicalGrindingFusion
 repository. Large raw recordings and intermediate caches are available for
 research use on request rather than mirrored in Git.
 
+In this study, ``physics-aware'' refers to process-motivated signal
+construction, modality-specific frequency interpretation, heuristic physical
+indicators, and physics-based consistency checks. It does not denote a
+physics-constrained learning objective.
+
 \subsection{Signal representations}\label{signal-representations}
 
 Rather than feeding raw waveforms directly to the models, we convert AE
@@ -415,9 +420,10 @@ spectrogram, (c)~vibration (Z-axis) dB spectrogram, and
 (d)~vibration log-mel spectrogram. The examples show dominant lower-frequency
 energy in both modalities. Vibration below 5~kHz is compatible with structural
 dynamics, whereas AE is treated as an empirical contact-related descriptor
-because its transfer function is unavailable. Higher-frequency AE energy above 0.5~MHz and vibration energy near
-17~kHz are located in frequency ranges commonly associated with
-grain-contact and chatter-related dynamics, respectively.}
+because its transfer function is unavailable. Higher-frequency AE activity
+above 0.5~MHz and vibration activity near 17~kHz are visible. Their mechanical
+or acquisition-chain origins cannot be resolved from the archived sensor
+documentation.}
 \label{fig:representations}
 \end{figure}
 
@@ -543,12 +549,11 @@ Attention regressor & AE-dB + Vib-dB & Self-attention & Late fusion \\
 \begin{figure}
 \centering
 \resizebox{0.98\linewidth}{!}{\input{tikz/model_taxonomy}}
-\caption{Model taxonomy evaluated in this study. The left branch contains
-a directly inspectable regularised linear model and auditable tree ensembles
-supported by post-hoc SHAP values. The right branch uses deep-learning
-baselines whose decisions are analysed post-hoc with Grad-CAM and
-MC-dropout. Both branches predict $R_a$ and are compared under the same
-LOGO protocol.}
+\caption{Model taxonomy evaluated in this study. Ridge regression is directly
+inspectable; tree ensembles are audited with post-hoc attribution; the shallow
+MLP is a separate neural baseline; and deeper neural architectures are analysed
+with model-appropriate diagnostics. All families predict $R_a$ and use the same
+outer LOGO test folds.}
 \label{fig:taxonomy}
 \end{figure}
 
@@ -558,7 +563,7 @@ LOGO protocol.}
 The historical shallow MLP uses an internal random 10\% validation fraction.
 The corrected grouped-validation MLP instead uses the designated complete
 validation condition and is reported separately in Supplementary
-Table~\ref{tab:supp-grouped-mlp}.}
+Tables~\ref{tab:supp-grouped-mlp}--\ref{tab:supp-grouped-mlp-selections}.}
 \label{tbl:hyperparams}
 \setlength{\tabcolsep}{8pt}
 \renewcommand{\arraystretch}{1.25}
