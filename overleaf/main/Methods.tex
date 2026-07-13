@@ -339,10 +339,10 @@ shown schematically in Figure~2. Note that for the vibration channel, the tempor
   arrow/.style={pub/arrow}
 ]
 \node[box] (spec) {2D spectrogram\\input};
-\node[box, right=of spec] (psi1) {Morlet wavelet\\filter bank\\$L=8, J=3$};
-\node[box, right=of psi1] (mod1) {Modulus\\$|\\cdot|$};
+\node[box, right=of spec] (psi1) {Morlet wavelet\\filter bank\\\(L=8,\ J=3\)};
+\node[box, right=of psi1] (mod1) {Modulus\\\(\lvert\cdot\rvert\)};
 \node[box, right=of mod1] (psi2) {Second-order\\Morlet filters};
-\node[box, right=of psi2] (mod2) {Modulus\\$|\\cdot|$};
+\node[box, right=of psi2] (mod2) {Modulus\\\(\lvert\cdot\rvert\)};
 \node[box, below=1.0cm of mod2] (avg) {Spatial\\averaging};
 \node[box, left=of avg] (out) {Scattering\\coefficients};
 \draw[arrow] (spec) -- (psi1);
@@ -351,7 +351,7 @@ shown schematically in Figure~2. Note that for the vibration channel, the tempor
 \draw[arrow] (psi2) -- (mod2);
 \draw[arrow] (mod2) -- (avg);
 \draw[arrow] (avg) -- (out);
-\end{tikzpicture}%
+\end{tikzpicture}
 \caption{Wavelet scattering transform pipeline. A 2D spectrogram is
 passed through two Morlet filter banks separated by modulus
 nonlinearities, then spatially averaged to produce a compact,
