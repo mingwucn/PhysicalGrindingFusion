@@ -4,6 +4,8 @@
 
 - `35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md`: authoritative experiment,
   result, interpretation, and artifact map.
+- `37_SUBMITTED_MANUSCRIPT_ARCHIVE.md`: final submitted source revision,
+  checksums, verification outcome, and reconstruction procedure.
 - `figure_script_toc.md`: Python figure generator mapping.
 - `FIGURE_TOC.md`: manuscript-oriented figure index.
 - `12_VISUALIZATION_CONTRACT.md`: mandatory Python figure style rules.
@@ -22,3 +24,5 @@
 
 The root `REPLICATION.md` provides executable reproduction commands. The
 frozen public review snapshot is tag `review-v3` in PhysicalGrindingFusion.
+The submitted project state is tag `submission-aei-2026-07-13` in the parent
+repository.

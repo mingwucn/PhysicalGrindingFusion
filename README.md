@@ -20,6 +20,8 @@ features, process parameters, and heuristic physics-inspired indicators.
 * `docs/figure_script_toc.md`: figure-to-generator mapping.
 * `docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md`: authoritative scientific
   provenance, experiment-family, result, and limitation ledger.
+* `docs/37_SUBMITTED_MANUSCRIPT_ARCHIVE.md`: submitted manuscript revision,
+  validation record, reconstruction instructions, and archive identifiers.
 * `docs/README.md`: documentation index.
 * `REPLICATION.md`: environment, data placement, and principal commands.
 
@@ -36,6 +38,14 @@ Create the environment, place supplied data under the paths documented in
 `src/grinding_physic_fusion/data/dataset.py`, and follow `REPLICATION.md`.
 Historical canonical artifacts and current reproducible reruns are deliberately
 identified separately in the evidence tables and manuscript.
+
+## Submitted manuscript
+
+The manuscript submitted to *Advanced Engineering Informatics* on 2026-07-13
+is archived by the annotated tag `submission-aei-2026-07-13`. The tag pins the
+exact Overleaf submodule revision. See
+`docs/37_SUBMITTED_MANUSCRIPT_ARCHIVE.md` for checksums and reconstruction
+instructions.
 
 ## License
 
