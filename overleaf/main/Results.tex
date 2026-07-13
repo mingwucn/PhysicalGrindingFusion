@@ -40,7 +40,7 @@ Log-mel, inner-grouped RF & 14 & 0.0206 & 0.0087 & 0.2061 \\
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=183mm]{nested_rf_dbz_logmel_folds.png}
+\includegraphics[width=\linewidth]{nested_rf_dbz_logmel_folds.png}
 \caption{Paired outer-fold MAE for the current nested dB-z and implemented
 log-mel RF analyses. Their means are nearly identical, but log-mel has the
 larger Condition~7 and maximum-fold error.}\label{fig:nested-rf-tail}
@@ -231,7 +231,7 @@ exploratory.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm]{submission_ranking_top20.png}
+\includegraphics[width=\linewidth]{submission_ranking_top20.png}
 \caption{Historical canonical top-20 model-configuration pairs ranked by LOGO MAE.
 Auditable tree-ensemble model--configuration pairs occupy the upper
 ranks by point-estimate MAE, although model and representation effects
@@ -254,7 +254,7 @@ asserted.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm]{submission_prediction_scatter_top3.png}
+\includegraphics[width=\linewidth]{submission_prediction_scatter_top3.png}
 \caption{Historical canonical benchmark predictions versus observed surface
 roughness for the top three model-configuration pairs. The dashed black line marks ideal
 \(y=x\) calibration.}\label{fig:scatter-top3}
@@ -385,7 +385,7 @@ Best RF vs LightGBM (Vib-dB-z) & \(-0.0005\) & 0.375 & \(-0.0026, 0.0007\) & \(-
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{results_statistical_comparison_pairs.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{results_statistical_comparison_pairs.png}
 \caption{Historical canonical benchmark: paired mean LOGO MAE and fold
 standard deviation for the nine statistical comparisons in
 Table~\ref{tbl:statistical}. Comparison IDs
@@ -402,7 +402,7 @@ significant.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{results_statistical_comparison_forest.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{results_statistical_comparison_forest.png}
 \caption{Historical canonical benchmark forest plot of median paired LOGO MAE differences for the nine
 comparisons in Table~\ref{tbl:statistical}, with descriptive 95\% bootstrap
 confidence intervals. These intervals are unadjusted and should not be interpreted as Holm--Bonferroni significance. Negative values favour Model~A.}\label{fig:statistical-forest}
@@ -496,7 +496,7 @@ into nested confirmatory inference.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm]{methods_signal_representation_comparison.png}
+\includegraphics[width=\linewidth]{methods_signal_representation_comparison.png}
 \caption{Historical canonical best-observed mean LOGO MAE for each signal representation family.
 Error bars show fold standard deviation across the 16 LOGO folds; lower
 whiskers are capped at zero because MAE is non-negative.}
@@ -530,7 +530,7 @@ Process parameters & 0.0803 & 0.0591 & 0.0733 \\
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{representation_controlled_comparison.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{representation_controlled_comparison.png}
 \caption{Fixed-input mean LOGO MAE comparison across three stable tabular
 learners. Each row uses the exact AE/vibration or process-parameter input
 named in Table~\ref{tbl:controlled-representations}; cells show mean
@@ -677,7 +677,7 @@ Vibration & RF OOF TreeSHAP & 0.21\% & 0.26\% & 10.89\% & 88.63\% \\
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=183mm]{rf_dbz_oof_treeshap.png}
+\includegraphics[width=\linewidth]{rf_dbz_oof_treeshap.png}
 \caption{Primary interpretability analysis: out-of-fold TreeSHAP frequency
 profiles for the reproducible current RF on AE-dB-z + Vib-dB-z. Curves show
 sample-pooled attribution, equal-condition aggregation after fold-wise
@@ -726,7 +726,7 @@ configuration, fitted predictor, and attribution aggregation also differ.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{results_interpretability_bandmass.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{results_interpretability_bandmass.png}
 \caption{Vibration importance mass by physical frequency band for
 ResNetVibCNN Grad-CAM, LightGBM global TreeSHAP, and RF out-of-fold
 TreeSHAP. The differing model and input
@@ -778,7 +778,7 @@ substantially by model and representation.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{shap_importance_LightGBMModel_ae_spec+vib_spec.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{shap_importance_LightGBMModel_ae_spec+vib_spec.png}
 \caption{Explainability analysis. Left: TreeSHAP mean absolute
 importance for the top AE frequency bins (LightGBM on
 AE-dB + Vib-dB), labelled by physical frequency.
@@ -828,7 +828,7 @@ top 20\% highest-error samples is 0.82.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{mc_dropout_intervals_ResNetVibCNN_vib_spec.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{mc_dropout_intervals_ResNetVibCNN_vib_spec.png}
 \caption{Full 16-fold LOGO MC-dropout intervals for
 ResNetVibCNN on Vib-dB. Blue band: nominal 95\%
 MC-dropout epistemic interval; orange dots: observed \(R_a\). Samples are sorted by predicted
@@ -851,7 +851,7 @@ which conditions are included.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{mc_dropout_reliability.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{mc_dropout_reliability.png}
 \caption{Reliability diagram for full 16-fold LOGO MC-dropout on
 ResNetVibCNN on Vib-dB. \textbf{a}, Empirical coverage per
 uncertainty bin versus the nominal 95\% level. \textbf{b}, Mean absolute error
@@ -872,7 +872,7 @@ error for the hardest samples.
 
 \begin{figure}
 \centering
-\includegraphics[width=89mm,height=\textheight,keepaspectratio]{results_uncertainty_calibration.png}
+\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio]{results_uncertainty_calibration.png}
 \caption{Full 16-fold LOGO MC-dropout predicted standard deviation
 versus observed absolute error for ResNetVibCNN on
 Vib-dB. Pass-level Pearson $r=0.488$, Spearman $\rho=0.594$; the
@@ -972,7 +972,7 @@ Naive residual 95\% & 67.5\% & 0.0264 \\
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{rf_conformal_intervals.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{rf_conformal_intervals.png}
 \caption{OOB-calibrated nominal 95\% intervals for a 15-condition RF
 uncertainty variant (AE-dB-z + Vib-dB-z). Blue band: OOB-scaled interval; blue
 dots: observed \(R_a\). Samples are sorted by predicted mean. Coverage is
@@ -1059,7 +1059,7 @@ compares the deployment characteristics of the top candidates.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm]{results_condition_error_bars.png}
+\includegraphics[width=\linewidth]{results_condition_error_bars.png}
 \caption{Mean MAE across all model-configuration pairs for each
 grinding condition, sorted from lowest to highest. Condition~7 is
 highlighted as the largest outlier.}\label{fig:condition-bars}
@@ -1067,7 +1067,7 @@ highlighted as the largest outlier.}\label{fig:condition-bars}
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm]{top_models_fold_mae.png}
+\includegraphics[width=\linewidth]{top_models_fold_mae.png}
 \caption{Per-fold MAE for the top five model--configuration pairs. The
 vertical dashed line marks condition 7, which produces the largest errors
 for every leading model.}\label{fig:top-models-fold-mae}
@@ -1075,7 +1075,7 @@ for every leading model.}\label{fig:top-models-fold-mae}
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm]{top_models_per_condition_mae.png}
+\includegraphics[width=\linewidth]{top_models_per_condition_mae.png}
 \caption{Per-condition fold MAE heatmap for the top five
 model--configuration pairs. Condition 7 stands out as the dominant source
 of fold-level error.}\label{fig:top-models-per-condition}
@@ -1356,7 +1356,7 @@ future work.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm]{latency_vs_accuracy.png}
+\includegraphics[width=\linewidth]{latency_vs_accuracy.png}
 \caption{Feature-precomputed latency versus accuracy for representative
 models. Points use median latency; rightward horizontal whiskers extend to
 p95 latency from Table~\ref{tbl:latency}. The y-axis shows mean LOGO MAE
@@ -1385,7 +1385,7 @@ in Section~\ref{discussion}.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm]{results_deployment_tradeoffs.png}
+\includegraphics[width=\linewidth]{results_deployment_tradeoffs.png}
 \caption{Deployment trade-offs for representative models using the exact
 Table~\ref{tbl:latency} median latencies. Bubble size is proportional to
 checkpoint size and colour distinguishes model configurations; numbered markers identify

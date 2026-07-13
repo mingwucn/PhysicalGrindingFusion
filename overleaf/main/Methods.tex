@@ -412,7 +412,7 @@ head.
 
 \begin{figure}
 \centering
-\includegraphics[width=183mm,height=\textheight,keepaspectratio]{methods_signal_representations.png}
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{methods_signal_representations.png}
 \caption{Example signal representations for condition 10, sample 1
 ($R_a = 0.098~\upmu$m). \textbf{a}, AE dB spectrogram. \textbf{b}, AE
 log-mel spectrogram. \textbf{c}, vibration (Z-axis) dB spectrogram.
@@ -644,7 +644,7 @@ The primary planned statistical testing is performed on the canonical seed-42 re
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=89mm]{methods_logo_matrix.png}
+\includegraphics[width=0.5\linewidth]{methods_logo_matrix.png}
 \caption{Leave-one-condition-out fold assignment. Rows correspond to the
 16 LOGO folds; columns correspond to the 16 grinding conditions. In each
 fold the test condition is red, the validation condition is orange, and
@@ -780,7 +780,7 @@ convolutional features rather than an isolated original-STFT bin.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=183mm]{methods_xai_comparison.png}
+\includegraphics[width=\linewidth]{methods_xai_comparison.png}
 \caption{Explainability methods applied to real grinding data. \textbf{a},
 Ridge regression coefficient magnitudes for Vib-dB. \textbf{b}, TreeSHAP
 mean $|\text{SHAP}|$ for LightGBM on Vib-dB.
@@ -875,7 +875,7 @@ benchmark RF.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=183mm]{methods_uncertainty_overview.png}
+\includegraphics[width=\linewidth]{methods_uncertainty_overview.png}
 \caption{Full 16-fold LOGO MC-dropout uncertainty for ResNetVibCNN on
 Vib-dB. \textbf{a}, Nominal 95\% MC-dropout epistemic intervals and observed $R_a$
 sorted by predicted mean. \textbf{b}, Reliability diagram: mean predicted

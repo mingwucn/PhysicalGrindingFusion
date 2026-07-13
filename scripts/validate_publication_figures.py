@@ -99,11 +99,9 @@ def main() -> int:
                 errors.append(f"{source_rel}: direct savefig is forbidden; use figure.save()")
 
         for include in includes.get(artifact, []):
-            if re.search(r"width=0\.", include):
-                errors.append(f"{artifact}: nonstandard LaTeX scale factor in {include}")
-            required_width = "89mm" if width_mm == 89 else "183mm"
+            required_width = r"0.5\linewidth" if width_mm == 89 else r"\linewidth"
             if f"width={required_width}" not in include:
-                errors.append(f"{artifact}: expected final-size width={required_width} in {include}")
+                errors.append(f"{artifact}: expected semantic width={required_width} in {include}")
 
     if errors:
         print("Publication figure style validation failed:", file=sys.stderr)

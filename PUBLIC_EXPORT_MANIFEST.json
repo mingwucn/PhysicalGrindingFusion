@@ -31,8 +31,8 @@
   },
   {
     "path": "docs/12_VISUALIZATION_CONTRACT.md",
-    "sha256": "7fe4d53e0959022b98503a6efce3d92d96132da3bc664c7fb9b0319a7c3c790a",
-    "bytes": 16714
+    "sha256": "d0480bc51a2a27ee26e71e37116c08e09a956033dd100286c07f9acce6d6c139",
+    "bytes": 16741
   },
   {
     "path": "docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md",
@@ -76,8 +76,8 @@
   },
   {
     "path": "overleaf/main/Discussion.tex",
-    "sha256": "6fc6bd102cc2c730138c87601a6e652c2d6bc83c264d5b72da6274476a729963",
-    "bytes": 38810
+    "sha256": "c95bde35df6e32c27a458917077f7fb0a5e8f517a0565c2082e34dc919e2ab6e",
+    "bytes": 38820
   },
   {
     "path": "overleaf/main/Highlights.tex",
@@ -96,8 +96,8 @@
   },
   {
     "path": "overleaf/main/Methods.tex",
-    "sha256": "d71924f9beb77d40f01bef442a8d2aa67819c03a2a277e122de9accec41c2c0e",
-    "bytes": 58556
+    "sha256": "e1da110608a628f9fc887bc90832b8a78f2661406d02e564eac637effa24503a",
+    "bytes": 58580
   },
   {
     "path": "overleaf/main/README.md",
@@ -111,13 +111,13 @@
   },
   {
     "path": "overleaf/main/Results.tex",
-    "sha256": "00d9969fe4655030ee3e4969cd11919ea0b4f3664ace16acc4deae326daa0616",
-    "bytes": 77173
+    "sha256": "a18891461f516d33af1554c323ac8cb0c90bc39b54a26ca3c9bfaccb6bc6acc6",
+    "bytes": 77272
   },
   {
     "path": "overleaf/main/Supplementary.tex",
-    "sha256": "54a4eeca23c181d401217031dadc76ef7a62774d6e4e4b7129ff0a48ad1d8557",
-    "bytes": 36651
+    "sha256": "da8c0fe3c68e2167cbde8bbdb4f8eb2b3258ceab2cad69b0fffa766bb0644288",
+    "bytes": 36676
   },
   {
     "path": "overleaf/main/statistical_comparison_table.tex",
@@ -2691,8 +2691,8 @@
   },
   {
     "path": "scripts/validate_publication_figures.py",
-    "sha256": "6790277f945aa06881f1dad9f05d68e4e2a8df005cf674a09a2113fe049bf6f5",
-    "bytes": 6800
+    "sha256": "61c782ccb480e2f61e2082ef0442b6c95d7ee271d5d7490c4713e38423698c38",
+    "bytes": 6675
   },
   {
     "path": "src/grinding_physic_fusion/__init__.py",

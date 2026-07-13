@@ -370,7 +370,7 @@ they use the dedicated double-column profile:
 | Tick labels | **6 pt** at final print size |
 | Value labels | **6--7 pt** at final print size, outside error-bar paths |
 | Labels | Three lines: `[model]`, `vs`, `[configuration]`; abbreviate before shrinking text |
-| LaTeX inclusion | `width=183mm`; no fractional downscaling |
+| LaTeX inclusion | `width=\linewidth`; the exported PDF retains the 183 mm design size |
 
 ### A.3.2 Three- and four-panel horizontal rows
 
