@@ -1,5 +1,10 @@
 [
   {
+    "path": ".env.example",
+    "sha256": "cf7fc65c2aa076d4727ce47f6cb6556bdd1f69bc81e28f0c74c3e81094f9fe34",
+    "bytes": 123
+  },
+  {
     "path": ".gitignore",
     "sha256": "47134b400f6be75b399931f6521c42e00cea5ece5c9317faef6177d2b2992ff9",
     "bytes": 100
@@ -16,8 +21,8 @@
   },
   {
     "path": "REPLICATION.md",
-    "sha256": "1026f499cbf39dfeab022cf87d5f4c09380ac0d4ae0c4f21ca3c9cc7343df8db",
-    "bytes": 5141
+    "sha256": "f4ceffb9a6044fec8f29e1bf59c0e180d7094a43843bac4e1e81a594f77301bb",
+    "bytes": 5977
   },
   {
     "path": "configs/runtime.yaml",
@@ -38,6 +43,11 @@
     "path": "docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md",
     "sha256": "73735a98af25d9ea41f1fbcaa8fdf34b0c15fee2126c8aaf952c57ccf041e1eb",
     "bytes": 13527
+  },
+  {
+    "path": "docs/36_REFERENCE_VERIFICATION.md",
+    "sha256": "471605b7426e8f1d74501eb1b47b6bbdd71224075a2ccf6f54f43b5e12a7be2b",
+    "bytes": 3809
   },
   {
     "path": "docs/README.md",
@@ -76,8 +86,8 @@
   },
   {
     "path": "overleaf/main/Discussion.tex",
-    "sha256": "5b4005f93369cbea4f927d4b2339ff2d0cea9b2c4ce7578a74d68e4503e97fb5",
-    "bytes": 39018
+    "sha256": "707c83f0d9f578f4922335864cdfe7c343acace08a42960adb9e91280c5b3417",
+    "bytes": 38986
   },
   {
     "path": "overleaf/main/Highlights.tex",
@@ -86,8 +96,8 @@
   },
   {
     "path": "overleaf/main/Introduction.tex",
-    "sha256": "ccc362934c7b165fffb967b8d29246148d80e07356209f4a369f7cc7cb4563a9",
-    "bytes": 10911
+    "sha256": "a37649a0cfa2593539012927b288ac80f33b88b95733aef5a09680ece9d95e9c",
+    "bytes": 10877
   },
   {
     "path": "overleaf/main/Keywords_elsevier.tex",
@@ -106,8 +116,8 @@
   },
   {
     "path": "overleaf/main/Related_work.tex",
-    "sha256": "1424e3206d91069f006b018932025b54c5a6046c1ed9700df7039a0f42701cdd",
-    "bytes": 16346
+    "sha256": "bc828d9e6367dcf6cfe77ec66efd5b5e0adc400c05f9c0a2c3fc9ab992c79436",
+    "bytes": 17370
   },
   {
     "path": "overleaf/main/Results.tex",
@@ -226,8 +236,8 @@
   },
   {
     "path": "overleaf/ref.bib",
-    "sha256": "a5880dd4fc1b6f55b7560a4d6ec063cd41ee20abd167d6fa32ecd2ec18df5799",
-    "bytes": 168261
+    "sha256": "db469dfda37d74ae821f42e1c7a46dddd35aad46b46f5281641e348b5cac7f65",
+    "bytes": 171211
   },
   {
     "path": "overleaf/tikz/logo_scheme.tex",
@@ -1705,6 +1715,11 @@
     "bytes": 432
   },
   {
+    "path": "reports/evidence/tables/non_doi_substitution_review.csv",
+    "sha256": "9ccde18ec67a43c700c9abb8cd9528a7fafc88ac350bcc2f92fa48b07031e2e5",
+    "bytes": 1872
+  },
+  {
     "path": "reports/evidence/tables/pass_position_sensitivity.csv",
     "sha256": "f15142dbc1d2ff9f78f1e900127407b83309c90309e50b5793bf813c5bae78fc",
     "bytes": 222
@@ -1733,6 +1748,16 @@
     "path": "reports/evidence/tables/pre_normalization_band_ablation_folds.csv",
     "sha256": "392b82449c2b0c710cd37e61eaf50b8703afde85cc119fd345ec00c570353f57",
     "bytes": 2737
+  },
+  {
+    "path": "reports/evidence/tables/reference_doi_audit.csv",
+    "sha256": "0d53d90bfe58ede6f2474f0f4e5263da0cd80d9792903f98509d37b12085269d",
+    "bytes": 34503
+  },
+  {
+    "path": "reports/evidence/tables/reference_doi_audit_summary.json",
+    "sha256": "a4fd6913aeb9cea1fa3e3ef396d0b7038071f8943043a30e22998838dc9839b5",
+    "bytes": 1052
   },
   {
     "path": "reports/evidence/tables/representation_comparison_controlled.csv",
@@ -2165,6 +2190,11 @@
     "bytes": 5480
   },
   {
+    "path": "reports/evidence/tables/suggested_reference_inclusion.csv",
+    "sha256": "1cb0a6ddb30a219fd1e1b3a741fe160272cc579d3d021771e5d91418dd89cbf4",
+    "bytes": 6960
+  },
+  {
     "path": "reports/evidence/tables/supp_condition7_sensitivity.csv",
     "sha256": "a4a2200f35c6c2731652a81137923cfdc3830c4f2a16449b5d7c60367dfa949e",
     "bytes": 906
@@ -2400,6 +2430,11 @@
     "bytes": 5346
   },
   {
+    "path": "scripts/audit_references_elsevier.py",
+    "sha256": "8b524f4df848ad8ce3ce756529878b85edc9d2296af5e0320745bf858981f29d",
+    "bytes": 32710
+  },
+  {
     "path": "scripts/benchmark_latency.py",
     "sha256": "b78ebb79a3f214a4f3883a8786d888aa142d52fe3ed0cb2a70df9f26c4fc8c14",
     "bytes": 14340
@@ -2568,6 +2603,11 @@
     "path": "scripts/grouped_validation_shallow_mlp.py",
     "sha256": "7ce83bc85ebe069e6dc96263b3281d7a057b33a719a9987a9465b6f6323e51fa",
     "bytes": 4676
+  },
+  {
+    "path": "scripts/include_verified_related_references.py",
+    "sha256": "9a5ccc41ff6c48cb1351a973e98ecf0b06211e3c53bcf92de1051ca17a36ede7",
+    "bytes": 16372
   },
   {
     "path": "scripts/mc_dropout_full_logo.py",
@@ -2768,5 +2808,15 @@
     "path": "src/grinding_physic_fusion/visualization/publication_plotter.py",
     "sha256": "f9075c0032f0b10a881e29259c538ecec6dd6fba08e06dcc6f845b5322e81cb8",
     "bytes": 10614
+  },
+  {
+    "path": "tests/test_reference_doi_audit.py",
+    "sha256": "7eca6bab36af4ba1674c038e6f9d07f9570d83d682e3f3e011ad4a3719fcfbe2",
+    "bytes": 2578
+  },
+  {
+    "path": "tests/test_reference_inclusion.py",
+    "sha256": "b60a698e53d853e884d1713bd91711f23bffd2615ae88121d56c328792ef1698",
+    "bytes": 646
   }
 ]

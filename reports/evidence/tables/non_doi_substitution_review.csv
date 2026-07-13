@@ -1,0 +1,9 @@
+original_key,action,replacement_key,replacement_doi,locator,rationale
+lundberg2017unified,substituted,Lundberg2020,10.1038/s42256-019-0138-9,https://doi.org/10.1038/s42256-019-0138-9,"The peer-reviewed SHAP article supports the TreeSHAP and local/global attribution claim."
+angelopoulos2021gentle,substituted,Angelopoulos2023,10.1561/2200000101,https://doi.org/10.1561/2200000101,"The published conformal-prediction monograph covers the same methodological role as the arXiv introduction."
+Cawley2010,substituted,varma2006bias,10.1186/1471-2105-7-91,https://doi.org/10.1186/1471-2105-7-91,"The DOI-bearing nested-cross-validation study directly supports the model-selection bias claim after the sentence was narrowed."
+malkin2008grinding,substituted,tonshoff1992acoustic;Brinksmeier2006,10.1016/S0007-8506(07)63254-5;10.1016/j.cirp.2006.10.003,https://doi.org/10.1016/S0007-8506(07)63254-5,"DOI-bearing grinding-process and surface-integrity papers support the specific process-parameter and chip-thickness claims."
+gal2016dropout,retained,,,https://proceedings.mlr.press/v48/gal16.html,"Foundational MC-dropout paper; no DOI version was found and Scopus/Crossref candidates were different works."
+lakshminarayanan2017simple,retained,,,https://arxiv.org/abs/1612.01474,"Foundational deep-ensembles paper; no DOI version was found and DOI-bearing application papers are not equivalent substitutes."
+ovadia2019can,retained,,,https://proceedings.neurips.cc/paper/2019/file/8558cb408c1d76621371888657d2eb1d-Paper.pdf,"Foundational uncertainty-under-shift benchmark; available DOI candidates concern different datasets or studies."
+Ke2017,retained,,,https://proceedings.neurips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html,"Original LightGBM algorithm paper; DOI-bearing surveys and applications are secondary and not equivalent replacements."

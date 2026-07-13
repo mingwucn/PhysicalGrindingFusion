@@ -107,6 +107,16 @@ recordings and caches may be requested from the corresponding author.
     python scripts/validate_publication_figures.py
     ```
 
+11. **Audit and populate DOI-bearing references**
+    ```bash
+    export ELSEVIER_API_KEY="..."
+    python scripts/audit_references_elsevier.py --apply
+    python scripts/include_verified_related_references.py --apply
+    ```
+
+    The real API key belongs in the environment or untracked `.env` file, never
+    in source code or documentation. See `docs/36_REFERENCE_VERIFICATION.md`.
+
 ## Key outputs
 
 | File | Description |
@@ -121,6 +131,10 @@ recordings and caches may be requested from the corresponding author.
 | `reports/evidence/tables/pre_normalization_band_ablation.csv` | Strict pre-normalization band-removal sensitivity |
 | `reports/evidence/xai/` | OOF SHAP and other attribution artifacts |
 | `reports/evidence/uncertainty/` | MC-dropout and RF interval diagnostics |
+| `reports/evidence/tables/reference_doi_audit.csv` | Elsevier DOI and metadata verification results |
+| `reports/evidence/tables/reference_doi_audit_summary.json` | Reference-audit status counts and provenance |
+| `reports/evidence/tables/non_doi_substitution_review.csv` | Claim-aware decisions for DOI-free references |
+| `reports/evidence/tables/suggested_reference_inclusion.csv` | DOI verification and scope decisions for proposed references |
 
 ## Notes
 

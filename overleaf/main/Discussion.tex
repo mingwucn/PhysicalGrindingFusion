@@ -200,7 +200,7 @@ h_m \propto \left(\frac{v_w}{v_s}\right)^{1/2}\left(\frac{a_e}{D_e}\right)^{1/4}
 \label{eq:chip-thickness}
 \end{equation}
 where \(v_w\) and \(v_s\) are expressed in consistent linear surface speed units (using the workpiece outer diameter \(d_w = 214\)~mm to convert \(v_w\) from r/min to m/s), \(a_e\) is the effective depth of cut, and \(D_e\) is the
-equivalent wheel diameter \cite{malkin2008grinding, tonshoff1992acoustic}. For this descriptive calculation, \(a_e=a_p\); \(D_e\) and the r/min-to-surface-speed conversion cancel in the ratio because the same wheel and workpiece diameter apply to both cases. Substituting Condition~7 and the component-wise medians gives
+equivalent wheel diameter \cite{tonshoff1992acoustic}. For this descriptive calculation, \(a_e=a_p\); \(D_e\) and the r/min-to-surface-speed conversion cancel in the ratio because the same wheel and workpiece diameter apply to both cases. Substituting Condition~7 and the component-wise medians gives
 \(\sqrt{(80/30)/(40/35)}(20/40)^{1/4}=1.28\).
 This kinematic interpretation remains
 post-hoc and is not definitively settled. Because our experimental setup
@@ -317,7 +317,7 @@ level and include frontier conditions. Ensembles of
 structurally different models (tree, CNN, scattering) can provide
 uncertainty estimates that reflect genuine model disagreement rather than
 internal Monte-Carlo noise \cite{lakshminarayanan2017simple}. Conformal
-prediction is a candidate approach, but with only 16 conditions the calibration set would be small, and coverage would depend strongly on whether calibration conditions span the same process frontier as Condition~7 \cite{angelopoulos2021gentle}.
+prediction is a candidate approach, but with only 16 conditions the calibration set would be small, and coverage would depend strongly on whether calibration conditions span the same process frontier as Condition~7 \cite{Angelopoulos2023}.
 Exchangeability can be questioned when conditions differ as strongly as
 Condition~7 does from the rest, so adaptive or condition-aware conformal
 variants should be considered in practice. For multivariate industrial
@@ -530,7 +530,7 @@ split conformal with one held-out calibration condition, and a naive
 residual interval). None covers Condition~7, indicating that the largest
 outlier lies outside the support of in-distribution residuals. Future
 work should compare conformal prediction
-\cite{angelopoulos2021gentle, zhang2023improved}, deep ensembles
+\cite{Angelopoulos2023, zhang2023improved}, deep ensembles
 \cite{lakshminarayanan2017simple}, and evidential or explicitly decomposed
 uncertainty estimates under the same LOGO protocol, with explicit
 calibration reserves that span the parameter-space frontier. The goal is

@@ -1,0 +1,29 @@
+{
+  "generated_at_utc": "2026-07-13T14:49:34.591374+00:00",
+  "bibliography": "overleaf/ref.bib",
+  "bibliography_sha256_before_update": "db469dfda37d74ae821f42e1c7a46dddd35aad46b46f5281641e348b5cac7f65",
+  "api_endpoint": "https://api.elsevier.com/content/abstract/doi/{doi}",
+  "search_endpoint": "https://api.elsevier.com/content/search/scopus",
+  "crossref_fallback_endpoint": "https://api.crossref.org/works/{doi}",
+  "crossref_search_endpoint": "https://api.crossref.org/works",
+  "entries_total": 103,
+  "entries_with_doi_before_update": 99,
+  "entries_with_doi_after_update": 99,
+  "status_counts": {
+    "verified": 96,
+    "missing_doi_candidate_only": 4,
+    "verified_by_crossref": 3
+  },
+  "duplicate_dois": {
+    "10.1016/j.cirpj.2025.02.004": [
+      "Chen2025PredictiveModellingSurface",
+      "Chen2025PrecisionGrinding"
+    ]
+  },
+  "title_similarity_threshold": 0.78,
+  "search_title_similarity_threshold": 0.93,
+  "author_overlap_threshold": 0.5,
+  "applied": true,
+  "updated_entries": [],
+  "api_key_persisted_in_report": false
+}
