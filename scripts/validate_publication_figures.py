@@ -52,6 +52,16 @@ ARTIFACTS = {
     "latency_vs_accuracy": ("scripts/benchmark_latency_cached.py", "double"),
 }
 
+TIKZ_WIDTHS = {
+    "preprocessing_pipeline": r"\linewidth",
+    "wst_pipeline": r"\linewidth",
+    "resnetvibcnn_architecture": r"\linewidth",
+    "model_taxonomy": r"\linewidth",
+    "logo_scheme": r"\linewidth",
+    "statistical_workflow": r"0.5\linewidth",
+    "workflow_schematic": r"\linewidth",
+}
+
 
 def tex_includes() -> dict[str, list[str]]:
     result: dict[str, list[str]] = {}
@@ -66,13 +76,24 @@ def main() -> int:
     errors: list[str] = []
     includes = tex_includes()
     checked_sources: set[str] = set()
+    manuscript_text = ""
 
     for path in (ROOT / "overleaf" / "main").glob("*.tex"):
-        if "\\begin{tikzpicture}" in path.read_text(encoding="utf-8"):
+        text = path.read_text(encoding="utf-8")
+        manuscript_text += text
+        if "\\begin{tikzpicture}" in text:
             errors.append(
                 f"{path.relative_to(ROOT)}: inline tikzpicture is forbidden; "
                 "use \\input{tikz/<figure_name>}"
             )
+
+    for figure, width in TIKZ_WIDTHS.items():
+        expected = f"\\resizebox{{{width}}}{{!}}{{\\input{{tikz/{figure}}}}}"
+        if expected not in manuscript_text:
+            errors.append(f"{figure}: expected TikZ inclusion {expected}")
+        source_text = (ROOT / "overleaf" / "tikz" / f"{figure}.tex").read_text(encoding="utf-8")
+        if "\\resizebox" in source_text:
+            errors.append(f"{figure}: scaling belongs at the manuscript inclusion site")
 
     for artifact, (source_rel, profile_name) in ARTIFACTS.items():
         metadata_path = METADATA_DIR / f"{artifact}.json"

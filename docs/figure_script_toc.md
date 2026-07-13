@@ -26,15 +26,16 @@ The Top-20 LOGO ranking is produced by
 All manuscript TikZ figures must load the shared
 `overleaf/tikz/publication_styles.tex` layer through `overleaf/Manuscript.tex`.
 Each diagram must live in its own `overleaf/tikz/<figure_name>.tex` source and
-be included from the manuscript with `\\input{tikz/<figure_name>}`; inline
+be included from the manuscript with `\input{tikz/<figure_name>}`; inline
 `tikzpicture` environments in `overleaf/main/*.tex` are forbidden.
 Use `pub/input`, `pub/representation`, `pub/process`, `pub/physics`,
 `pub/model`, `pub/explanation`, and `pub/target` for semantic nodes; use
 `pub/arrow`, `pub/flow`, and `pub/dashed` for connectors. Do not introduce
 figure-local palette definitions, arbitrary rounded-corner radii, or nested
-scaling. The four canonical full-width schematics may use one outer
-`\resizebox{\linewidth}{!}` because their geometry and type are designed and
-visually verified as a unit; arbitrary local scaling remains forbidden.
+scaling. Set width at the manuscript inclusion site with exactly one outer
+`\resizebox{\linewidth}{!}{\input{...}}` for wide diagrams or
+`\resizebox{0.5\linewidth}{!}{\input{...}}` for intentionally single-column
+diagrams. TikZ source files must not contain their own scaling wrapper.
 Geometry must target the final 89 mm or 183 mm width, and a compact horizontal legend is permitted only when colour
 carries meaning. Semantic nodes and headings use the shared 7 pt-equivalent
 sans-serif style; legends and notes use the shared 5--6 pt-equivalent style.

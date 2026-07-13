@@ -46,8 +46,8 @@
   },
   {
     "path": "docs/figure_script_toc.md",
-    "sha256": "fad54422d3e9db4fff0beb2ffbbefc9afd0ce5de78410ef0875edd60c4b2aa0b",
-    "bytes": 16430
+    "sha256": "d11e524af697379765b9576f05179f12859a97e2dd3625acb77a56e5092e3aea",
+    "bytes": 16497
   },
   {
     "path": "overleaf/Manuscript.tex",
@@ -96,8 +96,8 @@
   },
   {
     "path": "overleaf/main/Methods.tex",
-    "sha256": "eb6fd50adb7587a9d3e0af9c00419b0f5a0c31f98109ba331ccc17efaa8bbffa",
-    "bytes": 56038
+    "sha256": "59c5ec882373a8a32ba4b0a132f382afa654da4be046b279c3fedfb9affd194f",
+    "bytes": 56230
   },
   {
     "path": "overleaf/main/README.md",
@@ -231,13 +231,13 @@
   },
   {
     "path": "overleaf/tikz/logo_scheme.tex",
-    "sha256": "844ef289697069c7a17c0911e16a78ad2dc4474f0d7e7897cd05f812834b8820",
-    "bytes": 4363
+    "sha256": "749783252ee617f504d86c0cea6675ea5f86afff60717b09c76304fd87f70769",
+    "bytes": 4332
   },
   {
     "path": "overleaf/tikz/model_taxonomy.tex",
-    "sha256": "83b7e0ccf7268cce1ca08e46a8c1ecefff39a97540c4a65e067141132e44bbba",
-    "bytes": 4915
+    "sha256": "2df7c9dffd35081ca242b23eafc1dad5e49a3a186257571111a187ecbe683fea",
+    "bytes": 4884
   },
   {
     "path": "overleaf/tikz/preprocessing_pipeline.tex",
@@ -251,8 +251,8 @@
   },
   {
     "path": "overleaf/tikz/resnetvibcnn_architecture.tex",
-    "sha256": "132f72e07016bcfb084aa3ea0d82f6e0b99075e4b3423519900a9c6112b0df50",
-    "bytes": 5532
+    "sha256": "ba3b7eca0cdb09964e656ed530927d11aee1ca398c291a65ef59eb927c45d515",
+    "bytes": 5501
   },
   {
     "path": "overleaf/tikz/statistical_workflow.tex",
@@ -261,8 +261,8 @@
   },
   {
     "path": "overleaf/tikz/workflow_schematic.tex",
-    "sha256": "cd51088bf929bded2f4a3c7ec38d2f96a595759613f3332470494346f019cd08",
-    "bytes": 5786
+    "sha256": "c18e23a6bccd222c80b46f74477f13df56114ecf49ed19ea5af8c3f75622b8c2",
+    "bytes": 5755
   },
   {
     "path": "overleaf/tikz/wst_pipeline.tex",
@@ -2706,8 +2706,8 @@
   },
   {
     "path": "scripts/validate_publication_figures.py",
-    "sha256": "846450b1280f2f7b9bace9002c7db757fe18c3e6c0000016273592586669885b",
-    "bytes": 6977
+    "sha256": "7757324830a2d411c5a0ac9a222facce2d54a7d333658fa69d8c4e45fcf61363",
+    "bytes": 7830
   },
   {
     "path": "src/grinding_physic_fusion/__init__.py",

@@ -160,7 +160,7 @@ pipeline is shown in Figure~\ref{fig:preprocessing-pipeline}.
 
 \begin{figure}[htbp]
 \centering
-\input{tikz/preprocessing_pipeline}
+\resizebox{\linewidth}{!}{\input{tikz/preprocessing_pipeline}}
 \caption{Preprocessing pipeline for AE and vibration signals. Raw
 waveforms are transformed by a Hann-window STFT. The magnitude branch is
 converted to dB and averaged over local maps; an optional per-sample
@@ -311,7 +311,7 @@ shown schematically in Figure~2. Note that for the vibration channel, the tempor
 
 \begin{figure}[htbp]
 \centering
-\input{tikz/wst_pipeline}
+\resizebox{\linewidth}{!}{\input{tikz/wst_pipeline}}
 \caption{Wavelet scattering transform pipeline. A 2D spectrogram is
 passed through two Morlet filter banks separated by modulus
 nonlinearities, then spatially averaged to produce a compact,
@@ -471,7 +471,7 @@ Section~\ref{experimental-workflow}.
 
 \begin{figure}[htbp]
 \centering
-\input{tikz/resnetvibcnn_architecture}
+\resizebox{\linewidth}{!}{\input{tikz/resnetvibcnn_architecture}}
 \caption{ResNetVibCNN architecture for vibration dB spectrogram
 regression. The three-axis input is processed by a stem convolution and
 two stride-two SE-residual blocks. Each residual block contains batch
@@ -507,7 +507,7 @@ Attention regressor & AE-dB + Vib-dB & Self-attention & Late fusion \\
 
 \begin{figure}
 \centering
-\input{tikz/model_taxonomy}
+\resizebox{\linewidth}{!}{\input{tikz/model_taxonomy}}
 \caption{Model taxonomy evaluated in this study. Ridge regression is directly
 inspectable; tree ensembles are audited with post-hoc attribution; the shallow
 MLP is a separate neural baseline; and deeper neural architectures are analysed
@@ -614,7 +614,7 @@ the 14 training conditions are blue.}
 
 \begin{figure}
 \centering
-\input{tikz/logo_scheme}
+\resizebox{\linewidth}{!}{\input{tikz/logo_scheme}}
 \caption{Leave-one-condition-out cross-validation, illustrated with
 canonical fold 1 (Condition 1 test; Condition 8 validation). Each of the 16
 conditions is used once as the test fold (red); a different condition
@@ -652,7 +652,7 @@ the Wilcoxon zero-handling rule.
 
 \begin{figure}[htbp]
 \centering
-\input{tikz/statistical_workflow}
+\resizebox{0.5\linewidth}{!}{\input{tikz/statistical_workflow}}
 \caption{Statistical comparison workflow. Per-fold MAEs are used both to
 build bootstrap confidence intervals and to perform paired Wilcoxon tests;
 $p$-values are adjusted with Holm--Bonferroni correction.}
@@ -879,7 +879,7 @@ separate sensitivity rather than substituted into the historical family.
 
 \begin{figure}[htbp]
 \centering
-\input{tikz/workflow_schematic}
+\resizebox{\linewidth}{!}{\input{tikz/workflow_schematic}}
 \caption{End-to-end experimental workflow. Raw AE and vibration signals
 are converted into physics-aware representations, optionally combined
 with process parameters and physics-informed features, and evaluated by
