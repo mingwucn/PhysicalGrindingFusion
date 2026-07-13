@@ -1,10 +1,12 @@
 \begin{table}[htbp]
 \centering
-\caption{Seed-averaged per-condition LOGO MAE ($\upmu$m) for the equal-budget 14-condition random forest and the six repeated deep-learning baselines.}
+\caption{Seed-averaged per-condition LOGO MAE ($\upmu$m) for the equal-budget 14-condition random forest and six repeated deep-learning baselines. Headers abbreviate ResNetVibCNN (Vib-CNN), ResNetAECNN (AE-CNN), ChannelAttentionCNN (CA-CNN), ResNetFusion (Fusion), BilinearFusionNetwork (Bilinear), and TrajectoryCNN (Trajectory).}
 \label{tab:supp-seed-repeat-all}
+\small
+\setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}cccccccc@{}}
 \toprule
-Condition & RF & ResNetVibCNN & ResNetAECNN & ChannelAttentionCNN & ResNetFusion & BilinearFusion & TrajectoryCNN \\ \midrule
+Condition & RF & Vib-CNN & AE-CNN & CA-CNN & Fusion & Bilinear & Trajectory \\ \midrule
 1 & 0.0054 & 0.0088 & 0.0161 & 0.0104 & 0.0131 & 0.0157 & 0.0080 \\
 2 & 0.0032 & 0.0137 & 0.0163 & 0.0115 & 0.0311 & 0.0256 & 0.0634 \\
 3 & 0.0094 & 0.0358 & 0.0140 & 0.0139 & 0.0121 & 0.0140 & 0.0110 \\

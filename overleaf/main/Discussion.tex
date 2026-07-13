@@ -374,11 +374,14 @@ priority. All latency figures are \emph{feature-precomputed model-inference
 only}; true online latency must additionally account for the full-pass temporal aggregation used by the current cache, signal acquisition, STFT/dB-z/log-mel preprocessing, feature
 scaling, and communication/edge-hardware overhead.}
 \label{tbl:deployment-choice}
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.35\linewidth}
+                    >{\raggedright\arraybackslash}p{0.20\linewidth}
+                    >{\raggedright\arraybackslash}p{0.36\linewidth}@{}}
 \toprule
 Priority & Recommended model & Configuration \\
 \midrule
-Lowest observed point-estimate group & Random forest & \texttt{AE-dB-z + Vib-dB-z} or \texttt{AE-log-mel + Vib-log-mel} \\
+Lowest observed point-estimate group & Random forest &
+\shortstack[l]{\texttt{AE-dB-z + Vib-dB-z}\\or\\\texttt{AE-log-mel + Vib-log-mel}} \\
 Better observed nested worst-fold robustness & Random forest & \texttt{AE-dB-z + Vib-dB-z} \\
 Lowest median and p95 model-only latency & ResNetVibCNN & \texttt{Vib-dB} \\
 Out-of-fold attribution for recommended model & Random forest & \texttt{AE-dB-z + Vib-dB-z} \\

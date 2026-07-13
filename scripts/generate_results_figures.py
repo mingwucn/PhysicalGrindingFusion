@@ -264,7 +264,7 @@ def plot_statistical_comparison_pairs():
         ax.annotate(s, xy=(top, y[i]), xytext=(4, 0), textcoords="offset points",
                     ha="left", va="center", fontsize=7, color="black", fontweight="bold")
 
-    fig.subplots_adjust(left=0.34, right=0.98, bottom=0.14, top=0.90)
+    fig.tight_layout(pad=0.4)
     managed.save()
 
 

@@ -1,6 +1,12 @@
-\begin{longtable}{@{}p{2.25cm}p{2.15cm}ccp{2.45cm}p{2.6cm}c@{}}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{2.05cm}p{1.9cm}
+>{\centering\arraybackslash}p{1.15cm}
+>{\centering\arraybackslash}p{1.05cm}
+p{2.1cm}p{4.1cm}
+>{\centering\arraybackslash}p{1.0cm}@{}}
 \caption{RF experiment-provenance map. The canonical split manifest is
-\texttt{reports/evidence/tables/canonical\_logo\_assignments.csv}; cache
+\path{reports/evidence/tables/canonical_logo_assignments.csv}; cache
 hashes are given in Table~\ref{tab:supp-cache-provenance}. Unless stated
 otherwise, current RFs use 200 trees, depth eight, one minimum sample per
 leaf, random state 42, no fold-wise spectral scaler, Python 3.11.11,
@@ -28,9 +34,10 @@ modality-current-14 & AE/Vib modality ablation & 14 & Yes & Canonical test and v
 retrained-band & Retrained band removal & 14 & Yes & Canonical seed-42 & Features zeroed before fit and test & 0.0210 \\
 rf-oob-uq & OOB-scaled uncertainty only & 15 & Yes & Test condition only excluded & Fold scaler; 200 trees; depth 8; min leaf 2 & -- \\
 rf-oof-shap & OOF attribution & 14 & Yes & Canonical seed-42 & Approximate path-dependent TreeSHAP on held-out passes & 0.0210 \\
-latency-rf-db-z & Fold-complete timing & 14 & Yes & All 16 canonical repeat-0 checkpoints & Pooled 16,000-call timing; complete checkpoint hashes in \texttt{edge\_latency\_benchmark\_per\_fold.csv} & 0.0200 \\
+latency-rf-db-z & Fold-complete timing & 14 & Yes & All 16 canonical repeat-0 checkpoints & Pooled 16,000-call timing; complete checkpoint hashes in \shortstack[l]{\texttt{edge\_latency\_benchmark}\\\texttt{\_per\_fold.csv}} & 0.0200 \\
 \bottomrule
 \end{longtable}
+}
 
 The 14-condition seed repeat uses the same training-data budget as the neural
 baselines. The retained 15-condition seed repeat and robustness-suite values
@@ -45,9 +52,9 @@ OOB analyses use 15 non-test conditions and remain method-specific diagnostics
 rather than exact refits of the recommended 14-condition pipeline.
 
 The historical 14-comparison family reads its 16 fold records per
-model--configuration from \texttt{full\_results\_logo\_only.csv}. The 240
+model--configuration from \path{full_results_logo_only.csv}. The 240
 fold-level prediction files used across its 15 unique model--configuration
-sources are indexed in \texttt{canonical\_prediction\_manifest.csv}.
+sources are indexed in \path{canonical_prediction_manifest.csv}.
 Compact identifiers for these artifacts and the canonical split and test
 tables are listed in Table~\ref{tab:supp-artifact-hashes}; complete digests
 remain in the public machine-readable manifest.

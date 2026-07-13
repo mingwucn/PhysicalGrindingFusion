@@ -244,7 +244,7 @@ class Top20RankingFigure(DenseRankingFigure):
                 color="black",
             )
         assert self.fig is not None
-        self.fig.subplots_adjust(left=0.40, right=0.98, top=0.96, bottom=0.06)
+        self.fig.tight_layout(pad=0.4)
 
 
 def fig_ranking_top20(df: pd.DataFrame) -> str:

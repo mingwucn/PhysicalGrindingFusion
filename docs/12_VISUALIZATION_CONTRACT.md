@@ -492,6 +492,19 @@ def fig_size(width_mm=89, ratio=0.618, max_height_mm=170):
     return (width_in, height_in)
 ```
 
+### A.8.1 Manuscript tables and artifact identifiers
+
+- Use fixed-width `p{...}` columns for prose or long configuration fields; do
+  not use unconstrained `l` columns when cell contents can exceed one line.
+- Break alternative configurations onto separate lines, with `or` on its own
+  line when this improves scanning.
+- Use `\path{...}` for repository paths, filenames, and machine-readable
+  artifact identifiers. Do not place long underscore-separated identifiers in
+  `\texttt{...}`, because ordinary typewriter text cannot wrap reliably.
+- Prefer concise, caption-defined column abbreviations before reducing an
+  entire table below `\small`. Use `\footnotesize` only for dense supplementary
+  provenance tables.
+
 ## A.9 Pre-submission checklist
 
 - [ ] All text uses Arial / Helvetica / DejaVu Sans (sans-serif).

@@ -31,8 +31,8 @@
   },
   {
     "path": "docs/12_VISUALIZATION_CONTRACT.md",
-    "sha256": "3f74697fc706d32a6e9118bbc58458e26bf685ff47661305ddd5fb24ee81daf9",
-    "bytes": 17126
+    "sha256": "c445816a913cacb6c2b4099e3ae2fde7fe048a28482d4f96aed6327839e586f4",
+    "bytes": 17847
   },
   {
     "path": "docs/35_MANUSCRIPT_REPRODUCIBILITY_LEDGER.md",
@@ -61,8 +61,8 @@
   },
   {
     "path": "overleaf/main/Acknowledgment.tex",
-    "sha256": "e01c7e8deb95776a2c092475f7e6755b9ddab0d14752bb74b8cccbbfe681a5db",
-    "bytes": 3295
+    "sha256": "f96f1d18a5f296162ed3581fc5022af9c2f457d3cc7c8df653c76c69d224e56c",
+    "bytes": 3213
   },
   {
     "path": "overleaf/main/Author_elsevier.tex",
@@ -76,8 +76,8 @@
   },
   {
     "path": "overleaf/main/Discussion.tex",
-    "sha256": "c95bde35df6e32c27a458917077f7fb0a5e8f517a0565c2082e34dc919e2ab6e",
-    "bytes": 38820
+    "sha256": "5b4005f93369cbea4f927d4b2339ff2d0cea9b2c4ce7578a74d68e4503e97fb5",
+    "bytes": 39018
   },
   {
     "path": "overleaf/main/Highlights.tex",
@@ -111,13 +111,13 @@
   },
   {
     "path": "overleaf/main/Results.tex",
-    "sha256": "d13adf675710070de0297ce5794aec90367347e5630a47f3a88450aeefc79add",
-    "bytes": 77511
+    "sha256": "fb7d646e8b5737188e6cf4de81a81dcdfed44c0b39bfba37b9118aa26a1629b6",
+    "bytes": 77505
   },
   {
     "path": "overleaf/main/Supplementary.tex",
-    "sha256": "39972feadbfdd36db6f426c195e43e1ec5b41c09857502e20a3a3e52b7b32f33",
-    "bytes": 36791
+    "sha256": "2ec6f352779ecefdceffe2d66c4cd531c14f00f46482be065401f7ed8e584d56",
+    "bytes": 36775
   },
   {
     "path": "overleaf/main/statistical_comparison_table.tex",
@@ -131,8 +131,8 @@
   },
   {
     "path": "overleaf/main/supp_cache_provenance.tex",
-    "sha256": "5ba1e272ae402a810e9427fc3e206753e6b873c33cb7606dae588d661f7d6f6c",
-    "bytes": 2567
+    "sha256": "ded0a401370efbc65f2477e9b58241873492887f28c0b7ce2f7cca6f98ea74b8",
+    "bytes": 2564
   },
   {
     "path": "overleaf/main/supp_dl_architectures.tex",
@@ -176,8 +176,8 @@
   },
   {
     "path": "overleaf/main/supp_model_constructor_defaults.tex",
-    "sha256": "e1c786b2151c913a2fdaf34446b52db943c3291103d7b1302a5dfdb5fe625dba",
-    "bytes": 4273
+    "sha256": "a81fb2e972732057ae854e7275677b6e32366f0b33a5222607c5984d46876e52",
+    "bytes": 4263
   },
   {
     "path": "overleaf/main/supp_model_inventory.tex",
@@ -191,8 +191,8 @@
   },
   {
     "path": "overleaf/main/supp_rf_experiment_provenance.tex",
-    "sha256": "504bbe00864ca21ec7c757730f96c4e5c94e758aa402c868d24019ae97a25c73",
-    "bytes": 4415
+    "sha256": "90ee7bde31407a935d944a4bdebe0738e00a40ea53f8ed3731c725bbe4f4857a",
+    "bytes": 4583
   },
   {
     "path": "overleaf/main/supp_rf_oob_coverage.tex",
@@ -206,8 +206,8 @@
   },
   {
     "path": "overleaf/main/supp_seed_repeat_all.tex",
-    "sha256": "4c473dc3c918d0cbb9184dc1abf822a576dbc7148dfa938152d5ecddee6fd4bf",
-    "bytes": 1516
+    "sha256": "5ac523ad28c8f3b34256a48349e62ed2eded7c88055e76bb923430b54fe8e9cc",
+    "bytes": 1695
   },
   {
     "path": "overleaf/main/supp_seed_repeat_rf.tex",
@@ -231,8 +231,8 @@
   },
   {
     "path": "overleaf/tikz/logo_scheme.tex",
-    "sha256": "749783252ee617f504d86c0cea6675ea5f86afff60717b09c76304fd87f70769",
-    "bytes": 4332
+    "sha256": "3dc0e7c4a3c4530f1ad78c98fca7f9b7aa6587e3e0fe2f0313568a5fce832cb5",
+    "bytes": 4331
   },
   {
     "path": "overleaf/tikz/model_taxonomy.tex",
@@ -251,8 +251,8 @@
   },
   {
     "path": "overleaf/tikz/resnetvibcnn_architecture.tex",
-    "sha256": "ba3b7eca0cdb09964e656ed530927d11aee1ca398c291a65ef59eb927c45d515",
-    "bytes": 5501
+    "sha256": "131ba02513acfa4e52544f37f9942cdc278029bcceef0c6297d349a5f6035805",
+    "bytes": 5502
   },
   {
     "path": "overleaf/tikz/statistical_workflow.tex",
@@ -2526,8 +2526,8 @@
   },
   {
     "path": "scripts/generate_results_figures.py",
-    "sha256": "5cf7c4018bc14dbc49812452db670d1ff3cec3cf72d0e9676c5568273675beae",
-    "bytes": 21035
+    "sha256": "5b8ecf548197b44e651999ecf773549c4abe2639c288def387c711c12958b451",
+    "bytes": 20995
   },
   {
     "path": "scripts/generate_review19_diagnostics.py",
@@ -2551,8 +2551,8 @@
   },
   {
     "path": "scripts/generate_submission_report.py",
-    "sha256": "183d1a92f6ea169ead1b60081dadadfe10d2b4180467d8d45dfad8ed1fd35230",
-    "bytes": 30071
+    "sha256": "f1349d54e247ad1e3ee5aa775600e16f370802de1998f1eb24be12d7b8f32d0d",
+    "bytes": 30031
   },
   {
     "path": "scripts/generate_xai_composite_figure.py",
